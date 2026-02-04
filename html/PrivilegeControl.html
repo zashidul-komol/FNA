@@ -1,0 +1,96 @@
+<div class="breadcrumb" align="center">
+	<!--%[MSG]%-->
+</div>
+<div class="breadcrumb">
+	Home &raquo; Setup &raquo; Privilege Control &raquo; <span id="dynBCItem">Privilege Control</span>
+</div>
+<div class="container">
+    <ul class="tabs">
+        <li class="active"><a href="#UPrivilegeControl">Privilege Control</a></li>
+    </ul>
+	<div class="tab_container">
+    	<div class="tab_content" id="UPrivilegeControl" style="display: block;">
+			<script  type="text/javascript">
+                function doValidationModulePrivilege() {
+                    var formObject = document.ModulePrivilegeForm;
+                    if(formObject.role_module.selectedIndex=="") {
+                        alert("Please Select Role");
+                        formObject.role_module.focus();
+                        return false;
+                    }
+                    return true;
+                }
+                
+                $(document).ready(function() {
+					$("select#role_module").change(function(){
+						var role_id = $(this).val();
+						if( role_id == '') {
+							$("select#subrole_module").html('');
+							$("#privileging_modules").html('');
+							$("select#subrole_module").attr('disabled','disabled');
+							return false;
+						}
+						$.getJSON("ajax/getModulePrivilege.php",{'role_id': role_id}, function(j){
+							if(j.length>0) {
+								var options = '';
+								options += '<option value="">Select</option>';
+								for (var i = 0; i < j.length; i++) {
+								options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+								}
+								$("select#subrole_module").html('');
+								$("select#subrole_module").removeAttr('disabled');
+								$("select#subrole_module").html(options);
+								$("#privileging_modules").html('');
+							}
+							else{
+								options += '<option value="">Select</option>';
+								$("select#subrole_module").html(options);
+								$("#privileging_modules").html('');
+							}
+						})
+					  })
+                      
+                      $("select#subrole_module").change(function(){
+                        var subrole_id = $(this).val();
+                        if( subrole_id == '') {
+                            $("#privileging_modules").html('');
+                            return false;
+                        }
+					
+						$("#privileging_roles").html("");
+						$.post("ajax/getRoleSubmodules.php",{'role_id': '','subrole_id': subrole_id},
+						function(data) {
+							$("#privileging_modules").html(data);
+						});
+					  })
+                });
+            </script>
+            <form name="ModulePrivilegeForm" method="post" action="PrivilegeControl.php" onsubmit="return doValidationModulePrivilege();">
+            <table width="50%" class="frmTbl">
+                <tr valign="top">
+                    <td width="40%" align="right">Role</td>
+                    <td align="left">
+                        <select name="role_module" id="role_module" class="FormSelectTypeInput">
+                            <option value="">Select</option>
+                            <!--%[ROLE_MODULE]%-->
+                        </select>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td width="30%" align="right">User</td>
+                    <td align="left">
+                        <select name="subrole_module" id="subrole_module" class="FormSelectTypeInput" disabled="disabled">
+                        </select>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td colspan="2" width="100%" align="left">
+                        <div id="privileging_modules">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            </form>
+        </div>
+    </div>
+</div>

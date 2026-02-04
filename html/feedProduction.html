@@ -1,0 +1,124 @@
+    <table align="center" width="50%" border="0" cellspacing="1" cellpadding="10" style="margin:0px auto 0px auto;">
+        <tr>
+            <td colspan="2" align="center"><h1>Production  Entry Form</h1></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><!--%[MSG]%--></td>
+        </tr>
+        <tr valign="top">
+            <td width="60%" align="center">
+                <table width="80%"  border="0" cellspacing="0" cellpadding="0" align="center">
+                   
+                    <!--  Start Load Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmRecipiSubmit() {
+									if($("#FOODID").val() == ''){
+											alert("Please Select Food name");
+											$("#FOODID").focus();
+											return false;
+									}
+									if($("#PRODUCTIONQNTY").val() == ''){
+											alert("Please Select Food Expected Quantity");
+											$("#PRODUCTIONQNTY").focus();
+											return false;
+									}
+									if($("#PRODUCTIONDATE").val() == ''){
+											alert("Please Select Date");
+											$("#PRODUCTIONDATE").focus();
+											return false;
+									}
+									
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								
+								function checkCalender(){
+									var PRODUCTIONDATE = String($("#PRODUCTIONDATE").val());
+									if(PRODUCTIONDATE != ''){
+										
+										var tempPRODUCTIONDATE = PRODUCTIONDATE.split('-'); 
+										
+										var a = tempPRODUCTIONDATE[1]+'/'+tempPRODUCTIONDATE[0]+'/'+tempPRODUCTIONDATE[2];
+									}
+								}
+								
+								function LotNoCal(){
+								
+								var qnty  		= $("#quantity_1").val();
+								var totamnt  	= $("#TOTAMOUNT_1").val();
+								quantity		= parseFloat(qnty).toFixed(2);
+								TotalAmount		= parseFloat(totamnt).toFixed(2);
+								unitPrice		= parseFloat(TotalAmount/quantity).toFixed(2) ;
+								
+								//
+								$("#UNITPRICE_1").val(unitPrice);
+								
+								}
+								
+								
+                            </script>
+                            
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showLoad')">Enter Production Entry Information</legend>
+                                <div id="showLoad" style="display:">
+                                  <form name="LoadForm" method="post" action="feedProduction.php" onsubmit="return confirmRecipiSubmit();">
+                                        <table width="100%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td colspan="7">
+                                                	<table width="600">
+                                                       <tr>
+                                                    	<td width="134" align="right">
+                                                               Food Item Name :
+                                                         </td>
+                                                            <td ><select type="text" id="FOODID" name="FOODID" style="width:180px;" autocomplete="off" placeholder="PackingName">
+                                                  <option value="">Select</option>
+                                                        <!--%[FOOD_NAME_PROD]%-->
+                                                     </select>
+                                             				</td>
+                                                            <td width="144" align="right">
+                                                               Expected Quantity:
+                                                            </td>
+                                                            <td height="26" align="left"><input id="PRODUCTIONQNTY" name="PRODUCTIONQNTY" style="width:100px;"/></td>
+                                                      </tr>
+                                                       <tr>
+                                                    	<td width="134" align="right">&nbsp;</td>
+                                                            <td width="180" align="left">&nbsp;</td>
+                                                            <td width="144" align="right">Date : </td>
+                                                            <td width="122" align="left"><input name="PRODUCTIONDATE" size="18" id="PRODUCTIONDATE" type="text" readonly="readonly" onclick="showCalender('PRODUCTIONDATE','PRODUCTIONDATE')" onchange="checkCalender(this.value);" style="width:100px;" /></td>
+                                                        </tr>	
+                                                    </table>
+                                              </td>
+                                            </tr>
+                                            
+                                             <tr valign="top">
+                                                <td height="26" align="left" colspan="2">&nbsp;</td>
+                                            </tr>
+                                               <!-- <tr valign="top">
+                                                    <td align="right" colspan="2">
+                                                        <input name="TOTAL_PRODUCT_LIST" id="TOTAL_PRODUCT_LIST" type="hidden" value="2" />
+                                                        <input style="font-family:Tahoma, Geneva, sans-serif;font-size:100%;" id="btnAddMoreScripList" value="Add More" type="button">
+                                                    </td>
+                                                </tr>  -->                                     
+                                            <tr valign="top">
+                                                <td width="5%" height="26" align="right">&nbsp;</td>
+                                                <td width="95%" height="26" align="center">
+                                                    <input type="submit" name="InsertProductionInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showLoad')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Load Entry Form  --> 
+                    
+              </table>
+            </td>
+          </tr>
+    </table>

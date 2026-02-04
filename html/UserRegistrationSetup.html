@@ -1,0 +1,321 @@
+<div class="breadcrumb" align="center">
+	<!--%[MSG]%-->
+</div>
+<div class="breadcrumb">
+	Home &raquo; Setup &raquo; User Registration &raquo; <span id="dynBCItem">Role</span>
+</div>
+<div class="container">
+    <ul class="tabs">
+        <li><a href="#URole">Role</a></li>
+        <li><a href="#Position">Position</a></li>
+        <li><a href="#URegistration">Registration</a></li>
+    </ul>
+    <div class="tab_container">
+    	<div class="tab_content" id="URole" style="display: block;">
+           <script type="text/javascript">
+				function confirmRoleSubmit() {
+					if(!confirm('Are you sure, you want to proceed?')){
+						return false;
+					}
+					return true;
+				}
+			</script>
+
+			<form name="RoleNameForm" id="RoleNameForm" method="post" action="UserRegistration.php" onSubmit="return confirmRoleSubmit();">
+				<table width="40%" class="frmTbl">
+					<tr valign="top">
+						<td width="4%" align="right">&nbsp;</td>
+						<td width="30%" height="26" align="right">Role Name</td>
+						<td width="2%" align="left">:</td>
+						<td width="64%" height="26" align="left">
+							<input type="text" id="roleName" name="roleName" autocomplete="off" required="" autofocus="" placeholder="Role Name" class="FormTextTypeInput">
+							<sup style="color:red;">*</sup>
+						</td>
+					</tr> 
+					<tr valign="top">
+						<td align="right">&nbsp;</td>
+						<td align="right">Forward To</td>
+						<td align="left">:</td>
+						<td align="left">
+							<select name="roleForwardTo" id="roleForwardTo"  class="FormSelectTypeInput">
+								<option value="">Select Forward To</option>
+								<!--%[FORWARD_TO_LIST]%-->
+							</select>
+						</td>
+					</tr>                                 
+					<tr valign="top">
+						<td align="right">&nbsp;</td>
+						<td align="right">All Link</td>
+						<td align="left">:</td>
+						<td align="left">
+                            <!--%[DISPLAY_MODULE]%-->
+						</td>
+					</tr>
+                    <tr valign="top">
+						<td align="right">&nbsp;</td>
+						<td align="right">&nbsp;</td>
+						<td align="left">&nbsp;</td>
+						<td align="left" style="padding-top:40px;">
+                            <input type="submit" name="InsertRole" value="Insert" class="FormSubmitBtn"/>
+                            <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+						</td>
+					</tr>
+				</table>
+			</form>
+            <div class="viewCls">
+                <table class="resultset" id="userRole" border="0" align="center" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                    <thead>
+                        <th style="width:10%;">SL #</th>
+                        <th style="width:40%;">Role Name</th>
+                        <th style="width:40%;">Forward To</th>
+                        <th style="width:10%;">Action</th>
+                    </thead>
+                    <tbody>
+                        <!--%[ROLE_FORWARD_TO_VIEW]%-->
+                    </tbody>
+                </table>
+            </div>
+            <script type="text/javascript"> 					
+				$(document).ready(function() {
+					$('#userRole').fixheadertable({ 
+						caption : 'User Role', 
+						colratio : [100, 400, 400, 100],
+						height : 200, 
+						width : 1000, 
+						zebra : true, 
+						sortable : true, 
+						sortedColId : 0, 
+						sortType : ['integer', 'string', 'string', 'string'],
+						pager : true,
+						rowsPerPage	 : 100,
+						resizeCol : true
+					});
+				});
+			</script>
+        </div>
+        <div class="tab_content" id="Position" style="display: none;">
+           <script type="text/javascript">
+				function confirmPositionSubmit() {
+					if(!confirm('Are you sure, you want to proceed?')){
+						return false;
+					}
+					return true;
+				}
+			</script>
+
+			<form name="PositionForm" id="PositionForm" method="post" action="UserRegistration.php" onSubmit="return confirmPositionSubmit();">
+				<table width="40%" class="frmTbl">
+					<tr valign="top">
+						<td width="9%" align="right">&nbsp;</td>
+						<td width="25%" height="26" align="right">Position</td>
+						<td width="2%" align="left">:</td>
+						<td width="64%" height="26" align="left">
+							<input type="text" id="positionName" name="positionName" autocomplete="off" required="" autofocus="" placeholder="Position" class="FormTextTypeInput">
+							<sup style="color:red;">*</sup>
+						</td>
+					</tr> 
+					<tr valign="top">
+						<td align="right">&nbsp;</td>
+						<td height="26" align="right">&nbsp;</td>
+						<td align="left">&nbsp;</td>
+						<td height="26" align="left" style="padding-top:40px;">
+                            <input type="submit" name="InsertPosition" value="Insert" class="FormSubmitBtn" />
+                            <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+						</td>
+					</tr>
+				</table>
+			</form>
+            <div class="viewCls">
+            	<table class="resultset" id="viewPosition" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                    <thead>
+                        <tr>
+                            <th style="width:10%;">SL #</th>
+                            <th style="width:80%;">Position</th>
+                            <th style="width:10%;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--%[POSITION_VIEW]%-->
+                    </tbody>
+                </table>
+            </div>
+            <script type="text/javascript">					
+				$(document).ready(function() {
+					$('#viewPosition').fixheadertable({ 
+						caption : 'Position', 
+						colratio : [100, 800, 100],
+						height : 200, 
+						width : 1000, 
+						zebra : true, 
+						sortable : true, 
+						sortedColId : 0, 
+						sortType : ['integer', 'string', 'string'],
+						pager : true,
+						rowsPerPage	 : 100,
+						resizeCol : true
+					});
+				});
+			</script>
+        </div>
+       	<div class="tab_content" id="URegistration" style="display: none;">
+           <script type="text/javascript">
+				function confirmUserRegistrationSubmit() {
+					if ($('#loginPassword').val() != $('#confirmLoginPassword').val()) {
+						alert("Password Missmatch!");
+						$("#confirmLoginPassword").focus();
+						return false;
+					}
+					
+					if(!confirm('Are you sure, you want to proceed?')){
+						return false;
+					}
+					return true;
+				}
+				$(document).ready(function() {
+				$("select#aId").change(function(){
+					var options = '';
+					if($(this).val() == '') {
+						options = '<option value="">No Agency Found</option>';
+						$("select#psId").html('');
+						$("select#psId").html(options);
+						return false;
+					}
+					$.getJSON("ajax/getProject.php",{agency_id: $(this).val()}, function(j) {
+						if(j.length>0) {
+							options += '<option value="">Select</option>';
+							for (var i = 0; i < j.length; i++) {
+								options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+							}
+							$("select#psId").html('');
+							$("select#psId").html(options);
+						}
+						else {
+							options = '<option value="">No Project Found</option>';
+							$("select#psId").html('');
+							$("select#psId").html(options);
+						}
+					})
+				})
+			});
+			</script>
+
+			<form name="UserRegForm" id="UserRegForm" method="post" action="UserRegistration.php" onSubmit="return confirmUserRegistrationSubmit();">
+				<table width="45%" class="frmTbl">                
+                
+					<tr valign="top">
+						<td width="4%" align="right">&nbsp;</td>
+						<td width="30%" height="26" align="right">User Name</td>
+						<td width="2%" align="left">:</td>
+						<td width="64%" height="26" align="left">
+							<input type="text" id="userName" name="userName" autocomplete="off" required="" autofocus="" placeholder="User Name" class="FormTextTypeInput">
+							<sup style="color:red;">*</sup>
+						</td>
+					</tr>
+                    <tr valign="top">
+						<td align="right">&nbsp;</td>
+						<td height="26" align="right">Email</td>
+						<td align="left">:</td>
+						<td align="left">
+							<input type="email" id="emailAddress" name="emailAddress" autocomplete="off" required="" autofocus="" placeholder="example@email.com" class="FormTextTypeInput">
+							<sup style="color:red;">*</sup>
+						</td>
+					</tr>
+                    <tr valign="top">
+						<td align="right">&nbsp;</td>
+						<td align="right">Role</td>
+						<td align="left">:</td>
+						<td align="left">
+							<select name="userRegRole" id="userRegRole"  class="FormSelectTypeInput" required="" autofocus="">
+								<option value="">Select Role</option>
+								<!--%[FORWARD_TO_LIST]%-->
+							</select>
+                            <sup style="color:red;">*</sup>
+						</td>
+					</tr>
+                    <tr valign="top">
+						<td align="right">&nbsp;</td>
+						<td align="right">Position</td>
+						<td align="left">:</td>
+						<td align="left">
+							<select name="userRegPosition" id="userRegPosition"  class="FormSelectTypeInput" required="" autofocus="">
+								<option value="">Select Position</option>
+								<!--%[POSITION_LIST]%-->
+							</select>
+                            <sup style="color:red;">*</sup>
+						</td>
+					</tr>
+                    <tr valign="top">
+						<td align="right">&nbsp;</td>
+						<td align="right">Login Name</td>
+						<td align="left">:</td>
+						<td align="left">
+							<input type="text" id="loginName" name="loginName" autocomplete="off" required="" autofocus="" placeholder="Login Name" class="FormTextTypeInput">
+							<sup style="color:red;">*</sup>
+						</td>
+					</tr>
+                    <tr valign="top">
+						<td align="right">&nbsp;</td>
+						<td align="right">Password</td>
+						<td align="left">:</td>
+						<td align="left">
+							<input type="password" id="loginPassword" name="loginPassword" autocomplete="off" required="" autofocus="" placeholder="Password" class="FormTextTypeInput">
+							<sup style="color:red;">*</sup>
+						</td>
+					</tr>
+                    <tr valign="top">
+						<td align="right">&nbsp;</td>
+						<td align="right">Confirm Password</td>
+						<td align="left">:</td>
+						<td align="left">
+							<input type="password" id="confirmLoginPassword" name="confirmLoginPassword" autocomplete="off" required="" autofocus="" placeholder="Confirm Password" class="FormTextTypeInput">
+							<sup style="color:red;">*</sup>
+						</td>
+					</tr>
+                    <tr valign="top">
+						<td align="right">&nbsp;</td>
+						<td align="right">&nbsp;</td>
+						<td align="left">&nbsp;</td>
+						<td align="left" style="padding-top:40px;">
+                            <input type="submit" name="InsertUserRegistration" value="Insert" class="FormSubmitBtn" />
+                            <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+						</td>
+					</tr>
+				</table>
+			</form>
+            <div class="viewCls">
+                <table class="resultset" id="userReg" border="0" align="center" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                    <thead>
+                        <th style="width:10%;">SL #</th>
+                        <th style="width:20%;">User Name</th>
+                        <th style="width:15%;">Email</th>
+                        <th style="width:15%;">Position</th>
+                        <th style="width:15%;">Role</th>
+                        <th style="width:15%;">Operator Name</th>
+                        <th style="width:10%;">Action</th>
+                    </thead>
+                    <tbody>
+                         <!--%[USER_VIEW]%-->
+                    </tbody>
+                </table>
+            </div>
+            <script type="text/javascript">  
+					
+				$(document).ready(function() {
+					$('#userReg').fixheadertable({ 
+						caption : 'User Registration', 
+						colratio : [100, 200, 150, 150, 150, 150, 100],
+						height : 200, 
+						width : 1000, 
+						zebra : true, 
+						sortable : true, 
+						sortedColId : 0, 
+						sortType : ['integer', 'string', 'string', 'string', 'string', 'string', 'string'],
+						pager : true,
+						rowsPerPage	 : 100,
+						resizeCol : true
+					});
+				});
+			</script>
+        </div> 
+	</div>
+</div>

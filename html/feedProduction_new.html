@@ -1,0 +1,265 @@
+    <table align="center" width="61%" border="0" cellspacing="1" cellpadding="10" style="margin:0px auto 0px auto;">
+        <tr>
+            <td colspan="2" align="center"><h1>Feed Production   Entry Form</h1></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><!--%[MSG]%--></td>
+        </tr>
+        <tr valign="top">
+            <td width="60%" align="center">
+                <table width="90%"  border="0" cellspacing="0" cellpadding="0" align="center">
+                   
+                    <!--  Start Load Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmFeedProdSubmit() {
+									if($("#PROJECTID").val() == ''){
+											alert("Please Select Project name");
+											$("#PROJECTID").focus();
+											return false;
+									}
+									if($("#SUBPROJECTID").val() == ''){
+											alert("Please Select Sub Project name");
+											$("#SUBPROJECTID").focus();
+											return false;
+									}
+									if($("#PARTYID").val() == ''){
+											alert("Please Select Party name");
+											$("#PARTYID").focus();
+											return false;
+									}
+									if($("#LABOURID").val() == ''){
+											alert("Please Select Labour name");
+											$("#LABOURID").focus();
+											return false;
+									}
+									if($("#ENTRYDATE").val() == ''){
+											alert("Please Select Date");
+											$("#ENTRYDATE").focus();
+											return false;
+									}
+									if($("#LOTNO").val() == ''){
+											alert("Please Insert LOT No......");
+											$("#LOTNO").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								function checkCalender(){
+									var PRODUCTIONDATE = String($("#PRODUCTIONDATE").val());
+									if(PRODUCTIONDATE != ''){
+										
+										var tempPRODUCTIONDATE = PRODUCTIONDATE.split('-'); 
+										
+										var a = tempPRODUCTIONDATE[1]+'/'+tempPRODUCTIONDATE[0]+'/'+tempPRODUCTIONDATE[2];
+									}
+								}
+								
+								function getProductNamebyCat(getCatIdName, pcId){
+																			
+										var splitCatId = getCatIdName.split("_");										
+										var options = '';
+										if(pcId == '' && getCatIdName == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#PRODUCTID_"+splitCatId[1]).html('');
+											$("select#PRODUCTID_"+splitCatId[1]).html(options);
+											return false;
+										}
+										$.getJSON("ajax/getProductList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#PRODUCTID_"+splitCatId[1]).html('');
+												$("select#PRODUCTID_"+splitCatId[1]).html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#PRODUCTID_"+splitCatId[1]).html('');
+												$("select#PRODUCTID_"+splitCatId[1]).html(options);
+											}
+										})
+									
+									
+								}
+								
+								
+								$(document).ready(function(){
+   																		
+									$("select#PARTYID").change(function(){
+										$.getJSON("ajax/getPartyInfo.php",{party_id: $(this).val()}, function(j) {
+											if(j.length>0) {
+												for (var i = 0; i < j.length; i++) {
+												$("#FATHERNAME").val(j[i]['FATHERNAME']);
+												$("#ADDRESS").val(j[i]['ADDRESS']);
+												$("#MOBILE").val(j[i]['MOBILE']);
+												
+												}
+											}
+											else {
+												$("#FATHERNAME").val('');
+												$("#ADDRESS").val('');
+												$("#MOBILE").val('');
+											}
+										})
+									})
+									
+									$('#btnGo').click(function() {
+										
+										var FOODID				= $("#FOODID").val();
+										var PRODUCTIONQNTY		= $("#PRODUCTIONQNTY").val();
+										var PRODUCTIONDATE		= $("#PRODUCTIONDATE").val();
+										//$.getJSON("ajax/getProjectList.php",{PROJECTID: PROJECTID, SUBPROJECTID: SUBPROJECTID, PARTYID: PARTYID}, function(j) {
+											$.post("ajax/getFeedProdInfo.php",{FOODID: FOODID, PRODUCTIONQNTY: PRODUCTIONQNTY, PRODUCTIONDATE: PRODUCTIONDATE}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												$("#showFeedProdInfo").html(j);
+											}
+											else {
+												$("#showFeedProdInfo").html('');
+											}
+										})
+									});
+									
+									  
+  
+								});
+								
+								function getProjectNameLoad(pcId){					
+										var options = '';
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#SUBPROJECTID").html('');
+											$("select#SUBPROJECTID").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getProjectListAlu.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#SUBPROJECTID").html('');
+												$("select#SUBPROJECTID").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#SUBPROJECTID").html('');
+												$("select#SUBPROJECTID").html(options);
+											}
+										})
+									
+									
+								}
+								function PartyName(pcId){					
+										if(pcId == 1){
+											$("#showLotNo").show();
+										}else{
+											$("#showLotNo").hide();
+										}
+										
+										
+										var options = '';
+										var jj = '';
+										//alert (pcId);
+										options.length=0;
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#PARTYID").html('');
+											$("select#PARTYID").html(options);
+											return false;
+										}
+										
+									
+									
+								}
+								
+								
+								
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showLoad')">Enter Feed Production Entry Information</legend>
+                                <div id="showLoad" style="display:">
+                                 
+                                        <table width="100%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td colspan="7">
+                                                	<table width="101%">
+                                                        <tr>
+                                                          <td width="131" align="right"> Food Item Name : </td>
+                                                          <td width="150" ><select type="text" id="FOODID" name="FOODID" style="width:140px;" autocomplete="off" placeholder="PackingName">
+                                                            <option value="">Select</option>
+                                                            <!--%[FOOD_NAME_PROD]%-->
+                                                          </select></td>
+                                                          <td width="131" align="right"> Expected Quantity: </td>
+                                                          <td width="105" height="26" align="left"><input id="PRODUCTIONQNTY" name="PRODUCTIONQNTY" style="width:100px;"/></td>
+                                                   	  </tr>
+                                                        <tr valign="top">
+                                                            <td align="right">&nbsp;</td>
+                                                            <td height="21" align="left">&nbsp;</td>
+                                                            <td align="right">Date : </td>
+                                                            <td align="left"><input name="PRODUCTIONDATE" size="18" id="PRODUCTIONDATE" type="text" readonly="readonly" onclick="showCalender('PRODUCTIONDATE','PRODUCTIONDATE')" onchange="checkCalender(this.value);" style="width:100px;" /></td>
+                                                         </tr>
+                                                        
+                                                        <tr valign="top">
+                                                          <td height="26" colspan="4" align="center">&nbsp;</td>
+                                                        </tr>
+                                                        <tr valign="top">
+                                                          <td height="26" colspan="4" align="center"><input type="button" name="btnGo" id="btnGo" value="GO" class="FormSubmitBtn" /></td>
+                                                        </tr>
+                                                        <tr valign="top">
+                                                          <td height="26" colspan="4" align="center">&nbsp;</td>
+                                                        </tr>
+                                                        <tr valign="top">
+                                                          <td height="26" colspan="4" align="right">
+                                                          	<!--<table width="100%" style="display:">
+                                                            	<tr>
+                                                                	<td align="center">Purpose</td>
+                                                                    <td align="center">LoanID</td>
+                                                                    <td align="center">Date</td>
+                                                                    <td align="center">Amount</td>
+                                                                    <td align="center">Int. Rate</td>
+                                                                    <td align="center">Int.Amount</td>
+                                                                    <td align="center">Total</td>
+                                                                </tr>
+                                                                <tr>
+                                                                	<td align="center">&nbsp;</td>
+                                                                    <td align="center">&nbsp;</td>
+                                                                    <td align="center">&nbsp;</td>
+                                                                    <td align="center">&nbsp;</td>
+                                                                    <td align="center">&nbsp;</td>
+                                                                    <td align="center">&nbsp;</td>
+                                                                    <td align="center">&nbsp;</td>
+                                                                </tr>
+                                                            </table>-->
+                                                            <form name="LoadForm" method="post" action="feedProduction_new.php" onsubmit="return confirmFeedProdSubmit();">
+                                                            <div id="showFeedProdInfo"> </div>
+                                                          </form>
+                                                          </td>
+                                                        </tr>
+                                                        
+                                                    </table>
+                                              </td>
+                                            </tr>                                       
+                                            <tr valign="top">
+                                                <td width="41%" height="26" align="right">&nbsp;</td>
+                                                <td width="59%" height="26" align="left">&nbsp; </td>
+                                            </tr>
+                                        </table>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Load Entry Form  --> 
+                    
+              </table>
+            </td>
+          </tr>
+    </table>

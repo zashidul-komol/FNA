@@ -1,0 +1,155 @@
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0px; padding:0px;">
+	<tr valign="top">
+		<td style="width:100%">
+			<div class="container">
+				<!--%[TABS]%-->
+			</div>
+		</td>
+	</tr>
+</table><br/>
+
+
+<div class="container" style="min-height:600px;"> 
+             <!--  Start Project Form -->
+							<script  type="text/javascript">
+								function confirmProjectSubmit() {
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+														
+								$(document).ready(function() {
+									$("#advanceSearch2").click(function(){
+										
+										var ptIdAdvance 				= $("#ptIdAdvance").val();
+										var piProcurementMethod 		= $("#piProcurementMethod").val();
+										var piBiddingProcedure 			= $("#piBiddingProcedure").val();
+										var piPriorReview 				= $("#piPriorReview").val();
+										var piPrequalificationProcess   = $("#piPrequalificationProcess").val();
+										var contractName 				= $("#contractName").val();
+										var userId 						= $("#userId").val();
+										
+
+										$("#advanceSearch2").html();
+										$.post("ajax/getAdvanceSearch.php",{'ptIdAdvance': ptIdAdvance, 'piProcurementMethod': piProcurementMethod, 'piBiddingProcedure': piBiddingProcedure, 'piPriorReview':piPriorReview, 'piPrequalificationProcess':piPrequalificationProcess, 'contractName':contractName, 'userId':userId},
+										function(data)
+										{
+											$("#showResultsProcurement").html(data);
+										});
+									})
+								});
+								
+                            </script>
+                            
+                            <fieldset>	                       
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showProject')">Search Engine</legend>
+                                
+                                <div id="showSearch" style="display:;">
+                                
+                                  <table width="100%" border="0" cellpadding="3" cellspacing="0" style="margin:0px auto 0px auto;font-size:85%;">
+                                    		  <td valign="top" width="45%" height="26" align="right">Procurement Type : </td>
+                                    		  <td width="55%" height="26" align="left"><select name="ptIdAdvance" id="ptIdAdvance"  class="FormSelectTypeInput" required="" autofocus="">
+                                    		    <option value="">Select Procurement Type</option>
+                                    		    <!--%[PT_LIST]%-->
+                                  		    </select>
+                                            <a style="background-color:#099; text-decoration:none;color:#ffffff;padding: 5px;font-size: 14px;" href="#" onClick="return ShowHide('hideProject')" rel="hideProject">More</a>
+                                            </td>
+                                     </table>
+                                   </div>
+                                   
+                               <div id="hideProject" style="display:none;">
+                               <table width="100%" border="0" cellpadding="3" cellspacing="0" style="margin:0px auto 0px auto;font-size:85%;">
+                                    		
+                                    		<tr valign="top">
+                                                <td width="45%" height="26" align="right">
+                                                    Procurement Method :
+                                                </td>
+                                                <td width="55%" height="26" align="left">
+                                                <select name="piProcurementMethod" id="piProcurementMethod"  class="FormSelectTypeInput" required="" autofocus="">
+												<option value="">Select Procurement Method</option>
+												<!--%[PROJECT_PROCUREMENT_MATHOD_LIST]%-->
+												</select>
+                                                <a style="background-color:#099; text-decoration:none;color:#ffffff;padding: 5px;font-size: 14px;" href="#" onClick="return ShowHide('hideProject')" rel="hideProject">Less</a>
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Bidding Procedure :
+                                                </td>
+                                                <td height="26" align="left">
+                                                <select name="piBiddingProcedure" id="piBiddingProcedure"  class="FormSelectTypeInput" required="" autofocus="">
+												<option value="">Select Bidding Procedure</option>
+												<!--%[PROJECT_BIDDING_PROCEDURE_LIST]%-->
+												</select>
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Prior Review :
+                                                </td>
+                                                <td height="26" align="left">
+                                                <select name="piPriorReview" id="piPriorReview"  class="FormSelectTypeInput" required="" autofocus="">
+                                                <option value="">Select Prior Review</option>
+												<option value="Yes">Yes</option>
+                                                <option value="No">No</option>
+												</select>
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Prequalification Process :
+                                                </td>
+                                                <td height="26" align="left">
+                                                <select name="piPrequalificationProcess" id="piPrequalificationProcess"  class="FormSelectTypeInput" required="" autofocus="">
+                                                <option value="">Select Prequalification ........</option>
+                                                <option value="Yes">Yes</option>
+                                                <option value="No">No</option>
+												</select>
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                  Key Word Search :
+                                                </td>
+                                                <td height="26" align="left">
+                                                   <input type="text" id="contractName" name="contractName" autocomplete="off" placeholder="Key Word Search" class="FormTextTypeInput" />
+                                              </td>
+                                            </tr>
+                                  </table>
+                               </div> 
+                                     
+                                       <table width="100%" border="0" cellpadding="3" cellspacing="0" style="margin:0px auto 0px auto;font-size:85%;">                                                
+                                            <tr>
+                                              <td width="45%" height="30px">&nbsp;</td>
+                                              	<td width="47%" valign="top">
+                                                <input type="hidden" name="userId" id="userId" value="<!--%[USER_ID]%-->" />
+                                                 <input type="button" name="advanceSearch2" id="advanceSearch2" value="GO" class="FormSubmitBtn" />
+                                                 <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                              	</td>
+                                              <td width="8%">&nbsp;</td>
+                                            </tr>
+                                      </table> 
+                                 
+                                
+                                
+            
+            <table width="100%">    
+             <!--  Start Project Form -->
+                    <tr valign="top">
+                        <td width="100%" align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showProcurement')">View Procurement Stages</legend>
+                                <div id="showResultsProcurement" style="">
+                               		   
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Project Form -->
+            </table>
+</div>

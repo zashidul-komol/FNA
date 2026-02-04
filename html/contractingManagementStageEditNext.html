@@ -1,0 +1,223 @@
+    <table width="85%" border="0" cellspacing="1" style="margin:0px auto 0px auto;">
+        <tr>
+            <td colspan="2" align="center">                
+            <div style="text-align:left;"><b>Package No:</b>  <!--%[PI_4]%--> <br/>
+            <b>Lot No:</b>  <!--%[PI_5]%--> <br/>
+            <b>Contract Name:</b> <!--%[PI_6]%--></div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><!--%[MSG]%--></td>
+        </tr>
+        <tr valign="top">
+            <td width="50%" align="left">
+                <table width="100%"  border="0" cellspacing="0" cellpadding="0" align="center">
+                    
+            <!--  Start Contract Management Stage ------------------------------------------------------------------------------------------------------------------    -->
+                  <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmInputTabFieldsSubmit() {	
+									
+									var checkDate    = $("#checkDate").val();
+									var cms_74  = $("#cms_74").val();
+									var dSplit  = cms_74.split("-");
+									var cms_74New = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									
+									var cms_75  = $("#cms_75").val();
+									var dSplit  = cms_75.split("-");
+									var cms_75New = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+
+									var cms_74Date = Date.parse(cms_74New);
+									var cms_75Date = Date.parse(cms_75New);
+									
+									if (cms_74Date > cms_75Date) {
+										alert("Actual Completion Date Always Lower or Equal to Final Acceptance Date");
+										$("#cms_74").focus();
+										return false;
+									}
+									
+									var checkDate    = $("#checkDate").val();
+									var checkNewDate = Date.parse(checkDate);
+									
+									var cms_73      = $("#cms_73").val();
+									var dSplit  	= cms_73.split("-");
+									var cms_73New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var cms_73NewDate = Date.parse(cms_73New);
+									if (cms_73NewDate < checkNewDate) {
+										alert("Previous Date Not Allow!");
+										$("#cms_73").focus();
+										return false;
+									}
+									var cms_75a        = $("#cms_75a").val();
+									var dSplit  	   = cms_75a.split("-");
+									var cms_75aNew     = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var cms_75aNewDate = Date.parse(cms_75aNew);
+									if (cms_75aNewDate < checkNewDate) {
+										alert("Previous Date Not Allow!");
+										$("#cms_75a").focus();
+										return false;
+									}
+									var cms_71      = $("#cms_71").val();
+									var dSplit  	= cms_71.split("-");
+									var cms_71New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var cms_71NewDate = Date.parse(cms_71New);
+									if (cms_71NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#cms_71").focus();
+										return false;
+									}
+									var cms_74      = $("#cms_74").val();
+									var dSplit  	= cms_74.split("-");
+									var cms_74New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var cms_74NewDate = Date.parse(cms_74New);
+									if (cms_74NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#cms_74").focus();
+										return false;
+									}
+									var cms_75      = $("#cms_75").val();
+									var dSplit  	= cms_75.split("-");
+									var cms_75New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var cms_75NewDate = Date.parse(cms_75New);
+									if (cms_75NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#cms_75").focus();
+										return false;
+									}
+									
+									
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								
+                            </script>
+                             <script>
+                              $(document).ready(function() {
+                               $("#cms_71, #cms_73, #cms_74, #cms_75, #cms_75a").datepicker({ dateFormat: "dd-mm-yy",
+                                beforeShow: function(input, inst) {
+                                 if ($("#dateplanedcheck").is(':checked')) {
+                                  $(".ui-datepicker-calendar").css("display", "none");
+                                }}
+                               });
+                              });
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" >Edit Contract Management Stage</legend>
+                                <div id="showInputTabFields">
+                                  <form name="inputTabFieldsForm" method="post" action="contractingManagementStageEdit.php" onsubmit="return confirmInputTabFieldsSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                        
+                                           <tr valign="top" class="rowcolor">
+                                                <td width="4%" height="26" align="right">&nbsp;</td>
+                                                <td width="47%" height="26" align="right">
+                                                    Commencement Date :
+                                                </td>
+                                                <td width="49%" height="26" align="left">
+												 <input type="text" id="cms_71" name="cms_71" class="FormDateTypeInput" value="<!--%[CMS_71]%-->"  autocomplete="off">
+                                                </td>
+                                            </tr>
+                                                                                    
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="4%" height="26" align="right">&nbsp;</td>
+                                                <td width="47%" height="26" align="right">
+                                                    Revised Planned Completion Date:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="cms_73" name="cms_73" class="FormDateTypeInput" value="<!--%[CMS_73]%-->" autocomplete="off">
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="4%" height="26" align="right">&nbsp;</td>
+                                                <td width="47%" height="26" align="right">
+                                                   Actual Completion Date :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="cms_74" name="cms_74" class="FormDateTypeInput" value="<!--%[CMS_74]%-->" autocomplete="off">
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="4%" height="26" align="right">&nbsp;</td>
+                                                <td width="47%" height="26" align="right">
+                                                    Final Acceptance Date :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="cms_75" name="cms_75"  class="FormDateTypeInput" value="<!--%[CMS_75]%-->" autocomplete="off">
+                                                </td>
+                                            </tr>
+                                            
+                                                                                        
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="4%" height="26" align="right">&nbsp;</td>
+                                                <td width="47%" height="26" align="right">
+                                                    Number of Contract Amendments /Variation Orders:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="cms_107" onkeyup='removeChar(this);' name="cms_107" autocomplete="off" placeholder="Number of Contract ......................"  value="<!--%[CMS_107]%-->"class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                        
+                                           <tr valign="top" class="rowcolor">
+                                                <td width="4%" height="26" align="right">&nbsp;</td>
+                                                <td width="47%" height="26" align="right">
+                                                    Revised Contract Price in Contract Currency or Currencies :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input id="cms_10" name="cms_10" autocomplete="off" value="<!--%[CMS_10]%-->"  class="FormNumericTypeInput"/> 
+                                                </td>
+                                             
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="4%" height="26" align="right">&nbsp;</td>
+                                                <td width="47%" height="26" align="right">
+                                                    Revised Contract Price (Equiv. US$) :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input id="cms_12" name="cms_12" autocomplete="off" value="<!--%[CMS_12]%-->" onblur="if(this.value=='') this.value='0.00'; numberFormat(this.id,this.value.toString(),'2',',','.');" onfocus="if(this.value=='0.00') this.value='';" size="15" class="FormNumericTypeInput" onkeyup="removeChar(this);"/>
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="4%" height="26" align="right">&nbsp;</td>
+                                                <td width="47%" height="26" align="right">
+                                                    Defect Liability Period End Date :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="cms_75a" name="cms_75a"  class="FormDateTypeInput" value="<!--%[CMS_75A]%-->" autocomplete="off">
+                                                </td>
+                                            </tr>
+
+                                          
+
+                                            </tr>
+                                            
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td width="47%" height="26" align="right"> </td>
+                                                <td height="26" align="left">
+                                                    <input type="hidden" name="checkDate" id="checkDate" value="<!--%[CHECK_DATE]%-->" />
+                                                    <input type="hidden" name="contractMSpackageId" value="<!--%[CONTRACT_M_STAGE_PACKAGEID]%-->" />
+                                                    <input type="hidden" name="contractMSpackageName" value="<!--%[CONTRACT_M_STAGE_PACKAGENAME]%-->" />
+                                                    <input type="submit" name="editContractManagementStage" value="Submit" class="FormSubmitBtn" />
+                                                   <input type="button" value="Back" onclick="window.close();" class="FormResetBtn">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+						
+            <!--  End Contract Management Stage ------------------------------------------------------------------------------------------------------------------     -->
+                    
+                    
+                </table>
+                
+            </td>
+
+        </tr>
+    </table>

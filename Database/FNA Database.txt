@@ -1,0 +1,9 @@
+Added the database “ddhomesb_fna”. 
+You have successfully created a MySQL user named “ddhomesb_fna”. 
+Password:fna123
+
+
+DB_HOST 	= "localhost";		
+DB_NAME 	= "ddhomesb_fna";
+DB_USER 	= "ddhomesb_fna";
+DB_PASSW 	= "fna54321";

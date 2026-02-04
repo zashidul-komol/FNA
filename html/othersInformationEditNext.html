@@ -1,0 +1,120 @@
+    <table width="96%" border="0" cellspacing="1" style="margin:0px auto 0px auto;">
+        <tr>
+              <td colspan="2" align="center">
+            <div style="text-align:left;"><b>Package No:</b>  <!--%[PI_4]%--> <br/>
+            <b>Lot No:</b>  <!--%[PI_5]%--> <br/>
+            <b>Contract Name:</b> <!--%[PI_6]%--></div>
+             </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><!--%[MSG]%--></td>
+        </tr>
+        <td width="83%"><tr valign="top">
+            <td width="50%" align="left">
+                <table width="100%"  border="0" cellspacing="0" cellpadding="0" align="center">
+                    
+            <!--  Start Others Information ------------------------------------------------------------------------------------------------------------------    -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmInputTabFieldsSubmit() {
+									if($("#itfName").val() == ''){
+											alert("Please enter Input Tab Fields Name");
+											$("#itfName").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" >Edit Others Information</legend>
+                                <div id="showInputTabFields">
+                                  <form name="inputTabFieldsForm" method="post" action="othersInformationEdit.php" onsubmit="return confirmInputTabFieldsSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                        
+                                        
+                                           <tr valign="top" class="rowcolor">
+                                                <td width="7%" height="26" align="right">&nbsp;</td>
+                                                <td width="36%" height="26" align="right">
+                                                    Number of Disputes Raised by the Parties :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="oi_111" name="oi_111" onkeyup='removeChar(this);' autocomplete="off" value="<!--%[OI_111]%-->" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="7%" height="26" align="right">&nbsp;</td>
+                                                <td width="36%" height="26" align="right">
+                                                    Number of Unresolved Disputes:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="oi_112" name="oi_112" onkeyup='removeChar(this);' autocomplete="off" value="<!--%[OI_112]%-->" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                          <tr valign="top">
+                                                  <td width="2%" height="26" align="right">&nbsp;</td>
+                                                   <td height="26" align="right">
+                                                      Dropped/Cancelled :
+                                                   </td>
+                                                       <td height="26" align="left">
+                                                      <select name="oi_118" id="oi_118" autofocus="">
+                                                      <option value=""> Select One</option>
+                                                       		<!--%[OI_118]%-->
+                                                      </select>
+                                                   </td>
+                                            </tr>
+                                            
+                                            <tr valign="top">
+                                                  <td width="2%" height="26" align="right">&nbsp;</td>
+                                                   <td height="26" align="right">
+                                                      Termination :
+                                                   </td>
+                                                       <td height="26" align="left">
+                                                      <select name="oi_119" id="oi_119" autofocus="">
+                                                      <option value=""> Select One</option>
+                                                       		<!--%[OI_119]%-->
+                                                      </select>
+                                                   </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="7%" height="26" align="right">&nbsp;</td>
+                                                <td width="36%" height="26" align="right">
+                                                    Remarks :
+                                                </td>
+                                                <td width="57%" height="26" align="left">
+                                                    <input type="text" id="oi_114" name="oi_114" autocomplete="off" value="<!--%[OI_114]%-->" placeholder="Remarks" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                           
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td width="36%" height="26" align="right"> </td>
+                                                <td height="26" align="left">
+                                                     <input type="hidden" name="othersIpackageId" value="<!--%[OTHERS_INFORMATION_PACKAGEID]%-->" />
+                                                     <input type="hidden" name="othersIpackageName" value="<!--%[OTHERS_INFORMATION_PACKAGENAME]%-->" />
+                                                    <input type="submit" name="editOthersInformation" value="Submit" class="FormSubmitBtn" />
+                                                    <input type="button" value="Back" onclick="window.close();" class="FormResetBtn">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+						
+            <!--  End Others Information  ------------------------------------------------------------------------------------------------------------------     -->
+                    
+                    
+                </table>
+                
+            </td>
+
+        </tr>
+    </table>

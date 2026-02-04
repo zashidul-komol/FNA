@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>.:: FNA ::.</title>
+	<meta http-equiv="content-Type" content="text/html; charset=iso-8859-1">
+	<META http-equiv="content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="content-Type" content="text/html; charset=UTF-8" />
+	<meta name="robots" content="noindex,nofollow" />
+	<link rel="stylesheet" type="text/css" href="styles/login.css" />
+	<script src="scripts/jquery.js" language="javascript"></script>
+	<script language="javascript" type="text/javascript">
+		function check() {
+			if(document.getElementById('username').value=="") {
+				alert('Insert User Name');
+				document.getElementById('username').focus();
+				return false;
+			} else if(document.getElementById('password').value=="") {
+				alert('Insert Password');
+				document.getElementById('password').focus();
+				return false;
+			}
+			return true;
+		}
+	</script>
+
+</head>
+<body class="login">
+	<div class='wraplogin'>
+    	<div class="banner"><img src="../images/Traning-Logo.png" alt="Organization banner" height="100" /></div>
+		<div>
+        	<form id="login" name="loginform" action="" onSubmit="return check();" method="post">
+            
+            <h4>Welcome to FNA Cold Storage Limited</h4>
+            
+                <h1>Log In</h1>
+                <h4><!--%[MSG]%--></h4>
+                <fieldset id="inputs">
+                    <input id="username" placeholder="User Name" autofocus required name="userId" type="text"> 
+                    <input id="password" placeholder="Password" required name="password" type="password">
+                </fieldset>
+                <fieldset class="actions">
+                    <input class="submit" name="btnLogin" value="Log In" type="submit">
+                    <input type="hidden" name="testcookie" value="1" />
+                </fieldset>
+            </form>
+		</div>
+	</div>
+	<div class="logfooter">
+    	Development &amp; Powered by:.................................................
+	</div>
+
+<script language="javascript">
+
+$(document).ready(function () {
+  var bottom = $(window).height()-($('.logfooter').height()+60);
+  $('.wraplogin').css('height',bottom);
+
+});
+</script>
+</body>
+</html>

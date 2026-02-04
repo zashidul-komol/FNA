@@ -1,0 +1,353 @@
+    <table width="98%" border="0" cellspacing="1" style="margin:0px auto 0px auto;">
+        <tr>
+            <td colspan="2" align="center"><h4>Initialization Contracting Stage</h4>
+            <div style="text-align:left;"><b>Package No:</b>  <!--%[PI_4]%--> <br/>
+             <b>Lot No:</b>  <!--%[PI_5]%--> <br/>
+            <b>Contract Name:</b> <!--%[PI_6]%--></div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><!--%[MSG]%--></td>
+        </tr>
+        <tr valign="top">
+            <td width="50%" align="left">
+                <table width="100%"  border="0" cellspacing="0" cellpadding="0" align="center">
+                    
+            <!--  Start Contracting Stage ------------------------------------------------------------------------------------------------------------------    -->
+                  <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmInputTabFieldsSubmit() {
+											
+									var checkDate   = $("#checkDate").val();
+									var checkNewDate = Date.parse(checkDate);
+	
+									var cs_64      = $("#cs_64").val();
+									var dSplit  	= cs_64.split("-");
+									var cs_64New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var cs_64NewDate = Date.parse(cs_64New);
+									if (cs_64NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#cs_64").focus();
+										return false;
+									}
+									var cs_65      = $("#cs_65").val();
+									var dSplit  	= cs_65.split("-");
+									var cs_65New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var cs_65NewDate = Date.parse(cs_65New);
+									if (cs_65NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#cs_65").focus();
+										return false;
+									}
+									var cs_66      = $("#cs_66").val();
+									var dSplit  	 = cs_66.split("-");
+									var cs_66New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var cs_66NewDate = Date.parse(cs_66New);
+									if (cs_66NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#cs_66").focus();
+										return false;
+									}
+									var cs_67       = $("#cs_67").val();
+									var dSplit  	= cs_67.split("-");
+									var cs_67New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var cs_67NewDate = Date.parse(cs_67New);
+									if (cs_67NewDate < checkNewDate) {
+										alert("Previous Date Not Allow!");
+										$("#cs_67").focus();
+										return false;
+									}
+									var cs_67a      = $("#cs_67a").val();
+									var dSplit  	= cs_67a.split("-");
+									var cs_67aNew   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var cs_67aNewDate = Date.parse(cs_67aNew);
+									if (cs_67aNewDate < checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#cs_67a").focus();
+										return false;
+									}
+									var cs_68      = $("#cs_68").val();
+									var dSplit     = cs_68.split("-");
+									var cs_68New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var cs_68NewDate = Date.parse(cs_68New);
+									if (cs_68NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#cs_68").focus();
+										return false;
+									}
+									var cs_67a      = $("#cs_67a").val();
+									var dSplit  	= cs_67a.split("-");
+									var cs_67aNew   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var cs_67aNewDate = Date.parse(cs_67aNew);
+									if (cs_67aNewDate < checkNewDate) {
+										alert("Previous Date Not Allow!");
+										$("#cs_67a").focus();
+										return false;
+									}
+									var cs_69      = $("#cs_69").val();
+									var dSplit  	 = cs_69.split("-");
+									var cs_69New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var cs_69NewDate = Date.parse(cs_69New);
+									if (cs_69NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#cs_69").focus();
+										return false;
+									}
+									var cs_70      = $("#cs_70").val();
+									var dSplit     = cs_70.split("-");
+									var cs_70New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var cs_70NewDate = Date.parse(cs_70New);
+									if (cs_70NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#cs_70").focus();
+										return false;
+									}
+									var cs_72        = $("#cs_72").val();
+									var dSplit  	 = cs_72.split("-");
+									var cs_72New     = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var cs_72NewDate = Date.parse(cs_72New);
+									if (cs_72NewDate < checkNewDate) {
+										alert("Previous Date Not Allow!");
+										$("#cs_72").focus();
+										return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <script>
+                              $(document).ready(function() {
+                               $("#cs_64, #cs_65, #cs_66, #cs_67, #cs_67a, #cs_68, #cs_69, #cs_70, #cs_72").datepicker({ dateFormat: "dd-mm-yy",
+                                beforeShow: function(input, inst) {
+                                 if ($("#dateplanedcheck").is(':checked')) {
+                                  $(".ui-datepicker-calendar").css("display", "none");
+                                }}
+                               });
+                              });
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" >Enter Contracting Stage</legend>
+                                <div id="showInputTabFields">
+                                <center><b>Insert Data for " <!--%[CONTRACTING_STAGE_PACKAGENAME]%--> " Package</b></center><hr/>
+                                  <form name="inputTabFieldsForm" method="post" action="contractingStage.php" onsubmit="return confirmInputTabFieldsSubmit();">
+                                        <table width="100%" border="0" cellpadding="3" cellspacing="0">
+                                                                                
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="58%" height="26" align="right">
+                                                   Date of Issuance of NOA to Successful Bidder:
+                                                </td>
+                                                <td width="41%" height="26" align="left">
+                                                	<input type="text" id="cs_64" name="cs_64"  class="FormDateTypeInput" value="" autocomplete="off">
+
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="58%" height="26" align="right">
+                                                    Date of Acceptance of NOA by Successful Bidder:
+                                                </td>
+                                                <td width="41%" height="26" align="left">
+                                                	<input type="text" id="cs_65" name="cs_65" class="FormDateTypeInput" value="" autocomplete="off">
+
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="58%" height="26" align="right">
+                                                    Name of the Supplier/ Contractor :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="cs_113" name="cs_113" autocomplete="off" placeholder="Name of the Supplier/ ............." class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="58%" height="26" align="right">
+                                                    Country of the Supplier/ Contractor:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="cs_114a" name="cs_114a" autocomplete="off" placeholder="Country of the Supplier/ Contractor......." class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="58%" height="26" align="right">Planned Date of Contract Signing :
+                                                </td>
+                                                <td height="26" align="left">
+                                               		 <input type="text" id="cs_68" name="cs_68" class="FormDateTypeInput" value="" autocomplete="off">
+                                               </td>
+                                            </tr>
+                                            
+                                          <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="58%" height="26" align="right">Actual Date of Contract Signing :
+                                                </td>
+                                                <td width="41%" height="26" align="left">
+                                                	<input type="text" id="cs_67a" name="cs_67a"  class="FormDateTypeInput" value="" autocomplete="off">
+
+                                                </td>
+                                          </tr>
+                                          
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="58%" height="26" align="right">
+                                                   Date of Issuance of Performance Security :
+                                                </td>
+                                                <td height="26" align="left">
+                                              		<input type="text" id="cs_66" name="cs_66"  class="FormDateTypeInput" value="" autocomplete="off">
+
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="58%" height="26" align="right">
+                                                    Date of Expiry of Performance Security:
+                                                </td>
+                                                <td width="41%" height="26" align="left">
+                                                	<input type="text" id="cs_67" name="cs_67"  class="FormDateTypeInput" value="" autocomplete="off">
+
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="58%" height="26" align="right">
+                                                    Planned Completion Time (Days):
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="cs_72a" name="cs_72a" autocomplete="off" placeholder="Planned Completion Time......." class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="58%" height="26" align="right">
+                                                    Planned Completion Date:
+                                                </td>
+                                                <td height="26" align="left">
+                                                	<input type="text" id="cs_72" name="cs_72" class="FormDateTypeInput" value="" autocomplete="off">
+
+                                                </td>
+                                            </tr>
+
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="58%" height="26" align="right">
+                                                    Date of Contract Award Information Published in ADB, CPTU & Entity's Website:
+                                                </td>
+                                                <td height="26" align="left">
+                                               		<input type="text" id="cs_69" name="cs_69" class="FormDateTypeInput" value="" autocomplete="off">
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor" style="display:<!--%[CS_70VIEW]%-->;">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="58%" height="26" align="right">
+                                                    Date of Sending Copy of Final Contract to ADB:
+                                                </td>
+                                                <td height="26" align="left">
+                                           
+                                                	<input type="text" id="cs_70" name="cs_70" class="FormDateTypeInput" value="" autocomplete="off">
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="58%" height="26" align="right">
+                                                    Debriefing Held (Yes/ No) :
+                                                </td>
+                                                <td height="26" align="left">
+                                                <select name="cs_104" id="cs_104"  class="FormSelectTypeInput" autofocus="">
+                                                <option value="">Select Debriefing Held</option>
+                                                <option value="Yes">Yes</option>
+                                                <option value="No">No</option>
+												</select> 
+                                                </td>
+                                            </tr>
+                                            
+                                          <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="58%" height="26" align="right">
+                                                    Original Contract Price in Contract Currency or Currencies  :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="cs_9" name="cs_9" autocomplete="off" placeholder="Original Contract Price" class="FormTextTypeInput" />
+                                             </td>
+                                            </tr>
+                                            
+                                           <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="58%" height="26" align="right">
+                                                    Original Contract Price (Equiv. US$) :
+                                                </td>
+                                                <td height="26" align="left">
+ 													<input id="cs_11" name="cs_11" autocomplete="off" onblur="if(this.value=='') this.value='0.00'; numberFormat(this.id,this.value.toString(),'2',',','.');" onfocus="if(this.value=='0.00') this.value='';" size="15" class="FormNumericTypeInput" onkeyup="removeChar(this);"/> 
+                                              	 </td>
+                                            </tr>
+
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="58%" height="26" align="right">
+                                                    Contract with Advance Payment Provision (Yes/ No) :
+                                                </td>
+                                                <td height="26" align="left">
+                                                <select name="cs_105" id="cs_105"  class="FormSelectTypeInput" autofocus="">
+                                                <option value="">Select Contract with Advance Payment Provision</option>
+                                                <option value="Yes">Yes</option>
+                                                <option value="No">No</option>
+												</select> 
+                                                
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="58%" height="26" align="right">
+                                                    Contract with Price Adjustment Provision  (Yes/ No) :
+                                                </td>
+                                                <td height="26" align="left">
+                                                <select name="cs_106" id="cs_106"  class="FormSelectTypeInput" autofocus="">
+                                                <option value="">Select Contract with Price Adjustment Provision</option>
+                                                <option value="Yes">Yes</option>
+                                                <option value="No">No</option>
+												</select> 
+                                               </td>
+                                            </tr>
+                                            
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td width="58%" height="26" align="right"> </td>
+                                                <td height="26" align="left">
+                                                    <input type="hidden" name="checkDate" id="checkDate" value="<!--%[CHECK_DATE]%-->" />
+                                                    <input type="hidden" name="contractingStagepackageId" value="<!--%[CONTRACTING_STAGE_PACKAGEID]%-->" />
+                                                    <input type="hidden" name="contractingStagepackageName" value="<!--%[CONTRACTING_STAGE_PACKAGENAME]%-->" />
+                                                    <input type="submit" name="insertcontractingStage" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input type="button" value="Back" onclick="window.close();" class="FormResetBtn">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+						
+            <!--  End Contracting Stage ------------------------------------------------------------------------------------------------------------------     -->
+                    
+                    
+                </table>
+                
+            </td>
+
+        </tr>
+    </table>

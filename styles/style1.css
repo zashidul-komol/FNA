@@ -1,0 +1,185 @@
+th {
+	color : #000000;
+	font-size : 11px;
+	font-family : Tahoma,Verdana,Arial;
+}
+input, select {
+	color : #000000;
+	font-size : 11px;
+	font-family : Tahoma,Verdana,Arial;
+	font-weight: bold;
+}
+.px {
+	padding : 0px;
+	margin: 2px 0px 0px 0px;
+}
+.px5 {
+	padding : 0px;
+	margin : 5px 0px 0px 0px;
+}
+.title01, .BDJtabLinkNormal {
+	font-family:"Times New Roman", Times, serif;
+	font-size:14px;
+	color: #0033CC;	
+	font-weight: bold;
+}
+.title {
+	color : #ffffff;
+	margin : 28px 10px 0px 45px;
+	padding-bottom : 10px;
+	font-size : 11px;
+	font-family : Tahoma,Verdana,Arial;
+	font-weight: bold;
+	background-color:#005221;
+}
+.title a {
+	color : #EF6D00;
+}
+.title a:hover {
+	color : #C25A02;
+}
+.list {
+	color : #444444;
+	margin : 3px 2px 0px 2px;
+	padding-bottom : 3px;
+	font-size : 11px;
+	font-family : Tahoma,Verdana,Arial;
+	}
+.listOR {
+	color : #444444;
+	margin : 3px 2px 0px 2px;
+	padding-bottom : 3px;
+	font-size : 11px;
+	font-family : Tahoma,Verdana,Arial;
+	background-color:#e6ebff;
+	}
+.listER{
+	color : #444444;
+	margin : 3px 2px 0px 2px;
+	padding-bottom : 3px;
+	font-size : 11px;
+	font-family : Tahoma,Verdana,Arial;
+	background-color:#f3f3f3;
+	}
+
+form {
+	padding : 3px;
+	margin : 3px 2px 0px 2px;
+}
+
+.right {
+	color : #FFFFFF;
+	padding-bottom : 10px;
+	margin : 5px 15px 0px 15px;
+	font-size : 11px;
+	font-family : Tahoma,Verdana,Arial;
+	font-weight: bold;
+}
+.right a, .list a {
+	color : #000000;
+	font-weight:bold;
+}
+.right a:hover {
+	color : #AAAAAA;
+}
+.left {
+	color : #000000;
+	padding-bottom : 5px;
+	margin : 10px 10px 0px 15px;
+	font-size : 11px;
+	font-family : Tahoma,Verdana,Arial;
+	font-weight: bold;
+}
+.left a {
+	color : #FF6600;
+}
+.left a:hover {
+	color : #FF0000;
+}
+p {
+	color : #000000;
+	margin : 5px 10px 0px 10px;
+	padding-bottom : 10px;
+	font-size : 12px;
+	font-family : Tahoma,Verdana,Arial;
+}
+p a {
+	color : #000000;
+	font-weight: bold;
+	font-size : 12px;
+}
+p a:hover {
+	color : #294A7B;
+	font-size : 12px;
+	}
+	A:link {text-decoration: none}
+    A:visited {text-decoration: none}
+    A:active {text-decoration: none}
+	
+.menu01 {
+	color : #FFFFFF;
+	margin : 0px 1px;
+	padding-bottom : 0px;
+	font-size : 11px;
+	font-family : Tahoma,Verdana,Arial;
+	font-weight: bold;
+}
+.menu01 a {
+	color : #FFFFFF;
+	text-decoration: none;
+}
+.menu01 a:hover {
+	color : #EEEEEE;
+}
+.menu02 {
+	color : #FFFFFF;
+	margin : 25px 0px 0px 20px;
+	padding-bottom : 0px;
+	font-size : 11px;
+	font-family : Tahoma,Verdana,Arial;
+}
+.menu02 a {
+	color : #FFFFFF;
+	text-decoration: none;
+}
+.menu02 a:hover {
+	color : #555555;
+}
+
+  .dayOfWeek{display:inline; padding:2px; width:25px;}
+  .dateBox{cursor:pointer; background-color:#E6E6E6; padding:2px}
+  .dayOfWeekBox {color:#000000;}
+  
+  div#picker {width:189px; position:absolute; visibility:hidden; background-color:#CCCCFF; border:solid #000000 1px;}
+  div#picker_year{background-color:#E6E6E6; padding:2px; border-bottom:solid #000000 1px; font-weight:bold; text-decoration:none;}
+  div#picker_year a {text-decoration:none;}
+  div#picker_month{padding:2px; border-bottom:solid #000000 1px;}
+
+.topMenuStyle {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color:#FFFFFF;
+	padding-top: 0px;
+}
+A.topMenuStyle:hover {
+	COLOR: #FF6633;
+}
+setupTitle {
+	color : #EF6D00;
+}
+.SetupMenu {
+	color : #D25900;
+	margin : 0px 1px;
+	padding-bottom : 0px;
+	font-size : 11px;
+	font-family : Tahoma,Verdana,Arial;
+	font-weight: bold;
+}
+.SetupMenu:hover {
+	color : #794D31;
+	margin : 0px 1px;
+	padding-bottom : 0px;
+	font-size : 11px;
+	font-family : Tahoma,Verdana,Arial;
+	font-weight: bold;
+}

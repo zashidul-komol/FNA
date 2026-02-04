@@ -1,0 +1,264 @@
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0px; padding:0px;">
+	<tr valign="top">
+		<td style="width:100%">
+			<div class="container">
+				<!--%[TABS]%-->
+			</div>
+		</td>
+	</tr>
+</table><br/>
+
+<table cellpadding="1" cellspacing="1" border="0" width="100%" style="margin:0px; padding:5px;">
+	<tr valign="top">
+        <td width="95%">
+        <div class="container">
+            <!--%[PRICEALERT]%-->          
+        <table width="100%">    
+             <!--  Start Project Form -->
+                    <tr valign="top">
+                        <td width="100%" align="left">
+							<script  type="text/javascript">
+								function confirmProjectSubmit() {
+									if($("#pName").val() == ''){
+											alert("Please enter Project Name");
+											$("#pName").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								function checkCalender(){
+									var ENTRYDATE = String($("#ENTRYDATE").val());
+									var ENTRYDATE2 = String($("#ENTRYDATE2").val());
+									if(ENTRYDATE != ''){
+										
+										var tempENTRYDATE = ENTRYDATE.split('-'); 
+										
+										var a = tempENTRYDATE[1]+'/'+tempENTRYDATE[0]+'/'+tempENTRYDATE[2];
+									}
+								}
+								
+								$(document).ready(function() {
+									$("#FeedBillRec").click(function(){
+										
+										var PROJECTID  		= $("#PROJECTID").val();
+										var SUBPROJECTID  	= $("#SUBPROJECTID").val();
+										var PARTYID  		= $("#PARTYID").val();
+										var ENTRYDATE  		= $("#ENTRYDATE").val();
+										var ENTRYDATE2 		= $("#ENTRYDATE2").val();
+										var userId 			= $("#userId").val();
+										if(PARTYID == ''){
+											alert("Please Select Party Name!");	
+											$("#PARTYID").focus();
+											return false;
+										}
+										if(ENTRYDATE == ''){
+											alert("Please Select Date!");	
+											$("#ENTRYDATE").focus();
+											return false;
+										}
+										if(ENTRYDATE2 == ''){
+											alert("Please Select Date!");	
+											$("#ENTRYDATE2").focus();
+											return false;
+										}
+										$("#showAppSimple").html();
+										$.post("ajax/getReptFeedPartyBillRec.php",{'PROJECTID': PROJECTID, 'SUBPROJECTID': SUBPROJECTID, 'PARTYID': PARTYID, 'ENTRYDATE': ENTRYDATE, 'ENTRYDATE2': ENTRYDATE2, 'userId': userId},
+										function(data)
+										{
+											$("#showAppSimple").html(data);
+										});
+									})
+								});
+								
+								function getProjectName(pcId){					
+										var options = '';
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#SUBPROJECTID").html('');
+											$("select#SUBPROJECTID").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getProjectList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#SUBPROJECTID").html('');
+												$("select#SUBPROJECTID").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#SUBPROJECTID").html('');
+												$("select#SUBPROJECTID").html(options);
+											}
+										})
+									
+									
+								}
+								
+								function PartyName(pcId){					
+										var options = '';
+										var jj = '';
+										//alert (pcId);
+										options.length=0;
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#LABOURID").html('');
+											$("select#LABOURID").html(options);
+											return false;
+										}
+										
+										var j = '';
+										$.getJSON("ajax/getPartyName.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options = '';
+												options += '<option value="All">All</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#PARTYID").html('');
+												$("select#PARTYID").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#PARTYID").html('');
+												$("select#PARTYID").html(options);
+												
+											}
+										});
+										
+										$.getJSON("ajax/getProdCategoryList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options = '';
+												options += '<option value="">Select</option>';
+												options += '<option value="All">All</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#PRODCATTYPEID").html('');
+												$("select#PRODCATTYPEID").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#PRODCATTYPEID").html('');
+												$("select#PRODCATTYPEID").html(options);
+												
+											}
+										});
+										
+										
+									
+									
+								}
+								
+                            </script>
+                            
+                             <script language="javascript">
+							function Clickheretoprint()
+							{
+							  var disp_setting="toolbar=no,location=yes,directories=no,menubar=no,addressbars=no";
+								  disp_setting+="scrollbars=yes,width=800, height=2000, left=100, top=0";
+							  var content_vlue = document.getElementById("print_content").innerHTML;
+							 
+							  var docprint=window.open("","",disp_setting);
+							   docprint.document.open();
+							   docprint.document.write('<html><head><title>.::. FNA .::. </title>');
+							   docprint.document.write('<style type="text/css">*{font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px;}</style></head><body onLoad="self.print()"><center>');         
+							   docprint.document.write(content_vlue);     
+							   docprint.document.write('</center></body></html>');
+							   docprint.document.close();
+							   docprint.focus();
+							}
+							
+							
+							</script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showProject')">Create Feed Mill Party Bill Receive  Report</legend>
+                                <div id="showProject" style="">
+                                  <table width="100%" border="0" cellpadding="3" cellspacing="0" style="margin:0px auto 0px auto;font-size:85%;">
+                                    <tr>
+                                      <th width="27%" align="right" scope="col">Project   Name:</th>
+                                      <th width="13%" scope="col"><select type="text" id="PROJECTID" name="PROJECTID" style="width:165px;" autocomplete="off" placeholder="PackingName" onchange="getProjectName(this.value);" >
+                                        <option value="">Select</option>
+                                        <!--%[PROJECT_NAME]%-->
+                                      </select></th>
+                                      <th width="10%" align="right" scope="col">Sub Project Name : </th>
+                                      <th width="12%" scope="col"><select type="text" id="SUBPROJECTID" name="SUBPROJECTID" style="width:165px;" autocomplete="off" onchange="PartyName(this.value);"  />
+                                      </select></th>
+                                      <th width="38%" scope="col">&nbsp;</th>
+                                    </tr>
+                                    <tr>
+                                      <th width="29%" align="right" scope="col">Party Name:</th>
+                                      <th width="13%" scope="col"><select id="PARTYID" name="PARTYID" autocomplete="off" style="width:165px;" >
+                                      			<option value="All">All<option>
+                                                                 </select></th>
+                                      <th width="10%" align="right" scope="col">&nbsp;</th>
+                                      <th width="12%" scope="col">&nbsp;</th>
+                                      <th width="36%" scope="col">&nbsp;</th>
+                                    </tr>
+                                    <tr>
+                                      <td align="right" valign="top"><strong>Date :</strong></td>
+                                      <td><input name="ENTRYDATE" size="18" id="ENTRYDATE" type="text" readonly="readonly" onclick="showCalender('ENTRYDATE','ENTRYDATE')" onchange="checkCalender(this.value);" style="width:150px;" /></td>
+                                      <td align="center"><strong>To</strong></td>
+                                      <td><input name="ENTRYDATE2" size="18" id="ENTRYDATE2" type="text" readonly="readonly" onclick="showCalender('ENTRYDATE2','ENTRYDATE2')" onchange="checkCalender(this.value);" style="width:150px;" /></td>
+                                      <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                      <td height="31">&nbsp;</td>
+                                      <td>&nbsp;</td>
+                                      <td>&nbsp;</td>
+                                      <td>&nbsp;</td>
+                                      <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                      <td>&nbsp;</td>
+                                      <td colspan="3" align="center"><input type="hidden" name="userId" id="userId" value="&lt;!--%[USER_ID]%--&gt;" />
+                                        <input type="button" name="FeedBillRec" id="FeedBillRec" value="GO" class="FormSubmitBtn" />
+                                      <input type="reset"  name="Reset" value="Reset" class="FormResetBtn" /></td>
+                                      <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                      <td>&nbsp;</td>
+                                      <td>&nbsp;</td>
+                                      <td>&nbsp;</td>
+                                      <td>&nbsp;</td>
+                                      <td>&nbsp;</td>
+                                    </tr>
+                                  </table>
+                               		   
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Project Form -->
+            </table>
+            
+            <table width="100%">    
+             <!--  Start Project Form -->
+                    <tr valign="top">
+                        <td width="100%" align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showProject')">View Feed Mill Party Bill Receive Report</legend>
+                                <!-- Details main body  -->
+                                <div id="print_content">
+                                	<div id="showAppSimple" style="">
+                               		   
+                              		</div>
+                               </div>        
+                            <!-- end of details -->
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Project Form -->
+            </table>
+        </div>   
+		</td>
+	</tr>
+</table>

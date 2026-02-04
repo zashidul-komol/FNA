@@ -1,0 +1,179 @@
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0px; padding:0px;">
+	<tr valign="top">
+		<td style="width:100%">
+			<div class="container">
+				<!--%[TABS]%-->
+			</div>
+		</td>
+	</tr>
+</table><br/>
+
+<table cellpadding="1" cellspacing="1" border="0" width="100%" style="margin:0px; padding:5px;">
+	<tr valign="top">
+		<td width="9%">&nbsp;
+		</td>
+        <td width="91%">
+        <div class="container">
+            <!--%[PRICEALERT]%-->          
+        <table width="1005">    
+             <!--  Start Project Form -->
+                    <tr valign="top">
+                        <td width="949" align="left">
+							<script  type="text/javascript">
+								function confirmProjectSubmit() {
+									if($("#pName").val() == ''){
+											alert("Please enter Project Name");
+											$("#pName").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showProject')">Enter a New Package/Lot.</legend>
+                                <div id="showProject" style="display:;">
+                                
+								  <table width="100%"><tr><td valign="top" width="50%" style=" text-align:right;">
+                                      <a style="text-decoration:none;color:#fff;background-color:#78a951;width:100%;cursor:pointer;padding: 10px;font-size: 15px;" href="#"  onClick="return ShowHide('showNewProject')">Enter a New Package/Lot.</a>
+                                       <div id="showNewProject" style="display:none; border:solid 1px #78a951;padding-top:10px;margin-top: 8px;">
+                                          <form name="ProjectForm" method="post" action="packageInformation.php" onsubmit="return confirmProjectSubmit();">
+                                                <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                                    <tr valign="top">
+                                                        <td height="26" align="right">
+                                                            Procurement Type :
+                                                        </td>
+                                                        <td height="26" align="left">
+                                                        <select name="piProcurementType" id="piProcurementType"  class="FormSelectTypeInput" required="" autofocus="">
+                                                        <option value="">Select Procurement Type</option>
+                                                        <!--%[PROJECT_PROCUREMENT_TYPE_LIST]%-->
+                                                        </select>
+                                                        <sup style="color:red;">*</sup>
+                                                        </td>
+                                                    </tr>
+                                                     <tr valign="top">
+                                                        <td height="26" align="right">
+                                                            Procurement Method :
+                                                        </td>
+                                                        <td height="26" align="left">
+                                                        <select name="piProcurementMethod" id="piProcurementMethod"  class="FormSelectTypeInput" required="" autofocus="">
+                                                        <option value="">Select Procurement Method</option>
+                                                        <!--%[PROJECT_PROCUREMENT_MATHOD_LIST]%-->
+                                                        </select>
+                                                        <sup style="color:red;">*</sup>
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                     <tr valign="top">
+                                                        <td height="26" align="right">
+                                                            Bidding Procedure :
+                                                        </td>
+                                                        <td height="26" align="left">
+                                                        <select name="piBiddingProcedure" id="piBiddingProcedure"  class="FormSelectTypeInput" required="" autofocus="">
+                                                        <option value="">Select Bidding Procedure</option>
+                                                        <!--%[PROJECT_BIDDING_PROCEDURE_LIST]%-->
+                                                        </select>
+                                                        <sup style="color:red;">*</sup>
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                    <tr valign="top">
+                                                        <td height="26" align="right">
+                                                            Prior Review :
+                                                        </td>
+                                                        <td height="26" align="left">
+                                                        <select name="piPriorReview" id="piPriorReview"  class="FormSelectTypeInput" required="" autofocus="">
+                                                        <option value="">Select Prior Review</option>
+                                                        <option value="Yes">Yes</option>
+                                                        <option value="No">No</option>
+                                                        </select>
+                                                        <sup style="color:red;">*</sup>
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                    <tr valign="top">
+                                                        <td height="26" align="right">
+                                                            Prequalification Process :
+                                                        </td>
+                                                        <td height="26" align="left">
+                                                        <select name="piPrequalificationProcess" id="piPrequalificationProcess"  class="FormSelectTypeInput" required="" autofocus="">
+                                                        <option value="">Select Prequalification ........</option>
+                                                        <option value="Yes">Yes</option>
+                                                        <option value="No">No</option>
+                                                        </select>
+                                                        <sup style="color:red;">*</sup>
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                    <tr valign="top">
+                                                        <td height="26" align="right">&nbsp;</td>
+                                                        <td height="26" align="left">
+                                                            <input type="submit" name="pacakgeInformation" value="Next" class="FormSubmitBtn" />
+                                                            <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </form>
+                                      </div>
+                                    
+                                  </td><td valign="top" width="50%" style=" border:">
+                                    <a style="text-decoration:none;color:#fff;background-color:#78a951;width:100%;cursor:pointer;padding: 10px;font-size: 15px;" href="#"  onClick="return ShowHide('showExeistingProject')">Enter a Existing Package/Lot.</a>
+                                       <div id="showExeistingProject" style="display:none;border:solid 1px #78a951;padding-top:10px;margin-top: 8px;">
+                                          <form name="ProjectForm" method="post" action="packageInformation.php" onsubmit="return confirmProjectSubmit();">
+                                                <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                                
+                                                    <tr valign="top">
+                                                        <td height="26" align="right">
+                                                            Pacakge Name:
+                                                        </td>
+                                                        <td height="26" align="left">
+                                                        <select name="piProcurementMethod" id="piProcurementMethod"  class="FormSelectTypeInput" required="" autofocus="">
+                                                        <option value="">Select Pacakge Name</option>
+                                                       <!--%[PACKAGE_NAME_LIST]%-->
+                                                        </select>
+                                                        <sup style="color:red;">*</sup>
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                     <tr valign="top">
+                                                        <td height="26" align="right">
+                                                            Lot No.  :
+                                                        </td>
+                                                        <td height="26" align="left">
+															<input type="text" id="pi_5" name="pi_5" autocomplete="off" required="" placeholder="Lot No" class="FormTextTypeInput" />
+                                                        <sup style="color:red;">*</sup>
+                                                        </td>
+                                                    </tr>
+                                                
+                                                    <tr valign="top">
+                                                        <td height="26" align="right">&nbsp;</td>
+                                                        <td height="26" align="left">
+                                                            <input type="submit" name="pacakgeInformation" value="Next" class="FormSubmitBtn" />
+                                                            <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </form>
+                                      </div>
+                                      
+                                </td></tr>      
+                          		</table>
+                                    
+                                    
+                                    
+                                    
+                                    
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Project Form -->
+            </table>
+            
+            
+        </div>   
+		</td>
+	</tr>
+</table>

@@ -1,0 +1,180 @@
+    <table width="85%" border="0" cellspacing="1" cellpadding="10" style="margin:0px auto 0px auto;">
+        <tr>
+            <td colspan="2" align="center"><h4></h4></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><!--%[MSG]%--></td>
+        </tr>
+        <tr valign="top">
+            <td width="50%" align="left">
+                <table width="100%"  border="0" cellspacing="0" cellpadding="0" align="center">
+                    
+            <!--  Start Contracting Stage ------------------------------------------------------------------------------------------------------------------    -->
+                 <!--   <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmInputTabFieldsSubmit() {
+									if($("#itfName").val() == ''){
+											alert("Please enter Input Tab Fields Name");
+											$("#itfName").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" >Enter Contracting Stage</legend>
+                                <div id="showInputTabFields">
+                                <center><b>Insert Data for " <!--%[CONTRACTING_STAGE_PACKAGENAME]%--> 
+                                  <!--  <form name="inputTabFieldsForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmInputTabFieldsSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                        
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="50%" height="26" align="right">
+                                                    Original Contract Price in Contract Currency or Currencies  :
+                                                </td>
+                                                <td width="49%" height="26" align="left">
+                                                    <input type="text" id="loanGrantNO" name="pi_1" autocomplete="off" placeholder="Original Contract Price ..............." class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="50%" height="26" align="right">
+                                                    Original Contract Price (Equiv. US$) :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="loanGrantNO" name="pi_2" autocomplete="off" placeholder="Original Contract Price ................" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="50%" height="26" align="right">
+                                                    Date of NOA :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="loanGrantNO" name="pi_3" autocomplete="off" placeholder="Date of NOA" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="50%" height="26" align="right">
+                                                    Issued Date of Performance Security :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="loanGrantNO" name="pi_4" autocomplete="off" placeholder="Issued Date of Performance ............." class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="50%" height="26" align="right">
+                                                    Date of Contract Signing :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="loanGrantNO" name="pi_5" autocomplete="off" placeholder="Date of Contract Signing" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="50%" height="26" align="right">
+                                                    Date of Final Contract Sent to ADB  :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="loanGrantNO" name="pi_6" autocomplete="off" placeholder="Date of Final Contract Sent ..................." class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="50%" height="26" align="right">
+                                                    Original Scheduled Completion Date :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="loanGrantNO" name="pi_7" autocomplete="off" placeholder="Original Scheduled Completion ..........." class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                             
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="50%" height="26" align="right">
+                                                    Debriefing Held (Yes/ No) :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="loanGrantNO" name="pi_8" autocomplete="off" placeholder="Debriefing Held (Yes/ No)" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="50%" height="26" align="right">
+                                                    Contract with Advance Payment Provision (Yes/ No) :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="loanGrantNO" name="pi_9" autocomplete="off" placeholder="Contract with Advance ..............)" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="50%" height="26" align="right">
+                                                    Contract with Price Adjustment Provision  (Yes/ No) :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="loanGrantNO" name="pi_10" autocomplete="off" placeholder="Contract with Price .............." class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="50%" height="26" align="right">
+                                                    Date of Contract Award Notification Published into ADB/ CPTU/ Entity's Website :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="loanGrantNO" name="pi_11" autocomplete="off" placeholder="Date of Contract Award ..................." class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="50%" height="26" align="right">
+                                                    Name of the Supplier/ Contractor/ Consultant (with Country :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="loanGrantNO" name="pi_12" autocomplete="off" placeholder="Name of the Supplier/ ............." class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                           
+                                            
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td width="50%" height="26" align="right"> </td>
+                                                <td height="26" align="left">
+                                                 <!--     <input type="hidden" name="evaluationRASpackageId" value="<!--%[CONTRACTING_STAGE_PACKAGEID]%-->
+                                                 <!--     <input type="hidden" name="evaluationRASpackageName" value="<!--%[CONTRACTING_STAGE_PACKAGENAME]%-->
+                                                 <!--     <input type="submit" name="InsertInputTabFields" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+						
+            <!--  End Contracting Stage ------------------------------------------------------------------------------------------------------------------     -->
+                    
+                    
+                </table>
+                
+            </td>
+
+        </tr>
+    </table>

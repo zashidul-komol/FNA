@@ -1,0 +1,83 @@
+    <table width="85%" border="0" cellspacing="1" cellpadding="10" style="margin:0px auto 0px auto;">
+        <tr>
+            <td colspan="2" align="center"><h4>Edit Topics Information</h4></td>
+        </tr>
+        <tr valign="top">
+            <td width="100%" align="left">
+                <table width="100%"  border="0" cellspacing="0" cellpadding="0" align="center">
+                    <tr valign="top">
+                        <td align="left">
+                            <script type="text/javascript">
+                               function confirmTopicsSubmit() {
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+							</script>
+                            <fieldset style="width:90%; margin:0px auto 0px auto;">
+                                <legend style="color:#2C89B5;">Edit Topics Information</legend>
+                                <form name="TopicsForm" id="TopicsForm" method="post" action="TrainingSetup.php" onSubmit="return confirmTopicsSubmit();">
+                                    <table width="96%" border="0" cellpadding="3" cellspacing="0" class="BDJLebels">
+                                        <tr valign="top">
+                                            <td width="36%" height="26" align="right">Topics Title</td>
+                                            <td width="2%" align="left">:</td>
+                                            <td width="58%" height="26" align="left">
+                                                <input type="text" id="topicsTitle" name="topicsTitle" autocomplete="off" required="" autofocus="" placeholder="Topics Title" class="FormTextTypeInput" value="<!--%[TOPICS_TITLE]%-->">
+                                                <sup style="color:red;">*</sup>
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">
+                                            <td width="36%" height="26" align="right">Training Overview</td>
+                                            <td width="2%" align="left">:</td>
+                                            <td width="58%" height="26" align="left">
+                                                <textarea type="text" id="trainingOverview" name="trainingOverview" class="ckeditor"><!--%[TRAINING_OVERVIEW]%--></textarea>
+                                                <sup style="color:red;">*</sup>
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">
+                                            <td width="36%" height="26" align="right">Training Ojectives</td>
+                                            <td width="2%" align="left">:</td>
+                                            <td width="58%" height="26" align="left">
+                                                <textarea type="text" id="trainingOjectives" name="trainingOjectives" class="ckeditor"><!--%[TRAINING_OBJECTIVES]%--></textarea>
+                                                <sup style="color:red;">*</sup>
+                                            </td>
+                                        </tr> 
+                                        <tr valign="top">
+                                            <td width="36%" height="26" align="right">Training Outcomes</td>
+                                            <td width="2%" align="left">:</td>
+                                            <td width="58%" height="26" align="left">
+                                                <textarea type="text" id="trainingOutcomes" name="trainingOutcomes" class="ckeditor"><!--%[TRAINING_OUTCOMES]%--></textarea>
+                                                <sup style="color:red;">*</sup>
+                                            </td>
+                                        </tr> 
+                                        <tr valign="top">
+                                            <td width="36%" height="26" align="right">Who Should Attend</td>
+                                            <td width="2%" align="left">:</td>
+                                            <td width="58%" height="26" align="left">
+                                                <textarea type="text" id="whoShouldAttendName" name="whoShouldAttendName" class="ckeditor"><!--%[WHO_SHOULD_ATTEND]%--></textarea>
+                                                <sup style="color:red;">*</sup>
+                                            </td>
+                                        </tr> 
+                                        <tr valign="top">					
+                                            <td colspan="3">&nbsp;</td>
+                                        </tr> 
+                                        <tr valign="top">
+                                            <td align="right">&nbsp;</td>
+                                            <td align="right">&nbsp;</td>
+                                            <td align="left">
+                                            	<input type="hidden" id="topicsId" name="topicsId" value="<!--%[TOPICS_ID]%-->" />
+                                                <input type="submit" name="UpdateTopicsInfo" value="Done" />
+                                                <input type="reset"  name="Reset" value="Reset">
+                                                <input type="button" name="btnClose" value="Close" onClick="redirectPage();">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </fieldset>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>

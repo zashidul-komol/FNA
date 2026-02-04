@@ -1,0 +1,691 @@
+    <table align="center" width="75%" border="0" cellspacing="1" cellpadding="10" style="margin:0px auto 0px auto;">
+        <tr>
+            <td colspan="2" align="center"><h4>File Management for FNA Setup</h4></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><!--%[MSG]%--></td>
+        </tr>
+        <tr valign="top">
+            <td width="50%" align="left">
+                <table width="100%"  border="0" cellspacing="0" cellpadding="0" align="center">
+                   
+                    
+                    <!--  Start Opening Hatch Egg Quantity Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmHatchOpenSubmit() {
+									if($("#TOTEGGQNTY").val() == ''){
+											alert("Please Insert Total Egg Quantity....");
+											$("#TOTEGGQNTY").focus();
+											return false;
+									}
+									if($("#EGGQUANTITY").val() == ''){
+											alert("Please Insert Cancel Egg Quantity...");
+											$("#EGGQUANTITY").focus();
+											return false;
+									}
+									if($("#OPENDATE").val() == ''){
+											alert("Please Insert Date...");
+											$("#OPENDATE").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								
+								function checkCalender(){
+									var OPENDATE = String($("#OPENDATE").val());
+									if(OPENDATE != ''){
+										
+										var tempOPENDATE = OPENDATE.split('-'); 
+										
+										var a = tempOPENDATE[1]+'/'+tempOPENDATE[0]+'/'+tempOPENDATE[2];
+									}
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showOpenEggHatch')">Enter  Opening Hatching Egg Information</legend>
+                                <div id="showOpenEggHatch" style="display:none;">
+                                  <form name="labourForm" method="post" action="HatcheryEntry.php" onsubmit="return confirmHatchOpenSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td width="42%" height="26" align="right">
+                                                    Present Egg Stock in Hand:
+                                                </td>
+                                                <td width="58%" height="26" align="left">
+                                                    <input readonly="readonly" type="text" id="TOTEGGQNTY" name="TOTEGGQNTY" value="<!--%[TOT_EGG_QNTY_VIEW]%-->" autocomplete="off" placeholder="Batch No" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Cancel Quantity:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" name="EGGQUANTITY" id="EGGQUANTITY" autocomplete="off" placeholder="Cancel Egg Qnty"  class="FormTextTypeInput"/>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Vanga Quantity:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" name="VANGAEGGQNTY" id="VANGAEGGQNTY" autocomplete="off" placeholder="Cancel Egg Qnty"  class="FormTextTypeInput"/>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                              <td height="26" align="right">Hatch Start Date:</td>
+                                              <td height="26" align="left"><input type="text" name="OPENDATE" id="OPENDATE" autocomplete="off" placeholder="Hatch Start Date"  class="FormTextTypeInput" onclick="showCalender('OPENDATE','OPENDATE')" onchange="checkCalender(this.value);"/></td>
+                                            </tr>
+                                            <tr valign="top">
+                                              <td height="26" align="right">&nbsp;</td>
+                                              <td height="26" align="left"><input type="submit" name="InsertOpenHatchEggInfo" value="Insert" class="FormSubmitBtn" />
+                                                <input type="reset"  name="Reset2" value="Reset" class="FormResetBtn" />
+                                              <input name="btnClose2" type="button" value="Close" onclick="return ShowHide('showOpenEggHatch')" /></td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Opening Hatch Egg Quantity Entry Form  -->
+                    
+                    <!--  Start Chicken Production Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmChickProdSubmit() {
+									if($("#HATCHNO").val() == ''){
+											alert("Please Select Hatch No....");
+											$("#HATCHNO").focus();
+											return false;
+									}
+									if($("#EGGSETTQUANTITY").val() == ''){
+											alert("This Hatch No Egg Quantity is null....Please choose another Hatch no...");
+											$("#EGGSETTQUANTITY").focus();
+											return false;
+									}
+									if($("#QUANTITY").val() == ''){
+											alert("Please Insert Chicken Production Quantity...");
+											$("#QUANTITY").focus();
+											return false;
+									}
+									if($("#CPDATE").val() == ''){
+											alert("Please Insert Date...");
+											$("#CPDATE").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								
+								function checkCalender(){
+									var CPDATE = String($("#CPDATE").val());
+									if(CPDATE != ''){
+										
+										var tempCPDATE = CPDATE.split('-'); 
+										
+										var a = tempCPDATE[1]+'/'+tempCPDATE[0]+'/'+tempCPDATE[2];
+									}
+								}
+								
+								
+								function getEggSetting(HATCHNO){
+									if(HATCHNO == '') {
+											$("#EGGSETTQUANTITY").val('');
+											return false;
+										}
+										$.post("ajax/getEggSettingQnty.php",{HATCHNO: HATCHNO}, function(j) {
+											//alert (j);
+											if(j.length>0) {
+												$("#EGGSETTQUANTITY").val('');
+												$("#EGGSETTQUANTITY").val(j);
+											}
+											else {
+												$("#EGGSETTQUANTITY").val('');
+											}
+										})
+									
+									
+								}
+								
+								function CalcPercentage(id){
+									var eggsetquantity 	= $("#EGGSETTQUANTITY").val();
+									var chickQnty 		= $("#QUANTITY").val();
+									eggsetquantity 		= parseFloat(eggsetquantity);
+									chickQnty 	 		= parseFloat(chickQnty);
+									var percentage = (chickQnty / eggsetquantity) * 100;
+									$("#PERCENTAGE").val(percentage);
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showChickProd')">Enter  Chicken Production Information</legend>
+                                <div id="showChickProd" style="display:none;">
+                                  <form name="labourForm" method="post" action="HatcheryEntry.php" onsubmit="return confirmChickProdSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td width="48%" height="26" align="right">
+                                                    Hatch No:
+                                                </td>
+                                                <td width="52%" height="26" align="left">
+                                                <select type="text" id="HATCHNO" name="HATCHNO" style="width:150px;" autocomplete="off" placeholder="PackingName" onchange="getEggSetting(this.value);" >
+                                                      <option value="">Select</option>
+                                                      <!--%[HATCHNO_VIEW]%-->
+                                                </select></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Egg Setting Quantity:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" readonly="readonly" name="EGGSETTQUANTITY" id="EGGSETTQUANTITY" autocomplete="off" placeholder="Egg Setting Qnty"  class="FormTextTypeInput"/>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Chicken Production Quantity:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" name="QUANTITY" id="QUANTITY" autocomplete="off" placeholder="Egg Production Qnty" onchange="CalcPercentage(this.id);"/>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Percentage:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" readonly="readonly" name="PERCENTAGE" id="PERCENTAGE" autocomplete="off" placeholder="Percentage"  class="FormTextTypeInput"/>
+                                                    %
+                                                </td>
+                                            </tr>
+                                          <tr valign="top">
+                                              <td height="26" align="right">Chicken Production Date:</td>
+                                              <td height="26" align="left"><input type="text" name="CPDATE" id="CPDATE" autocomplete="off" placeholder="Production Date"  class="FormTextTypeInput" onclick="showCalender('CPDATE','CPDATE')" onchange="checkCalender(this.value);"/></td>
+                                            </tr>
+                                            <tr valign="top">
+                                              <td height="26" align="right">&nbsp;</td>
+                                              <td height="26" align="left"><input type="submit" name="InsertChickProdInfo" value="Insert" class="FormSubmitBtn" />
+                                                <input type="reset"  name="Reset2" value="Reset" class="FormResetBtn" />
+                                              <input name="btnClose2" type="button" value="Close" onclick="return ShowHide('showChickProd')" /></td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Chicken Production Entry Form  -->
+                    
+                     <!--  Start Vanga Egg Sell Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmVangaEggSellSubmit() {
+									if($("#VABGAEGGSTOCKQNTY").val() == ''){
+											alert("This Hatch No has no Chicken Stock Quantity...Select another Hatch No...");
+											$("#VABGAEGGSTOCKQNTY").focus();
+											return false;
+									}
+									if($("#PARTYID_VES").val() == ''){
+											alert("Please Select Party name...");
+											$("#PARTYID_VES").focus();
+											return false;
+									}
+									if($("#QUANTITY_VES").val() == ''){
+											alert("Please Insert Chicken Sell Quantity...");
+											$("#QUANTITY_VES").focus();
+											return false;
+									}
+									if($("#RATE_VES").val() == ''){
+											alert("Please Insert Chicken Sell Rate...");
+											$("#RATE_VES").focus();
+											return false;
+									}
+									if($("#CPDATE_VES").val() == ''){
+											alert("Please Insert Date...");
+											$("#CPDATE_VES").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								
+								function checkCalender(){
+									var VESDATE = String($("#VESDATE").val());
+									if(VESDATE != ''){
+										
+										var tempVESDATE = VESDATE.split('-'); 
+										
+										var a = tempVESDATE[1]+'/'+tempVESDATE[0]+'/'+tempVESDATE[2];
+									}
+								}
+								
+								
+								
+								
+								function calRateVes(id){
+									var quantity_ves 	= $("#QUANTITY_VES").val();
+									var rate_ves 		= $("#RATE_VES").val();
+									quantity_ves 		= parseFloat(quantity_ves);
+									rate_ves 	 		= parseFloat(rate_ves);
+									var totalprice_ves	= (quantity_ves * rate_ves) ;
+									$("#PRICE_VES").val(totalprice_ves);
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showVangaEggSell')">Enter Vanga Egg Sell Information</legend>
+                                <div id="showVangaEggSell" style="display:none;">
+                                  <form name="labourForm" method="post" action="HatcheryEntry.php" onsubmit="return confirmVangaEggSellSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td width="48%" height="26" align="right">&nbsp;</td>
+                                                <td width="52%" height="26" align="left">&nbsp;</td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Vanga Egg Stock Quantity:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" readonly="readonly" name="VABGAEGGSTOCKQNTY" id="VABGAEGGSTOCKQNTY" value="<!--%[TOT_VANGA_EGG_QNTY_VIEW]%-->" autocomplete="off" placeholder="Egg Setting Qnty"  class="FormTextTypeInput"/>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Party name:
+                                                </td>
+                                                <td height="26" align="left"><select id="PARTYID_VES" name="PARTYID_VES" style="width:100px;">
+                                                  <option value="">Select</option>
+                                                  <!--%[PARTY_ID]%-->
+                                              </select></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Quantity:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" name="QUANTITY_VES" id="QUANTITY_VES" autocomplete="off" placeholder="Percentage"  class="FormTextTypeInput"/></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Rate:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" name="RATE_VES" id="RATE_VES" autocomplete="off" placeholder="Percentage"  class="FormTextTypeInput" onchange="calRateVes(this.id);"/></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Total Price:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" readonly="readonly" name="PRICE_VES" id="PRICE_VES" autocomplete="off" placeholder="Percentage"  class="FormTextTypeInput"/></td>
+                                            </tr>
+                                          <tr valign="top">
+                                              <td height="26" align="right">V. Egg  Sell Date:</td>
+                                              <td height="26" align="left"><input type="text" name="VESDATE" id="VESDATE" autocomplete="off" placeholder="Production Date"  class="FormTextTypeInput" onclick="showCalender('VESDATE','VESDATE')" onchange="checkCalender(this.value);"/></td>
+                                            </tr>
+                                            <tr valign="top">
+                                              <td height="26" align="right">&nbsp;</td>
+                                              <td height="26" align="left"><input type="submit" name="InsertVangaEggSellInfo" value="Insert" class="FormSubmitBtn" />
+                                                <input type="reset"  name="Reset2" value="Reset" class="FormResetBtn" />
+                                              <input name="btnClose2" type="button" value="Close" onclick="return ShowHide('showVangaEggSell')" /></td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Vanga Egg Sell Entry Form  -->
+                    
+                    <!--  Start Daily Operation Entry Form -->                    <!--  End Daily Operation Entry Form  -->
+                    
+                      <!--  Start Divide Morog Murgi Entry Form -->                    <!--  End Divide Morog Murgi Entry Form  -->
+                    
+                    <!--  Start Medicine Distribute Entry Form -->                    <!--  End Medicine Distribute Entry Form  -->
+                   
+                    
+                     <!--  Start Weight Entry Form -->                    <!--  End Weight Entry Form  --> 
+                    
+                    
+                    <!--  Start Chamber Entry Form -->                    <!--  End Chamber Entry Form  --> 
+                                  
+                    <!--  Start Packing Unit Entry Form -->                    <!--  End Packing Unit Entry Form  -->
+                    
+                    <!--  Start Product Category Type Entry Form -->                    <!--  End Product Category Type Entry Form  -->
+                    
+                    <!--  Start Product Form -->                    <!--  End Product Entry Form  -->  
+                    
+                    <!--  Start Project Entry Form -->                    <!--  End Project Entry Form  -->
+                    
+                     <!--  Start Sub Project Form -->                    <!--  End Sub Project Entry Form  --> 
+                    
+                    <!--  Start Expanse Head Entry Form -->                    <!--  End Expanse Head Entry Form  -->
+                   
+                    
+                    <!--  Start Sub Expanse Head Form -->                    <!--  End Expanse Sub Head Entry Form  -->  
+                    
+                     <!--  Start Alu Fare Form -->
+                        
+                    <!--  End Alu Fare Entry Form  -->
+                    
+                     <!--  Start Product Fare Form -->
+                        
+                    <!--  End Product Fare Entry Form  -->
+                    
+                    <!--  Start Session Form -->                    <!--  End Session Entry Form  -->   
+                    
+                   
+                     <!--  Start Labour Contract Form -->                    <!--  End Labour Contract Entry Form  -->                     
+                    
+                </table>
+                
+            </td>
+            <td width="50%" align="right">
+                <table border="0" align="center" cellpadding="0" cellspacing="0" width="100%">
+                	                    
+                  <!--  Start Opening Hatch Egg Quantity Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmEggSettSubmit() {
+									if($("#HATCHNO_ES").val() == ''){
+											alert("Please Insert Hatch No....");
+											$("#HATCHNO_ES").focus();
+											return false;
+									}
+									if($("#EGGQNTY").val() == ''){
+											alert("Please Insert Egg Quantity...");
+											$("#EGGQNTY").focus();
+											return false;
+									}
+									if($("#EGGPRICE").val() == ''){
+											alert("Please Insert Date...");
+											$("#EGGPRICE").focus();
+											return false;
+									}
+									if($("#ESIMDATE").val() == ''){
+											alert("Please Insert Date...");
+											$("#ESIMDATE").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								
+								function checkCalender(){
+									var ESIMDATE = String($("#ESIMDATE").val());
+									if(ESIMDATE != ''){
+										
+										var tempESIMDATE = ESIMDATE.split('-'); 
+										
+										var a = tempESIMDATE[1]+'/'+tempESIMDATE[0]+'/'+tempESIMDATE[2];
+									}
+								}
+								
+								function getEggTotalPrice(EGGQNTY){
+									if(EGGQNTY == '') {
+											$("#EGGPRICE").val('');
+											return false;
+										}
+										$.post("ajax/getEggPrice.php",{EGGQNTY: EGGQNTY}, function(j) {
+											//alert (j);
+											if(j.length>0) {
+												$("#EGGPRICE").val('');
+												$("#EGGPRICE").val(j);
+											}
+											else {
+												$("#EGGPRICE").val('');
+											}
+										})
+									
+									
+								}
+                            </script>
+                            <fieldset>
+                              <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showEggSett')">Enter  Egg Settings in Machine Information</legend>
+                              <div id="showEggSett" style="display:none;">
+                                  <form name="labourForm" method="post" action="HatcheryEntry.php" onsubmit="return confirmEggSettSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td width="42%" height="26" align="right">
+                                                    Present Stock.:
+                                                </td>
+                                                <td width="58%" height="26" align="left">
+                                                    <input readonly="readonly" type="text" id="PRESENT_STOCK" name="PRESENT_STOCK" value="<!--%[PRESENTSTOCK_VIEW]%-->" autocomplete="off" placeholder="Hatch No" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td width="42%" height="26" align="right">
+                                                    Hatch No.:
+                                                </td>
+                                                <td width="58%" height="26" align="left">
+                                                    <input readonly="readonly" type="text" id="HATCHNO_ES" name="HATCHNO_ES" value="<!--%[HATCH_NO_VIEW]%-->" autocomplete="off" placeholder="Hatch No" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Egg Quantity:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" name="EGGQNTY" id="EGGQNTY" autocomplete="off" placeholder="Egg Qnty"  class="FormTextTypeInput" onchange="getEggTotalPrice(this.value);"/>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Total Price:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" readonly="readonly" name="EGGPRICE" id="EGGPRICE" autocomplete="off" placeholder="Total Price"  class="FormTextTypeInput"/>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                              <td height="26" align="right">Hatch Start Date:</td>
+                                              <td height="26" align="left"><input type="text" name="ESIMDATE" id="ESIMDATE" autocomplete="off" placeholder="Hatch Start Date"  class="FormTextTypeInput" onclick="showCalender('ESIMDATE','ESIMDATE')" onchange="checkCalender(this.value);"/></td>
+                                            </tr>
+                                            <tr valign="top">
+                                              <td height="26" align="right">&nbsp;</td>
+                                              <td height="26" align="left"><input type="submit" name="InsertEggSettingInfo" value="Insert" class="FormSubmitBtn" />
+                                                <input type="reset"  name="Reset2" value="Reset" class="FormResetBtn" />
+                                              <input name="btnClose2" type="button" value="Close" onclick="return ShowHide('showEggSett')" /></td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Opening Hatch Egg Quantity Entry Form  -->
+                    
+                    <!--  Start Chicken Sell Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmChickSellSubmit() {
+									if($("#HATCHNO_CS").val() == ''){
+											alert("Please Select Hatch No....");
+											$("#HATCHNO_CS").focus();
+											return false;
+									}
+									/*if($("#CHICKENSTOCKQNTY").val() == ''){
+											alert("This Hatch No has no Chicken Stock Quantity...Select another Hatch No...");
+											$("#CHICKENSTOCKQNTY").focus();
+											return false;
+									}*/
+									if($("#PARTYID").val() == ''){
+											alert("Please Select Party name...");
+											$("#PARTYID").focus();
+											return false;
+									}
+									if($("#QUANTITY_CS").val() == ''){
+											alert("Please Insert Chicken Sell Quantity...");
+											$("#QUANTITY_CS").focus();
+											return false;
+									}
+									if($("#RATE_CS").val() == ''){
+											alert("Please Insert Chicken Sell Rate...");
+											$("#RATE_CS").focus();
+											return false;
+									}
+									if($("#CPDATE_CS").val() == ''){
+											alert("Please Insert Date...");
+											$("#CPDATE_CS").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								
+								function checkCalender(){
+									var CPDATE_CS = String($("#CPDATE_CS").val());
+									if(CPDATE_CS != ''){
+										
+										var tempCPDATE_CS = CPDATE_CS.split('-'); 
+										
+										var a = tempCPDATE_CS[1]+'/'+tempCPDATE_CS[0]+'/'+tempCPDATE_CS[2];
+									}
+								}
+								
+								
+								function getChickenSell(HATCHNO_CS){
+									if(HATCHNO == '') {
+											$("#CHICKENSTOCKQNTY").val('');
+											return false;
+										}
+										$.post("ajax/getChickenSellQnty.php",{HATCHNO_CS: HATCHNO_CS}, function(j) {
+											//alert (j);
+											if(j.length>0) {
+												$("#CHICKENSTOCKQNTY").val('');
+												$("#CHICKENSTOCKQNTY").val(j);
+											}
+											else {
+												$("#CHICKENSTOCKQNTY").val('');
+											}
+										})
+									
+									
+								}
+								
+																
+								function calRate(id){
+									var quantity_cs 	= $("#QUANTITY_CS").val();
+									var rate_cs 		= $("#RATE_CS").val();
+									quantity_cs 		= parseFloat(quantity_cs);
+									rate_cs 	 		= parseFloat(rate_cs);
+									var totalprice		= (quantity_cs * rate_cs) ;
+									$("#TOTALPRICE_CS").val(totalprice);
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showChickSell')">Enter  Chicken Sell Information</legend>
+                                <div id="showChickSell" style="display:none;">
+                                  <form name="labourForm" method="post" action="HatcheryEntry.php" onsubmit="return confirmChickSellSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td width="48%" height="26" align="right">
+                                                    Hatch No:
+                                                </td>
+                                                <td width="52%" height="26" align="left">
+                                                <select type="text" id="HATCHNO_CS" name="HATCHNO_CS" style="width:150px;" autocomplete="off" placeholder="PackingName" onchange="getChickenSell(this.value);" >
+                                                      <option value="">Select</option>
+                                                      <!--%[HATCHNO_VIEW]%-->
+                                                </select></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Chicken Stock Quantity:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" readonly="readonly" name="CHICKENSTOCKQNTY" id="CHICKENSTOCKQNTY" autocomplete="off" placeholder="Egg Setting Qnty"  class="FormTextTypeInput"/>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Party name:
+                                                </td>
+                                                <td height="26" align="left"><select id="PARTYID" name="PARTYID" style="width:100px;" >
+                                                  <option value="">Select</option>
+                                                  <!--%[PARTY_ID]%-->
+                                                </select></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Fathers Name:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input id="FATHERNAME" name="FATHERNAME" autocomplete="off" style="width:167px;" readonly="readonly" /></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Address:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <textarea name="ADDRESS" id="ADDRESS" style="width:170px; height:40px;" readonly="readonly"></textarea></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Mobile No:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input id="MOBILE" name="MOBILE" autocomplete="off" style="width:167px;" readonly="readonly" /></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Quantity:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" name="QUANTITY_CS" id="QUANTITY_CS" autocomplete="off" placeholder="Percentage"  class="FormTextTypeInput"/></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Rate:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" name="RATE_CS" id="RATE_CS" autocomplete="off" placeholder="Percentage"  class="FormTextTypeInput" onchange="calRate(this.id);"/></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Total Price:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" readonly="readonly" name="TOTALPRICE_CS" id="TOTALPRICE_CS" autocomplete="off" placeholder="Percentage"  class="FormTextTypeInput"/></td>
+                                            </tr>
+                                          <tr valign="top">
+                                              <td height="26" align="right">Chicken Sell Date:</td>
+                                              <td height="26" align="left"><input type="text" name="CPDATE_CS" id="CPDATE_CS" autocomplete="off" placeholder="Production Date"  class="FormTextTypeInput" onclick="showCalender('CPDATE_CS','CPDATE_CS')" onchange="checkCalender(this.value);"/></td>
+                                            </tr>
+                                            <tr valign="top">
+                                              <td height="26" align="right">&nbsp;</td>
+                                              <td height="26" align="left"><input type="submit" name="InsertChickSellInfo" value="Insert" class="FormSubmitBtn" />
+                                                <input type="reset"  name="Reset2" value="Reset" class="FormResetBtn" />
+                                              <input name="btnClose2" type="button" value="Close" onclick="return ShowHide('showChickSell')" /></td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Chicken Sell Entry Form  -->
+                    
+                   <!--  Start Divide Morog Murgi Entry Form -->                    <!--  End Divide Morog Murgi Entry Form  -->
+                    
+                   <!--  Start Food Distribute Entry Form -->                    <!--  End Food Distribute Entry Form  -->
+                     
+                     <!--  Start Egg Production Entry Form -->                    <!--  End Egg Production Entry Form  -->
+                    
+                    
+                </table>
+            </td>
+        </tr>
+    </table>

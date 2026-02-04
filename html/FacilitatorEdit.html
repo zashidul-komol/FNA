@@ -1,0 +1,92 @@
+    <table width="85%" border="0" cellspacing="1" cellpadding="10" style="margin:0px auto 0px auto;">
+        <tr>
+            <td colspan="2" align="center"><h4>Edit Facilitator Information</h4></td>
+        </tr>
+        <tr valign="top">
+            <td width="100%" align="left">
+                <table width="100%"  border="0" cellspacing="0" cellpadding="0" align="center">
+                    <tr valign="top">
+                        <td align="left">
+                            <script type="text/javascript">
+                               function confirmFacilitatorEditSubmit() {
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+							</script>
+                            <fieldset style="width:90%; margin:0px auto 0px auto;">
+                                <legend style="color:#2C89B5;">Edit Facilitator Information</legend>
+                                <form name="FacilitatorEditForm" method="post" action="TrainingSetup.php" onSubmit="return confirmFacilitatorEditSubmit();" enctype="multipart/form-data">
+                                    <table width="96%" border="0" cellpadding="3" cellspacing="0" class="BDJLebels">
+                                        <tr valign="top">
+                                            <td width="32%" height="26" align="right">Facilitator Id</td>
+                                            <td width="2%" align="left">:</td>
+                                            <td width="64%" height="26" align="left">
+                                                <input type="text" id="facilitatorId" name="facilitatorId" class="FormTextTypeInput" readonly="readonly" value="<!--%[FACILITATOR_ID]%-->" />
+                                                <sup style="color:red;">*</sup>
+                                            </td>
+                                        </tr> 
+                                        <tr valign="top">
+                                            <td width="34%" height="26" align="right">Facilitator Name</td>
+                                            <td width="2%" align="left">:</td>
+                                            <td width="64%" height="26" align="left">
+                                                <input type="text" id="facilitatorName" name="facilitatorName" autocomplete="off" required="" autofocus="" placeholder="Facilitator Name" class="FormTextTypeInput" value="<!--%[FACILITATOR_NAME]%-->" />
+                                                <sup style="color:red;">*</sup>
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">					
+                                            <td width="32%" height="26" align="right">Education</td>
+                                            <td width="2%" align="left">:</td>
+                                            <td width="64%" height="26" align="left">
+                                                <input type="text" id="facilitatorEducation" name="facilitatorEducation" autocomplete="off" required="" autofocus="" placeholder="Education" class="FormTextTypeInput" value="<!--%[FACILITATOR_EDUCATION]%-->">
+                                                <sup style="color:red;">*</sup>
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">	
+                                            <td width="32%" height="26" align="right">Position</td>
+                                            <td width="2%" align="left">:</td>
+                                            <td width="64%" height="26" align="left">
+                                                <input type="text" id="facilitatorPosition" name="facilitatorPosition" autocomplete="off" required="" autofocus="" placeholder="Position" class="FormTextTypeInput" value="<!--%[FACILITATOR_POSITION]%-->">
+                                                <sup style="color:red;">*</sup>
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">					
+                                            <td width="32%" height="26" align="right">Details</td>
+                                            <td width="2%" align="left">:</td>
+                                            <td width="64%" height="26" align="left">
+                                                <textarea type="text" id="facilitatorDetails" name="facilitatorDetails" class="ckeditor"><!--%[FACILITATOR_DETAILS]%--></textarea>
+                                                <sup style="color:red;">*</sup>
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">					
+                                            <td width="32%" height="26" align="right">Photo</td>
+                                            <td width="2%" align="left">:</td>
+                                            <td width="64%" height="26" align="left">
+                                                <input type="file" size="4" name="facilitatorPhoto" id="facilitatorPhoto"/><br/>
+                                                <img src="<!--%[FACILITATOR_PHOTO]%-->" id="facilitatorPhotoView" width="120" />
+                                            </td>
+                                        </tr> 
+                                        <tr valign="top">					
+                                            <td colspan="3">&nbsp;</td>
+                                        </tr> 
+                                        <tr valign="top">
+                                            <td align="right">&nbsp;</td>
+                                            <td align="right">&nbsp;</td>
+                                            <td align="left">
+                                            	<input type="hidden" id="facilitatorId" name="facilitatorId" value="<!--%[FACILITATOR_ID]%-->" />
+                                                <input type="hidden" id="facilitatorExistPhoto" name="facilitatorExistPhoto" value="<!--%[FACILITATOR_PHOTO]%-->" />
+                                                <input type="submit" name="UpdateFacilitatorInfo" value="Done" />
+                                                <input type="reset"  name="Reset" value="Reset">
+                                                <input type="button" name="btnClose" value="Close" onClick="redirectPage();">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </fieldset>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>

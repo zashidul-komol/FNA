@@ -1,0 +1,3333 @@
+    <table width="85%" border="0" cellspacing="1" cellpadding="10" style="margin:0px auto 0px auto;">
+        <tr>
+            <td colspan="2" align="center"><h4>File Management for FNA Setup</h4></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><!--%[MSG]%--></td>
+        </tr>
+        <tr valign="top">
+            <td width="50%" align="left">
+                <table width="100%"  border="0" cellspacing="0" cellpadding="0" align="center">
+                   
+                    <!--  Start Labour Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmLabourSubmit() {
+									if($("#PROJECTID").val() == ''){
+											alert("Please Select Project name");
+											$("#PROJECTID").focus();
+											return false;
+									}
+									if($("#SUBPROJECTID").val() == ''){
+											alert("Please Select Sub Project name");
+											$("#SUBPROJECTID").focus();
+											return false;
+									}
+									if($("#name").val() == ''){
+											alert("Please enter name");
+											$("#name").focus();
+											return false;
+									}
+									if($("#fName").val() == ''){
+											alert("Please enter father name");
+											$("#fName").focus();
+											return false;
+									}
+									if($("#address").val() == ''){
+											alert("Please enter address");
+											$("#address").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								
+								function getProjectNameLabour(pcId){					
+										var options = '';
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#SUBPROJECTID").html('');
+											$("select#SUBPROJECTID").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getProjectList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#SUBPROJECTID").html('');
+												$("select#SUBPROJECTID").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#SUBPROJECTID").html('');
+												$("select#SUBPROJECTID").html(options);
+											}
+										})
+									
+									
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showLabour')">Enter Labour Information</legend>
+                                <div id="showLabour" style="display:none;">
+                                  <form name="labourForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmLabourSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                        	<tr valign="top">
+                                                <td width="42%" height="26" align="right">
+                                                    Project Name:
+                                                </td>
+                                                <td width="58%" height="26" align="left"><select type="text" id="PROJECTID" name="PROJECTID" style="width:150px;" autocomplete="off" placeholder="PackingName" class="FormTextTypeInput" onchange="getProjectNameLabour(this.value);" >
+                                                  <option value="">Select</option>
+                                                        <!--%[PROJECT_NAME]%-->
+                                                     </select>
+                                              </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Sub Project Name :
+                                                </td>
+                                                <td height="26" align="left"><select type="text" id="SUBPROJECTID" name="SUBPROJECTID" style="width:150px;" autocomplete="off" placeholder="PackingName" class="FormTextTypeInput" /></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Name :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="name" name="name" autocomplete="off" placeholder="Name" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Father Name :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" name="fName" id="fName" autocomplete="off" placeholder="Father Name"  class="FormTextTypeInput"/>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Address :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <textarea name="address" id="address" autocomplete="off" style="width:200px; height:50px;"> </textarea>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Mobile :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="mobile" name="mobile" autocomplete="off" placeholder="Mobile Number" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertLabourInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showLabour')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Labour Entry Form  -->
+                    
+                    <!--  Start Party Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmPartySubmit() {
+									if($("#PROJECTID_PARTY").val() == ''){
+											alert("Please Select Project name");
+											$("#PROJECTID_PARTY").focus();
+											return false;
+									}
+									if($("#SUBPROJECTID_PARTY").val() == ''){
+											alert("Please Select Sub Project name");
+											$("#SUBPROJECTID_PARTY").focus();
+											return false;
+									}
+									if($("#partyname").val() == ''){
+											alert("Please enter name");
+											$("#partyname").focus();
+											return false;
+									}
+									if($("#fatherName").val() == ''){
+											alert("Please enter father name");
+											$("#fatherName").focus();
+											return false;
+									}
+									if($("#address").val() == ''){
+											alert("Please enter address");
+											$("#address").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								function getProjectName(pcId){					
+										var options = '';
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#SUBPROJECTID_PARTY").html('');
+											$("select#SUBPROJECTID_PARTY").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getProjectList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#SUBPROJECTID_PARTY").html('');
+												$("select#SUBPROJECTID_PARTY").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#SUBPROJECTID_PARTY").html('');
+												$("select#SUBPROJECTID_PARTY").html(options);
+											}
+										})
+									
+									
+								}
+								
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showParty')">Enter Party Information</legend>
+                                <div id="showParty" style="display:none;">
+                                  <form name="labourForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmPartySubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td width="48%" height="26" align="right">
+                                                    Project Name:
+                                                </td>
+                                                <td width="52%" height="26" align="left"><select type="text" id="PROJECTID_PARTY" name="PROJECTID_PARTY" style="width:150px;" autocomplete="off" onchange="getProjectName(this.value);" >
+                                                  <option value="">Select</option>
+                                                        <!--%[PROJECT_NAME]%-->
+                                                     </select>
+                                              </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Sub Project Name :
+                                                </td>
+                                                <td height="26" align="left"><select type="text" id="SUBPROJECTID_PARTY" name="SUBPROJECTID_PARTY" style="width:150px;" autocomplete="off" class="FormTextTypeInput" />
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Name :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="partyname" name="partyname" autocomplete="off" placeholder="PartyName" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Father Name :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" name="fatherName" id="fatherName" autocomplete="off" placeholder="FatherName"  class="FormTextTypeInput"/>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Address :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <textarea name="address" id="address" autocomplete="off" style="width:200px; height:50px;" > </textarea>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Mobile :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="mobile" name="mobile" autocomplete="off" placeholder="Mobile Number" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertPartyInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showParty')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Party Entry Form  -->
+                    
+                     <!--  Start Packing Name Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmPackingNameSubmit() {
+									if($("#packingname").val() == ''){
+											alert("Please enter Packing name");
+											$("#packingname").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showPackingName')">Enter Packing Name Information</legend>
+                                <div id="showPackingName" style="display:none;">
+                                  <form name="PackingNameForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmPackingNameSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Name :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="packingname" name="packingname" autocomplete="off" placeholder="Packingname" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                                                       
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertPackingNameInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showPackingName')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Packing Name Entry Form  -->
+                    
+                    <!--  Start Loan Type Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmLoanTypeSubmit() {
+									if($("#LOANTYPENAME").val() == ''){
+											alert("Please enter Loan Type");
+											$("#LOANTYPENAME").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showLoanType')">Enter Loan Type Information</legend>
+                                <div id="showLoanType" style="display:none;">
+                                  <form name="PackingNameForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmLoanTypeSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Loan Type Name :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="LOANTYPENAME" name="LOANTYPENAME" autocomplete="off" placeholder="Packingname" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                                                       
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertLoanTypeInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showLoanType')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Loan Type Entry Form  -->
+                    
+                     <!--  Start Quantity Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmQuantitySubmit() {
+									if($("#quantity").val() == ''){
+											alert("Please enter Quantity");
+											$("#quantity").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showQuantity')">Enter Quantity Information</legend>
+                                <div id="showQuantity" style="display:none;">
+                                  <form name="QuantityForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmQuantitySubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Quantity :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="quantity" name="quantity" autocomplete="off" placeholder="Quantity" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertQuantityInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showQuantity')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Quantity Entry Form  --> 
+                    
+                     <!--  Start Weight Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmWeightSubmit() {
+									if($("#weight").val() == ''){
+											alert("Please enter Quantity");
+											$("#weight").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showWeight')">Enter Weight Information</legend>
+                                <div id="showWeight" style="display:none;">
+                                  <form name="QuantityForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmWeightSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Weight Name :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="weight" name="weight" autocomplete="off" placeholder="Weight" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertWeightInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showWeight')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Weight Entry Form  --> 
+                    
+                    
+                    <!--  Start Chamber Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmChamberSubmit() {
+									if($("#chname").val() == ''){
+											alert("Please enter Chamber");
+											$("#chname").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showChamber')">Enter Chamber Information</legend>
+                                <div id="showChamber" style="display:none;">
+                                  <form name="QuantityForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmChamberSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Chamber Name :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="chname" name="chname" autocomplete="off" placeholder="Chname" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertChamberInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showChamber')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Chamber Entry Form  --> 
+                    
+                    <!--  Start FLOOR Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmFloorSubmit() {
+									if($("#CHID_FL").val() == ''){
+											alert("Please enter Floor");
+											$("#CHID_FL").focus();
+											return false;
+									}
+									if($("#FLOORNAME").val() == ''){
+											alert("Please enter Floor");
+											$("#FLOORNAME").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showFloor')">Enter Floor Information</legend>
+                                <div id="showFloor" style="display:none;">
+                                  <form name="PackingNameForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmFloorSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Chamber:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <select type="text" id="CHID_FL" name="CHID_FL" autocomplete="off" placeholder="Floor" class="FormTextTypeInput" >
+                                                    <option value="">Select</option>
+                                                        <!--%[CHAMBER_NAME]%-->
+                                                     </select>
+                                              </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Floor:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="FLOORNAME" name="FLOORNAME" autocomplete="off" placeholder="FLOOR NAME" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                                                                                                                  
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertFloorInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showFloor')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End FLOOR Entry Form  -->
+                    
+                    <!--  Start POCKET Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmPocketSubmit() {
+									if($("#CHID_POCKET").val() == ''){
+											alert("Please Select Chamber");
+											$("#CHID_POCKET").focus();
+											return false;
+									}
+									if($("#FLOOR_ID_POCKET").val() == ''){
+											alert("Please Select Floor");
+											$("#FLOOR_ID_POCKET").focus();
+											return false;
+									}
+									if($("#POCKET_NAME").val() == ''){
+											alert("Please enter Pocket");
+											$("#POCKET_NAME").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								
+								function getFloorList(pcId){					
+										var options = '';
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#FLOOR_ID_POCKET").html('');
+											$("select#FLOOR_ID_POCKET").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getFloorList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#FLOOR_ID_POCKET").html('');
+												$("select#FLOOR_ID_POCKET").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#FLOOR_ID_POCKET").html('');
+												$("select#FLOOR_ID_POCKET").html(options);
+											}
+										})
+									
+									
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showPocket')">Enter Pocket Information</legend>
+                                <div id="showPocket" style="display:none;">
+                                  <form name="PackingNameForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmPocketSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td width="42%" height="26" align="right">
+                                                    Chamber :
+                                                </td>
+                                                <td width="58%" height="26" align="left"><select type="text" id="CHID_POCKET" name="CHID_POCKET" style="width:150px;" autocomplete="off" placeholder="Chamber" onchange="getFloorList(this.value);" >
+                                                  <option value="">Select</option>
+                                                        <!--%[CHAMBER_NAME]%-->
+                                                     </select>
+                                              </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Floor :
+                                                </td>
+                                                <td height="26" align="left"><select type="text" id="FLOOR_ID_POCKET" name="FLOOR_ID_POCKET" style="width:150px;" autocomplete="off" placeholder="Floor" class="FormTextTypeInput" />
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Pocket :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="POCKET_NAME" name="POCKET_NAME" autocomplete="off" placeholder="Pocket" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                                                                      
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertPocketInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showPocket')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End POCKET Entry Form  -->
+                                  
+                    <!--  Start Packing Unit Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmPackingUnitSubmit() {
+									if($("#PackingName").val() == ''){
+											alert("Please enter Packing name");
+											$("#PackingName").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showPackingUnit')">Enter Packing Unit Information</legend>
+                                <div id="showPackingUnit" style="display:none;">
+                                  <form name="PackingNameForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmPackingUnitSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Packing  Name :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <select type="text" id="PackingName" name="PackingName" autocomplete="off" placeholder="PackingName" class="FormTextTypeInput" >
+                                                    <option value="">Select</option>
+                                                        <!--%[PACKING_NAME_NEW]%-->
+                                                     </select>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Quantity :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <select type="text" id="quantity" name="quantity" autocomplete="off" placeholder="Quantity" class="FormTextTypeInput" >
+                                                    <option value="">Select</option>
+                                                        <!--%[QUANTITY]%-->
+                                                     </select>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Weight Type :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <select type="text" id="weight" name="weight" autocomplete="off" placeholder="Weight" class="FormTextTypeInput" >
+                                                    <option value="">Select</option>
+                                                        <!--%[WEIGHTTYPE]%-->
+                                                     </select>
+                                                    
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertPackingUnitInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showPackingUnit')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Packing Unit Entry Form  -->
+                    
+                    <!--  Start Product Category Type Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmProdCatTypeSubmit() {
+									if($("#PROJECTID_ProdCat").val() == ''){
+											alert("Please Select Project name");
+											$("#PROJECTID_ProdCat").focus();
+											return false;
+									}
+									if($("#SUBPROJECTID_ProdCat").val() == ''){
+											alert("Please Select Sub Project name");
+											$("#SUBPROJECTID_ProdCat").focus();
+											return false;
+									}
+									if($("#ProdCatTypeName").val() == ''){
+											alert("Please enter Product Category Type name");
+											$("#ProdCatTypeName").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								
+								function getProjectNameProdCat(pcId){					
+										var options = '';
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#SUBPROJECTID_ProdCat").html('');
+											$("select#SUBPROJECTID_ProdCat").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getProjectList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#SUBPROJECTID_ProdCat").html('');
+												$("select#SUBPROJECTID_ProdCat").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#SUBPROJECTID_ProdCat").html('');
+												$("select#SUBPROJECTID_ProdCat").html(options);
+											}
+										})
+									
+									
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showProdCatType')">Enter Product Category Type Information</legend>
+                                <div id="showProdCatType" style="display:none;">
+                                  <form name="PackingNameForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmProdCatTypeSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td width="42%" height="26" align="right">
+                                                    Project Name:
+                                                </td>
+                                                <td width="58%" height="26" align="left"><select type="text" id="PROJECTID_ProdCat" name="PROJECTID_ProdCat" style="width:150px;" autocomplete="off" placeholder="PackingName" onchange="getProjectNameProdCat(this.value);" >
+                                                  <option value="">Select</option>
+                                                        <!--%[PROJECT_NAME]%-->
+                                                     </select>
+                                              </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Sub Project Name :
+                                                </td>
+                                                <td height="26" align="left"><select type="text" id="SUBPROJECTID_ProdCat" name="SUBPROJECTID_ProdCat" style="width:150px;" autocomplete="off" placeholder="PackingName" class="FormTextTypeInput" />
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Packing  Name :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="ProdCatTypeName" name="ProdCatTypeName" autocomplete="off" placeholder="ProdCatTypeName" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                                                                      
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertProdCatTypeInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showProdCatType')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Product Category Type Entry Form  -->
+                    
+                    <!--  Start Product Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmProdSubmit() {
+									if($("#PROJECTID_PROD").val() == ''){
+											alert("Please Select Project name");
+											$("#PROJECTID_PROD").focus();
+											return false;
+									}
+									if($("#SUBPROJECTID_PROD").val() == ''){
+											alert("Please Sub Project name");
+											$("#SUBPROJECTID_PROD").focus();
+											return false;
+									}
+									if($("#catType").val() == ''){
+											alert("Please enter Product Category Type name");
+											$("#catType").focus();
+											return false;
+									}
+									if($("#Prodname").val() == ''){
+											alert("Please enter Product name");
+											$("#Prodname").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								
+								function getProjectNameProd(pcId){					
+										var options = '';
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#SUBPROJECTID_PROD").html('');
+											$("select#SUBPROJECTID_PROD").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getProjectList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#SUBPROJECTID_PROD").html('');
+												$("select#SUBPROJECTID_PROD").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#SUBPROJECTID_PROD").html('');
+												$("select#SUBPROJECTID_PROD").html(options);
+											}
+										})
+									
+									
+								}
+								
+								function getProdCat(pcId){					
+										var options = '';
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#catType").html('');
+											$("select#catType").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getProdCategoryList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#catType").html('');
+												$("select#catType").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#catType").html('');
+												$("select#catType").html(options);
+											}
+										})
+									
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showProd')">Enter Product Information</legend>
+                                <div id="showProd" style="display:none;">
+                                  <form name="PackingNameForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmProdSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td width="42%" height="26" align="right">
+                                                    Project Name:
+                                                </td>
+                                                <td width="58%" height="26" align="left"><select type="text" id="PROJECTID_PROD" name="PROJECTID_PROD" style="width:150px;" autocomplete="off" placeholder="PackingName" onchange="getProjectNameProd(this.value);" >
+                                                  <option value="">Select</option>
+                                                        <!--%[PROJECT_NAME]%-->
+                                                     </select>
+                                              </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Sub Project Name :
+                                                </td>
+                                                <td height="26" align="left"><select type="text" id="SUBPROJECTID_PROD" name="SUBPROJECTID_PROD" style="width:150px;" autocomplete="off" placeholder="PackingName" onchange="getProdCat(this.value);" class="FormTextTypeInput" />
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Category Type:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <select type="text" id="catType" name="catType" autocomplete="off" placeholder="catType" class="FormTextTypeInput" >
+                                                    <option value="">Select</option>
+                                                        <!--%[PRODUCT_NAME]%-->
+                                                     </select>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Product Name :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="Prodname" name="Prodname" autocomplete="off" placeholder="Prodname" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                                                                      
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertProdInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showProd')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Product Entry Form  --> 
+                    
+                    <!--  Start Poultry Others Income Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmPalOthersIncomeSubmit() {
+									if($("#PROJECTID_OTHERS").val() == ''){
+											alert("Please Select Project name.....");
+											$("#PROJECTID_OTHERS").focus();
+											return false;
+									}
+									if($("#SUBPROJECTID_OTHERS").val() == ''){
+											alert("Please Sub Project name");
+											$("#SUBPROJECTID_OTHERS").focus();
+											return false;
+									}
+									if($("#INCOMEHEAD").val() == ''){
+											alert("Please enter Income Head name");
+											$("#INCOMEHEAD").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								
+								function getProjectNameOIN(pcId){					
+										var options = '';
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#SUBPROJECTID_OTHERS").html('');
+											$("select#SUBPROJECTID_OTHERS").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getProjectList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#SUBPROJECTID_OTHERS").html('');
+												$("select#SUBPROJECTID_OTHERS").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#SUBPROJECTID_OTHERS").html('');
+												$("select#SUBPROJECTID_OTHERS").html(options);
+											}
+										})
+									
+									
+								}
+								
+								function getProdCat(pcId){					
+										var options = '';
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#catType").html('');
+											$("select#catType").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getProdCategoryList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#catType").html('');
+												$("select#catType").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#catType").html('');
+												$("select#catType").html(options);
+											}
+										})
+									
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showPalOthersIncome')">Enter Poultry Others Income Information</legend>
+                                <div id="showPalOthersIncome" style="display:none;">
+                                  <form name="PackingNameForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmPalOthersIncomeSubmit();" enctype="multipart/form-data">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td width="42%" height="26" align="right">
+                                                    Project Name:
+                                                </td>
+                                                <td width="58%" height="26" align="left"><select type="text" id="PROJECTID_OTHERS" name="PROJECTID_OTHERS" style="width:150px;" autocomplete="off" placeholder="PackingName" onchange="getProjectNameOIN(this.value);" >
+                                                  <option value="">Select</option>
+                                                        <!--%[PROJECT_NAME]%-->
+                                                     </select>
+                                              </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Sub Project Name :
+                                                </td>
+                                                <td height="26" align="left"><select type="text" id="SUBPROJECTID_OTHERS" name="SUBPROJECTID_OTHERS" style="width:150px;" autocomplete="off" placeholder="PackingName" onchange="getProdCat(this.value);" class="FormTextTypeInput" />
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Others Income Head :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="INCOMEHEAD" name="INCOMEHEAD" autocomplete="off" placeholder="Prodname" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Remarks :
+                                                </td>
+                                                <td height="26" align="left">
+                                              <textarea name="abcd" id="abcd" cols="30" rows="3"></textarea></td>
+                                            </tr>
+                                                                                      
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertPalOthersIncomeInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showPalOthersIncome')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Poultry Others Income Entry Form  --> 
+                    
+                     <!--  Start Poultry Others Expanse Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmPalOthersExpSubmit() {
+									if($("#PROJECTID_OTHERSEXP").val() == ''){
+											alert("Please Select Project name");
+											$("#PROJECTID_OTHERSEXP").focus();
+											return false;
+									}
+									if($("#SUBPROJECTID_OTHERSEXP").val() == ''){
+											alert("Please Sub Project name");
+											$("#SUBPROJECTID_OTHERSEXP").focus();
+											return false;
+									}
+									if($("#EXPANSEHEAD").val() == ''){
+											alert("Please enter Expanse Head name");
+											$("#EXPANSEHEAD").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								
+								function getProjectNameOthersExp(pcId){					
+										var options = '';
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#SUBPROJECTID_OTHERSEXP").html('');
+											$("select#SUBPROJECTID_OTHERSEXP").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getProjectList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#SUBPROJECTID_OTHERSEXP").html('');
+												$("select#SUBPROJECTID_OTHERSEXP").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#SUBPROJECTID_OTHERSEXP").html('');
+												$("select#SUBPROJECTID_OTHERSEXP").html(options);
+											}
+										})
+									
+									
+								}
+								
+								function getProdCat(pcId){					
+										var options = '';
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#catType").html('');
+											$("select#catType").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getProdCategoryList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#catType").html('');
+												$("select#catType").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#catType").html('');
+												$("select#catType").html(options);
+											}
+										})
+									
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showPalOthersExp')">Enter Poultry Others Expanse Information</legend>
+                                <div id="showPalOthersExp" style="display:none;">
+                                  <form name="PackingNameForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmPalOthersExpSubmit();" enctype="multipart/form-data">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td width="42%" height="26" align="right">
+                                                    Project Name:
+                                                </td>
+                                                <td width="58%" height="26" align="left"><select type="text" id="PROJECTID_OTHERSEXP" name="PROJECTID_OTHERSEXP" style="width:150px;" autocomplete="off" placeholder="PackingName" onchange="getProjectNameOthersExp(this.value);" >
+                                                  <option value="">Select</option>
+                                                        <!--%[PROJECT_NAME]%-->
+                                                     </select>
+                                              </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Sub Project Name :
+                                                </td>
+                                                <td height="26" align="left"><select type="text" id="SUBPROJECTID_OTHERSEXP" name="SUBPROJECTID_OTHERSEXP" style="width:150px;" autocomplete="off" placeholder="PackingName" onchange="getProdCat(this.value);" class="FormTextTypeInput" />
+                                            </tr>
+                                            <tr valign="top">
+                                               <td height="26" align="right">
+                                                   Others Expanse Head :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="EXPANSEHEAD" name="EXPANSEHEAD" autocomplete="off" placeholder="Prodname" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Remarks :
+                                                </td>
+                                                <td height="26" align="left">
+                                              <textarea name="abcdExp" id="abcdExp" cols="30" rows="3"></textarea></td>
+                                            </tr>
+                                                                                      
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertPalOthersExpanseInfo" value="Insert" class="FormSubmitBtn" id="InsertPalOthersExpanseInfo" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showPalOthersIncome')">
+                                              </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Poultry Others Expanse Entry Form  -->
+                    
+                    <!--  Start Bank Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmBankSubmit() {
+									if($("#BANKNAME").val() == ''){
+											alert("Please enter Bank name");
+											$("#BANKNAME").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showBank')">Enter Bank Information</legend>
+                                <div id="showBank" style="display:none;">
+                                  <form name="PackingNameForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmBankSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Bank Name:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="BANKNAME" name="BANKNAME" autocomplete="off" placeholder="EXPHEADNAME" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Address
+                                                     
+                                                : </td>
+                                                <td height="26" align="left"><input type="text" id="ADDRESS" name="ADDRESS" autocomplete="off" placeholder="EXPHEADNAME" style="height:50px;"/></td>
+                                            </tr>
+                                                                                      
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertBankInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showBank')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Bank Entry Form  --> 
+                    
+                    <!--  Start Bank Branch Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmBankBranchSubmit() {
+									if($("#BANKID").val() == ''){
+											alert("Please enter Bank name");
+											$("#BANKID").focus();
+											return false;
+									}
+									if($("#BRANCHNAME").val() == ''){
+											alert("Please enter Bank Branch name");
+											$("#BRANCHNAME").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showBranch')">Enter Bank Branch Information</legend>
+                                <div id="showBranch" style="display:none;">
+                                  <form name="PackingNameForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmBankBranchSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Bank Name:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <select type="text" id="BANKID" name="BANKID" autocomplete="off" placeholder="EXPHID" class="FormTextTypeInput" >
+                                                    <option value="">Select</option>
+                                                        <!--%[BANK_NAME]%-->
+                                                     </select>
+                                              </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Bank Branch Name:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="BRANCHNAME" name="BRANCHNAME" autocomplete="off" placeholder="SUBHEADNAME" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Address
+                                                     
+                                                : </td>
+                                                <td height="26" align="left"><input type="text" id="ADDRESS_Branch" name="ADDRESS_Branch" autocomplete="off" placeholder="EXPHEADNAME" style="height:50px;"/></td>
+                                            </tr>
+                                                                                      
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertBankBranchInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showBranch')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Bank Branch Entry Form  --> 
+                    
+                    <!--  Start Bank Account No Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmBankAccountSubmit() {
+									if($("#BANKID_ACC").val() == ''){
+											alert("Please enter Bank name");
+											$("#BANKID_ACC").focus();
+											return false;
+									}
+									if($("#BRANCHID_ACC").val() == ''){
+											alert("Please enter Bank Branch name");
+											$("#BRANCHID_ACC").focus();
+											return false;
+									}
+									if($("#ACCOUNTNO").val() == ''){
+											alert("Please enter Bank Account No....");
+											$("#ACCOUNTNO").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								
+								function getBranchName(pcId){					
+										var options = '';
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#BRANCHID_ACC").html('');
+											$("select#BRANCHID_ACC").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getBranchList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#BRANCHID_ACC").html('');
+												$("select#BRANCHID_ACC").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#BRANCHID_ACC").html('');
+												$("select#BRANCHID_ACC").html(options);
+											}
+										})
+									
+									
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showAccount')">Enter Bank Account No Information</legend>
+                                <div id="showAccount" style="display:none;">
+                                  <form name="PackingNameForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmBankAccountSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Bank Name:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <select type="text" id="BANKID_ACC" name="BANKID_ACC" autocomplete="off" placeholder="EXPHID" class="FormTextTypeInput" onchange="getBranchName(this.value);" >
+                                                    <option value="">Select</option>
+                                                        <!--%[BANK_NAME]%-->
+                                                     </select>
+                                              </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Bank Branch Name:
+                                                </td>
+                                                <td height="26" align="left"><select type="text" id="BRANCHID_ACC" name="BRANCHID_ACC" autocomplete="off" placeholder="EXPHID" class="FormTextTypeInput" >
+                                                  <option value="">Select</option>
+                                                  
+                                                </select></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Account Name: </td>
+                                                <td height="26" align="left"><input type="text" name="ACCOUNTNAME" id="ACCOUNTNAME" /></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Account No: </td>
+                                                <td height="26" align="left"><input type="text" name="ACCOUNTNO" id="ACCOUNTNO" /></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Description: </td>
+                                                <td height="26" align="left"><input type="text" name="DESCRIPTION" id="DESCRIPTION" style="height:50px;" /></td>
+                                            </tr>
+                                                                                      
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertBankAccountInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showAccount')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Bank Account No Entry Form  --> 
+                    
+                    <!--  Start Project Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmProjectSubmit() {
+									if($("#PROJECTNAME").val() == ''){
+											alert("Please enter Project name");
+											$("#PROJECTNAME").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showProject')">Enter Project Information</legend>
+                                <div id="showProject" style="display:none;">
+                                  <form name="PackingNameForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmProjectSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Project Name:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="PROJECTNAME" name="PROJECTNAME" autocomplete="off" placeholder="EXPHEADNAME" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                                                                      
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertProjectInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showProject')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Project Entry Form  -->
+                    
+                     <!--  Start Sub Project Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmSubProjSubmit() {
+									if($("#PROJECTID_sub").val() == ''){
+											alert("Please enter Project name");
+											$("#PROJECTID_sub").focus();
+											return false;
+									}
+									if($("#SUBPROJECTNAME").val() == ''){
+											alert("Please enter Sub Project Name");
+											$("#SUBPROJECTNAME").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showSubProj')">Enter Sub Project Information</legend>
+                                <div id="showSubProj" style="display:none;">
+                                  <form name="PackingNameForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmSubProjSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Project Name:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <select type="text" id="PROJECTID_sub" name="PROJECTID_sub" autocomplete="off" placeholder="EXPHID" class="FormTextTypeInput" >
+                                                    <option value="">Select</option>
+                                                        <!--%[PROJECT_NAME]%-->
+                                                     </select>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Sub Project Name:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="SUBPROJECTNAME" name="SUBPROJECTNAME" autocomplete="off" placeholder="SUBHEADNAME" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                                                                      
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertSubProjInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showSubProj')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Sub Project Entry Form  --> 
+                    
+                    <!--  Start Expanse Head Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmExpHeadSubmit() {
+									if($("#EXPHEADNAME").val() == ''){
+											alert("Please enter Expanse Head name");
+											$("#EXPHEADNAME").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showExpHead')">Enter Expanse Head Information</legend>
+                                <div id="showExpHead" style="display:none;">
+                                  <form name="PackingNameForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmExpHeadSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Expanse Head Name:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="EXPHEADNAME" name="EXPHEADNAME" autocomplete="off" placeholder="EXPHEADNAME" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                                                                      
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertExpHeadInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showExpHead')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Expanse Head Entry Form  -->
+                   
+                    
+                    <!--  Start Sub Expanse Head Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmExpSubHeadSubmit() {
+									if($("#EXPHID").val() == ''){
+											alert("Please enter Expanse Head name");
+											$("#EXPHID").focus();
+											return false;
+									}
+									if($("#SUBHEADNAME").val() == ''){
+											alert("Please enter ERxpanse Sub Head Name");
+											$("#SUBHEADNAME").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showExpSubHead')">Enter Expanse Sub Head Information</legend>
+                                <div id="showExpSubHead" style="display:none;">
+                                  <form name="PackingNameForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmExpSubHeadSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Expanse Head:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <select type="text" id="EXPHID" name="EXPHID" autocomplete="off" placeholder="EXPHID" class="FormTextTypeInput" >
+                                                    <option value="">Select</option>
+                                                        <!--%[EXPANSE_HEAD_NAME]%-->
+                                                     </select>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Expanse Sub Head :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="SUBHEADNAME" name="SUBHEADNAME" autocomplete="off" placeholder="SUBHEADNAME" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                                                                      
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertExpSubHeadInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showExpSubHead')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Expanse Sub Head Entry Form  --> 
+                    
+                     <!--  Start Income Head Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmIncHeadSubmit() {
+									if($("#INCHEADNAME").val() == ''){
+											alert("Please enter Income Head name");
+											$("#INCHEADNAME").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showIncHead')">Enter Income Head Information</legend>
+                                <div id="showIncHead" style="display:none;">
+                                  <form name="PackingNameForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmIncHeadSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Income Head Name:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="INCHEADNAME" name="INCHEADNAME" autocomplete="off" placeholder="INCHEADNAME" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                                                                      
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertIncHeadInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showIncHead')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Income Head Entry Form  -->
+                    
+                     <!--  Start Alu Fare Form -->
+
+				     <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmAluFareSubmit() {
+									if($("#PROJECTID_aluFare").val() == ''){
+											alert("Please Select Project name");
+											$("#PROJECTID_aluFare").focus();
+											return false;
+									}
+									if($("#SUBPROJECTID_aluFare").val() == ''){
+											alert("Please Select Sub Project name");
+											$("#SUBPROJECTID_aluFare").focus();
+											return false;
+									}
+									if($("#prodCatTypeidAlu").val() == ''){
+											alert("Please enter Product Category Type name");
+											$("#prodCatTypeidAlu").focus();
+											return false;
+									}
+									if($("#PRODUCTIDAlu").val() == ''){
+											alert("Please enter Product name");
+											$("#PRODUCTIDAlu").focus();
+											return false;
+									}
+									if($("#packingUnitAlu").val() == ''){
+											alert("Please enter Packing Unit....");
+											$("#packingUnitAlu").focus();
+											return false;
+									}
+									if($("#productFareAlu").val() == ''){
+											alert("Please enter Product Fare");
+											$("#productFareAlu").focus();
+											return false;
+									}
+									if($("#startAFDate").val() == ''){
+											alert("Please enter Fare Start Date");
+											$("#startAFDate").focus();
+											return false;
+									}
+									if($("#endAFDate").val() == ''){
+											alert("Please enter Fare End Date");
+											$("#endAFDate").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								
+								function getProductNamebyCatAlu(getCatIdName, pcId){
+										var splitCatId = getCatIdName.split("_");										
+										var options = '';
+										if(pcId == '' && getCatIdName == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#PRODUCTIDAlu").html('');
+											$("select#PRODUCTIDAlu").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getProductList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#PRODUCTIDAlu").html('');
+												$("select#PRODUCTIDAlu").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#PRODUCTIDAlu").html('');
+												$("select#PRODUCTIDAlu").html(options);
+											}
+										})
+									
+									
+								}
+								function checkCalender(){
+									var startDate = String($("#startAFDate").val());
+									var endDate = String($("#endAFDate").val());
+									if((startDate != '') && (endDate != '')){
+										
+										var tempstartDate = startDate.split('-'); 
+										var tempendDate = endDate.split('-');
+										
+										var a = tempstartDate[1]+'/'+tempstartDate[0]+'/'+tempstartDate[2];
+										var b = tempendDate[1]+'/'+tempendDate[0]+'/'+tempendDate[2];
+										
+										
+										if((dates.compare(b,a) == 1) || (dates.compare(b,a) == 0)) {
+											return true;
+										} else {
+											alert('Invalid Date Range!');
+											$("#startAFDate").attr("value","");
+											return false;
+										}
+									}
+								}
+								
+								function getProjectNameAluFare(pcId){					
+										var options = '';
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#SUBPROJECTID_aluFare").html('');
+											$("select#SUBPROJECTID_aluFare").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getProjectListAlu.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#SUBPROJECTID_aluFare").html('');
+												$("select#SUBPROJECTID_aluFare").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#SUBPROJECTID_aluFare").html('');
+												$("select#SUBPROJECTID_aluFare").html(options);
+											}
+										})
+									
+								}
+								
+								function getProdCategoryAlu(pcId){					
+										var options = '';
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#prodCatTypeidAlu").html('');
+											$("select#prodCatTypeidAlu").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getProdCategoryList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#prodCatTypeidAlu").html('');
+												$("select#prodCatTypeidAlu").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#prodCatTypeidAlu").html('');
+												$("select#prodCatTypeidAlu").html(options);
+											}
+										})
+										$.getJSON("ajax/getPartyName.php",{pcId: pcId}, function(jj) {
+											if(jj.length>0) {
+												//alert (pcId);
+												options = '';
+												options += '<option value="">Select</option>';
+												for (var ii = 0; ii < jj.length; ii++) {
+													options += '<option value="' + jj[ii].optionValue + '">' + jj[ii].optionDisplay + '</option>';
+												}
+												$("select#PARTYID_ALU").html('');
+												$("select#PARTYID_ALU").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#PARTYID_ALU").html('');
+												$("select#PARTYID_ALU").html(options);
+												$("#FATHERNAME").val('');
+												$("#ADDRESS").val('');
+												$("#MOBILE").val('');
+											}
+										});
+									
+								}
+								
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showAluFare')">Enter Alu Fare Information</legend>
+                                <div id="showAluFare" style="display:none;">
+                                  <form name="PackingNameForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmAluFareSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td width="42%" height="26" align="right">
+                                                    Project Name:
+                                                </td>
+                                                <td width="58%" height="26" align="left"><select type="text" id="PROJECTID_aluFare" name="PROJECTID_aluFare" style="width:150px;" autocomplete="off" placeholder="PackingName" onchange="getProjectNameAluFare(this.value);" >
+                                                  <option value="">Select</option>
+                                                        <!--%[PROJECT_NAME]%-->
+                                                     </select>
+                                              </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Sub Project Name :
+                                                </td>
+                                                <td height="26" align="left"><select type="text" id="SUBPROJECTID_aluFare" name="SUBPROJECTID_aluFare" style="width:150px;" autocomplete="off" placeholder="PackingName" onchange="getProdCategoryAlu(this.value);" class="FormTextTypeInput" /></td>
+                                            </tr>
+                                            
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Product Category Type :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <select type="text" id="prodCatTypeidAlu" name="prodCatTypeidAlu" autocomplete="off" placeholder="prodCatTypeid" class="FormTextTypeInput" style="width:150px;" onchange="getProductNamebyCatAlu(this.id,this.value);" />
+                                                    
+                                                </td>
+                                             </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Product Name :
+                                                </td>
+                                                <td align="left"><select id="PRODUCTIDAlu" name="PRODUCTIDAlu" style="width:150px;" >
+                                                  
+                                                  </select>
+                                                 </td>
+                                            </tr>
+                                            <tr valign="middle">
+                                                <td align="right">Packing Unit :</td>
+                                                <td align="left">
+                                                <select name="packingUnitAlu" id="packingUnitAlu" style="width:150px;">
+                                                    <option value=""> Select </option>
+                                                     <!--%[PACKING_NAME]%-->
+                                                </select> 
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Product Fare :
+                                                </td>
+                                                <td height="26" align="left"><input type="text" name="productFareAlu" id="productFareAlu" style="width:150px;" /></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Start Date :
+                                                </td>
+                                                <td height="26" align="left"><input name="startAFDate" size="18" id="startAFDate" type="text" style="width:150px;" class="FormDateTypeInput" readonly="readonly" onclick="showCalender('startAFDate','startAFDate')" onchange="checkCalender(this.value);" /></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   End Date :
+                                                </td>
+                                                <td height="26" align="left"><input name="endAFDate" size="18" id="endAFDate" type="text" class="FormDateTypeInput" readonly="readonly" onclick="showCalender('endAFDate','endAFDate')" onchange="checkCalender(this.value);" style="width:150px;" /></td>
+                                            </tr>
+                                                                                      
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertAluFareInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showAluFare')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                        </tr>
+                        
+                 
+                    <!--  End Alu Fare Entry Form  -->
+                    
+                     <!--  Start Product Fare Form -->
+
+				     <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmProdFareSubmit() {
+									if($("#PROJECTID_prodFare").val() == ''){
+											alert("Please Select Project name");
+											$("#PROJECTID_prodFare").focus();
+											return false;
+									}
+									if($("#SUBPROJECTID_prodFare").val() == ''){
+											alert("Please Select Sub Project name");
+											$("#SUBPROJECTID_prodFare").focus();
+											return false;
+									}
+									if($("#prodCatTypeid_prodFare").val() == ''){
+											alert("Please enter Product Category Type name");
+											$("#prodCatTypeid_prodFare").focus();
+											return false;
+									}
+									if($("#PRODUCTID_ProdFare").val() == ''){
+											alert("Please enter Product name");
+											$("#PRODUCTID_ProdFare").focus();
+											return false;
+									}
+									if($("#productFare").val() == ''){
+											alert("Please enter Product Fare");
+											$("#productFare").focus();
+											return false;
+									}
+									if($("#startPFDate").val() == ''){
+											alert("Please enter Fare Start Date");
+											$("#startPFDate").focus();
+											return false;
+									}
+									if($("#endPFDate").val() == ''){
+											alert("Please enter Fare End Date");
+											$("#endPFDate").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								
+								function getProductNamebyCatCold(getCatIdName, pcId){
+										var splitCatId = getCatIdName.split("_");										
+										var options = '';
+										if(pcId == '' && getCatIdName == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#PRODUCTID_ProdFare").html('');
+											$("select#PRODUCTID_ProdFare").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getProductList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#PRODUCTID_ProdFare").html('');
+												$("select#PRODUCTID_ProdFare").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#PRODUCTID_ProdFare").html('');
+												$("select#PRODUCTID_ProdFare").html(options);
+											}
+										})
+									
+									
+								}
+								function checkCalender(){
+									var startDate = String($("#startPFDate").val());
+									var endDate = String($("#endPFDate").val());
+									if((startDate != '') && (endDate != '')){
+										
+										var tempstartDate = startDate.split('-'); 
+										var tempendDate = endDate.split('-');
+										
+										var a = tempstartDate[1]+'/'+tempstartDate[0]+'/'+tempstartDate[2];
+										var b = tempendDate[1]+'/'+tempendDate[0]+'/'+tempendDate[2];
+										
+										
+										if((dates.compare(b,a) == 1) || (dates.compare(b,a) == 0)) {
+											return true;
+										} else {
+											alert('Invalid Date Range!');
+											$("#startPFDate").attr("value","");
+											return false;
+										}
+									}
+								}
+								
+								function getProjectNameProdFare(pcId){					
+										var options = '';
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#SUBPROJECTID_prodFare").html('');
+											$("select#SUBPROJECTID_prodFare").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getProjectList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#SUBPROJECTID_prodFare").html('');
+												$("select#SUBPROJECTID_prodFare").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#SUBPROJECTID_prodFare").html('');
+												$("select#SUBPROJECTID_prodFare").html(options);
+											}
+										})
+									
+								}
+								
+								function getProdCategory(pcId){					
+										var options = '';
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#prodCatTypeid_prodFare").html('');
+											$("select#prodCatTypeid_prodFare").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getProdCategoryList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#prodCatTypeid_prodFare").html('');
+												$("select#prodCatTypeid_prodFare").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#prodCatTypeid_prodFare").html('');
+												$("select#prodCatTypeid_prodFare").html(options);
+											}
+										})
+									
+								}
+								
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showProdFare')">Enter Product Fare Information</legend>
+                                <div id="showProdFare" style="display:none;">
+                                  <form name="PackingNameForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmProdFareSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td width="42%" height="26" align="right">
+                                                    Project Name:
+                                                </td>
+                                                <td width="58%" height="26" align="left"><select type="text" id="PROJECTID_prodFare" name="PROJECTID_prodFare" style="width:150px;" autocomplete="off" placeholder="PackingName" onchange="getProjectNameProdFare(this.value);" >
+                                                  <option value="">Select</option>
+                                                        <!--%[PROJECT_NAME]%-->
+                                                     </select>
+                                              </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Sub Project Name :
+                                                </td>
+                                                <td height="26" align="left"><select type="text" id="SUBPROJECTID_prodFare" name="SUBPROJECTID_prodFare" style="width:150px;" autocomplete="off" placeholder="PackingName" onchange="getProdCategory(this.value);" class="FormTextTypeInput" /></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Product Category Type :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <select type="text" id="prodCatTypeid_prodFare" name="prodCatTypeid_prodFare" autocomplete="off" placeholder="prodCatTypeid" class="FormTextTypeInput" onchange="getProductNamebyCatCold(this.id,this.value);" />
+                                                    
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Product Name :
+                                                </td>
+                                                <td align="left"><select id="PRODUCTID_ProdFare" name="PRODUCTID_ProdFare" style="width:100px;" >
+                                                  <option value="">Select</option>
+                                                    <!--%[PRODUCT]-->
+                                                  </select>
+                                                 </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Product Fare :
+                                                </td>
+                                                <td height="26" align="left"><input type="text" name="productFare" id="productFare" style="width:135px;" /></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Start Date :
+                                                </td>
+                                                <td height="26" align="left"><input name="startPFDate" size="18" id="startPFDate" type="text" class="FormDateTypeInput" readonly="readonly" onclick="showCalender('startPFDate','startPFDate')" onchange="checkCalender(this.value);" /></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   End Date :
+                                                </td>
+                                                <td height="26" align="left"><input name="endPFDate" size="18" id="endPFDate" type="text" class="FormDateTypeInput" readonly="readonly" onclick="showCalender('endPFDate','endPFDate')" onchange="checkCalender(this.value);" /></td>
+                                            </tr>
+                                                                                      
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertProdFareInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showProdFare')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                        </tr>
+                        
+                 
+                    <!--  End Product Fare Entry Form  -->
+                    
+                    <!--  Start Session Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmSessionSubmit() {
+									if($("#productCatTypeid").val() == ''){
+											alert("Please enter Product Category Type name");
+											$("#productCatTypeid").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								
+								function checkCalender(){
+									var startDate = String($("#startDate").val());
+									var endDate = String($("#endDate").val());
+									if((startDate != '') && (endDate != '')){
+										
+										var tempstartDate = startDate.split('-'); 
+										var tempendDate = endDate.split('-');
+										
+										var a = tempstartDate[1]+'/'+tempstartDate[0]+'/'+tempstartDate[2];
+										var b = tempendDate[1]+'/'+tempendDate[0]+'/'+tempendDate[2];
+										
+										
+										if((dates.compare(b,a) == 1) || (dates.compare(b,a) == 0)) {
+											return true;
+										} else {
+											alert('Invalid Date Range!');
+											$("#startDate").attr("value","");
+											return false;
+										}
+									}
+								}
+								
+								function getProjectNameSession(pcId){					
+										var options = '';
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#SUBPROJECTID_SESSION").html('');
+											$("select#SUBPROJECTID_SESSION").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getProjectListSession.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#SUBPROJECTID_SESSION").html('');
+												$("select#SUBPROJECTID_SESSION").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#SUBPROJECTID_SESSION").html('');
+												$("select#SUBPROJECTID_SESSION").html(options);
+											}
+										})
+									
+								}
+								
+								function getProdCategorySession(pcId){					
+										var options = '';
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#productCatTypeidSession").html('');
+											$("select#productCatTypeidSession").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getProdCategoryListSession.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#productCatTypeidSession").html('');
+												$("select#productCatTypeidSession").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#productCatTypeidSession").html('');
+												$("select#productCatTypeidSession").html(options);
+											}
+										})
+										
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showSession')">Enter Session Information</legend>
+                                <div id="showSession" style="display:none;">
+                                  <form name="PackingNameForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmSessionSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            
+                                            <tr valign="top">
+                                                <td width="42%" height="26" align="right">
+                                                    Load / Unload:
+                                                </td>
+                                                <td width="58%" height="26" align="left"><select type="text" id="WORKTYPE" name="WORKTYPE" style="width:150px;" autocomplete="off" placeholder="WORKTYPE" >
+                                                  <option value="">Select</option>
+                                                  <option value="Load">Load</option>
+                                                  <option value="Unload">Unload</option>
+                                                  <option value="Aluload">Aluload</option>
+                                                  <option value="AluUnload">AluUnload</option>
+                                                     </select>
+                                              </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td width="42%" height="26" align="right">
+                                                    Project Name:
+                                                </td>
+                                                <td width="58%" height="26" align="left"><select type="text" id="PROJECTID_SESSION" name="PROJECTID_SESSION" style="width:150px;" autocomplete="off" placeholder="PackingName" onchange="getProjectNameSession(this.value);" >
+                                                  <option value="">Select</option>
+                                                        <!--%[PROJECT_NAME]%-->
+                                                     </select>
+                                              </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Sub Project Name :
+                                                </td>
+                                                <td height="26" align="left"><select type="text" id="SUBPROJECTID_SESSION" name="SUBPROJECTID_SESSION" style="width:150px;" autocomplete="off" placeholder="PackingName" onchange="getProdCategorySession(this.value);" class="FormTextTypeInput" /></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Product Category Type :
+                                                </td>
+                                                <td height="26" align="left"><select type="text" id="productCatTypeidSession" name="productCatTypeidSession" autocomplete="off" placeholder="productCatTypeidSession" class="FormTextTypeInput"/></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Start Date :
+                                                </td>
+                                                <td height="26" align="left">
+                                                	<input name="startDate" size="18" id="startDate" type="text" class="FormDateTypeInput" readonly="readonly" onclick="showCalender('startDate','startDate')" onchange="checkCalender(this.value);" />
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   End Date :
+                                                </td>
+                                                <td height="26" align="left">
+                                                	<input name="endDate" size="18" id="endDate" type="text" class="FormDateTypeInput" readonly="readonly" onclick="showCalender('endDate','endDate')" onchange="checkCalender(this.value);" />
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td width="42%" height="26" align="right">
+                                                    Session Year:
+                                                </td>
+                                                <td width="58%" height="26" align="left"><select type="text" id="SESSIONYEARID" name="SESSIONYEARID" style="width:150px;" autocomplete="off" placeholder="Session Year" >
+                                                  <option value="">Select</option>
+                                                        <!--%[SESSION_YEAR]%-->
+                                                     </select>
+                                              </td>
+                                            </tr>
+                                                                                      
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertSessionInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showSession')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Session Entry Form  -->   
+                    
+                   
+                     <!--  Start Labour Contract Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmLabourContractSubmit() {
+									if($("#PROJECTID_labCon").val() == ''){
+											alert("Please Select Project name");
+											$("#PROJECTID_labCon").focus();
+											return false;
+									}
+									if($("#SUBPROJECTID_labCon").val() == ''){
+											alert("Please Select Sub Project Name");
+											$("#SUBPROJECTID_labCon").focus();
+											return false;
+									}
+									if($("#LABOURID").val() == ''){
+											alert("Please Select Labour name");
+											$("#LABOURID").focus();
+											return false;
+									}
+									if($("#startLDate").val() == ''){
+											alert("Please Select Start Date");
+											$("#startLDate").focus();
+											return false;
+									}
+									if($("#endLDate").val() == ''){
+											alert("Please Select End Date");
+											$("#endLDate").focus();
+											return false;
+									}
+									if($("#ChmbrTo_1").val() == ''){
+											alert("Please Select Chamber To");
+											$("#ChmbrTo_1").focus();
+											return false;
+									}
+									if($("#packingUnit_1").val() == ''){
+											alert("Please Select Pack Size");
+											$("#packingUnit_1").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								
+								function getProjectNameLabCon(pcId){					
+										var options = '';
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#SUBPROJECTID_labCon").html('');
+											$("select#SUBPROJECTID_labCon").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getProjectList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#SUBPROJECTID_labCon").html('');
+												$("select#SUBPROJECTID_labCon").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#SUBPROJECTID_labCon").html('');
+												$("select#SUBPROJECTID_labCon").html(options);
+											}
+										})
+									
+								}
+								
+								function getLabourName(pcId){					
+										var options = '';
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#LABOURID").html('');
+											$("select#LABOURID").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getLabourNameList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#LABOURID").html('');
+												$("select#LABOURID").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#LABOURID").html('');
+												$("select#LABOURID").html(options);
+											}
+										})
+									
+								}
+								
+								function checkCalender(){
+									var startDate = String($("#startDate").val());
+									var endDate = String($("#endDate").val());
+									if((startDate != '') && (endDate != '')){
+										
+										var tempstartDate = startDate.split('-'); 
+										var tempendDate = endDate.split('-');
+										
+										var a = tempstartDate[1]+'/'+tempstartDate[0]+'/'+tempstartDate[2];
+										var b = tempendDate[1]+'/'+tempendDate[0]+'/'+tempendDate[2];
+										
+										
+										if((dates.compare(b,a) == 1) || (dates.compare(b,a) == 0)) {
+											return true;
+										} else {
+											alert('Invalid Date Range!');
+											$("#startDate").attr("value","");
+											return false;
+										}
+									}
+								}
+								$(document).ready(function(){
+   
+									var inputs = 2;	
+									$('#btnAddMoreScripList').click(function() {		
+										
+										
+										$('.btnDelMoreScripList:disabled').removeAttr('disabled');
+										var c = $('.clonedInputForScripList:first').clone(true);
+										
+										
+										
+										c.find('input:hidden#ChmbrFrom_1').attr({
+																				'id':'ChmbrFrom_'+inputs
+																			});
+										c.find('input:hidden#ChmbrTo_1').attr({
+																				'id':'ChmbrTo_'+inputs
+																			});
+										c.find('input:hidden#packingUnit_1').attr({
+																				'id':'packingUnit_'+inputs
+																			});
+										c.find('input:hidden#loadPrice_1').attr({
+																				'id':'loadPrice_'+inputs,
+																				'value':''
+																			});
+										c.find('input:hidden#unloadPrice_1').attr({
+																				'id':'unloadPrice_'+inputs,
+																				'value':''
+																			});
+										c.find('input:hidden#transferPrice_1').attr({
+																				'id':'transferPrice_'+inputs,
+																				'value':''
+																			});
+										c.find('input:hidden#palotPrice_1').attr({
+																				'id':'palotPrice_'+inputs,
+																				'value':''
+																			});
+										c.find('input:hidden#shadePrice_1').attr({
+																				'id':'shadePrice_'+inputs,
+																				'value':''
+																			});																																																																																															
+																			
+										
+										c.find('input:hidden#closest_position1').attr({
+																			'id':'closest_position'+inputs,
+																			'value':inputs
+																		});																		
+																																
+																					
+										$('.clonedInputForScripList:last').after(c);
+										
+										
+										inputs++;
+										$("#TOTAL_PRODUCT_LIST").attr('value',inputs);
+									});
+									
+									$('.btnDelMoreScripList').click(function() {
+										if (confirm('Continue Delete?')) {
+											var colsest_pos = $(this).closest('.clonedInputForScripList').find('.closest_position').val();
+											$(this).closest('.clonedInputForScripList').remove();
+											var counter = 1;
+											for(var i=1;i<inputs;i++) {
+												if(i == colsest_pos)
+												continue;
+												$("#trade_file_view_details").find('input:hidden#ChmbrFrom_'+i).attr({
+																											'id':'ChmbrFrom_'+counter
+																										});
+												$("#trade_file_view_details").find('input:hidden#ChmbrTo_'+i).attr({
+																											'id':'ChmbrTo_'+counter
+																										});
+												$("#trade_file_view_details").find('input:hidden#packingUnit_'+i).attr({
+																											'id':'packingUnit_'+counter
+																										});
+												$("#trade_file_view_details").find('input:hidden#loadPrice_'+i).attr({
+																											'id':'loadPrice_'+counter
+																										});
+												$("#trade_file_view_details").find('input:hidden#unloadPrice_'+i).attr({
+																											'id':'unloadPrice_'+counter
+																										});
+												$("#trade_file_view_details").find('input:hidden#transferPrice_'+i).attr({
+																											'id':'transferPrice_'+counter
+																										});
+												$("#trade_file_view_details").find('input:hidden#palotPrice_'+i).attr({
+																											'id':'palotPrice_'+counter
+																										});
+												$("#trade_file_view_details").find('input:hidden#shadePrice_'+i).attr({
+																											'id':'shadePrice_'+counter
+																										});																																																																																																																																																												
+																											
+																											
+																											
+																																																																																																																			
+												$("#trade_file_view_details").find('input:text#closest_position'+i).attr({
+																							'value':counter,
+																							'id':'closest_position'+counter
+																						});
+												counter++;
+											}
+											--inputs;
+											$("#TOTAL_PRODUCT_LIST").attr('value',inputs);
+											$('.btnDelMoreScripList').attr('disabled',($('.clonedInputForScripList').length  < 2));
+											return false;
+										}
+										else{
+											return false;
+										}
+									});	
+									  
+  
+								});
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showLabourContract')">Enter Labour Contract Information</legend>
+                                <div id="showLabourContract" style="display:none;">
+                                  <form name="PackingNameForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmLabourContractSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td width="42%" height="26" align="right">
+                                                    Project Name:
+                                                </td>
+                                                <td width="58%" height="26" align="left"><select type="text" id="PROJECTID_labCon" name="PROJECTID_labCon" style="width:190px;" autocomplete="off" placeholder="PackingName" onchange="getLabourName(this.value);" >
+                                                  <option value="">Select</option>
+                                                        <!--%[PROJECT_NAME]%-->
+                                                     </select>
+                                              </td>
+                                            </tr>
+                                                                                      
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Labour Name :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <select id="LABOURID" name="LABOURID" autocomplete="off" class="FormTextTypeInput" style="width:190px;">
+                                                    
+                                                     </select>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Start Date :
+                                                </td>
+                                                <td height="26" align="left">
+                                                	<input name="startLDate" size="18" id="startLDate" type="text" class="FormDateTypeInput" readonly="readonly" onclick="showCalender('startLDate','startLDate')" onchange="checkCalender(this.value);" style="width:165px;"/>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   End Date :
+                                                </td>
+                                                <td height="26" align="left">
+                                                	<input name="endLDate" size="18" id="endLDate" type="text" class="FormDateTypeInput" readonly="readonly" onclick="showCalender('endLDate','endLDate')" onchange="checkCalender(this.value);" style="width:165px;"/>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Description :
+                                                </td>
+                                                <td height="26" align="left">
+                                                	<textarea name="description" id="description" style="width:180px;"></textarea>
+                                                </td>
+                                            </tr>
+                                             <tr valign="top">
+                                                <td height="26" align="left" colspan="2">
+                                                		<div id="trade_file_view_details">
+                                                                <div style="margin-bottom:4px;width:100%; font-family:Tahoma, Geneva, sans-serif;" class="clonedInputForScripList">
+                                                                    <fieldset style='width:100%;border:0px;border-top:1px solid #2b2d93;font-family:Tahoma, Geneva, sans-serif;'>
+                                                                        <legend style="border:0px;" id="stock1">Add Product List <input type="text" name="closest_position" id="closest_position1" class="closest_position" value="1" readonly="readonly" size="2" style="border:0px;font-weight:bold; width:40px;"/></legend>
+                                                                        <table width="100%" class="frmTbl" border="0" style="font-family:Tahoma, Geneva, sans-serif;font-size:100%;">
+                                                                            
+                                                                            <tr>
+                                                                                <td colspan="3" align="right" valign="top">
+                                                                                    <input style="font-family:Tahoma, Geneva, sans-serif;font-size:100%;" class="btnDelMoreScripList"  disabled="disabled" type="image" src="../images/cancel.png">	
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr valign="middle">
+                                                                                <td align="right">Packing Unit<sup style="color:red;">*</sup></td>
+                                                                                <td align="left">:</td>
+                                                                                <td align="left">
+                                                                                <select name="packingUnit[]" id="packingUnit_1" style="width:190px;">
+                                                                                    <option value=""> Select </option>
+                                                                                     <!--%[PACKING_NAME]%-->
+                                                                                </select>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr valign="middle">
+                                                                                <td align="right">Load Price<sup style="color:red;">*</sup></td>
+                                                                                <td align="left">:</td>
+                                                                                <td align="left">
+                                                                                <input type="text" name="loadPrice[]" id="loadPrice_1"  />
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr valign="middle">
+                                                                                <td align="right">Unload Price<sup style="color:red;">*</sup></td>
+                                                                                <td align="left">:</td>
+                                                                                <td align="left">
+                                                                                <input type="text" name="unloadPrice[]" id="unloadPrice_1"  />
+                                                                                </td>
+                                                                            </tr>
+                                                                           
+                                                                        </table>
+                                                                    </fieldset>
+                                                                </div>
+                                                            </div>
+                                                </td>
+                                            </tr>
+                                                <tr valign="top">
+                                                    <td align="right" colspan="2">
+                                                        <input name="TOTAL_PRODUCT_LIST" id="TOTAL_PRODUCT_LIST" type="hidden" value="2" />
+                                                        <input style="font-family:Tahoma, Geneva, sans-serif;font-size:100%;" id="btnAddMoreScripList" value="Add More" type="button">
+                                                    </td>
+                                                </tr>                                       
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertLabourContract" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showLabourContract')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Labour Contract Entry Form  -->                     
+                    
+                </table>
+                
+            </td>
+            <td width="50%" align="right">
+                <table border="0" align="center" cellpadding="0" cellspacing="0" width="100%">
+                
+                    
+                    <!-- View Labour Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewProcurementType')">View Labour Information</legend>
+                                <div id="viewProcurementType" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:10%;">SL#</th>
+                                            <th style="width:40%;">Project Name</th>
+                                            <th style="width:40%;">Sub Project Name</th>
+                                            <th style="width:40%;">Labour Name</th>
+                                            <th style="width:40%;">Father Name</th>
+                                            <th style="width:40%;">Address</th>
+                                            <th style="width:40%;">Mobile</th>
+                                            <th style="width:10%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[LABOUR_VIEW]%-->
+                                    </tbody>
+                                </table>
+                                </div>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Labour End -->
+                    
+                    <!-- View Party Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewParty')">View Party Information</legend>
+                                <div id="viewParty" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:10%;">SL#</th>
+                                            <th style="width:40%;">Project Name</th>
+                                            <th style="width:40%;">Sub Project Name</th>
+                                            <th style="width:40%;">Name</th>
+                                            <th style="width:40%;">Father Name</th>
+                                            <th style="width:40%;">Address</th>
+                                            <th style="width:40%;">Mobile</th>
+                                            <th style="width:10%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[PARTY_VIEW]%-->
+                                    </tbody>
+                                </table>
+                                </div>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Party End -->
+                    
+                    <!-- View Packing Name Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewPackingName')">View Packing Name Information</legend>
+                                <div id="viewPackingName" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:10%;">SL#</th>
+                                            <th style="width:40%;">Name</th>
+                                            <th style="width:10%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[PACKING_NAME_VIEW]%-->
+                                    </tbody>
+                                </table>
+                                </div>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Packing Name End -->
+                    
+                    <!-- View Loan Type Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewLoanType')">View Loan Type Information</legend>
+                                <div id="viewLoanType" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:10%;">SL#</th>
+                                            <th style="width:40%;">Loan Type</th>
+                                            <th style="width:10%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[LOAN_TYPE_VIEW]%-->
+                                    </tbody>
+                                </table>
+                                </div>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Loan Type End -->
+                    
+                     <!-- View Quantity Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewQuantity')">View Quantity Information</legend>
+                                <div id="viewQuantity" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:10%;">SL#</th>
+                                            <th style="width:40%;">Quantity</th>
+                                            <th style="width:10%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[QUANTITY_VIEW]%-->
+                                    </tbody>
+                                </table>
+                                </div>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Quantity End -->
+                    
+                    <!-- View Weight Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewWeight')">View Weight Information</legend>
+                                <div id="viewWeight" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:10%;">SL#</th>
+                                            <th style="width:40%;">Weight Name</th>
+                                            <th style="width:10%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[WEIGHT_VIEW]%-->
+                                    </tbody>
+                                </table>
+                                </div>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Weight End -->
+                    
+                    <!-- View Chamber Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewChamber')">View Chamber Information</legend>
+                                <div id="viewChamber" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:10%;">SL#</th>
+                                            <th style="width:40%;">Chamber Name</th>
+                                            <th style="width:10%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[CHAMBER_VIEW]%-->
+                                    </tbody>
+                                </table>
+                                </div>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Chamber End -->
+                    
+                    <!-- View Weight Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewPackingUnit')">View Packing Unit Information</legend>
+                                <div id="viewPackingUnit" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:10%;">SL#</th>
+                                            <th style="width:40%;">Packing Name </th>
+                                            <th style="width:40%;">Quanttity </th>
+                                            <th style="width:40%;">Weight </th>
+                                            <th style="width:10%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[PACKING_UNIT_VIEW]%-->
+                                    </tbody>
+                                </table>
+                                </div>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Weight End -->
+                    
+                    <!-- View Product Cat Type Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewProdCatType')">View Product Cat Type Information</legend>
+                                <div id="viewProdCatType" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:10%;">SL#</th>
+                                            <th style="width:40%;">Project Name </th>
+                                            <th style="width:40%;">Sub Project Name </th>
+                                            <th style="width:40%;">Product Cat Type Name </th>
+                                            <th style="width:10%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[PROD_CAT_TYPE_VIEW]%-->
+                                    </tbody>
+                                </table>
+                                </div>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Product Cat Type End -->
+                    
+                    <!-- View Product Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewProd')">View Product Information</legend>
+                                <div id="viewProd" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:10%;">SL#</th>
+                                            <th style="width:40%;">Project Name </th>
+                                            <th style="width:40%;">Sub Project Name </th>
+                                            <th style="width:40%;">Product Type Name </th>
+                                            <th style="width:40%;">Product Name </th>
+                                            <th style="width:10%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[PROD_VIEW]%-->
+                                    </tbody>
+                                </table>
+                                </div>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Product End -->
+                    
+                    <!-- View Paltry Others Income Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewPalOthrsIncome')">View  Poultry Others Income Information</legend>
+                                <div id="viewPalOthrsIncome" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:10%;">SL#</th>
+                                            <th style="width:40%;">Income Head Name </th>
+                                            <th style="width:40%;">Remarks </th>
+                                           <th style="width:10%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[PALTRY_OTHERS_INCOME_VIEW]%-->
+                                    </tbody>
+                                </table>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Paltry Others Income End -->
+                    
+                    <!-- View Paltry Others Expanse Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewPalOthrsExpanse')">View  Poultry Others Expanse Information</legend>
+                                <div id="viewPalOthrsExpanse" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:10%;">SL#</th>
+                                            <th style="width:40%;">Expanse Head Name </th>
+                                            <th style="width:40%;">Remarks </th>
+                                           <th style="width:10%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[PALTRY_OTHERS_EXPANSE_VIEW]%-->
+                                    </tbody>
+                                </table>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Paltry Others Expanse End -->
+                    
+                    <!-- View Bank Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewBank')">View Bank Information</legend>
+                                <div id="viewBank" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:15%;">SL#</th>
+                                            <th style="width:30%;">Bank Name </th>
+                                            <th style="width:40%;">Address </th>
+                                            <th style="width:15%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[BANK_VIEW]%-->
+                                    </tbody>
+                                </table>
+                                </div>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Bank End -->
+                    
+                    <!-- View Bank Branch Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewBankBranch')">View Bank Branch Information</legend>
+                                <div id="viewBankBranch" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:15%;">SL#</th>
+                                            <th style="width:30%;">Bank Name </th>
+                                            <th style="width:30%;">Branch Name </th>
+                                            <th style="width:40%;">Address </th>
+                                            <th style="width:15%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[BANK_BRANCH_VIEW]%-->
+                                    </tbody>
+                                </table>
+                                </div>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Bank Branch End -->
+                    
+                    <!-- View Bank Account No Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewBankAccount')">View Bank Account No. Information</legend>
+                                <div id="viewBankAccount" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:15%;">SL#</th>
+                                            <th style="width:30%;">Bank Name </th>
+                                            <th style="width:30%;">Branch Name </th>
+                                            <th style="width:30%;">Account No. </th>
+                                            <th style="width:40%;">Description </th>
+                                            <th style="width:15%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[BANK_ACCOUNT_VIEW]%-->
+                                    </tbody>
+                                </table>
+                                </div>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Bank Account No End -->
+                    
+                    <!-- View Project Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewProject')">View Project Information</legend>
+                                <div id="viewProject" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:10%;">SL#</th>
+                                            <th style="width:40%;">Project Name </th>
+                                            <th style="width:10%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[PROJECT_VIEW]%-->
+                                    </tbody>
+                                </table>
+                                </div>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Project End -->
+                    
+                    <!-- View Sub Project Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewSubProj')">View Sub Project Information</legend>
+                                <div id="viewSubProj" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:10%;">SL#</th>
+                                            <th style="width:40%;">Project Name </th>
+                                            <th style="width:40%;">Sub Project Name </th>
+                                            <th style="width:10%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[SUB_PROJECT_VIEW]%-->
+                                    </tbody>
+                                </table>
+                                </div>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Sub Project End -->
+                    
+                     <!-- View Expanse Head Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewExpHead')">View Expanse Head Information</legend>
+                                <div id="viewExpHead" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:10%;">SL#</th>
+                                            <th style="width:40%;">Expanse Head Name </th>
+                                            <th style="width:10%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[EXPANSE_HEAD_VIEW]%-->
+                                    </tbody>
+                                </table>
+                                </div>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Expanse Head End -->
+                    
+                    <!-- View Expanse Sub Head Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewExpSubHead')">View Expanse Sub Head Information</legend>
+                                <div id="viewExpSubHead" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:10%;">SL#</th>
+                                            <th style="width:40%;">Expanse Head Name </th>
+                                            <th style="width:40%;">Expanse Sub Head Name </th>
+                                            <th style="width:10%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[EXPANSE_SUB_HEAD_VIEW]%-->
+                                    </tbody>
+                                </table>
+                                </div>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Expanse Sub Head End -->
+                    
+                     <!-- View Income Head Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewIncHead')">View Income Head Information</legend>
+                                <div id="viewIncHead" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:10%;">SL#</th>
+                                            <th style="width:40%;">Income Head Name </th>
+                                            <th style="width:10%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[INCOME_HEAD_VIEW]%-->
+                                    </tbody>
+                                </table>
+                                </div>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Income Head End -->
+                    
+                     <!-- View Alu Fare Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewAluFare')">View Alu Fare Information</legend>
+                                <div id="viewAluFare" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:10%;">SL#</th>
+                                            <th style="width:40%;">Project Name </th>
+                                            <th style="width:40%;">Sub Project Name </th>
+                                            <th style="width:40%;">Product Name </th>
+                                            <th style="width:40%;">Packing Unit </th>
+                                            <th style="width:10%;">Fare</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[ALU_FARE_VIEW]%-->
+                                    </tbody>
+                                </table>
+                                </div>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Alu Fare End -->
+                    
+                    <!-- View Alu Fare Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewProdFare')">View Product Fare Information</legend>
+                                <div id="viewProdFare" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:5%;">SL#</th>
+                                            <th style="width:25%;">Project Name </th>
+                                            <th style="width:25%;">Prod Cat Name </th>
+                                            <th style="width:40%;">Product Name </th>
+                                            <th style="width:5%;">Fare</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[PROD_FARE_VIEW]%-->
+                                    </tbody>
+                                </table>
+                                </div>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Alu Fare End -->
+                </table>
+            </td>
+        </tr>
+    </table>

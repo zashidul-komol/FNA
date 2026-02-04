@@ -1,0 +1,410 @@
+    <table align="center" width="80%" border="0" cellspacing="1" cellpadding="10" style="margin:0px auto 0px auto;">
+        <tr>
+            <td colspan="2" align="center"><h1>Alu Unload  Entry Form</h1></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><!--%[MSG]%--></td>
+        </tr>
+        <tr valign="top">
+            <td width="60%" align="center">
+                <table width="90%"  border="0" cellspacing="0" cellpadding="0" align="center">
+                   
+                    <!--  Start Load Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmAluUnloadSubmit() {
+									if($("#PROJECTID").val() == ''){
+											alert("Please Select Project name");
+											$("#PROJECTID").focus();
+											return false;
+									}
+									if($("#SUBPROJECTID").val() == ''){
+											alert("Please Select Sub Project name");
+											$("#SUBPROJECTID").focus();
+											return false;
+									}
+									if($("#PARTYID").val() == ''){
+											alert("Please Select Party name");
+											$("#PARTYID").focus();
+											return false;
+									}
+									if($("#LABOURID").val() == ''){
+											alert("Please Select Labour name");
+											$("#LABOURID").focus();
+											return false;
+									}
+									if($("#ENTRYDATE").val() == ''){
+											alert("Please Select Date");
+											$("#ENTRYDATE").focus();
+											return false;
+									}
+									if($("#LOTNO").val() == ''){
+											alert("Please Insert LOT No......");
+											$("#LOTNO").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed????')){
+										return false;
+									}
+									return true;
+								}
+								function checkCalender(){
+									var CALDATE = String($("#CALDATE").val());
+									var CHEQUEDATE = String($("#CHEQUEDATE").val());
+									if(CALDATE != ''){
+										
+										var tempCALDATE = CALDATE.split('-'); 
+										
+										var a = tempCALDATE[1]+'/'+tempCALDATE[0]+'/'+tempCALDATE[2];
+									}
+								}
+								
+								function getProductNamebyCat(getCatIdName, pcId){
+																			
+										var splitCatId = getCatIdName.split("_");										
+										var options = '';
+										if(pcId == '' && getCatIdName == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#PRODUCTID_"+splitCatId[1]).html('');
+											$("select#PRODUCTID_"+splitCatId[1]).html(options);
+											return false;
+										}
+										$.getJSON("ajax/getProductList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#PRODUCTID_"+splitCatId[1]).html('');
+												$("select#PRODUCTID_"+splitCatId[1]).html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#PRODUCTID_"+splitCatId[1]).html('');
+												$("select#PRODUCTID_"+splitCatId[1]).html(options);
+											}
+										})
+									
+									
+								}
+								
+								
+								$(document).ready(function(){
+   																		
+									$("select#PARTYID").change(function(){
+										$.getJSON("ajax/getPartyInfo.php",{party_id: $(this).val()}, function(j) {
+											if(j.length>0) {
+												for (var i = 0; i < j.length; i++) {
+												$("#FATHERNAME").val(j[i]['FATHERNAME']);
+												$("#ADDRESS").val(j[i]['ADDRESS']);
+												$("#MOBILE").val(j[i]['MOBILE']);
+												
+												}
+											}
+											else {
+												$("#FATHERNAME").val('');
+												$("#ADDRESS").val('');
+												$("#MOBILE").val('');
+											}
+										})
+									})
+									
+									$('#btnGo').click(function() {
+										
+										var PROJECTID 		= $("#PROJECTID").val();
+										var SUBPROJECTID 	= $("#SUBPROJECTID").val();
+										var UNLOADBASTA		= $("#UNLOADBASTA").val();
+										var LABOURID		= $("#LABOURID").val();
+										var ENTRYDATE		= $("#ENTRYDATE").val();
+										var LOTNO			= $("#LOTNO").val();
+										var DONO			= $("#DONO").val();
+										var RECNAME			= $("#RECNAME").val();
+										var RECMOBNO		= $("#RECMOBNO").val();
+										//$.getJSON("ajax/getProjectList.php",{PROJECTID: PROJECTID, SUBPROJECTID: SUBPROJECTID, PARTYID: PARTYID}, function(j) {
+											$.post("ajax/getAluUnloadInfo.php",{PROJECTID: PROJECTID, SUBPROJECTID: SUBPROJECTID, LABOURID: LABOURID, ENTRYDATE: ENTRYDATE, UNLOADBASTA: UNLOADBASTA, LOTNO: LOTNO , RECNAME: RECNAME, RECMOBNO: RECMOBNO , DONO: DONO}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												$("#showAluUnloadInfo").html(j);
+											}
+											else {
+												$("#showAluUnloadInfo").html('');
+											}
+										})
+									});
+									
+									
+									
+									  
+  
+								});
+								
+								function getProjectNameLoad(pcId){					
+										var options = '';
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#SUBPROJECTID").html('');
+											$("select#SUBPROJECTID").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getProjectListAlu.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#SUBPROJECTID").html('');
+												$("select#SUBPROJECTID").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#SUBPROJECTID").html('');
+												$("select#SUBPROJECTID").html(options);
+											}
+										})
+										
+										$.getJSON("ajax/getLabourNameList.php",{pcId: pcId}, function(jj) {
+											if(jj.length>0) {
+												//alert (pcId);
+												options = '';
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < jj.length; i++) {
+													options += '<option value="' + jj[i].optionValue + '">' + jj[i].optionDisplay + '</option>';
+												}
+												$("select#LABOURID").html('');
+												$("select#LABOURID").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#LABOURID").html('');
+												$("select#LABOURID").html(options);
+												
+											}
+										});
+									
+									
+								}
+								function PartyName(pcId){					
+										if(pcId == 1){
+											$("#showLotNo").show();
+										}else{
+											$("#showLotNo").hide();
+										}
+										
+										
+										var options = '';
+										var jj = '';
+										//alert (pcId);
+										options.length=0;
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#PARTYID").html('');
+											$("select#PARTYID").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getPartyName.php",{pcId: pcId}, function(jj) {
+											if(jj.length>0) {
+												//alert (pcId);
+												options = '';
+												options += '<option value="">Select</option>';
+												for (var ii = 0; ii < jj.length; ii++) {
+													options += '<option value="' + jj[ii].optionValue + '">' + jj[ii].optionDisplay + '</option>';
+												}
+												$("select#PARTYID").html('');
+												$("select#PARTYID").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#PARTYID").html('');
+												$("select#PARTYID").html(options);
+												$("#FATHERNAME").val('');
+												$("#ADDRESS").val('');
+												$("#MOBILE").val('');
+											}
+										});
+										var j = '';
+																			
+										$.getJSON("ajax/getProdCategoryList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options = '';
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#PRODCATTYPEID_1").html('');
+												$("select#PRODCATTYPEID_1").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#PRODCATTYPEID_1").html('');
+												$("select#PRODCATTYPEID_1").html(options);
+												
+											}
+										});
+										var j = '';
+										$.post("ajax/getMaxDONO.php",{pcId: pcId}, function(j) {
+											//alert (j);
+											if(j.length>0) {
+												//var race = j.split("-"); 
+												//alert (posId[1]);
+												$("#DONO").val(j);
+												//$("#EMPLOYEEID_"+posId[1]).html(j);
+											}
+											else {
+												$("#DONO").html('');
+											}
+										});
+									
+									
+								}
+								
+								function getPartyNameLotNo(LotNo){
+										
+										var PROJECTID 		= $("#PROJECTID").val();
+										var SUBPROJECTID 	= $("#SUBPROJECTID").val();
+										var ENTRYDATE 		= $("#ENTRYDATE").val();
+												
+										$.getJSON("ajax/getPartyNameLotNoAlu.php",{LotNo: LotNo, PROJECTID:PROJECTID, SUBPROJECTID:SUBPROJECTID, ENTRYDATE:ENTRYDATE  }, function(j) {
+											if(j.length>0) {
+												for (var i = 0; i < j.length; i++) {
+												$("#PARTYNAME").val(j[i]['PARTYNAME']);
+												$("#FATHERNAME").val(j[i]['FATHERNAME']);
+												$("#ADDRESS").val(j[i]['ADDRESS']);
+												$("#MOBILE").val(j[i]['MOBILE']);
+												
+												}
+											}
+											else {
+												$("#PARTYNAME").val('');
+												$("#FATHERNAME").val('');
+												$("#ADDRESS").val('');
+												$("#MOBILE").val('');
+											}
+										})
+									
+									
+								}
+								
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showLoad')">Enter Alu Unload Entry Information</legend>
+                                <div id="showLoad" style="display:">
+                                 
+                                        <table width="100%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td colspan="7">
+                                                	<table width="100%">
+                                                        <tr>
+                                                    	<td width="286" align="right">
+                                                               Project Name :
+                                                         </td>
+                                                            <td ><select type="text" id="PROJECTID" name="PROJECTID" style="width:180px;" autocomplete="off" placeholder="PackingName" onchange="getProjectNameLoad(this.value);" >
+                                                  <option value="">Select</option>
+                                                        <!--%[PROJECT_NAME]%-->
+                                                     </select>
+                                             				</td>
+                                                            <td width="136" align="right">
+                                                               Sub Project Name :
+                                                            </td>
+                                                            <td height="26" align="left"><select type="text" id="SUBPROJECTID" name="SUBPROJECTID" style="width:180px;" autocomplete="off" onchange="PartyName(this.value);"  /></td>
+                                                      </tr>
+                                                      <tr valign="top" >
+                                                          <td align="right">Labour Name :</td>
+                                                          <td height="26" align="left"><select id="LABOURID" name="LABOURID" autocomplete="off" style="width:180px;">
+                                                          </select></td>
+                                                          <td height="26" align="right">Lot No :</td>
+                                                          <td height="26" align="left"><input id="LOTNO" name="LOTNO" autocomplete="off" style="width:30px;" onchange="getPartyNameLotNo(this.value);" />
+/
+  <input readonly="readonly" id="LOTNO2" name="LOTNO2" autocomplete="off" style="width:30px;" /></td>
+                                                      </tr>
+                                                        <tr valign="top" >
+                                                          <td align="right">Party Name :</td>
+                                                          <td height="26" align="left"><input id="PARTYNAME" name="PARTYNAME" autocomplete="off" style="width:167px;" readonly="readonly" /></td>
+                                                          <td height="26" align="right">Father Name :</td>
+                                                          <td height="26" align="left"><input id="FATHERNAME" name="FATHERNAME" autocomplete="off" style="width:167px;" readonly="readonly" /></td>
+                                                        </tr>
+                                                       <tr>
+                                                    	<td width="286" align="right">
+                                                               Address :
+                                                            </td>
+                                                            <td width="188" align="left"><textarea name="ADDRESS" id="ADDRESS" style="width:170px; height:40px;" readonly="readonly"></textarea></td>
+                                                            <td width="136" align="right">Mobile :</td>
+                                                            <td width="304" align="left"><input id="MOBILE" name="MOBILE" autocomplete="off" style="width:167px;" readonly="readonly" /></td>
+                                                        </tr>
+                                                        <tr valign="top">
+                                                            <td align="right">Date : </td>
+                                                            <td height="21" align="left"><input name="ENTRYDATE" size="18" id="ENTRYDATE" type="text" readonly="readonly" onclick="showCalender('ENTRYDATE','ENTRYDATE')" onchange="checkCalender(this.value);" style="width:165px;" /></td>
+                                                            <td height="21" align="right">Unload Basta : </td>
+                                                            <td height="21" align="left"><input id="UNLOADBASTA" name="UNLOADBASTA" autocomplete="off" style="width:167px;" /></td>
+                                                         </tr>
+                                                          <tr valign="top">
+                                                            <td align="right">Receiver Name: </td>
+                                                            <td height="21" align="left"><input name="RECNAME" id="RECNAME" autocomplete="off" style="width:165px;" /></td>
+                                                            <td height="21" align="right">Rec Mobile No : </td>
+                                                            <td height="21" align="left"><input id="RECMOBNO" name="RECMOBNO" autocomplete="off" style="width:167px;" /></td>
+                                                         </tr>
+                                                         <tr valign="top">
+                                                            <td align="right">&nbsp;</td>
+                                                            <td height="21" align="left">&nbsp;</td>
+                                                            <td height="21" align="right">D.O Number : </td>
+                                                            <td height="21" align="left"><input readonly="readonly" id="DONO" name="DONO" autocomplete="off" style="width:167px;" /></td>
+                                                         </tr>
+                                                        
+                                                        <tr valign="top">
+                                                          <td height="26" colspan="4" align="center">&nbsp;</td>
+                                                        </tr>
+                                                        <tr valign="top">
+                                                          <td height="26" colspan="4" align="center"><input type="button" name="btnGo" id="btnGo" value="GO" class="FormSubmitBtn" /></td>
+                                                        </tr>
+                                                        <tr valign="top">
+                                                          <td height="26" colspan="4" align="center">&nbsp;</td>
+                                                        </tr>
+                                                        <tr valign="top">
+                                                          <td height="26" colspan="4" align="right">
+                                                          	<!--<table width="100%" style="display:">
+                                                            	<tr>
+                                                                	<td align="center">Purpose</td>
+                                                                    <td align="center">LoanID</td>
+                                                                    <td align="center">Date</td>
+                                                                    <td align="center">Amount</td>
+                                                                    <td align="center">Int. Rate</td>
+                                                                    <td align="center">Int.Amount</td>
+                                                                    <td align="center">Total</td>
+                                                                </tr>
+                                                                <tr>
+                                                                	<td align="center">&nbsp;</td>
+                                                                    <td align="center">&nbsp;</td>
+                                                                    <td align="center">&nbsp;</td>
+                                                                    <td align="center">&nbsp;</td>
+                                                                    <td align="center">&nbsp;</td>
+                                                                    <td align="center">&nbsp;</td>
+                                                                    <td align="center">&nbsp;</td>
+                                                                </tr>
+                                                            </table>-->
+                                                            <form name="LoadForm" method="post" action="fnaAluUnload.php" onsubmit="return confirmAluUnloadSubmit();">
+                                                            <div id="showAluUnloadInfo"> </div>
+                                                          </form>
+                                                          </td>
+                                                        </tr>
+                                                        
+                                                    </table>
+                                              </td>
+                                            </tr>                                       
+                                            <tr valign="top">
+                                                <td width="41%" height="26" align="right">&nbsp;</td>
+                                                <td width="59%" height="26" align="left">&nbsp; </td>
+                                            </tr>
+                                        </table>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Load Entry Form  --> 
+                    
+              </table>
+            </td>
+          </tr>
+    </table>

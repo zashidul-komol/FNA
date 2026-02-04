@@ -1,0 +1,294 @@
+    <table width="85%" border="0" cellspacing="1" cellpadding="10" style="margin:0px auto 0px auto;">
+        <tr>
+            <td colspan="2" align="center"><h4></h4></td>
+        </tr>
+        <tr>
+        
+        	<script>
+              $(document).ready(function() {
+               $("#bps_38a, #bpes_54a, #eras_60a, #eras_62a, #cs_67a, #cs_72").datepicker({ dateFormat: "dd-mm-yy",
+                beforeShow: function(input, inst) {
+                 if ($("#dateplanedcheck").is(':checked')) {
+                  $(".ui-datepicker-calendar").css("display", "none");
+                }}
+               });
+              });
+            </script>
+            <script  type="text/javascript">
+								function confirmInputTabFieldsSubmit() {
+									
+									var checkDate   = $("#checkDate").val();
+									var checkNewDate = Date.parse(checkDate);
+									
+									var bps_38a      = $("#bps_38a").val();
+									var dSplit  	= bps_38a.split("-");
+									var bps_38aNew   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var bps_38aNewDate = Date.parse(bps_38aNew);
+									if (bps_38aNewDate < checkNewDate || bps_38a == '') {
+										alert("Previous Date Not Allow! And Must Be Fill Up!");
+										$("#bps_38a").focus();
+										return false;
+									}
+									var bpes_54a      = $("#bpes_54a").val();
+									var dSplit  	  = bpes_54a.split("-");
+									var bpes_54aNew   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var bpes_54aNewDate = Date.parse(bpes_54aNew);
+									if (bpes_54aNewDate < checkNewDate || bpes_54a == '') {
+										alert("Previous Date Not Allow! And Must Be Fill Up!");
+										$("#bpes_54a").focus();
+										return false;
+									}
+									var eras_60a      = $("#eras_60a").val();
+									var dSplit  	= eras_60a.split("-");
+									var eras_60aNew   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var eras_60aNewDate = Date.parse(eras_60aNew);
+									if (eras_60aNewDate < checkNewDate || eras_60a == ''){
+										alert("Previous Date Not Allow! And Must Be Fill Up!");
+										$("#eras_60a").focus();
+										return false;
+									}
+									var eras_62a      = $("#eras_62a").val();
+									var dSplit  	  = eras_62a.split("-");
+									var eras_62aNew   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var eras_62aNewDate = Date.parse(eras_62aNew);
+									if (eras_62aNewDate < checkNewDate || eras_62a == '') {
+										alert("Previous Date Not Allow! And Must Be Fill Up!");
+										$("#eras_62a").focus();
+										return false;
+									}
+									var cs_67a      = $("#cs_67a").val();
+									var dSplit  	= cs_67a.split("-");
+									var cs_67aNew   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var cs_67aNewDate = Date.parse(cs_67aNew);
+									if (cs_67aNewDate < checkNewDate || cs_67a == '') {
+										alert("Previous Date Not Allow! And Must Be Fill Up!");
+										$("#cs_67a").focus();
+										return false;
+									}
+									var cs_72      = $("#cs_72").val();
+									var dSplit  	= cs_72.split("-");
+									var cs_72New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var cs_72NewDate = Date.parse(cs_72New);
+									if (cs_72NewDate < checkNewDate || cs_72 == '') {
+										alert("Previous Date Not Allow! And Must Be Fill Up!");
+										$("#cs_72").focus();
+										return false;
+									}
+								
+									
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+        
+            <td colspan="2" align="center"><!--%[MSG]%--></td>
+        </tr>
+        <tr valign="top">
+            <td width="50%" align="left">
+                <table width="100%"  border="0" cellspacing="0" cellpadding="0" align="center">
+                    
+            <!--  Start Pacakge Information ------------------------------------------------------------------------------------------------------------------    -->
+            
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmPacakgeInformationSubmit() {
+									
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            
+                           <!-- <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" >Enter Package Information</legend>
+                                <div id="showPacakgeInformation">
+                                  <form name="PacakgeInformationForm" method="post" action="packageInformation.php" onsubmit="return confirmPacakgeInformationSubmit();">
+   
+                                  
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                        
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="9%" height="26" align="right">&nbsp;</td>
+                                                <td width="35%" height="26" align="right">
+                                                    Loan/ Grant No :
+                                                </td>
+                                                <td width="56%" height="26" align="left">
+                                                    <input type="text" id="pi_1" name="pi_1" autocomplete="off" placeholder="Loan/ Grant No" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="9%" height="26" align="right">&nbsp;</td>
+                                                <td width="35%" height="26" align="right">
+                                                    ADB Project Name :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="pi_2" name="pi_2" autocomplete="off" placeholder="ADB Project Name" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="9%" height="26" align="right">&nbsp;</td>
+                                                <td width="35%" height="26" align="right">
+                                                    EA Name :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="pi_3" name="pi_3" autocomplete="off" placeholder="EA Name" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="9%" height="26" align="right">&nbsp;</td>
+                                                <td width="35%" height="26" align="right">
+                                                    Package No. :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="pi_4" name="pi_4" autocomplete="off" placeholder="Package No." class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="9%" height="26" align="right">&nbsp;</td>
+                                                <td width="35%" height="26" align="right">
+                                                    Lot No. :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="pi_5" name="pi_5" autocomplete="off" placeholder="Lot No." class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="9%" height="26" align="right">&nbsp;</td>
+                                                <td width="35%" height="26" align="right">
+                                                    Contract Name :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="pi_6" name="pi_6" autocomplete="off" placeholder="Contract Name" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="9%" height="26" align="right">&nbsp;</td>
+                                                <td width="35%" height="26" align="right">
+                                                    Short Description of Contract :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="pi_7" name="pi_7" autocomplete="off" placeholder="Short Description of Contract" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                             
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="9%" height="26" align="right">&nbsp;</td>
+                                                <td width="35%" height="26" align="right">
+                                                    Cost Estimate (US$) :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="pi_8" name="pi_8" autocomplete="off" placeholder="Cost Estimate (US$)" class="FormTextTypeInput" />  
+                                                   <input autocomplete="off" onblur="if(this.value=='') this.value='0.00'; numberFormat(this.id,this.value.toString(),'2',',','.');" onfocus="if(this.value=='0.00') this.value='';" size="15" class="FormNumericTypeInput" onkeyup="removeChar(this);" id="amountMoneyMarket" name="amountMoneyMarket"> 
+                                                    
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="9%" height="26" align="right">&nbsp;</td>
+                                                <td width="35%" height="26" align="right">
+                                                    Procurement Type (Goods/ Works/ Turnkey) :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="pi_9" name="pi_9" autocomplete="off" placeholder="Procurement Type" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="9%" height="26" align="right">&nbsp;</td>
+                                                <td width="35%" height="26" align="right">
+                                                    Procurement Method (ICB, LCB, NCB, Shopping, DC) :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="pi_10" name="pi_10" autocomplete="off" placeholder="Procurement Method" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="9%" height="26" align="right">&nbsp;</td>
+                                                <td width="35%" height="26" align="right">
+                                                    Bidding Procedures (1S1E, 1S2E, 2S, 2S2E) :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="pi_11" name="pi_11" autocomplete="off" placeholder="Bidding Procedures" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="9%" height="26" align="right">&nbsp;</td>
+                                                <td width="35%" height="26" align="right">
+                                                    Applicability of Guidelines (ADB/ GOB) :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="pi_12" name="pi_12" autocomplete="off" placeholder="Applicability of Guidelines" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="9%" height="26" align="right">&nbsp;</td>
+                                                <td width="35%" height="26" align="right">
+                                                    Prior Review (Yes/ No) :
+                                                </td>
+                                                <td height="26" align="left">
+                                                <select name="pi_14" id="pi_14"  class="FormSelectTypeInput" required="" autofocus="">
+                                                <option value="">Select Prior Review</option>
+												<option value="Yes">Yes</option>
+                                                <option value="No">No</option>
+												</select>
+                                                </td>
+                                            </tr>
+                                            
+                                              <tr valign="top" class="rowcolor">
+                                                <td width="9%" height="26" align="right">&nbsp;</td>
+                                                <td width="35%" height="26" align="right">
+                                                    Prequalification Process (Yes/ No) :
+                                                </td>
+                                                <td height="26" align="left">
+                                                <select name="pi_15" id="pi_15"  class="FormSelectTypeInput" required="" autofocus="">
+                                                <option value="">Prequalification Process</option>
+												<option value="Yes">Yes</option>
+                                                <option value="No">No</option>
+												</select>
+                            					<sup style="color:red;">*</sup>
+                                                </td>
+                                            </tr>
+                                            
+                                            
+                                            
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td width="35%" height="26" align="right"> </td>
+                                                <td height="26" align="left">
+                                                    <input type="hidden" name="piProcurementType" value="<!--%[PROCUREMENTTYPE]%-->
+                                                   <!-- <input type="hidden" name="piProcurementMethod" value="<!--%[PROCUREMENTMETHOD]%-->
+                                                   <!-- <input type="hidden" name="piBiddingProcedure" value="<!--%[BIDDINGPROCUREDURE]%-->
+                                                 <!--   <input type="hidden" name="piPriorReview" value="<!--%[PRIOREVIEW]%-->
+                                                  <!--  <input type="hidden" name="piPrequalificationProcess" value="<!--%[PREWUALIFICATIONPROCESS]%-->
+                                                <!--    <input type="submit" name="insertPacakgeInformation" value="Insert" class="FormSubmitBtn" />-->
+                                               <!--     <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">-->
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+						
+            <!--  End Pacakge Information ------------------------------------------------------------------------------------------------------------------     -->
+                    
+                    
+                </table>
+                
+            </td>
+
+        </tr>
+    </table>

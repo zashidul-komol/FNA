@@ -1,0 +1,282 @@
+    <table align="center" width="50%" border="0" cellspacing="1" cellpadding="10" style="margin:0px auto 0px auto;">
+        <tr>
+            <td colspan="2" align="center"><h1>Recipe Entry Form</h1></td>
+        </tr>
+        <tr valign="top">
+            <td width="60%" align="center">
+                <table width="80%"  border="0" cellspacing="0" cellpadding="0" align="center">
+                   
+                    <!--  Start Load Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmRecipiSubmit() {
+									if($("#FOODID").val() == ''){
+											alert("Please Select Food name");
+											$("#FOODID").focus();
+											return false;
+									}
+									if($("#FOODQNTY").val() == ''){
+											alert("Please Select Food Default Quantity");
+											$("#FOODQNTY").focus();
+											return false;
+									}
+									if($("#RECIPIDATE").val() == ''){
+											alert("Please Select Date");
+											$("#RECIPIDATE").focus();
+											return false;
+									}
+									
+									var pList = $("#TOTAL_PRODUCT_LIST").val();
+									for(i=1; i < pList; i++){
+										if($("#PRODUCTID_"+i).val() == ''){
+													alert("Please Select Product Name");
+													$("#PRODUCTID_"+i).focus();
+													return false;
+											}
+											if($("#quantity_"+i).val() == ''){
+													alert("Please Insert Quantity");
+													$("#quantity_"+i).focus();
+													return false;
+											}
+											if($("#WTID_"+i).val() == ''){
+													alert("Please Select Unit");
+													$("#WTID_"+i).focus();
+													return false;
+											}
+											
+										
+									}
+																		
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								
+								function checkCalender(){
+									var RECIPIDATE = String($("#RECIPIDATE").val());
+									if(RECIPIDATE != ''){
+										
+										var tempRECIPIDATE = RECIPIDATE.split('-'); 
+										
+										var a = tempRECIPIDATE[1]+'/'+tempRECIPIDATE[0]+'/'+tempRECIPIDATE[2];
+									}
+								}
+								
+								
+								
+								$(document).ready(function(){
+   																		
+									var inputs = 2;	
+									$('#btnAddMoreScripList').click(function() {		
+										
+										
+										$('.btnDelMoreScripList:disabled').removeAttr('disabled');
+										var c = $('.clonedInputForScripList:first').clone(true);
+										
+										
+										
+										c.find('select#PRODUCTID_1').attr({
+																				'id':'PRODUCTID_'+inputs
+																			});
+										c.find('input:hidden#quantity_1').attr({
+																				'id':'quantity_'+inputs,
+																				'value':''
+																			});
+																			
+										c.find('select#WTID_1').attr({
+																				'id':'WTID_'+inputs
+																			});
+																			
+										c.find('input:hidden#TOTAMOUNT_1').attr({
+																				'id':'TOTAMOUNT_'+inputs,
+																				'value':''
+																			});
+										
+										c.find('input:hidden#closest_position1').attr({
+																			'id':'closest_position'+inputs,
+																			'value':inputs
+																		});																		
+																																
+																					
+										$('.clonedInputForScripList:last').after(c);
+										
+										
+										inputs++;
+										$("#TOTAL_PRODUCT_LIST").attr('value',inputs);
+									});
+									
+									$('.btnDelMoreScripList').click(function() {
+										if (confirm('Continue Delete?')) {
+											var colsest_pos = $(this).closest('.clonedInputForScripList').find('.closest_position').val();
+											$(this).closest('.clonedInputForScripList').remove();
+											var counter = 1;
+											for(var i=1;i<inputs;i++) {
+												if(i == colsest_pos)
+												continue;
+												$("#trade_file_view_details").find('select#PRODUCTID_'+i).attr({
+																											'id':'PRODUCTID_'+counter
+																										});
+												$("#trade_file_view_details").find('input:hidden#quantity_'+i).attr({
+																											'id':'quantity_'+counter,
+																											'value':''
+																										});
+												$("#trade_file_view_details").find('select#WTID_'+i).attr({
+																											'id':'WTID_'+counter
+																										});																									
+												$("#trade_file_view_details").find('input:hidden#TOTAMOUNT_'+i).attr({
+																											'id':'TOTAMOUNT_'+counter,
+																											'value':''
+																										});
+												
+												$("#trade_file_view_details").find('input:text#closest_position'+i).attr({
+																							'value':counter,
+																							'id':'closest_position'+counter
+																						});
+												counter++;
+											}
+											--inputs;
+											$("#TOTAL_PRODUCT_LIST").attr('value',inputs);
+											$('.btnDelMoreScripList').attr('disabled',($('.clonedInputForScripList').length  < 2));
+											return false;
+										}
+										else{
+											return false;
+										}
+									});	
+									  
+  
+								});
+								
+								function LotNoCal(){
+								
+								var qnty  		= $("#quantity_1").val();
+								var totamnt  	= $("#TOTAMOUNT_1").val();
+								quantity		= parseFloat(qnty).toFixed(2);
+								TotalAmount		= parseFloat(totamnt).toFixed(2);
+								unitPrice		= parseFloat(TotalAmount/quantity).toFixed(2) ;
+								
+								//
+								$("#UNITPRICE_1").val(unitPrice);
+								
+								}
+								
+								
+								function calTotQuantity(id){
+									
+									var sp = id.split("_");
+									var countRows = parseFloat(sp[1]);
+									//alert(countRows);
+									var totquantity = 0;
+									var quantity = 0;
+									for(var i=1; i<=countRows; i++){
+										quantity = $("#quantity_"+i).val();
+										quantity = parseFloat(quantity);
+										totquantity = totquantity + quantity;
+									}
+									defaultquantity = $("#defaultquantity").val();
+									defaultquantity = parseFloat(defaultquantity) + 0.01;
+									if(defaultquantity <=totquantity){
+										alert("Default quantity exceed!");
+										 $("#quantity_"+sp[1]).focus();
+									}else{
+										$("#TOTAMOUNT_"+countRows).val(totquantity);
+									}
+								}
+								
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showLoad')">Enter Recipe Entry Information</legend>
+                                <div id="showLoad" style="display:">
+                                  <form name="LoadForm" method="post" action="feedRecipi.php" onsubmit="return confirmRecipiSubmit();">
+                                        <table width="100%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td colspan="7">
+                                                	<table width="600">
+                                                       <tr>
+                                                    	<td width="134" align="right">
+                                                               Food Item Name :
+                                                         </td>
+                                                            <td ><select type="text" id="FOODID" name="FOODID" style="width:180px;" autocomplete="off" placeholder="PackingName">
+                                                  <option value="">Select</option>
+                                                        <!--%[FOOD_NAME]%-->
+                                                     </select>
+                                             				</td>
+                                                            <td width="144" align="right">
+                                                               Default Quantity:
+                                                            </td>
+                                                            <td height="26" align="left"><input id="defaultquantity" name="FOODQNTY" style="width:100px;" value="100"/></td>
+                                                      </tr>
+                                                       <tr>
+                                                    	<td width="134" align="right">&nbsp;</td>
+                                                            <td width="180" align="left">&nbsp;</td>
+                                                            <td width="144" align="right">Date : </td>
+                                                            <td width="122" align="left"><input name="RECIPIDATE" size="18" id="RECIPIDATE" type="text" readonly="readonly" onclick="showCalender('RECIPIDATE','RECIPIDATE')" onchange="checkCalender(this.value);" style="width:100px;" /></td>
+                                                        </tr>	
+                                                    </table>
+                                              </td>
+                                            </tr>
+                                            
+                                             <tr valign="top">
+                                                <td height="26" align="left" colspan="2">
+                                                		<div id="trade_file_view_details">
+                                                                <div style="margin-bottom:4px;width:100%; font-family:Tahoma, Geneva, sans-serif;" class="clonedInputForScripList">
+                                                                    <fieldset style='width:95%;border:0px;border-top:1px solid #2b2d93;font-family:Tahoma, Geneva, sans-serif;'>
+                                                                        <legend style="border:0px;" id="stock1">Add Product List <input type="text" name="closest_position" id="closest_position1" class="closest_position" value="1" readonly="readonly" size="2" style="border:0px;font-weight:bold; width:40px;"/></legend>
+                                                                        <table width="100%" class="frmTbl" border="0" style="font-family:Tahoma, Geneva, sans-serif;font-size:100%;">
+                                                                           <tr valign="middle">
+                                                                                <td width="13%" align="center">Product name <sup style="color:red;">*</sup></td>
+                                                                                <td width="13%" align="center">Quantity <sup style="color:red;">*</sup></td>
+                                                                                <td width="13%" align="center">Unit<sup style="color:red;">*</sup></td>
+                                                                                <td width="13%" align="center">Total KG<sup style="color:red;">*</sup></td>
+                                                                                <td width="10%" align="right">&nbsp;</td>
+                                                                                
+                                                                            </tr>
+                                                                            <tr valign="middle">
+                                                                                <td align="center"><select id="PRODUCTID_1" name="PRODUCTID[]" style="width:100px;" >
+                                                                                <option value="">Select</option>
+                                                                    				<!--%[FEED_PRODUCT]%-->
+                                                                 				</select>
+                                                                                </td>
+                                                                                <td align="center"><input id="quantity_1" name="quantity[]" style="width:100px;" onchange="calTotQuantity(this.id);"/></td>
+                                                                                <td align="center"><select id="WTID_1" name="WTID[]" style="width:100px;" >
+                                                                                  <option value="KG">Select</option>
+                                                                                  <!--%[WEIGHT]%-->
+                                                                                </select></td>
+                                                                                <td align="center"><input readonly="readonly" id="TOTAMOUNT_1" name="TOTALKG[]" style="width:100px;"  onchange="LotNoCal();"/></td>
+                                                                                <td align="right" valign="top"><input style="font-family:Tahoma, Geneva, sans-serif;font-size:100%;" class="btnDelMoreScripList"  disabled="disabled" type="image" src="../images/cancel.png">	
+                                                                               </td>
+                                                                            </tr>
+                                                                              
+                                                                        </table>
+                                                                    </fieldset>
+                                                                </div>
+                                                            </div>
+                                                </td>
+                                            </tr>
+                                                <tr valign="top">
+                                                    <td align="right" colspan="2">
+                                                        <input name="TOTAL_PRODUCT_LIST" id="TOTAL_PRODUCT_LIST" type="hidden" value="2" />
+                                                        <input style="font-family:Tahoma, Geneva, sans-serif;font-size:100%;" id="btnAddMoreScripList" value="Add More" type="button">
+                                                    </td>
+                                                </tr>                                       
+                                            <tr valign="top">
+                                                <td width="5%" height="26" align="right">&nbsp;</td>
+                                                <td width="95%" height="26" align="center">
+                                                    <input type="submit" name="InsertRecipiInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showLoad')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Load Entry Form  --> 
+                    
+              </table>
+            </td>
+          </tr>
+    </table>

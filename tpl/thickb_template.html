@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<title>.::. FNA .::.</title>
+	<link rel="icon" href="../favicon.ico" />
+    
+    <!--Text Editor Necessary Documents Upload Start -->
+	<script src="editor/ckeditor.js"></script>
+    <link rel="stylesheet" href="editor/samples/sample.css">
+    <!--Text Editor Necessary Documents Upload End -->
+	
+	<script type="text/javascript" language="JavaScript" src="../scripts/jquery-1.4.2.min.js"></script><!--../scripts/jquery-1.4.2.min.js-->
+    <script type="text/javascript" language="JavaScript" src="../scripts/functions.js"></script>
+	<script type="text/javascript" src="../scripts/jquery-ui-1.8.4.custom.min.js"></script><!--../scripts/jquery-ui-1.8.4.custom.min.js-->
+    <script type="text/javascript" src="../scripts/jquery.ui.datepicker.js"></script>
+    <script type="text/javascript" src="../scripts/jquery.fixheadertable.min.js"></script>
+	<script type="text/javascript" src="../scripts/ui.dropdownchecklist.js"></script>
+	<script type='text/javascript' src='calendar/utils/zapatec.js'></script>
+	<script type="text/javascript" src="calendar/src/calendar.js"></script>
+	<script type="text/javascript" src="calendar/lang/calendar-en.js"></script>
+	<script type="text/javascript" src="../scripts/highcharts.js"></script>
+    <script type="text/javascript" src="../scripts/jquery.treeview.js"></script>
+    <script type="text/javascript" src="../scripts/jquery.cookie.js"></script>
+    <script language="JavaScript" src="../scripts/jquery.jsonSuggest.js"></script> <!--Date : 28-01-2013 added by jubydul haque-->
+    <script type="text/javascript" src="../scripts/jquery.simplemodal.js"></script> <!--Date : 03-03-2013 added by jubydul haque-->
+    
+    
+     <link href="../scripts/CalendarControl.css" rel="stylesheet" type="text/css">
+     <script src="../scripts/CalendarControl.js" language="javascript"></script>
+    
+    <script type="text/javascript">
+		$(document).ready(function() { 
+				
+				$(".tab_content").hide(); //Hide all content
+				$("ul.tabs li:first").addClass("active").show(); //Activate first tab
+				$(".tab_content:first").show(); //Show first tab content
+				
+				
+				//On Click Event
+				$("ul.tabs li").click(function() {
+					$("ul.tabs li").removeClass("active"); //Remove any "active" class
+					$(this).addClass("active"); //Add "active" class to selected tab
+					$(".tab_content").hide(); //Hide all tab content
+					var activeTab = $(this).find("a").attr("href"); //Find the rel attribute value to identify the active tab + content
+					$(activeTab).fadeIn(); //Fade in the active content
+					
+					$("#dynBCItem:first").html($(this).find("a").text()); 
+					return false;
+				});
+		});
+    </script>
+    
+	<style type="text/css">
+	@import url("styles/default.css");
+	@import url("styles/base.css");
+	
+	h4 {
+		margin:0px;
+		padding-top:10px;
+	}
+	</style>
+	<link href="calendar/themes/aqua.css" rel="stylesheet" type="text/css">
+	<link href="../styles/ui.dropdownchecklist.themeroller.css" rel="stylesheet" type="text/css">
+	<link href="../styles/jquery-ui-1.8.4.custom.css" rel="stylesheet" type="text/css">
+    <link href="../styles/jquery.treeview.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<!-- ===================== HEADER ================== -->
+	<div class="wrapper" id="wrapperclass">
+    <div class="header" id="headerclass">
+		<div class="banner">
+			<a href="../index.php" title="Go to Homepage"><img src="../images/Traning-Logo.png" alt="Organization banner" height="100"/></a>
+		</div><!--End banner-->
+		<div class="logstatus">
+			<!-- <div class="datetime">
+				&nbsp;
+				<span id="Time"><!--%[BUSINESS_DATE]%</span>
+			</div> --> <!--End datetime-->
+            <div class="userInfo">
+                <!--%[WELCOME_MESSAGE]%-->
+                <a href="index.php?logout=y">Logout</a><br />
+            </div>
+		</div><!--End logstatus-->
+		<div class="clear"></div>
+	</div><!--End header-->
+    <!--%[BODY_CONTENT]%-->
+	
+	<div id="TDiv" style="border:0px; padding:25px 2px 5px 0px;margin-top:0px auto; min-height:500px;" class="barcol" align="center">
+		<table cellpadding="0" cellspacing="2" border="0" style="margin:0px auto 20px auto; font-size:100%;" width="100%">
+			<tr>
+				<td>
+					<!--%[PAGE_CONTENT]%-->
+				</td>
+			</tr>
+		</table>
+	<!--</div>-->
+	</div>
+</div><!--End wrapper-->
+<div class="footer" id="footerclass">
+		 <div align="center" class="owner">
+			Development &amp; Powered by:.................................................
+		</div>
+</div><!--End footer-->
+
+</body>
+</html>

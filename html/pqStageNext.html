@@ -1,0 +1,369 @@
+    <table width="85%" border="0" cellspacing="1" cellpadding="" style="margin:0px auto 0px auto;">
+        <tr>
+            <td colspan="2" align="center"><h4>Initialization PQ Stage</h4>
+            <div style="text-align:left;"><b>Package No:</b>  <!--%[PI_4]%--> <br/>
+             <b>Lot No:</b>  <!--%[PI_5]%--> <br/>
+            <b>Contract Name:</b> <!--%[PI_6]%--></div>
+            </td>
+        </tr>
+        <tr>
+        </tr>
+        <tr valign="top">
+            <td width="50%" align="left">
+                <table width="100%"  border="0" cellspacing="0" cellpadding="0" align="center">
+                    
+            <!--  Start PQ Stage ------------------------------------------------------------------------------------------------------------------    -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmInputTabFieldsSubmit() {
+											
+									var checkDate   = $("#checkDate").val();
+									var checkNewDate = Date.parse(checkDate);
+									
+									var pqs_20      = $("#pqs_20").val();
+									var dSplit  	= pqs_20.split("-");
+									var pqs_20New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var pqs_20NewDate = Date.parse(pqs_20New);
+									if (pqs_20NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#pqs_20").focus();
+										return false;
+									}
+									
+									var pqs_21      = $("#pqs_21").val();
+									var dSplit  	= pqs_21.split("-");
+									var pqs_21New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var pqs_21NewDate = Date.parse(pqs_21New);
+									if (pqs_21NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#pqs_21").focus();
+										return false;
+									}
+									
+									var pqs_22      = $("#pqs_22").val();
+									var dSplit  	= pqs_22.split("-");
+									var pqs_22New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var pqs_22NewDate = Date.parse(pqs_22New);
+									if (pqs_22NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#pqs_22").focus();
+										return false;
+									}
+									
+									var pqs_22a      = $("#pqs_22a").val();
+									var dSplit  	 = pqs_22a.split("-");
+									var pqs_22aNew   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var pqs_22aNewDate = Date.parse(pqs_22aNew);
+									if (pqs_22aNewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#pqs_22a").focus();
+										return false;
+									}
+									
+									var pqs_23      = $("#pqs_23").val();
+									var dSplit  	= pqs_23.split("-");
+									var pqs_23New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var pqs_23NewDate = Date.parse(pqs_23New);
+									if (pqs_23NewDate < checkNewDate) {
+										alert("Previous Date Not Allow!");
+										$("#pqs_23").focus();
+										return false;
+									}
+									
+									var pqs_24      = $("#pqs_24").val();
+									var dSplit  	= pqs_24.split("-");
+									var pqs_24New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var pqs_24NewDate = Date.parse(pqs_24New);
+									if (pqs_24NewDate < checkNewDate) {
+										alert("Previous Date Not Allow!");
+										$("#pqs_24").focus();
+										return false;
+									}
+									
+									var pqs_25      = $("#pqs_25").val();
+									var dSplit  	= pqs_25.split("-");
+									var pqs_25New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var pqs_25NewDate = Date.parse(pqs_25New);
+									if (pqs_25NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#pqs_25").focus();
+										return false;
+									}
+									
+									var pqs_26      = $("#pqs_26").val();
+									var dSplit  	= pqs_26.split("-");
+									var pqs_26New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var pqs_26NewDate = Date.parse(pqs_26New);
+									if (pqs_26NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#pqs_26").focus();
+										return false;
+									}
+									
+									var pqs_27      = $("#pqs_27").val();
+									var dSplit  	= pqs_27.split("-");
+									var pqs_27New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var pqs_27NewDate = Date.parse(pqs_27New);
+									if (pqs_27NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#pqs_27").focus();
+										return false;
+									}
+									
+									var pqs_27a      = $("#pqs_27a").val();
+									var dSplit  	 = pqs_27a.split("-");
+									var pqs_27aNew   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var pqs_27aNewDate = Date.parse(pqs_27aNew);
+									if (pqs_27aNewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#pqs_27a").focus();
+										return false;
+									}
+									
+									var pqs_28      = $("#pqs_28").val();
+									var dSplit  	 = pqs_28.split("-");
+									var pqs_28New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var pqs_28NewDate = Date.parse(pqs_28New);
+									if (pqs_28NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#pqs_28").focus();
+										return false;
+									}
+									
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <script>
+                              $(document).ready(function() {
+                               $("#pqs_20, #pqs_21, #pqs_22,#pqs_22a, #pqs_23, #pqs_24, #pqs_25, #pqs_26, #pqs_27, #pqs_27a, #pqs_28").datepicker({ dateFormat: "dd-mm-yy",
+                                beforeShow: function(input, inst) {
+                                 if ($("#dateplanedcheck").is(':checked')) {
+                                  $(".ui-datepicker-calendar").css("display", "none");
+                                }}
+                               });
+                              });
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" >Enter PQ Stage</legend>
+                                <div id="showInputTabFields">
+                                  <form name="inputTabFieldsForm" method="post" action="pqStage.php" onsubmit="return confirmInputTabFieldsSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                       <center><b>Insert Data for " <!--%[PACKAGENAME]%--> " Package</b></center><hr/>
+                                       
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="9%" height="26" align="right">&nbsp; </td>
+                                                <td width="42%" height="26" align="right">
+                                                    Date of Sending DPQD to ADB:
+                                                </td>
+                                               <td width="49%" height="26" align="left">                                         
+                                              		<input type="text" id="pqs_20" name="pqs_20"  class="FormDateTypeInput" value=""  autocomplete="off">
+                                                </td>
+                                            </tr>
+                                          
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="9%" height="26" align="right">&nbsp;</td>
+                                                <td width="42%" height="26" align="right">
+                                                    Date of ADB's NOL on DPQD:
+                                                </td>
+                                                <td height="26" align="left">
+                                                   
+                                                    <input type="text"  id="pqs_21" name="pqs_21" class="FormDateTypeInput" value=""  autocomplete="off">
+                                                
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="9%" height="26" align="right">&nbsp;</td>
+                                                <td width="42%" height="26" align="right">
+                                                    Date of EA's Approval on PQD :
+                                                </td>
+                                                <td height="26" align="left">
+                                                   
+                                                    <input type="text"  id="pqs_22" name="pqs_22" class="FormDateTypeInput" value=""  autocomplete="off">
+                                                
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="9%" height="26" align="right">&nbsp; </td>
+                                                <td width="42%" height="26" align="right">
+                                                    Date of Issuance of Invitation for PQ (IFPQ):
+                                                </td>
+                                                <td width="49%" height="26" align="left">
+                                         
+                                              <input type="text" id="pqs_22a" name="pqs_22a"  class="FormDateTypeInput" value=""  autocomplete="off">
+                                              
+                                                </td>
+                                            </tr>  
+                                                
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="9%" height="26" align="right">&nbsp;</td>
+                                                <td width="42%" height="26" align="right">
+                                                   Original Date of PQ Submission Deadline:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="pqs_23" name="pqs_23"  class="FormDateTypeInput"   autocomplete="off">
+                                                </td>
+                                            </tr>
+
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="9%" height="26" align="right">&nbsp;</td>
+                                                <td width="42%" height="26" align="right">
+                                                    Revised Date of PQ Submission Deadline:
+                                                </td>
+                                                <td height="26" align="left">
+                                               
+                                                    <input type="text" id="pqs_24" name="pqs_24" class="FormDateTypeInput" value=""  autocomplete="off">
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="9%" height="26" align="right">&nbsp;</td>
+                                                <td width="42%" height="26" align="right">
+                                                    Date of PQ Evaluation Report :
+                                                </td>
+                                                <td height="26" align="left">
+                                                   
+                                                    <input type="text" id="pqs_25" name="pqs_25" class="FormDateTypeInput" value=""  autocomplete="off">
+                                                </td>
+                                            </tr>
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="9%" height="26" align="right">&nbsp;</td>
+                                                <td width="42%" height="26" align="right">
+                                                   Date of Sending PQ Evaluation Report to ADB:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    
+                                                    <input type="text" id="pqs_26" name="pqs_26" class="FormDateTypeInput" value=""  autocomplete="off">
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="9%" height="26" align="right">&nbsp;</td>
+                                                <td width="42%" height="26" align="right">
+                                                    Date of ADB's NOL on PQ Evaluation Report:
+                                                </td>
+                                                <td height="26" align="left">
+                                                
+                                                    <input type="text" id="pqs_27" name="pqs_27"  class="FormDateTypeInput" value=""  autocomplete="off">
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="9%" height="26" align="right">&nbsp;</td>
+                                                <td width="42%" height="26" align="right">
+                                                   Date of EA's Approval on PQ Evaluation Report:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="pqs_27a" name="pqs_27a"  class="FormDateTypeInput" value="" autocomplete="off">
+                                                </td>
+                                            </tr>
+                                             
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="9%" height="26" align="right">&nbsp;</td>
+                                                <td width="42%" height="26" align="right">
+                                                    Date of Notifying PQ Bidders:
+                                                </td>
+                                                <td height="26" align="left">
+                                         
+                                                    <input type="text" id="pqs_28" name="pqs_28"  class="FormDateTypeInput" value=""  autocomplete="off">
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="9%" height="26" align="right">&nbsp;</td>
+                                                <td width="42%" height="26" align="right">
+                                                    Number of PQD sold/ Issued :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="pqs_81" name="pqs_81" onkeyup='removeChar(this);' autocomplete="off" placeholder="Number of PQD sold/ Issued" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="9%" height="26" align="right">&nbsp;</td>
+                                                <td width="42%" height="26" align="right">
+                                                    Number of PQ Applications :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="pqs_82" name="pqs_82" onkeyup='removeChar(this);' autocomplete="off" placeholder="Number of PQ Applications ..." class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                              <tr valign="top" class="rowcolor">
+                                                <td width="9%" height="26" align="right">&nbsp;</td>
+                                                <td width="42%" height="26" align="right">
+                                                    Number of Prequalified Bidders :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="pqs_83" name="pqs_83" onkeyup='removeChar(this);' autocomplete="off" placeholder="Number of Prequalified ..." class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="9%" height="26" align="right">&nbsp;</td>
+                                                <td width="42%" height="26" align="right">
+                                                    Number of Complaints Received by EA  :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="pqs_102" name="pqs_102" onkeyup='removeChar(this);' autocomplete="off" placeholder="Number of Complaints ..." class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top">
+                                            	 <td width="9%" height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="right">
+                                                    Fraud and Corruption Detected by EA (Yes/ No) :
+                                                </td>
+                                                <td height="26" align="left">
+                                                <select name="pqs_103" id="pqs_103"  class="FormSelectTypeInput" autofocus="">
+                                                <option value="">Select Fraud and Corruption Detected by EA</option>
+                                                <option value="Yes">Yes</option>
+                                                <option value="No">No</option>
+												</select>
+                            					<sup style="color:red;">*</sup>
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="3%" height="26" align="right">&nbsp;</td>
+                                                <td width="46%" height="26" align="right">
+                                              Short description of Complaints/  F&amp;C Detected:</td>
+                                                <td height="26" align="left">
+                                                    <textarea id="pqs_104" name="pqs_104" autocomplete="off" class="FormTextAreaTypeInput"> </textarea> 
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td width="42%" height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="hidden" name="checkDate" id="checkDate" value="<!--%[CHECK_DATE]%-->" />
+                                                    <input type="hidden" name="packageId" value="<!--%[PACKAGEID]%-->" />
+                                                    <input type="hidden" name="packageName" value="<!--%[PACKAGENAME]%-->" />
+                                                    <input type="submit" name="insertPQStage" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input type="button" value="Back" onclick="window.close();" class="FormResetBtn">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+						
+            <!--  End PQ Stage ------------------------------------------------------------------------------------------------------------------     -->
+                    
+                    
+                </table>
+                
+            </td>
+
+        </tr>
+    </table>

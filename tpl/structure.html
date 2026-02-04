@@ -1,0 +1,322 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+
+	<title><!--%[PAGETITLE]%--></title>
+
+	
+
+	 <!--%[META]%-->
+
+	 
+
+	<link rel="shortcut icon" href="favicon.ico" />
+
+	
+
+	<script type="text/javascript" src="js/jquery.js" ></script>
+
+	<script type="text/javascript" src="js/menu.js" ></script>
+
+	<script type="text/javascript" src="js/menu_hv.js" ></script>
+
+	<script type="text/javascript" src="js/jquery.cycle.js" ></script>
+
+	<script type="text/javascript" src="js/jq.corner.js" ></script>
+
+	<script type="text/javascript" src="js/validator.js" ></script>
+
+	
+
+	<link rel="stylesheet" href="css/style.css" type="text/css" />
+
+	<link rel="stylesheet" href="css/menu.css" type="text/css" />
+
+	<link rel="stylesheet" href="css/ui.datepicker.css" />
+
+	
+
+</head>
+
+
+
+<body>
+
+	<script type="text/javascript">
+
+		$(document).ready(function()
+
+		{
+
+		    $('#slideshow1').cycle({ fx: 'fade', speed:  'slow', timeout: 3000, pause: 1,	pauseOnPagerHover:	1 });
+
+		    $('#slideshow2').cycle({ fx: 'fade', speed:  'slow', timeout: 3000, pause: 1,	pauseOnPagerHover:	1 });
+
+		    $('#slide_map').cycle({ fx: 'fade', speed:  'slow', timeout: 3000, pause: 1,	pauseOnPagerHover:	1 });
+
+		    $('#slide_footer').cycle({ fx: 'fade', speed:  'slow', timeout: 3000, pause: 1,	pauseOnPagerHover:	1 });
+
+		    $('.smallcycle').cycle({ fx: 'fade', speed:  'slow', timeout: 3000, pause: 1,	pauseOnPagerHover:	1 });
+
+		    
+
+		    if($.browser.msie)
+
+		    {
+
+		    	$('.frontPagePic').corner("10px").parent().css({padding:'1px','padding-bottom':'1px'}).corner("8px");
+
+		    	$('.frontPageExtra').corner("8px").parent().css({padding:'1px','padding-bottom':'1px'}).corner("8px");
+
+		    }
+
+		    $('.frontPageExtra h3').click(function(event){
+
+	    		var id = $(this).parent().attr("id");
+
+	    		$('#'+id+' ul').slideToggle("slow");
+
+	    	});
+
+		});
+
+	</script>
+
+	<!-- ===================== HEADER ================== -->
+
+	
+
+	<div id="header">
+
+        <div class="inPageDiv">
+
+        	<div class="floatleft"><a href="index.php"><img src="images/logo.jpg" alt="<!--%[PAGETITLE]%-->" title="<!--%[PAGETITLE]%-->" class="logo" /></a></div>
+
+	        
+
+          	<div class="floatright">
+
+          		<!--<div id="compname" class="floatleft"><b class="floatleft ml5 mt12">Ai Microsystems Ltd.</b></div>-->
+
+          		
+
+          		<div class="floatright searchdiv">
+
+		          	<form id="frmsrc" name="frmsrc" method="post" action="">
+
+		          		<table>
+
+		          			<tr><td align="right">User:</td><td align="left"><input  type="text" name="txtsrc" class="search" id="txtsrc" size="17" value="" /></td><td></td> </tr>
+
+		          			<tr><td align="right">Password:</td><td align="left"><input  type="text" name="txtsrc" class="search" id="txtsrc" size="17" value="" /></td><td><input  type="image" name="btnsrc" src="images/btngo.gif" title="Search" alt="Search"/></td> </tr>
+
+		          		</table>
+
+			        </form>
+
+		        </div>
+
+		        
+
+		        <div class="clearboth"></div>
+
+		        
+
+		        <div id="menu" class="floatright">
+
+			       <!--%[MENU]%-->
+
+		        
+
+			        <div class="clearboth"></div>
+
+		      	</div>
+
+		    </div>
+
+		    <div class="clearboth"></div>
+
+        </div>
+
+  	</div>
+
+ 
+
+	<!-- ===================== BANNER ================== -->
+
+	  
+
+	<div id="banner">
+
+	     <div class="inPageDiv pt10" align="center"> 
+
+	     	<div style="width:640px;">
+
+	     	  <!--%[BANNER_AREA]%-->   
+
+	     	</div>
+
+	    </div>
+
+	</div>	
+
+  	
+
+  	<!-- ===================== BANNER DOWN SLIDE ================== -->
+
+  	<div id="bannerDownSlide">
+
+  		<div class="inPageDiv bordertop">
+
+  			<div class="smallcycle floatleft borderright">
+
+	  			<div class="fraq">
+
+	  				<img src="images/img_3.jpg" alt="SDLC" title="Software Development" align="left" />
+
+			        <p><b title="Software Development Life Cycle">Software Development <small>(SDLC)</small></b></p>
+
+	  			</div>
+
+	  			<div class="fraq">
+
+					<img src="images/icon1.gif" alt="ERP Solution" title="ERP Solution" align="left" />
+
+			        <p><b title="Enterprise Resource Planning">ERP</b>&nbsp;<b>Solution</b></p>
+
+	  			</div>
+
+	  			<div class="fraq">
+
+	  				<img src="images/img_1.jpg" alt="E-business Solution" title="E-business Solution" align="left" />
+
+			        <p><b>E-business Solution</b></p>
+
+	  			</div>
+
+  			</div>
+
+  			
+
+  			<div class="smallcycle floatleft borderright">
+
+  				<div class="fraq">
+
+					<img src="images/icon4.gif" alt="Project Management" title="Project Management" align="left" />
+
+			        <p><b>Project Management</b></p>
+
+	  			</div>
+
+	  			<div class="fraq">
+
+	  				<img src="images/img_6.jpg" alt="Systems Integration" title="Systems Integration" align="left" />
+
+			        <p><b>Systems Integration</b></p>
+
+	  			</div>
+
+	  			<div class="fraq">
+
+	  				<img src="images/icon5.gif" alt="Graphics & Animation" title="Graphics & Animation" align="left" />
+
+			        <p><b>Graphics & Animation</b></p>
+
+	  			</div>
+
+  			</div>
+
+  			
+
+  			<div class="smallcycle floatleft borderright">
+
+	  			<div class="fraq">
+
+					<img src="images/icon2.gif" alt="Database Administration" title="Database Administration" align="left" />
+
+			        <p><b>Database Administration</b></p>
+
+	  			</div>
+
+	  			<div class="fraq">
+
+	  				<img src="images/img_2.jpg" alt="Enterprise Networking" title="Enterprise Networking" align="left" />
+
+			        <p><b>Enterprise Networking</b></p>
+
+	  			</div>
+
+	  			<div class="fraq">
+
+	  				<img src="images/icon7.gif" alt="Data Warehousing" title="Data Warehousing" align="left" />
+
+			        <p><b>Data Warehousing</b></p>
+
+	  			</div>
+
+  			</div>
+
+  			
+
+  			<div class="fraq floatleft">
+
+  				<img src="images/img_4.jpg" alt="SEO Marketing" title="SEO Marketing" align="left" />
+
+		        <p><b>SEO Marketing</b></p>
+
+  			</div>
+
+  			
+
+  			<div class="clearboth"></div>
+
+  		</div>
+
+  	</div>
+
+  	
+
+  	
+
+    <!-- ===================== BODY ================== -->
+
+  
+
+    <div id="bodycontainer" class="bordertop">
+
+	    <div class="inPageDiv">
+
+	    	<br />
+
+	     	<br />   
+
+	        <!--%[BODY]%-->
+
+			<br />
+
+	    </div>
+
+    </div>
+
+    
+
+    <!-- ===================== FOOTER ================== -->
+
+  
+
+    <!--%[ALL_FOOTER]%-->
+
+    
+
+</body>
+
+<!--%[ This project is developed by Abdul Jalil E-mail: majalil11285@gmail.com,majalil11285@hotmail.com,majalil11285@yahoo.com ]%-->
+
+
+
+</html>
+

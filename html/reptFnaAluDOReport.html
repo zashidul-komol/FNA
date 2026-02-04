@@ -1,0 +1,290 @@
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0px; padding:0px;">
+	<tr valign="top">
+		<td style="width:100%">
+			<div class="container">
+				<!--%[TABS]%-->
+			</div>
+		</td>
+	</tr>
+</table><br/>
+
+<table cellpadding="1" cellspacing="1" border="0" width="100%" style="margin:0px; padding:5px;">
+	<tr valign="top">
+        <td width="95%">
+        <div class="container">
+            <!--%[PRICEALERT]%-->          
+        <table width="100%">    
+             <!--  Start Project Form -->
+                    <tr valign="top">
+                        <td width="100%" align="left">
+							<script  type="text/javascript">
+								function confirmProjectSubmit() {
+									if($("#pName").val() == ''){
+											alert("Please enter Project Name");
+											$("#pName").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								function checkCalender(){
+									var ENTRYDATE = String($("#ENTRYDATE").val());
+									var ENTRYDATE2 = String($("#ENTRYDATE2").val());
+									if(ENTRYDATE != ''){
+										
+										var tempENTRYDATE = ENTRYDATE.split('-'); 
+										
+										var a = tempENTRYDATE[1]+'/'+tempENTRYDATE[0]+'/'+tempENTRYDATE[2];
+									}
+								}
+								
+								$(document).ready(function() {
+									$("#FnaLoanDetails").click(function(){
+										
+										var PROJECTID  		= $("#PROJECTID").val();
+										var SUBPROJECTID  	= $("#SUBPROJECTID").val();
+										var ENTRYDATE  		= $("#ENTRYDATE").val();
+										var DONO	  		= $("#DONO").val();
+										var LOTNO	  		= $("#LOTNO").val();
+										var userId 			= $("#userId").val();
+										if(DONO == ''){
+											alert("Please Insert DO NO First.....!");	
+											$("#DONO").focus();
+											return false;
+										}
+										if(ENTRYDATE == ''){
+											alert("Please Select Date!");	
+											$("#ENTRYDATE").focus();
+											return false;
+										}
+										$("#showAppSimple").html();
+										$.post("ajax/getReptAluDOReport.php",{'PROJECTID': PROJECTID, 'SUBPROJECTID': SUBPROJECTID, 'ENTRYDATE': ENTRYDATE, 'DONO': DONO, 'LOTNO': LOTNO, 'userId': userId},
+										function(data)
+										{
+											$("#showAppSimple").html(data);
+										});
+									})
+								});
+								
+								function getProjectName(pcId){					
+										var options = '';
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#SUBPROJECTID").html('');
+											$("select#SUBPROJECTID").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getProjectList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#SUBPROJECTID").html('');
+												$("select#SUBPROJECTID").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#SUBPROJECTID").html('');
+												$("select#SUBPROJECTID").html(options);
+											}
+										})
+									
+									
+								}
+								
+								function PartyName(pcId){					
+										var options = '';
+										var jj = '';
+										//alert (pcId);
+										options.length=0;
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#LABOURID").html('');
+											$("select#LABOURID").html(options);
+											return false;
+										}
+										
+										var j = '';
+										$.getJSON("ajax/getPartyName.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options = '';
+												options += '<option value="All">All</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#PARTYID").html('');
+												$("select#PARTYID").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#PARTYID").html('');
+												$("select#PARTYID").html(options);
+												
+											}
+										});
+										
+										$.getJSON("ajax/getProdCategoryList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options = '';
+												options += '<option value="">Select</option>';
+												options += '<option value="All">All</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#PRODCATTYPEID").html('');
+												$("select#PRODCATTYPEID").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#PRODCATTYPEID").html('');
+												$("select#PRODCATTYPEID").html(options);
+												
+											}
+										});
+										
+										
+									
+									
+								}
+								
+								function getPartyNameLotNo(DONO){
+									
+										var PROJECTID 		= $("#PROJECTID").val();
+										var SUBPROJECTID 	= $("#SUBPROJECTID").val();		
+										var NEWDONO		 	= $("#DONO").val();				
+										//alert (NEWDONO);
+										var k = '';
+										$.getJSON("ajax/getPartyNameLotNo.php",{PROJECTID: PROJECTID, SUBPROJECTID: SUBPROJECTID, NEWDONO: NEWDONO }, function(k) {
+											//alert (DONO);
+											//alert (k);
+											if(k.length>0) {
+												for (var i = 0; i < k.length; i++) {
+												$("#PARTYNAME").val(k[i]['PARTYNAME']);
+												$("#FATHERNAME").val(k[i]['FATHERNAME']);
+												$("#ADDRESS").val(k[i]['ADDRESS']);
+												$("#MOBILE").val(k[i]['MOBILE']);
+												$("#LOTNO").val(k[i]['LOTNO']);
+												
+												}
+											}
+											else {
+												$("#PARTYNAME").val('');
+												$("#FATHERNAME").val('');
+												$("#ADDRESS").val('');
+												$("#MOBILE").val('');
+												$("#LOTNO").val('');
+											}
+										})
+									
+									
+								}
+								
+                            </script>
+                             <script language="javascript">
+							function Clickheretoprint()
+							{
+							  var disp_setting="toolbar=no,location=yes,directories=no,menubar=no,addressbars=no";
+								  disp_setting+="scrollbars=yes,width=800, height=2000, left=100, top=0";
+							  var content_vlue = document.getElementById("print_content").innerHTML;
+							 
+							  var docprint=window.open("","",disp_setting);
+							   docprint.document.open();
+							   docprint.document.write('<html><head><title>.::. FNA .::. </title>');
+							   docprint.document.write('<style type="text/css">*{font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px;}</style></head><body onLoad="self.print()"><center>');         
+							   docprint.document.write(content_vlue);     
+							   docprint.document.write('</center></body></html>');
+							   docprint.document.close();
+							   docprint.focus();
+							}
+							
+							
+							</script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showProject')">Create D.O Report</legend>
+                                <div id="showProject" style="">
+                                  <table width="100%" border="0" cellpadding="3" cellspacing="0" style="margin:0px auto 0px auto;font-size:85%;">
+                                    <tr>
+                                      <th width="26%" align="right" scope="col">Project   Name:</th>
+                                      <th width="13%" align="left" scope="col"><select type="text" id="PROJECTID" name="PROJECTID" style="width:165px;" autocomplete="off" placeholder="PackingName" onchange="getProjectName(this.value);" >
+                                        <option value="">Select</option>
+                                        <!--%[PROJECT_NAME]%-->
+                                      </select></th>
+                                      <th width="11%" align="right" scope="col">Sub Project Name : </th>
+                                      <th width="14%" align="left" scope="col"><select type="text" id="SUBPROJECTID" name="SUBPROJECTID" style="width:165px;" autocomplete="off" onchange="PartyName(this.value);"  />
+                                      </select></th>
+                                      <th width="36%" scope="col">&nbsp;</th>
+                                    </tr>
+                                    <tr>
+                                      <td height="26" align="right" valign="top">D.O No :</td>
+                                      <td height="26" align="left" valign="top"><input id="DONO" name="DONO" autocomplete="off" style="width:80px;" onchange="getPartyNameLotNo(this.value);" /></td>
+                                      <td align="right" valign="top">Party Name :</td>
+                                      <td height="26" align="left" valign="top"><input id="PARTYNAME" name="PARTYNAME" autocomplete="off" style="width:167px;" readonly="readonly" /></td>
+                                      <th width="36%" scope="col">&nbsp;</th>
+                                    </tr>
+                                    <tr>
+                                      <td height="26" align="right" valign="top">Lot No :</td>
+                                      <td height="26" align="left" valign="top"><input readonly="readonly" id="LOTNO" name="LOTNO" autocomplete="off" style="width:30px;" />
+
+  <input readonly="readonly" id="LOTNO2" name="LOTNO2" autocomplete="off" style="width:30px;" /></td>
+                                      <td align="right">Father's Name :</td>
+                                      <td align="left"><input id="FATHERNAME" name="FATHERNAME" autocomplete="off" style="width:167px;" readonly="readonly" /></td>
+                                      <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                      <td align="right">Date : </td>
+                                      <td align="left"><input name="ENTRYDATE" size="18" id="ENTRYDATE" type="text" readonly="readonly" onclick="showCalender('ENTRYDATE','ENTRYDATE')" onchange="checkCalender(this.value);" style="width:165px;" /></td>
+                                      <td align="right" valign="top">Mobile :</td>
+                                      <td height="28" align="left" valign="top"><input id="MOBILE" name="MOBILE" autocomplete="off" style="width:167px;" readonly="readonly" /></td>
+                                      <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                      <td align="right">&nbsp;</td>
+                                      <td>&nbsp;</td>
+                                      <td align="right">Address : </td>
+                                      <td><textarea name="ADDRESS" id="ADDRESS" style="width:170px; height:40px;" readonly="readonly"></textarea></td>
+                                      <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                      <td>&nbsp;</td>
+                                      <td colspan="3" align="center" valign="middle"><input type="hidden" name="userId" id="userId" value="&lt;!--%[USER_ID]%--&gt;" />
+                                        <input type="button" name="FnaLoanDetails" id="FnaLoanDetails" value="GO" class="FormSubmitBtn" />
+                                      <input type="reset"  name="Reset" value="Reset" class="FormResetBtn" /></td>
+                                      <td>&nbsp;</td>
+                                    </tr>
+                                  </table>
+                               		   
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Project Form -->
+            </table>
+            
+            <table width="100%">    
+             <!--  Start Project Form -->
+                    <tr valign="top">
+                        <td width="100%" align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showProject')">View D.O Report</legend>
+                                <!-- Details main body  -->
+                              <div id="print_content">
+                                	<div id="showAppSimple" style="">
+                               		   
+                              		</div>
+                               </div>        
+                            <!-- end of details -->
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Project Form -->
+            </table>
+        </div>   
+		</td>
+	</tr>
+</table>

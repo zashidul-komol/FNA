@@ -1,0 +1,83 @@
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0px; padding:0px;">
+	<tr valign="top">
+		<td style="width:100%">
+			<div class="container"><br/>
+				<!--%[TABS]%--><center> <!--%[MSG]%--> </center>
+			</div>
+		</td>
+	</tr>
+</table><br/>
+
+<table cellpadding="1" cellspacing="1" border="0" width="100%" style="margin:0px; padding:5px;">
+	<tr valign="top">
+		<td width="21%">&nbsp;
+		</td>
+        <td width="79%">
+        <div class="container">
+            <!--%[PRICEALERT]%-->          
+        <table>    
+             <!--  Start Project Form -->
+                    <tr valign="top">
+                        <td width="670" align="left">
+							<script  type="text/javascript">
+								function confirmProjectSubmit() {
+									if($("#csv").val() == ''){
+											alert("Please Select a (.CSV) file");
+											$("#csv").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showProject')">Data Uploader Form</legend>
+                                <div id="showProject" style="">
+                                  <form action="dataUpload.php" method="post" enctype="multipart/form-data" name="form1" id="form1" onsubmit="return confirmProjectSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Procurement Type :
+                                                </td>
+                                                <td height="26" align="left">
+                                                <select name="piProcurementType" id="piProcurementType"  class="FormSelectTypeInput" required="" autofocus="">
+												<option value="">Select Procurement Type</option>
+												<!--%[PROJECT_PROCUREMENT_TYPE_LIST]%-->
+												</select>
+                         					    <sup style="color:red;">*</sup>
+                                                </td>
+                                            </tr>                                                
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Please Select a (.CSV) file :
+                                                </td>
+                                                <td height="26" align="left">
+                                                <input name="csv" type="file" id="csv" /> 
+                         					    <sup style="color:red;">*</sup>
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                     <input name="pName" value="<!--%[PACKAGE_LIST]%-->" id="pName" type="hidden" />
+                                                    <input type="submit" name="dataUploadSubmit" value="Submit" /> 
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Project Form -->
+            </table>
+            
+            
+        </div>   
+		</td>
+	</tr>
+</table>

@@ -1,0 +1,446 @@
+    <table align="center" width="60%" border="0" cellspacing="1" cellpadding="10" style="margin:0px auto 0px auto;">
+        <tr>
+            <td colspan="2" align="center"><h1>FNA Income  Entry Form</h1></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><!--%[MSG]%--></td>
+        </tr>
+        <tr valign="top">
+            <td width="60%" align="center">
+                <table width="90%"  border="0" cellspacing="0" cellpadding="0" align="center">
+                   
+                    <!--  Start Load Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+							//-----------------Convert Number To Word-------------------------
+							function number2text(value,showWord) {
+								var fraction = Math.round(frac(value)*100);
+								var f_text  = "";
+							
+								if(fraction > 0) {
+									f_text = "AND "+convert_number(fraction)+" PAISE";
+								}
+							
+								//return convert_number(value)+" RUPEE "+f_text+" ONLY";
+								abc =  convert_number(value)+" TAKA "+f_text+" ONLY .";
+								document.getElementById(showWord).innerHTML=abc.replace(/\s+/g,' ');
+							}
+							
+							function frac(f) {
+								return f % 1;
+							}
+							
+							function convert_number(number)
+							{
+								if ((number < 0) || (number > 999999999)) 
+								{ 
+									return "NUMBER OUT OF RANGE!";
+								}
+								var Gn = Math.floor(number / 10000000);  /* Crore */ 
+								number -= Gn * 10000000; 
+								var kn = Math.floor(number / 100000);     /* lakhs */ 
+								number -= kn * 100000; 
+								var Hn = Math.floor(number / 1000);      /* thousand */ 
+								number -= Hn * 1000; 
+								var Dn = Math.floor(number / 100);       /* Tens (deca) */ 
+								number = number % 100;               /* Ones */ 
+								var tn= Math.floor(number / 10); 
+								var one=Math.floor(number % 10); 
+								var res = ""; 
+							
+								if (Gn>0) 
+								{ 
+									res += (convert_number(Gn) + " CRORE"); 
+								} 
+								if (kn>0) 
+								{ 
+										res += (((res=="") ? "" : " ") + 
+										convert_number(kn) + " LAKH"); 
+								} 
+								if (Hn>0) 
+								{ 
+									res += (((res=="") ? "" : " ") +
+										convert_number(Hn) + " THOUSAND"); 
+								} 
+							
+								if (Dn) 
+								{ 
+									res += (((res=="") ? "" : " ") + 
+										convert_number(Dn) + " HUNDRED"); 
+								} 
+							
+							
+								var ones = Array("", "ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX","SEVEN", "EIGHT", "NINE", "TEN", "ELEVEN", "TWELVE", "THIRTEEN","FOURTEEN", "FIFTEEN", "SIXTEEN", "SEVENTEEN", "EIGHTEEN","NINETEEN"); 
+							var tens = Array("", "", "TWENTY", "THIRTY", "FOURTY", "FIFTY", "SIXTY","SEVENTY", "EIGHTY", "NINETY"); 
+							
+								if (tn>0 || one>0) 
+								{ 
+									if (!(res=="")) 
+									{ 
+										res += " AND "; 
+									} 
+									if (tn < 2) 
+									{ 
+										res += ones[tn * 10 + one]; 
+									} 
+									else 
+									{ 
+							
+										res += tens[tn];
+										if (one>0) 
+										{ 
+											res += ("-" + ones[one]); 
+										} 
+									} 
+								}
+							
+								if (res=="")
+								{ 
+									res = "zero"; 
+								} 
+								return res;
+							}
+							//-------------------------------------------------
+							
+								function toWords(s,destinationF)
+								{
+									
+									var th = ['','thousand','million', 'billion','trillion'];
+									var dg = ['zero','one','two','three','four', 'five','six','seven','eight','nine'];
+									 var tn = ['ten','eleven','twelve','thirteen', 'fourteen','fifteen','sixteen', 'seventeen','eighteen','nineteen'];
+									 var tw = ['twenty','thirty','forty','fifty', 'sixty','seventy','eighty','ninety'];
+									//array_assign=new Array();
+									//array_assign[s];
+									//alert ('komol');
+									s = s.toString(); 
+									s = s.replace(/[\, ]/g,''); 
+									if (s != parseFloat(s)) 
+									return 'not a number'; 
+									var x = s.indexOf('.'); 
+									if (x == -1) x = s.length; 
+									if (x > 15) 
+									return 'too big'; 
+									var n = s.split(''); 
+									var str = ''; 
+									var sk = 0; 
+									
+									for (var i=0; i < x; i++) 
+										{
+												
+												if ((x-i)%3==2) 
+												{	
+													//alert(i);
+													if (n[i] == '1') 
+														{
+															str += tn[Number(n[i+1])] + ' '; 
+															i++; 
+															sk=1;
+															
+															
+														} 
+													else if (n[i]!=0) 
+														{
+															str += tw[n[i]-2] + ' ';
+															sk=1;
+															//alert(str);
+														}
+												} 
+												
+												else if (n[i]!=0) 
+												{	
+													str += dg[n[i]] +' '; 
+													if ((x-i)%3==0) 
+													str += 'hundred ';
+													sk=1;
+													//alert(str);
+												} 
+												if ((x-i)%3==1) 
+												{	
+													if (sk) str += th[(x-i-1)/3] + ' ';
+													sk=0;
+													//alert(str);
+												}
+												
+										} 
+									if (x != s.length) 
+										{
+											var y = s.length;
+											//alert(y);
+											str += 'point ';
+											//alert(str);
+											for (var i=x+1; i<y; i++) str += dg[n[i]] +' ';
+										} 
+									//alert(str);
+									if(destinationF == '') {
+										return str.replace(/\s+/g,' ');
+									} else {
+										document.getElementById(destinationF).value=str.replace(/\s+/g,' ');
+									}
+									//return str.replace(/\s+/g,' ');
+									
+								}
+
+								function confirmIncomeSubmit() {
+									if($("#PROJECTID").val() == ''){
+											alert("Please Select Project name");
+											$("#PROJECTID").focus();
+											return false;
+									}
+									if($("#SUBPROJECTID").val() == ''){
+											alert("Please Select Sub Project name");
+											$("#SUBPROJECTID").focus();
+											return false;
+									}
+									if($("#EXPHID").val() == ''){
+											alert("Please Select Expanse Head Name");
+											$("#EXPHID").focus();
+											return false;
+									}
+									if($("#AMOUNT").val() == ''){
+											alert("Please Insert Amount");
+											$("#AMOUNT").focus();
+											return false;
+									}
+									if($("#EXPDATE").val() == ''){
+											alert("Please Select date");
+											$("#EXPDATE").focus();
+											return false;
+									}
+									if($("#VOUCHERNO").val() == ''){
+											alert("Please Insert Voucher No");
+											$("#VOUCHERNO").focus();
+											return false;
+									}
+									
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								function checkCalender(){
+									var INDATE = String($("#INDATE").val());
+									if(INDATE != ''){
+										
+										var tempINDATE = INDATE.split('-'); 
+										
+										var a = tempINDATE[1]+'/'+tempINDATE[0]+'/'+tempINDATE[2];
+									}
+								}
+								function getExpanseHead(pcId){					
+																			
+										var options = '';
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#EXPSUBHID").html('');
+											$("select#EXPSUBHID").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getExpanseHeadList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#EXPSUBHID").html('');
+												$("select#EXPSUBHID").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#EXPSUBHID").html('');
+												$("select#EXPSUBHID").html(options);
+											}
+										})
+									
+									
+								}
+								
+								
+								$(document).ready(function(){
+   																		
+									$("select#PARTYID").change(function(){
+										$.getJSON("ajax/getPartyInfo.php",{party_id: $(this).val()}, function(j) {
+											if(j.length>0) {
+												for (var i = 0; i < j.length; i++) {
+												$("#FATHERNAME").val(j[i]['FATHERNAME']);
+												$("#ADDRESS").val(j[i]['ADDRESS']);
+												$("#MOBILE").val(j[i]['MOBILE']);
+												
+												}
+											}
+											else {
+												$("#FATHERNAME").val('');
+												$("#ADDRESS").val('');
+												$("#MOBILE").val('');
+											}
+										})
+									})
+								});
+								
+								function getProjectNameTrans(pcId){					
+										var options = '';
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#SUBPROJECTID").html('');
+											$("select#SUBPROJECTID").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getProjectList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#SUBPROJECTID").html('');
+												$("select#SUBPROJECTID").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#SUBPROJECTID").html('');
+												$("select#SUBPROJECTID").html(options);
+											}
+										})
+									
+									
+								}
+								
+								function PartyName(pcId){					
+										var options = '';
+										var jj = '';
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#PARTYID").html('');
+											$("select#PARTYID").html(options);
+											return false;
+										}
+										
+										if(pcId != 8) {
+											$("#showBatch").hide();
+										}else{
+											$("#showBatch").show();
+										}
+										$.getJSON("ajax/getPartyName.php",{pcId: pcId}, function(jj) {
+											if(jj.length>0) {
+												//alert (pcId);
+												options += '<option value="">Select</option>';
+												for (var ii = 0; ii < jj.length; ii++) {
+													options += '<option value="' + jj[ii].optionValue + '">' + jj[ii].optionDisplay + '</option>';
+												}
+												$("select#PARTYID").html('');
+												$("select#PARTYID").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#PARTYID").html('');
+												$("select#PARTYID").html(options);
+											}
+										});
+											
+								}
+								function ConvertToWord(val,destination){
+									
+									result=number2text(val,destination);
+									//alert(result);
+									
+									}
+									
+									
+								
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showLoad')">Income Entry Information</legend>
+                                <div id="showLoad" style="display:">
+                                  <form name="LoadForm" method="post" action="fnaIncome.php" onsubmit="return confirmIncomeSubmit();">
+                                        <table width="100%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td colspan="6">
+                                                	<table align="center" width="636">
+                                                        <tr valign="top">
+                                                            <td width="117" align="right">
+                                                               Project Name :
+                                                            </td>
+                                                            <td width="193" height="26" align="left"><select type="text" id="PROJECTID" name="PROJECTID" style="width:180px;" autocomplete="off" placeholder="PackingName" onchange="getProjectNameTrans(this.value);" >
+                                                              <option value="">Select</option>
+                                                              <!--%[PROJECT_NAME]%-->
+                                                            </select></td>
+                                                            <td width="141" height="26" align="right">
+                                                               Sub project Name:
+                                                            </td>
+                                                            <td width="180" height="26" align="left"><select type="text" id="SUBPROJECTID" name="SUBPROJECTID" style="width:180px;" autocomplete="off" onchange="PartyName(this.value);"  />
+                                                            </select></td>
+                                                         </tr>
+                                                        <tr valign="top">
+                                                            <td width="117" align="right">
+                                                               Party Name :
+                                                            </td>
+                                                            <td width="193" height="26" align="left"><select id="PARTYID" name="PARTYID" autocomplete="off" style="width:180px;" >
+                                                              
+                                                            </select></td>
+                                                            <td width="141" height="26" align="right">
+                                                               Father Name:
+                                                            </td>
+                                                            <td width="180" height="26" align="left"><input id="FATHERNAME" name="FATHERNAME" autocomplete="off" style="width:167px;" readonly="readonly" /></td>
+                                                         </tr>
+                                                        <tr valign="top">
+                                                          <td align="right" valign="middle">Address : </td>
+                                                          <td height="26" align="left" valign="middle"><label for="AMOUNT">
+                                                            <textarea name="ADDRESS" id="ADDRESS" style="width:167px; height:40px;" readonly="readonly"></textarea>
+                                                          </label></td>
+                                                          <td height="26" align="right">Mobile:</td>
+                                                          <td height="26" align="left"><input id="MOBILE" name="MOBILE" autocomplete="off" style="width:167px;" readonly="readonly" /></td>
+                                                        </tr>
+                                                        <tr valign="top" style="display:none;" id="showBatch">
+                                                          <td align="right">Batch No:</td>
+                                                          <td height="26" align="left"><select id="BATCHNO" name="BATCHNO" autocomplete="off" style="width:165px;" >
+                                                            <option value="">Select</option>
+                                                            <!--%[BATCH_NO]%-->
+                                                          </select></td>
+                                                          <td height="26" align="right">&nbsp;</td>
+                                                          <td height="26" align="left">&nbsp;</td>
+                                                        </tr>
+                                                        <tr valign="top">
+                                                          <td align="right">Income Head:</td>
+                                                          <td height="26" colspan="3" align="left"><select id="INHID" name="INHID" autocomplete="off" style="width:530px;" onchange="getExpanseHead(this.value);" >
+                                                            <option value="">Select</option>
+                                                            <!--%[INCOME_HEAD_NAME]%-->
+                                                          </select></td>
+                                                        </tr>
+                                                        <tr valign="top">
+                                                          <td align="right">Amount:</td>
+                                                          <td height="26" align="left"><input type="text" name="AMOUNT" id="AMOUNT" style="width:167px;" onchange="number2text(this.value,'ToWordField')" /></td>
+                                                          <td height="26" align="right">Date:</td>
+                                                          <td height="26" align="left"><input name="INDATE" size="18" id="INDATE" type="text" readonly="readonly" onclick="showCalender('INDATE','INDATE')" onchange="checkCalender(this.value);" style="width:167px;" /></td>
+                                                        </tr>
+                                                        <tr valign="top">
+                                                          <td align="right">Description:</td>
+                                                          <td height="26" align="left"><textarea name="DESCRIPTION" id="DESCRIPTION" style="width:170px; height:60px;"></textarea></td>
+                                                          <td height="26" align="right">Voucher Number:</td>
+                                                          <td height="26" align="left"><input type="text" name="VOUCHERNO" id="VOUCHERNO" style="width:167px;" /></td>
+                                                        </tr>
+                                                        <tr valign="top">
+                                                          <td height="26" colspan="4" align="center"><b><font color="#009900">
+                                                          <span id="ToWordField"> </span>
+                                                          <!--<input type="text" name="ShowWord" id="ShowWord" style="width:600px; font-style:italic; font-size:14px" />--></font></b></td>
+                                                        </tr>	
+                                                    </table>
+                                              </td>
+                                            </tr>                                       
+                                            <tr valign="top">
+                                                <td height="26" align="center">
+                                                  <input type="submit" name="InsertIncomeInfo" value="Insert" class="FormSubmitBtn" />
+                                                  <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showLoad')">                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Load Entry Form  --> 
+                    
+              </table>
+            </td>
+          </tr>
+    </table>

@@ -1,0 +1,548 @@
+<table width="67%" height="362" border="0" align="center" cellpadding="10" cellspacing="1" style="margin:0px auto 0px auto;">
+<tr valign="top">
+  <td width="60%" align="center"><table width="83%" height="362" border="0" align="center" cellpadding="10" cellspacing="1" style="margin:0px auto 0px auto;">
+    <tr>
+      <td colspan="2" align="center"><h1>Labour Bill Payment Entry Form</h1></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center"><!--%[MSG]%--></td>
+    </tr>
+    <tr valign="top">
+      <td width="60%" align="center"><table width="89%"  border="0" cellspacing="0" cellpadding="0" align="right">
+        <!--  Start Load Entry Form -->
+        <tr valign="top">
+          <td align="left"><script  type="text/javascript">
+								function confirmLoadSubmit() {
+									
+									if($("#PROJECTID").val() == ''){
+											alert("Please Select Project name");
+											$("#PROJECTID").focus();
+											return false;
+									}
+									if($("#SUBPROJECTID").val() == ''){
+											alert("Please Select Sub Project name");
+											$("#SUBPROJECTID").focus();
+											return false;
+									}
+									if($("#LABOURID").val() == ''){
+											alert("Please Select Labour name");
+											$("#LABOURID").focus();
+											return false;
+									}
+									if($("#ENTRYDATE").val() == ''){
+											alert("Please Select Date");
+											$("#ENTRYDATE").focus();
+											return false;
+									}
+									if($("#amount").val() == ''){
+											alert("Please Insert Amount");
+											$("#amount").focus();
+											return false;
+									}
+									if($("#PRODCATTYPEID").val() == ''){
+											alert("Please Select Product Category");
+											$("#PRODCATTYPEID").focus();
+											return false;
+									}
+									if($("#EXPHID").val() == ''){
+											alert("Please Select Expanse Head Name");
+											$("#EXPHID").focus();
+											return false;
+									}
+									if($("#WORKTYPE").val() == ''){
+											alert("Please Select Work Type");
+											$("#WORKTYPE").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								function checkCalender(){
+									var ENTRYDATE = String($("#ENTRYDATE").val());
+									if(ENTRYDATE != ''){
+										
+										var tempENTRYDATE = ENTRYDATE.split('-'); 
+										
+										var a = tempENTRYDATE[1]+'/'+tempENTRYDATE[0]+'/'+tempENTRYDATE[2];
+									}
+								}
+								
+								function getProductNamebyCat(getCatIdName, pcId){
+																			
+										var splitCatId = getCatIdName.split("_");										
+										var options = '';
+										if(pcId == '' && getCatIdName == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#PRODUCTID_"+splitCatId[1]).html('');
+											$("select#PRODUCTID_"+splitCatId[1]).html(options);
+											return false;
+										}
+										$.getJSON("ajax/getProductList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#PRODUCTID_"+splitCatId[1]).html('');
+												$("select#PRODUCTID_"+splitCatId[1]).html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#PRODUCTID_"+splitCatId[1]).html('');
+												$("select#PRODUCTID_"+splitCatId[1]).html(options);
+											}
+										})
+									
+									
+								}
+								
+								
+								$(document).ready(function(){
+   																		
+									$("select#PARTYID").change(function(){
+										$.getJSON("ajax/getPartyInfo.php",{party_id: $(this).val()}, function(j) {
+											if(j.length>0) {
+												for (var i = 0; i < j.length; i++) {
+												$("#FATHERNAME").val(j[i]['FATHERNAME']);
+												$("#ADDRESS").val(j[i]['ADDRESS']);
+												$("#MOBILE").val(j[i]['MOBILE']);
+												
+												}
+											}
+											else {
+												$("#FATHERNAME").val('');
+												$("#ADDRESS").val('');
+												$("#MOBILE").val('');
+											}
+										})
+									})
+									
+									
+									
+									
+									var inputs = 2;	
+									$('#btnAddMoreScripList').click(function() {		
+										
+										
+										$('.btnDelMoreScripList:disabled').removeAttr('disabled');
+										var c = $('.clonedInputForScripList:first').clone(true);
+										
+										
+										
+										c.find('select#PRODCATTYPEID_1').attr({
+																				'id':'PRODCATTYPEID_'+inputs,
+																			});
+										c.find('select#PRODUCTID_1').attr({
+																				'id':'PRODUCTID_'+inputs
+																			});
+										c.find('input:hidden#quantity_1').attr({
+																				'id':'quantity_'+inputs
+																			});
+										c.find('select#packingUnit_1').attr({
+																				'id':'packingUnit_'+inputs
+																			});
+										c.find('input:hidden#CHID_1').attr({
+																				'id':'CHID_'+inputs
+																			});
+																				
+										c.find('input:hidden#closest_position1').attr({
+																			'id':'closest_position'+inputs,
+																			'value':inputs
+																		});																		
+																																
+																					
+										$('.clonedInputForScripList:last').after(c);
+										
+										
+										inputs++;
+										$("#TOTAL_PRODUCT_LIST").attr('value',inputs);
+									});
+									
+									$('.btnDelMoreScripList').click(function() {
+										if (confirm('Continue Delete?')) {
+											var colsest_pos = $(this).closest('.clonedInputForScripList').find('.closest_position').val();
+											$(this).closest('.clonedInputForScripList').remove();
+											var counter = 1;
+											for(var i=1;i<inputs;i++) {
+												if(i == colsest_pos)
+												continue;
+												$("#trade_file_view_details").find('input:hidden#PRODCATTYPEID_'+i).attr({
+																											'id':'PRODCATTYPEID_'+counter
+																										});
+												$("#trade_file_view_details").find('input:hidden#PRODUCTID_'+i).attr({
+																											'id':'PRODUCTID_'+counter
+																										});
+												$("#trade_file_view_details").find('input:hidden#quantity_'+i).attr({
+																											'id':'quantity_'+counter
+																										});
+												$("#trade_file_view_details").find('input:hidden#packingUnit_'+i).attr({
+																											'id':'packingUnit_'+counter
+																										});
+												$("#trade_file_view_details").find('input:hidden#CHID_'+i).attr({
+																											'id':'CHID_'+counter
+																											});																																																																																																				
+												$("#trade_file_view_details").find('input:text#closest_position'+i).attr({
+																							'value':counter,
+																							'id':'closest_position'+counter
+																						});
+												counter++;
+											}
+											--inputs;
+											$("#TOTAL_PRODUCT_LIST").attr('value',inputs);
+											$('.btnDelMoreScripList').attr('disabled',($('.clonedInputForScripList').length  < 2));
+											return false;
+										}
+										else{
+											return false;
+										}
+									});	
+									  
+  
+								});
+								
+								function getProjectNameTrans(ProjId, pcId){	
+										//alert (ProjId);				
+										var options = '';
+										options.length=0;
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#SUBPROJECTID").html('');
+											$("select#SUBPROJECTID").html(options);
+											return false;
+										}
+										var j = '';
+										$.getJSON("ajax/getProjectList.php",{pcId: pcId}, function(j) {
+											//alert (j);
+											options.length=0;
+											if(j.length>0) {
+												//alert (pcId);
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#SUBPROJECTID").html('');
+												$("select#SUBPROJECTID").html(options);
+											}
+											else {
+												options = '<option value="">No Project Found</option>';
+												$("select#SUBPROJECTID").html('');
+												$("select#SUBPROJECTID").html(options);
+											}
+										});
+										
+										var jj = '';
+										$.getJSON("ajax/getLabourNameList.php",{pcId: pcId}, function(jj) {
+											if(jj.length>0) {
+												//alert (pcId);
+												options = '';
+												options += '<option value="">Select</option>';
+												for (var k = 0; k < jj.length; k++) {
+													options += '<option value="' + jj[k].optionValue + '">' + jj[k].optionDisplay + '</option>';
+												}
+												$("select#LABOURID").html('');
+												$("select#LABOURID").html(options);
+											}
+											else {
+												options = '<option value="">No Labour Found</option>';
+												$("select#LABOURID").html('');
+												$("select#LABOURID").html(options);
+											}
+										});
+									
+									
+								}
+								/*
+								function PartyName(pcId){					
+										var options = '';
+										//options.length=0;
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#PARTYID").html('');
+											$("select#PARTYID").html(options);
+											return false;
+										}
+										var j = '';
+										$.getJSON("ajax/getProdCategoryList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options = '';
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#PRODCATTYPEID").html('');
+												$("select#PRODCATTYPEID").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#PRODCATTYPEID").html('');
+												$("select#PRODCATTYPEID").html(options);
+												
+											}
+										});
+										
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#PARTYID").html('');
+											$("select#PARTYID").html(options);
+											return false;
+										}
+										//var jj = '';
+										$.getJSON("ajax/getPartyName.php",{pcId: pcId}, function(jj) {
+											if(jj.length>0) {
+												alert (jj);
+												//options = '';
+												
+												options += '<option value="">Select</option>';
+												for (var ii = 0; ii < jj.length; ii++) {
+													options += '<option value="' + jj[ii].optionValue + '">' + jj[ii].optionDisplay + '</option>';
+												}
+												$("select#PARTYID").html('');
+												$("select#PARTYID").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#PARTYID").html('');
+												$("select#PARTYID").html(options);
+												$("#FATHERNAME").val('');
+												$("#ADDRESS").val('');
+												$("#MOBILE").val('');
+											}
+										});
+									
+									
+								}
+								*/
+								
+								function PartyName(pcId){					
+										if(pcId == 1){
+											$("#showLotNo").show();
+										}else{
+											$("#showLotNo").hide();
+										}
+										
+										
+										var options = '';
+										var jj = '';
+										var j = '';
+										//alert (pcId);
+										options.length=0;
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#PARTYID").html('');
+											$("select#PARTYID").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getPartyName.php",{pcId: pcId}, function(jj) {
+											if(jj.length>0) {
+												//alert (pcId);
+												//options = '';
+												options += '<option value="">Select</option>';
+												for (var ii = 0; ii < jj.length; ii++) {
+													options += '<option value="' + jj[ii].optionValue + '">' + jj[ii].optionDisplay + '</option>';
+												}
+												$("select#PARTYID").html('');
+												$("select#PARTYID").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#PARTYID").html('');
+												$("select#PARTYID").html(options);
+												$("#FATHERNAME").val('');
+												$("#ADDRESS").val('');
+												$("#MOBILE").val('');
+											}
+										});
+										
+										
+										$.getJSON("ajax/getProdCategoryList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options = '';
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#PRODCATTYPEID").html('');
+												$("select#PRODCATTYPEID").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#PRODCATTYPEID").html('');
+												$("select#PRODCATTYPEID").html(options);
+												
+											}
+										});
+									
+									
+								}
+																
+								//-----------------Convert Number To Word-------------------------
+							function number2text(value,showWord) {
+								var fraction = Math.round(frac(value)*100);
+								var f_text  = "";
+							
+								if(fraction > 0) {
+									f_text = "AND "+convert_number(fraction)+" PAISE";
+								}
+							
+								//return convert_number(value)+" RUPEE "+f_text+" ONLY";
+								abc =  convert_number(value)+" TAKA "+f_text+" ONLY .";
+								document.getElementById(showWord).innerHTML=abc.replace(/\s+/g,' ');
+							}
+							
+							function frac(f) {
+								return f % 1;
+							}
+							
+							function convert_number(number)
+							{
+								if ((number < 0) || (number > 999999999)) 
+								{ 
+									return "NUMBER OUT OF RANGE!";
+								}
+								var Gn = Math.floor(number / 10000000);  /* Crore */ 
+								number -= Gn * 10000000; 
+								var kn = Math.floor(number / 100000);     /* lakhs */ 
+								number -= kn * 100000; 
+								var Hn = Math.floor(number / 1000);      /* thousand */ 
+								number -= Hn * 1000; 
+								var Dn = Math.floor(number / 100);       /* Tens (deca) */ 
+								number = number % 100;               /* Ones */ 
+								var tn= Math.floor(number / 10); 
+								var one=Math.floor(number % 10); 
+								var res = ""; 
+							
+								if (Gn>0) 
+								{ 
+									res += (convert_number(Gn) + " CRORE"); 
+								} 
+								if (kn>0) 
+								{ 
+										res += (((res=="") ? "" : " ") + 
+										convert_number(kn) + " LAKH"); 
+								} 
+								if (Hn>0) 
+								{ 
+									res += (((res=="") ? "" : " ") +
+										convert_number(Hn) + " THOUSAND"); 
+								} 
+							
+								if (Dn) 
+								{ 
+									res += (((res=="") ? "" : " ") + 
+										convert_number(Dn) + " HUNDRED"); 
+								} 
+							
+							
+								var ones = Array("", "ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX","SEVEN", "EIGHT", "NINE", "TEN", "ELEVEN", "TWELVE", "THIRTEEN","FOURTEEN", "FIFTEEN", "SIXTEEN", "SEVENTEEN", "EIGHTEEN","NINETEEN"); 
+							var tens = Array("", "", "TWENTY", "THIRTY", "FOURTY", "FIFTY", "SIXTY","SEVENTY", "EIGHTY", "NINETY"); 
+							
+								if (tn>0 || one>0) 
+								{ 
+									if (!(res=="")) 
+									{ 
+										res += " AND "; 
+									} 
+									if (tn < 2) 
+									{ 
+										res += ones[tn * 10 + one]; 
+									} 
+									else 
+									{ 
+							
+										res += tens[tn];
+										if (one>0) 
+										{ 
+											res += ("-" + ones[one]); 
+										} 
+									} 
+								}
+							
+								if (res=="")
+								{ 
+									res = "zero"; 
+								} 
+								return res;
+							}
+							//-------------------------------------------------
+                            </script>
+            <fieldset>
+              <legend style="color:#2C89B5; cursor:pointer;"  onclick="return ShowHide('showLoad')">Enter Labour Bill Payment Entry Information</legend>
+              <div id="showLoad" style="display:">
+                <form name="LoadForm" method="post" action="fnaLabourBillPayment.php" onsubmit="return confirmLoadSubmit();">
+                  <table width="89%" border="0" cellpadding="3" cellspacing="0">
+                    <tr valign="top">
+                      <td width="59%" colspan="7" align="center" valign="middle"><table width="685" border="1">
+                        <tr valign="top">
+                          <td width="106" align="right"> Project Name : </td>
+                          <td width="183" height="26" align="left"><select type="text" id="PROJECTID" name="PROJECTID" style="width:180px;" autocomplete="off" placeholder="PackingName" onchange="getProjectNameTrans(this.id, this.value);" >
+                            <option value="">Select</option>
+                            <!--%[PROJECT_NAME]%-->
+                          </select></td>
+                          <td width="196" height="26" align="right"> Sub Project Name: </td>
+                          <td width="180" height="26" align="left"><select type="text" id="SUBPROJECTID" name="SUBPROJECTID" style="width:180px;" autocomplete="off" onchange="PartyName(this.value);"  />
+                          </td>
+                        </tr>
+                        <tr valign="top">
+                          <td width="106" align="right"> Labour Name : </td>
+                          <td width="183" height="31" align="left"><select id="LABOURID" name="LABOURID" autocomplete="off" style="width:180px;">
+                          </select></td>
+                          <td align="right"> Party Name : </td>
+                          <td height="31" align="left"><select id="PARTYID" name="PARTYID" autocomplete="off" style="width:180px;">
+                          </select></td>
+                          </tr>
+                        <tr valign="top">
+                          <td width="106" align="right">&nbsp;</td>
+                          <td width="183" height="31" align="left">&nbsp;</td>
+                          <td width="196" height="31" align="right">Product Category :</td>
+                          <td width="180" height="31" align="left"><select id="PRODCATTYPEID" name="PRODCATTYPEID" style="width:180px;" onchange="getProductNamebyCat(this.id,this.value);"></select></td>
+                        </tr>
+                        <tr valign="top">
+                          <td align="right">Expanse Head:</td>
+                          <td height="26" align="left"><select id="EXPHID" name="EXPHID" autocomplete="off" style="width:180px;" onchange="getExpanseHead(this.value);" >
+                            <option value="">Select</option>
+                            <!--%[EXPANSE_HEAD_NAME]%-->
+                          </select></td>
+                          <td align="right" valign="top">Date :</td>
+                          <td height="26" align="left"><input name="ENTRYDATE" size="18" id="ENTRYDATE" type="text" readonly="readonly" onclick="showCalender('ENTRYDATE','ENTRYDATE')" onchange="checkCalender(this.value);" style="width:170px;" /></td>
+                        </tr>
+                        <tr valign="top">
+                          <td align="right">Amount :</td>
+                          <td height="26" align="left"><input type="text" name="amount" id="amount" style="width:170px;" onchange="number2text(this.value,'ToWordField')" /></td>
+                          <td align="right" valign="top">Work Type : </td>
+                          <td height="26" align="left"><select id="WORKTYPE" name="WORKTYPE" autocomplete="off" style="width:180px;" onchange="getExpanseHead(this.value);" >
+                            <option value="">Select</option>
+                            <option value="Load">Load</option>
+                            <option value="Unload">Unload</option>
+                            <option value="Transfer">Transfer</option>
+                            <option value="Palot">Palot</option>
+                            
+                          </select></td>
+                        </tr>
+                        <tr valign="top">
+                          <td height="26" align="right">Description:</td>
+                          <td height="26" colspan="3" align="left"><textarea name="DESCRIPTION" id="DESCRIPTION" cols="24" rows="2" style="width:560px;"></textarea></td>
+                          </tr>
+                        <tr valign="top">
+                          <td height="26" colspan="4" align="center"><b><font color="#009900"> <span id="ToWordField"> </span>
+                            <!--<input type="text" name="ShowWord" id="ShowWord" style="width:600px; font-style:italic; font-size:14px" />-->
+                          </font></b></td>
+                        </tr>
+                      </table>
+                        <input type="submit" name="InsertLabBillPaymentInfo" value="Insert" class="FormSubmitBtn" style="width:150px;"/></td>
+                    </tr>
+                  </table>
+                </form>
+              </div>
+            </fieldset></td>
+        </tr>
+        <!--  End Load Entry Form  -->
+      </table></td>
+    </tr>
+  </table></td>
+</tr>
+</table>

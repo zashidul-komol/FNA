@@ -1,0 +1,1628 @@
+    <table align="center" width="75%" border="0" cellspacing="1" cellpadding="10" style="margin:0px auto 0px auto;">
+        <tr>
+            <td colspan="2" align="center"><h4>File Management for FNA Setup</h4></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><!--%[MSG]%--></td>
+        </tr>
+        <tr valign="top">
+            <td width="46%" align="left">
+                <table width="100%"  border="0" cellspacing="0" cellpadding="0" align="center">
+                   <!--  Start Opening Batch Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmEggSellCatgSubmit() {
+									if($("#SCNAME").val() == ''){
+											alert("Please Insert Egg Category....");
+											$("#SCNAME").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								
+								function checkCalender(){
+									var BDATE = String($("#BDATE").val());
+									if(BDATE != ''){
+										
+										var tempBDATE = BDATE.split('-'); 
+										
+										var a = tempBDATE[1]+'/'+tempBDATE[0]+'/'+tempBDATE[2];
+									}
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showEggSellCat')">Enter Egg Category Information</legend>
+                                <div id="showEggSellCat" style="display:none;">
+                                  <form name="labourForm" method="post" action="PaultryEntry.php" onsubmit="return confirmEggSellCatgSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td width="42%" height="26" align="right">
+                                                    Sell Category Name:
+                                                </td>
+                                                <td width="58%" height="26" align="left">
+                                                    <input type="text" id="SCNAME" name="SCNAME" value="" autocomplete="off" placeholder="Cat Name" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Description:
+                                                </td>
+                                                <td height="26" align="left"><textarea name="DESCRIPTION" id="DESCRIPTION"></textarea></td>
+                                            </tr>
+                                            <tr valign="top">
+                                              <td height="26" align="right">&nbsp;</td>
+                                              <td height="26" align="left"><input type="submit" name="InsertEggSellCatInfo" value="Insert" class="FormSubmitBtn" />
+                                                <input type="reset"  name="Reset2" value="Reset" class="FormResetBtn" />
+                                              <input name="btnClose2" type="button" value="Close" onclick="return ShowHide('showEggSellCat')" /></td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Opening Batch Entry Form  -->
+                    
+                    <!--  Start Opening Batch Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmBatchOpenSubmit() {
+									if($("#BATCHNO").val() == ''){
+											alert("Please Insert New Batch No....");
+											$("#BATCHNO").focus();
+											return false;
+									}
+									if($("#BWISELIVESTOCK").val() == ''){
+											alert("Please Insert Batch Opening Stock Quantity...");
+											$("#BWISELIVESTOCK").focus();
+											return false;
+									}
+									if($("#PRICE").val() == ''){
+											alert("Please Insert The Price...");
+											$("#PRICE").focus();
+											return false;
+									}
+									if($("#BDATE").val() == ''){
+											alert("Please Select Batch Opening Start Date...");
+											$("#BDATE").focus();
+											return false;
+									}
+									
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								
+								function checkCalender(){
+									var BDATE = String($("#BDATE").val());
+									if(BDATE != ''){
+										
+										var tempBDATE = BDATE.split('-'); 
+										
+										var a = tempBDATE[1]+'/'+tempBDATE[0]+'/'+tempBDATE[2];
+									}
+								}
+								
+								function calRate(id){
+									
+									var batchLiveStock 	= $("#BWISELIVESTOCK").val();
+									var avgrate 		= $("#AvgRate").val();
+									batchLiveStock 		= parseFloat(batchLiveStock);
+									avgrate 	 		= parseFloat(avgrate);
+									var totalprice		= (batchLiveStock * avgrate) ;
+									$("#PRICE").val(totalprice);
+								}
+								function Show(id){
+									var SOURCEID 	= $("#SOURCEID").val();
+									if(SOURCEID == 'Hatchery') {
+											$("#showParty").hide();
+										}else{
+											$("#showParty").show();
+										}
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showLabour')">Enter Batch Opening Information</legend>
+                                <div id="showLabour" style="display:none;">
+                                  <form name="labourForm" method="post" action="PaultryEntry.php" onsubmit="return confirmBatchOpenSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td width="42%" height="26" align="right">
+                                                    Batch No:
+                                                </td>
+                                                <td width="58%" height="26" align="left">
+                                                    <input type="text" id="BATCHNO" name="BATCHNO" value="<!--%[BATCH_VIEW]%-->" autocomplete="off" placeholder="Batch No" class="FormTextTypeInput" />
+                                                <label for="Stock"></label></td>
+                                            </tr>
+                                             <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Source:
+                                                </td>
+                                                <td height="26" align="left"><select id="SOURCEID" name="SOURCEID" style="width:150px;" onchange="Show(this.id)" >
+ 													<option value="">Select</option>
+                                                    <option value="Hatchery">Hatchery</option> 
+                                                    <option value="Outside">Outside</option>
+                                                    
+                                                  </select></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Batch Live Stock:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" name="BWISELIVESTOCK" id="BWISELIVESTOCK" autocomplete="off" placeholder="Live Stock"  class="FormTextTypeInput" onchange="calRate(this.id);"/>
+                                                <input readonly="readonly" type="text" name="Stock" id="Stock" style="width:70px;" value="<!--%[STOCK_IN_HAND]%-->" /></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">Price:</td>
+                                                <td height="26" align="left"><input  type="text" name="PRICE" id="PRICE" autocomplete="off" placeholder="Price"  class="FormTextTypeInput" />
+                                                <input readonly="readonly" type="text" name="AvgRate" id="AvgRate" style="width:70px;" value="<!--%[AVGRATE_VIEW]%-->" /></td>
+                                            </tr>
+                                            <tr valign="top" style="display:none" id="showParty">
+                                                <td height="26" align="right">
+                                                    Party Name:
+                                                </td>
+                                                <td height="26" align="left"><select id="PARTYID_OPEN" name="PARTYID_OPEN" style="width:150px;">
+ 													<option value="">Select</option>
+                                                    <!--%[PARTY_NAME_PAL]%-->
+                                                  </select></td>
+                                            </tr>
+                                            <tr valign="top">
+                                              <td height="26" align="right">Batch Start Date:</td>
+                                              <td height="26" align="left"><input type="text" name="BDATE" id="BDATE" autocomplete="off" placeholder="Batch Start Date"  class="FormTextTypeInput" onclick="showCalender('BDATE','BDATE')" onchange="checkCalender(this.value);"/></td>
+                                            </tr>
+                                            <tr valign="top">
+                                              <td height="26" align="right">&nbsp;</td>
+                                              <td height="26" align="left"><input type="submit" name="InsertOpeningBatchInfo" value="Insert" class="FormSubmitBtn" />
+                                                <input type="reset"  name="Reset2" value="Reset" class="FormResetBtn" />
+                                              <input name="btnClose2" type="button" value="Close" onclick="return ShowHide('showLabour')" /></td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Opening Batch Entry Form  -->
+                    
+                    <!--  Start Standard Food Item Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmStandFoodSubmit() {
+									if($("#FOODID_STANDARD").val() == ''){
+											alert("Please Select Food Name....");
+											$("#FOODID_STANDARD").focus();
+											return false;
+									}
+									if($("#STANDARD_QUANTITY").val() == ''){
+											alert("Please Insert Standard Quantity...");
+											$("#STANDARD_QUANTITY").focus();
+											return false;
+									}
+									if($("#STANDARD_WEIGHT").val() == ''){
+											alert("Please Select Standard Weight...");
+											$("#STANDARD_WEIGHT").focus();
+											return false;
+									}
+									if($("#FSDATE").val() == ''){
+											alert("Please Select Batch Opening Start Date...");
+											$("#FSDATE").focus();
+											return false;
+									}
+									
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								
+								function checkCalender(){
+									var FSDATE = String($("#FSDATE").val());
+									if(FSDATE != ''){
+										
+										var tempFSDATE = FSDATE.split('-'); 
+										
+										var a = tempFSDATE[1]+'/'+tempFSDATE[0]+'/'+tempFSDATE[2];
+									}
+								}
+								
+								
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showStandard')">Enter Standard Food Item Entry</legend>
+                                <div id="showStandard" style="display:none;">
+                                  <form name="labourForm" method="post" action="PaultryEntry.php" onsubmit="return confirmStandFoodSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td width="42%" height="26" align="right">
+                                                    Date:
+                                                </td>
+                                                <td width="52%" height="26" align="left"><input type="text" id="FSDATE" name="FSDATE" autocomplete="off" placeholder="Date" class="FormTextTypeInput" onclick="showCalender('FSDATE','FSDATE')" onchange="checkCalenderFD(this.value);" /></td>
+                                            </tr>
+                                             <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Food Name:
+                                                </td>
+                                                <td height="26" align="left"><select type="text" id="FOODID_STANDARD" name="FOODID_STANDARD" style="width:150px;" autocomplete="off" class="FormTextTypeInput">
+                                                  <option value="">Select</option>
+                                                  <!--%[FOOD_NAME]%-->
+                                          </select> 
+                                          		</td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Standard Quantity:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" name="STANDARD_QUANTITY" id="STANDARD_QUANTITY" autocomplete="off" placeholder="Standard Quantity"  class="FormTextTypeInput" /></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Weight:
+                                                </td>
+                                                <td height="26" align="left"><select id="STANDARD_WEIGHT" name="STANDARD_WEIGHT" style="width:150px;">
+ 													<option value="">Select</option>
+                                                    <!--%[WEIGHT_NAME]%-->
+                                                  </select></td>
+                                            </tr>
+                                            <tr valign="top">
+                                              <td height="26" align="right">&nbsp;</td>
+                                              <td height="26" align="left"><input type="submit" name="InsertStandardFoodInfo" value="Insert" class="FormSubmitBtn" />
+                                                <input type="reset"  name="Reset2" value="Reset" class="FormResetBtn" />
+                                              <input name="btnClose2" type="button" value="Close" onclick="return ShowHide('showStandard')" /></td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Standard Food Item Entry Form  -->
+                    
+                    <!--  Start Daily Operation Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmDailyOperationSubmit() {
+									if($("#DODATE").val() == ''){
+											alert("Please Insert Entry Date....");
+											$("#DODATE").focus();
+											return false;
+									}
+									if($("#BATCHNO_DO").val() == ''){
+											alert("Please Select Batch No.....");
+											$("#BATCHNO_DO").focus();
+											return false;
+									}
+									if($("#STOCKINHAND_DO").val() == ''){
+											alert("Please Insert Stock in Hand Quantity.....");
+											$("#STOCKINHAND_DO").focus();
+											return false;
+									}
+									if($("#PARTYID_PAL").val() == ''){
+											alert("Please Select Party Name.....");
+											$("#PARTYID_PAL").focus();
+											return false;
+									}
+									
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								function checkCalenderDO(){
+									var DODATE = String($("#DODATE").val());
+									if(DODATE != ''){
+										
+										var tempDODATE = DODATE.split('-'); 
+										
+										var a = tempDODATE[1]+'/'+tempDODATE[0]+'/'+tempDODATE[2];
+									}
+								}
+								
+								function getHandStock(pcId){
+										if(pcId == '') {
+											$("#STOCKINHAND_DO").val('');
+											return false;
+										}
+										$.post("ajax/getHandStockDaily.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												
+												$("#STOCKINHAND_DO").val('');
+												$("#STOCKINHAND_DO").val(j);
+											}
+											else {
+												$("#STOCKINHAND_DO").val('');
+											}
+										})
+									
+									
+								}
+								function CalTotPrice(id){
+									var SELLSTOCK	 	= $("#SELLSTOCK_DO").val();
+									var RATE_DO 		= $("#RATE_DO").val();
+									SELLSTOCK	 		= parseFloat(SELLSTOCK);
+									RATE_DO 	 		= parseFloat(RATE_DO);
+									var totalprice		= (SELLSTOCK * RATE_DO) ;
+									$("#TOTALPRICE_DO").val(totalprice);
+								}
+								
+								
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showDailyOperation')">Enter Daily Operation</legend>
+                                <div id="showDailyOperation" style="display:none;">
+                                  <form name="labourForm" method="post" action="PaultryEntry.php" onsubmit="return confirmDailyOperationSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td width="48%" height="26" align="right">
+                                                    Date:
+                                                </td>
+                                                <td width="52%" height="26" align="left"><input type="text" id="DODATE" name="DODATE" autocomplete="off" placeholder="Date" class="FormTextTypeInput" onclick="showCalender('DODATE','DODATE')" onchange="checkCalenderDO(this.value);" /></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Batch No:
+                                                </td>
+                                                <td height="26" align="left"><select type="text" id="BATCHNO_DO" name="BATCHNO_DO" style="width:150px;" autocomplete="off" class="FormTextTypeInput" onchange="getHandStock(this.value);">
+                                                <option value="">Select</option>
+                                                <!--%[BATCH_NO]%-->
+                                                </select>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Stock in Hand:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input readonly="readonly" type="text" id="STOCKINHAND_DO" name="STOCKINHAND_DO" autocomplete="off" placeholder="Stock in Hand" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Dead Quantity:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" name="DEADSTOCK" id="DEADSTOCK" autocomplete="off" placeholder="Dead Stock"  class="FormTextTypeInput"/>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Cancel Quantity:
+                                                </td>
+                                                <td height="26" align="left"><input type="text" id="CANCELSTOCK" name="CANCELSTOCK" autocomplete="off" placeholder="Cancel Stock" class="FormTextTypeInput" /></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Sell Quantity:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="SELLSTOCK_DO" name="SELLSTOCK_DO" autocomplete="off" placeholder="Sell Stock" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Party Name:
+                                                </td>
+                                                <td height="26" align="left"><select id="PARTYID_PAL" name="PARTYID_PAL" style="width:150px;">
+ 													<option value="">Select</option>
+                                                    <!--%[PARTY_NAME_PAL]%-->
+                                                  </select></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Rate:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="RATE_DO" name="RATE_DO" autocomplete="off" placeholder="Sell Stock" class="FormTextTypeInput" onchange="CalTotPrice(this.value);"/>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Total Price:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input readonly="readonly" type="text" id="TOTALPRICE_DO" name="TOTALPRICE_DO" autocomplete="off" placeholder="Sell Stock" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertDailyOperInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showDailyOperation')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Daily Operation Entry Form  -->
+                    
+                      <!--  Start Divide Morog Murgi Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmDailyOperMorMurSubmit() {
+									if($("#ENTRYDATE_MMDO").val() == ''){
+											alert("Please Insert Entry Date....");
+											$("#ENTRYDATE_MMDO").focus();
+											return false;
+									}
+									if($("#BATCHNO_MMDO").val() == ''){
+											alert("Please Select Batch No.....");
+											$("#BATCHNO_MMDO").focus();
+											return false;
+									}
+									if($("#MOROGMURGI").val() == ''){
+											alert("Please Select MOROG OR MURGI.....");
+											$("#MOROGMURGI").focus();
+											return false;
+									}
+									if($("#STOCKINHAND_MMDO").val() == ''){
+											alert("Stock Quantity is not Sufficient.....Please Select another Batch No...");
+											$("#STOCKINHAND_MMDO").focus();
+											return false;
+									}
+									if($("#PARTYID_DOPAL").val() == ''){
+											alert("Please Select Party name...");
+											$("#PARTYID_DOPAL").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								function checkCalenderDO(){
+									var ENTRYDATE_MMDO = String($("#ENTRYDATE_MMDO").val());
+									if(ENTRYDATE_MMDO != ''){
+										
+										var tempENTRYDATE_MMDO = ENTRYDATE_MMDO.split('-'); 
+										
+										var a = tempENTRYDATE_MMDO[1]+'/'+tempENTRYDATE_MMDO[0]+'/'+tempENTRYDATE_MMDO[2];
+									}
+								}
+								
+								function getHandStockMorogMurgi(MOROGMURGI){
+									
+										var BATCHNO_MMDO = $("#BATCHNO_MMDO").val();
+										if(MOROGMURGI == '') {
+											$("#STOCKINHAND_MMDO").val('');
+											return false;
+										}
+										//alert (MOROGMURGI);
+										$.post("ajax/getHandStockDailyMorogMurgi.php",{MOROGMURGI: MOROGMURGI, BATCHNO_MMDO: BATCHNO_MMDO}, function(j) {
+											//alert (j);
+											if(j.length>0) {
+												
+												$("#STOCKINHAND_MMDO").val('');
+												$("#STOCKINHAND_MMDO").val(j);
+											}
+											else {
+												$("#STOCKINHAND_MMDO").val('');
+											}
+										})
+									
+									
+								}
+								function CalTotPriceMM(id){
+									var SELLSTOCK_DOMM	 	= $("#SELLSTOCK_DOMM").val();
+									var RATE_DOMM 			= $("#RATE_DOMM").val();
+									SELLSTOCK_DOMM	 		= parseFloat(SELLSTOCK_DOMM);
+									RATE_DOMM 	 			= parseFloat(RATE_DOMM);
+									var totalpriceMM		= (SELLSTOCK_DOMM * RATE_DOMM) ;
+									$("#TOTALPRICE_DOMM").val(totalpriceMM);
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showDailyOperMorMur')">Enter Daily  Operation (<span style="color:#2C89B5; cursor:pointer;"> Morog / Murgi </span>)</legend>
+                              <div id="showDailyOperMorMur" style="display:none;">
+                  				<form name="labourForm" method="post" action="PaultryEntry.php" onsubmit="return confirmDailyOperMorMurSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td width="48%" height="26" align="right">
+                                                    Date:
+                                                </td>
+                                                <td width="52%" height="26" align="left"><input type="text" id="ENTRYDATE_MMDO" name="ENTRYDATE_MMDO" autocomplete="off" placeholder="Date" class="FormTextTypeInput" onclick="showCalender('ENTRYDATE_MMDO','ENTRYDATE_MMDO')" onchange="checkCalenderDO(this.value);" /></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Batch No:
+                                                </td>
+                                                <td height="26" align="left"><select type="text" id="BATCHNO_MMDO" name="BATCHNO_MMDO" style="width:150px;" autocomplete="off" class="FormTextTypeInput">
+                                                <option value="">Select</option>
+                                                <!--%[BATCH_NO]%-->
+                                                </select>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Select Morog / Murgi:
+                                                </td>
+                                                <td height="26" align="left"><select type="text" id="MOROGMURGI" name="MOROGMURGI" style="width:150px;" autocomplete="off" class="FormTextTypeInput" onchange="getHandStockMorogMurgi(this.value);">
+                                                <option value="">Select</option>
+                                                <option value="Morog">Morog</option>
+                                                <option value="Murgi">Murgi</option>
+                                                
+                                                </select>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Stock in Hand:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input readonly="readonly" type="text" id="STOCKINHAND_MMDO" name="STOCKINHAND_MMDO" autocomplete="off" placeholder="Stock in Hand" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Dead Quantity:
+                                              </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" name="DEADSTOCK_MMDO" id="DEADSTOCK_MMDO" autocomplete="off" placeholder="Dead Stock"  class="FormTextTypeInput"/>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Cancel Quantity:
+                                              </td>
+                                                <td height="26" align="left"><input type="text" id="CANCELSTOCK_MMDO" name="CANCELSTOCK_MMDO" autocomplete="off" placeholder="Cancel Stock" class="FormTextTypeInput" /></td>
+                                            </tr>
+                                           <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertDailyOperMurMorInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showDailyOperMorMur')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Divide Morog Murgi Entry Form  -->
+                    
+                    <!--  Start Medicine Distribute Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmMedicineDistSubmit() {
+									if($("#MDDATE").val() == ''){
+											alert("Please Insert Entry Date");
+											$("#MDDATE").focus();
+											return false;
+									}
+									if($("#BATCHNO_MD").val() == ''){
+											alert("Please Select Batch No.....");
+											$("#BATCHNO_MD").focus();
+											return false;
+									}
+									if($("#PRODUCTID_MD").val() == ''){
+											alert("Please Select Product Name.....");
+											$("#PRODUCTID_MD").focus();
+											return false;
+									}
+									if($("#QUANTITY_MD").val() == ''){
+											alert("Please Select Product Quantity ...");
+											$("#QUANTITY_MD").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								function checkCalenderMD(){
+									var MDDATE = String($("#MDDATE").val());
+									if(MDDATE != ''){
+										
+										var tempMDDATE = MDDATE.split('-'); 
+										
+										var a = tempMDDATE[1]+'/'+tempMDDATE[0]+'/'+tempMDDATE[2];
+									}
+								}
+								
+								
+								
+								function getUnitPrice(FOODID){
+									if(FOODID == '') {
+											$("#UNITPRICE").val('');
+											return false;
+										}
+										$.post("ajax/getFinishedGoodsUnitPrice.php",{FOODID: FOODID}, function(j) {
+											//alert (j);
+											if(j.length>0) {
+												$("#UNITPRICE").val('');
+												$("#UNITPRICE").val(j);
+											}
+											else {
+												$("#UNITPRICE").val('');
+											}
+										})
+									
+									
+								}
+								
+									function UnitPriceCal(gr){
+										
+										var STOCKINHAND_FD  	= $("#STOCKINHAND_FD").val();
+										var FOOD_NEED_MUR_MOR  	= $("#FOOD_NEED_MUR_MOR").val();
+										var UNITPRICE		  	= $("#UNITPRICE").val();
+										
+										STOCKINHAND_FD		= parseFloat(STOCKINHAND_FD);
+										FOOD_NEED_MUR_MOR	= parseFloat(FOOD_NEED_MUR_MOR);
+										UNITPRICE			= parseFloat(UNITPRICE);
+										
+										var TotFoodQnty		= (FOOD_NEED_MUR_MOR * STOCKINHAND_FD)/1000;
+										var TotPrice		= TotFoodQnty * UNITPRICE ; 
+										
+										TotPrice 			= TotPrice.toFixed(4);
+										TotFoodQnty 		= TotFoodQnty.toFixed(4);
+										
+										$("#FOODWEIGHT").val(TotFoodQnty);
+										$("#TOTALPRICE").val(TotPrice);
+										
+									}
+									
+									$(document).ready(function(){
+   																		
+									$("select#PARTYID").change(function(){
+										$.getJSON("ajax/getPartyInfo.php",{party_id: $(this).val()}, function(j) {
+											if(j.length>0) {
+												for (var i = 0; i < j.length; i++) {
+												$("#FATHERNAME").val(j[i]['FATHERNAME']);
+												$("#ADDRESS").val(j[i]['ADDRESS']);
+												$("#MOBILE").val(j[i]['MOBILE']);
+												
+												}
+											}
+											else {
+												$("#FATHERNAME").val('');
+												$("#ADDRESS").val('');
+												$("#MOBILE").val('');
+											}
+										})
+									})
+									
+									
+									
+									
+									var inputs = 2;	
+									$('#btnAddMoreScripList').click(function() {		
+										
+										
+										$('.btnDelMoreScripList:disabled').removeAttr('disabled');
+										var c = $('.clonedInputForScripList:first').clone(true);
+										
+										
+										
+										c.find('select#BATCHNO_MD_1').attr({
+																				'id':'BATCHNO_MD_'+inputs,
+																			});
+										c.find('select#PRODUCTIDMD_1').attr({
+																				'id':'PRODUCTIDMD_'+inputs
+																			});
+										c.find('input:hidden#BALANCE_QUANTITY_MD_1').attr({
+																				'id':'BALANCE_QUANTITY_MD_'+inputs,
+																				'value':''
+																			});
+										c.find('input:hidden#QUANTITY_MD_1').attr({
+																				'id':'QUANTITY_MD_'+inputs,
+																				'value':''
+																			});
+										c.find('input:hidden#closest_position1').attr({
+																			'id':'closest_position'+inputs,
+																			'value':inputs
+																		});																		
+																																
+																					
+										$('.clonedInputForScripList:last').after(c);
+										
+										
+										inputs++;
+										$("#TOTAL_PRODUCT_LIST").attr('value',inputs);
+									});
+									
+									$('.btnDelMoreScripList').click(function() {
+										if (confirm('Continue Delete?')) {
+											var colsest_pos = $(this).closest('.clonedInputForScripList').find('.closest_position').val();
+											$(this).closest('.clonedInputForScripList').remove();
+											var counter = 1;
+											for(var i=1;i<inputs;i++) {
+												if(i == colsest_pos)
+												continue;
+												$("#trade_file_view_details").find('select#BATCHNO_MD_'+i).attr({
+																											'id':'BATCHNO_MD_'+counter
+																										});
+												$("#trade_file_view_details").find('select#PRODUCTIDMD_'+i).attr({
+																											'id':'PRODUCTIDMD_'+counter
+																										});
+												$("#trade_file_view_details").find('input:hidden#BALANCE_QUANTITY_MD_'+i).attr({
+																											'id':'BALANCE_QUANTITY_MD_'+counter,
+																											'value':''
+																										});
+												$("#trade_file_view_details").find('input:hidden#QUANTITY_MD_'+i).attr({
+																											'id':'QUANTITY_MD_'+counter,
+																											'value':''
+																										});
+												$("#trade_file_view_details").find('input:text#closest_position'+i).attr({
+																							'value':counter,
+																							'id':'closest_position'+counter
+																						});
+												counter++;
+											}
+											--inputs;
+											$("#TOTAL_PRODUCT_LIST").attr('value',inputs);
+											$('.btnDelMoreScripList').attr('disabled',($('.clonedInputForScripList').length  < 2));
+											return false;
+										}
+										else{
+											return false;
+										}
+									});	
+									  
+  
+								});
+								
+								function BalanceQuantity(productIdPosition, productId){
+									
+									var posId = productIdPosition.split("_");
+									//alert (j);
+									//var LABOURID 	= $("#LABOURID").val();										
+									//var CHID	 	= $("#CHID_"+posId[1]).val();										
+									//var packingUnit = $("#packingUnit_"+posId[1]).val();	
+									
+									if(productId == '') {
+											$("#BALANCE_QUANTITY_MD_"+posId[1]).html('');
+											$("#BALANCE_QUANTITY_MD_"+posId[1]).html(j);
+											return false;
+										}
+										$.post("ajax/getBalanceQuantity.php",{productId: productId}, function(j) {
+											//alert (j);
+											if(j.length>0) {
+												//var race = j.split("-"); 
+												//alert (posId[1]);
+												$("#BALANCE_QUANTITY_MD_"+posId[1]).val(j);
+												//$("#EMPLOYEEID_"+posId[1]).html(j);
+											}
+											else {
+												$("#BALANCE_QUANTITY_MD_"+posId[1]).html('');
+											}
+										})
+										
+																		
+								}
+								
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showMedicicneDist')">Enter Medicine Distribution</legend>
+                              <div id="showMedicicneDist" style="display:none;">
+                  				<form name="labourForm" method="post" action="PaultryEntry.php" onsubmit="return confirmMedicineDistSubmit();">
+                                        <table width="102%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td colspan="7">
+                                                	<table width="100%">
+                                                       <tr>
+                                                    	<td align="center">
+                                                    	  Date :                                                    	  
+                                                   	      <input type="text" id="MDDATE" name="MDDATE" autocomplete="off" placeholder="Date" class="FormTextTypeInput" onclick="showCalender('MDDATE','MDDATE')" onchange="checkCalenderMD(this.value);" /></td>
+                                                        </tr>
+                                                       	
+                                                    </table>
+                                              </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="left" colspan="2">
+                                                		<div id="trade_file_view_details">
+                                                                <div style="margin-bottom:4px;width:100%; font-family:Tahoma, Geneva, sans-serif;" class="clonedInputForScripList">
+                                                                  <fieldset style='width:100%;border:0px;border-top:1px solid #2b2d93;font-family:Tahoma, Geneva, sans-serif;'>
+                                                                    <legend style="border:0px;" id="stock1">Add Product List <input type="text" name="closest_position" id="closest_position1" class="closest_position" value="1" readonly="readonly" size="2" style="border:0px;font-weight:bold; width:40px;"/></legend>
+                                                                      <table width="100%" class="frmTbl" border="0" style="font-family:Tahoma, Geneva, sans-serif;font-size:100%;">
+                                                                         <tr valign="middle">
+                                                                              <td width="13%" align="center">Batch No</td>
+                                                                              <td width="28%" align="center">Product name</td>
+                                                                              <td width="18%" align="center">Bal Qnty</td>
+                                                                              <td width="18%" align="center">Quantity</td>
+                                                                              <td width="19%" align="right">&nbsp;</td>
+                                                                                
+                                                                        </tr>
+                                                                          <tr valign="middle">
+                                                                              <td align="center"><select type="text" id="BATCHNO_MD_1" name="BATCHNO_MD[]" style="width:50px;" autocomplete="off" class="FormTextTypeInput" >
+                                                                                <option value="">Select</option>
+                                                                                <!--%[BATCH_NO]%-->
+                                                                              </select></td>
+                                                                              <td align="center"><select type="text" id="PRODUCTIDMD_1" name="PRODUCTIDMD[]" style="width:80px;" autocomplete="off" class="FormTextTypeInput" onchange="BalanceQuantity(this.id, this.value);">
+                                                                                <option value="">Select</option>
+                                                                                <!--%[PRODUCT_ID]%-->
+                                                                              </select></td>
+                                                                              <td align="center"><input type="text" name="BALANCE_QUANTITY_MD[]" id="BALANCE_QUANTITY_MD_1" autocomplete="off" placeholder="Quantity" style="width:50px;" class="FormTextTypeInput" readonly="readonly" onchange="UnitPriceCal(this.value);"/></td>
+                                                                              <td align="center"><input type="text" name="QUANTITY_MD[]" id="QUANTITY_MD_1" autocomplete="off" placeholder="Quantity" style="width:50px;" class="FormTextTypeInput" onchange="UnitPriceCal(this.value);"/></td>
+                                                                              
+                                                                              <td width="9%" align="right" valign="top"><input style="font-family:Tahoma, Geneva, sans-serif;font-size:80%;" class="btnDelMoreScripList"  disabled="disabled" type="image" src="../images/cancel.png">	
+                                                                             </td>
+                                                                          </tr>
+                                                                              
+                                                                      </table>
+                                                                    </fieldset>
+                                                                </div>
+                                                            </div>
+                                                </td>
+                                            </tr>
+                                                <tr valign="top">
+                                                    <td align="right" colspan="2">
+                                                        <input name="TOTAL_PRODUCT_LIST" id="TOTAL_PRODUCT_LIST" type="hidden" value="2" />
+                                                        <input style="font-family:Tahoma, Geneva, sans-serif;font-size:100%;" id="btnAddMoreScripList" value="Add More" type="button">
+                                                    </td>
+                                                </tr>
+                                            <tr valign="top">
+                                              <td width="33%" height="26" align="right">&nbsp;</td>
+                                              <td width="67%" height="26" align="left">
+                                              <input type="submit" name="InsertMedicinDistInfo" value="Insert" class="FormSubmitBtn" />
+                                              <input type="reset"  name="Reset3" value="Reset" class="FormResetBtn" />
+                                              <input name="btnClose3" type="button" value="Close" onclick="return ShowHide('showMedicicneDist')" /></td>
+                                            </tr>
+                                        </table>
+                </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Medicine Distribute Entry Form  -->
+                    
+                   
+                   
+                    
+                     <!--  Start Weight Entry Form -->                    <!--  End Weight Entry Form  --> 
+                    
+                    
+                    <!--  Start Chamber Entry Form -->                    <!--  End Chamber Entry Form  --> 
+                                  
+                    <!--  Start Packing Unit Entry Form -->                    <!--  End Packing Unit Entry Form  -->
+                    
+                    <!--  Start Product Category Type Entry Form -->                    <!--  End Product Category Type Entry Form  -->
+                    
+                    <!--  Start Product Form -->                    <!--  End Product Entry Form  -->  
+                    
+                    <!--  Start Project Entry Form -->                    <!--  End Project Entry Form  -->
+                    
+                     <!--  Start Sub Project Form -->                    <!--  End Sub Project Entry Form  --> 
+                    
+                    <!--  Start Expanse Head Entry Form -->                    <!--  End Expanse Head Entry Form  -->
+                   
+                    
+                    <!--  Start Sub Expanse Head Form -->                    <!--  End Expanse Sub Head Entry Form  -->  
+                    
+                     <!--  Start Alu Fare Form -->
+                        
+                    <!--  End Alu Fare Entry Form  -->
+                    
+                     <!--  Start Product Fare Form -->
+                        
+                    <!--  End Product Fare Entry Form  -->
+                    
+                    <!--  Start Session Form -->                    <!--  End Session Entry Form  -->   
+                    
+                   
+                     <!--  Start Labour Contract Form -->                    <!--  End Labour Contract Entry Form  -->                     
+                    
+                </table>
+                
+            </td>
+            <td width="54%" align="right">
+                <table border="0" align="center" cellpadding="0" cellspacing="0" width="100%">
+                	<!-- View Egg Category  Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewEggCat')">View Egg Category Information</legend>
+                                <div id="viewEggCat" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:40%;">Egg Category Name</th>
+                                            <th style="width:10%;">Description</th>
+                                            <th style="width:10%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[EGG_CAT_VIEW]%-->
+                                    </tbody>
+                                </table>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Egg Category End -->
+                    
+                   <!-- View Opening Batch  Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewQuantity')">View Batch Opening Information</legend>
+                                <div id="viewQuantity" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:10%;">Batch #</th>
+                                            <th style="width:40%;">Live Stock Quantity</th>
+                                            <th style="width:10%;">Start Date</th>
+                                            <th style="width:10%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[BATCH_VIEW_VIEW]%-->
+                                    </tbody>
+                                </table>
+                                </div>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Opening Batch End -->
+                    
+                   <!--  Start Divide Morog Murgi Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmDivMorMurSubmit() {
+									if($("#ENTRYDATE").val() == ''){
+											alert("Please Insert Entry Date....");
+											$("#ENTRYDATE").focus();
+											return false;
+									}
+									if($("#BATCHNO_MM").val() == ''){
+											alert("Please Select Batch No.....");
+											$("#BATCHNO_MM").focus();
+											return false;
+									}
+									if($("#STOCKINHAND_MM").val() == ''){
+											alert("Stock Quantity is not Sufficient.....Please Select another Batch No...");
+											$("#STOCKINHAND_MM").focus();
+											return false;
+									}
+									if($("#MOROG_MM").val() == ''){
+											alert("Please Insert Morog Quantity.....");
+											$("#MOROG_MM").focus();
+											return false;
+									}
+									if($("#MURGI_MM").val() == ''){
+											alert("Please Insert Murgi Quantity.....");
+											$("#MURGI_MM").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								function checkCalenderDO(){
+									var ENTRYDATE = String($("#ENTRYDATE").val());
+									if(ENTRYDATE != ''){
+										
+										var tempENTRYDATE = ENTRYDATE.split('-'); 
+										
+										var a = tempENTRYDATE[1]+'/'+tempENTRYDATE[0]+'/'+tempENTRYDATE[2];
+									}
+								}
+								
+								function getHandStockMorog(pcId){
+										if(pcId == '') {
+											$("#STOCKINHAND_MM").val('');
+											return false;
+										}
+										$.post("ajax/getHandStockDailyMorog.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												
+												$("#STOCKINHAND_MM").val('');
+												$("#STOCKINHAND_MM").val(j);
+											}
+											else {
+												$("#STOCKINHAND_MM").val('');
+											}
+										})
+									
+									
+								}
+								
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showDivideMorMur')">Enter Divide Morog / Murgi</legend>
+                              <div id="showDivideMorMur" style="display:none;">
+                                  <form name="labourForm" method="post" action="PaultryEntry.php" onsubmit="return confirmDivMorMurSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td width="48%" height="26" align="right">
+                                                    Date:
+                                                </td>
+                                                <td width="52%" height="26" align="left"><input type="text" id="ENTRYDATE" name="ENTRYDATE" autocomplete="off" placeholder="Date" class="FormTextTypeInput" onclick="showCalender('ENTRYDATE','ENTRYDATE')" onchange="checkCalenderDO(this.value);" /></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Batch No:
+                                                </td>
+                                                <td height="26" align="left"><select type="text" id="BATCHNO_MM" name="BATCHNO_MM" style="width:150px;" autocomplete="off" class="FormTextTypeInput" onchange="getHandStockMorog(this.value);">
+                                                <option value="">Select</option>
+                                                <!--%[BATCH_NO]%-->
+                                                </select>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Stock in Hand:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input readonly="readonly" type="text" id="STOCKINHAND_MM" name="STOCKINHAND_MM" autocomplete="off" placeholder="Stock in Hand" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Morog Quantity:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" name="MOROG_MM" id="MOROG_MM" autocomplete="off" placeholder="Dead Stock"  class="FormTextTypeInput"/>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Murgi Quantity:
+                                                </td>
+                                                <td height="26" align="left"><input type="text" id="MURGI_MM" name="MURGI_MM" autocomplete="off" placeholder="Cancel Stock" class="FormTextTypeInput" /></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertDivMMInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showDivideMorMur')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                  </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Divide Morog Murgi Entry Form  -->
+                    
+                    <!--  Start Food Distribute Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmFoodDistSubmit() {
+									if($("#FDDATE").val() == ''){
+											alert("Please Insert Entry Date....");
+											$("#FDDATE").focus();
+											return false;
+									}
+									if($("#FOODID").val() == ''){
+											alert("Please Select Batch No.....");
+											$("#FOODID").focus();
+											return false;
+									}
+									if($("#UNITPRICE").val() == ''){
+											alert("Please Select MOROG OR MURGI.....");
+											$("#UNITPRICE").focus();
+											return false;
+									}
+									if($("#BATCHNO_FD").val() == ''){
+											alert("Stock Quantity is not Sufficient.....Please Select another Batch No...");
+											$("#BATCHNO_FD").focus();
+											return false;
+									}
+									if($("#STOCKINHAND_FD").val() == ''){
+											alert("Stock Quantity is not Sufficient.....Please Select another Batch No...");
+											$("#STOCKINHAND_FD").focus();
+											return false;
+									}
+									if($("#FOOD_NEED_MUR_MOR").val() == ''){
+											alert("Stock Quantity is not Sufficient.....Please Select another Batch No...");
+											$("#FOOD_NEED_MUR_MOR").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								function checkCalenderFD(){
+									var FDDATE = String($("#FDDATE").val());
+									if(FDDATE != ''){
+										
+										var tempFDDATE = FDDATE.split('-'); 
+										
+										var a = tempFDDATE[1]+'/'+tempFDDATE[0]+'/'+tempFDDATE[2];
+									}
+								}
+								
+								function getFoodDist(BatchNo){
+									if(BatchNo == '') {
+											$("#STOCKINHAND_FD").val('');
+											return false;
+										}
+										$.post("ajax/getFoodDistribute.php",{BatchNo: BatchNo}, function(j) {
+											//alert (j);
+											if(j.length>0) {
+												var res = j.split(",");
+												$("#STOCKINHAND_FD").val('');
+												$("#DOID").val('0');
+												$("#MORID").val('0');
+												$("#MURID").val('0');
+												if(res[0]== 'd'){
+													$("#STOCKINHAND_FD").val(res[1]);
+													$("#DOID").val(res[2]);
+												}else if(res[0]== 'm'){
+													$("#STOCKINHAND_FD").val(res[1]);
+													$("#MORID").val(res[2]);
+													$("#MURID").val(res[3]);
+												}
+											}
+											else {
+												$("#STOCKINHAND_FD").val('');
+											}
+										})
+									
+									
+								}
+								
+								function getUnitPriceFood(FOODID){
+									if(FOODID == '') {
+											$("#UNITPRICE").val('');
+											return false;
+										}
+										$.post("ajax/getFinishedGoodsUnitPrice.php",{FOODID: FOODID}, function(j) {
+											//alert (j);
+											if(j.length>0) {
+												$("#UNITPRICE").val('');
+												$("#UNITPRICE").val(j);
+											}
+											else {
+												$("#UNITPRICE").val('');
+											}
+										})
+										
+										$.post("ajax/getStandardFoodQuantity.php",{FOODID: FOODID}, function(j) {
+											//alert (j);
+											if(j.length>0) {
+												$("#QUANTITY_STANDARD").val('');
+												$("#QUANTITY_STANDARD").val(j);
+											}
+											else {
+												$("#QUANTITY_STANDARD").val('');
+											}
+										})
+									
+									
+								}
+								
+									function UnitPriceCalculation(gr){
+										
+										var STOCKINHAND_FD  	= $("#STOCKINHAND_FD").val();
+										var FOODWEIGHT		  	= $("#FOODWEIGHT").val();
+										var UNITPRICE		  	= $("#UNITPRICE").val();
+										
+										STOCKINHAND_FD		= parseFloat(STOCKINHAND_FD);
+										FOODWEIGHT			= parseFloat(FOODWEIGHT);
+										UNITPRICE			= parseFloat(UNITPRICE);
+										
+										var Feed_Per_Murgi	= (FOODWEIGHT * 1000)/STOCKINHAND_FD;
+										var TotPrice		= FOODWEIGHT * UNITPRICE ; 
+										
+										TotPrice 			= TotPrice.toFixed(4);
+										Feed_Per_Murgi 		= Feed_Per_Murgi.toFixed(4);
+										
+										$("#FOOD_NEED_MUR_MOR").val(Feed_Per_Murgi);
+										$("#TOTALPRICE").val(TotPrice);
+										
+									}
+								
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showFoodDist')">Enter Daily Food Distribution</legend>
+                              <div id="showFoodDist" style="display:none;">
+                  				<form name="labourForm" method="post" action="PaultryEntry.php" onsubmit="return confirmFoodDistSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td width="48%" height="26" align="right">
+                                                    Date:
+                                                </td>
+                                                <td width="52%" height="26" align="left"><input type="text" id="FDDATE" name="FDDATE" autocomplete="off" placeholder="Date" class="FormTextTypeInput" onclick="showCalender('FDDATE','FDDATE')" onchange="checkCalenderFD(this.value);" /></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">Food Name:</td>
+                                                <td height="26" align="left"><select type="text" id="FOODID" name="FOODID" style="width:150px;" autocomplete="off" class="FormTextTypeInput" onchange="getUnitPriceFood(this.value)">
+                                                  <option value="">Select</option>
+                                                  <!--%[FOOD_NAME]%-->
+                                          </select> 
+                                          </tr>
+                                          <tr valign="top">
+                                              <td height="26" align="right">
+                                                    Price per KG:
+                                              </td>
+                                                <td height="26" align="left">
+                                                    <input readonly="readonly" type="text" id="UNITPRICE" name="UNITPRICE" autocomplete="off" placeholder="Unit Price" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="31" align="right">Batch No: </td>
+                                                <td height="31" align="left"><select type="text" id="BATCHNO_FD" name="BATCHNO_FD" style="width:150px;" autocomplete="off" class="FormTextTypeInput" onchange="getFoodDist(this.value)">
+                                                  <option value="">Select</option>
+                                                  <!--%[BATCH_NO]%-->
+                                          </select>                                                </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Stock in Hand:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input readonly="readonly" type="text" id="STOCKINHAND_FD" name="STOCKINHAND_FD" autocomplete="off" placeholder="Stock in Hand" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Total Food Quantity:
+                                              </td>
+                                                <td height="26" align="left"><input type="text" id="FOODWEIGHT" name="FOODWEIGHT" autocomplete="off" placeholder="Total Food Weight" class="FormTextTypeInput" onchange="UnitPriceCalculation(this.value);"/>
+                                                  Kg</td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Standard Food Per Murgi:
+                                              </td>
+                                                <td height="26" align="left">
+                                                    <input readonly="readonly" type="text" name="QUANTITY_STANDARD" id="QUANTITY_STANDARD" autocomplete="off" placeholder="Standard Food"  class="FormTextTypeInput" />
+                                                    gm
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Food Distribute Per Murgi:
+                                              </td>
+                                                <td height="26" align="left">
+                                                    <input readonly="readonly" type="text" name="FOOD_NEED_MUR_MOR" id="FOOD_NEED_MUR_MOR" autocomplete="off" placeholder="Food Weight"  class="FormTextTypeInput" />
+                                                    gm
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top">
+                                                <td height="26" align="right">Total Price:</td>
+                                                <td height="26" align="left"><input readonly="readonly" type="text" id="TOTALPRICE" name="TOTALPRICE" autocomplete="off" placeholder="Total Price" class="FormTextTypeInput" /></td>
+                                            </tr>
+                                            <tr valign="top">
+                                              <td height="26" align="right">&nbsp;</td>
+                                              <td height="26" align="left">
+                                              <input type="hidden" name="DOID" id="DOID" value="0" />
+                                              <input type="hidden" name="MORID" id="MORID" value="0" />
+                                              <input type="hidden" name="MURID" id="MURID" value="0" />
+                                              <input type="submit" name="InsertFoodDistInfo" value="Insert" class="FormSubmitBtn" />
+                                              <input type="reset"  name="Reset3" value="Reset" class="FormResetBtn" />
+                                              <input name="btnClose3" type="button" value="Close" onclick="return ShowHide('showFoodDist')" /></td>
+                                            </tr>
+                                        </table>
+                </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Food Distribute Entry Form  -->
+                    
+                   
+                     
+                     <!--  Start Egg Production Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmEggProdSubmit() {
+									if($("#EPDATE").val() == ''){
+											alert("Please Insert Entry Date....");
+											$("#EPDATE").focus();
+											return false;
+									}
+									if($("#BATCHNO_EP").val() == ''){
+											alert("Please Select Batch No.....");
+											$("#BATCHNO_EP").focus();
+											return false;
+									}
+									if($("#MURGIQNTY").val() == ''){
+											alert("This Batch ...Murgi Quantity is not available.....");
+											$("#MURGIQNTY").focus();
+											return false;
+									}
+									if($("#EGGQNTY").val() == ''){
+											alert("Please Insert Egg Quantity ...");
+											$("#EGGQNTY").focus();
+											return false;
+									}
+									if($("#EGGPERCENTAGE").val() == ''){
+											alert("Please Egg Percentage...");
+											$("#EGGPERCENTAGE").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								function checkCalenderFD(){
+									var EPDATE = String($("#EPDATE").val());
+									if(EPDATE != ''){
+										
+										var tempEPDATE = EPDATE.split('-'); 
+										
+										var a = tempEPDATE[1]+'/'+tempEPDATE[0]+'/'+tempEPDATE[2];
+									}
+								}
+								function PackCalculation(quantityPosition, quantity){
+									
+									var posId = quantityPosition.split("_");
+									//alert (j);
+									var LABOURID 	= $("#LABOURID").val();										
+									var CHID	 	= $("#CHID_"+posId[1]).val();										
+									var packingUnit = $("#packingUnit_"+posId[1]).val();	
+									
+									if(quantity == '') {
+											$("#Calculation_"+posId[1]).html('');
+											$("#Calculation_"+posId[1]).html(j);
+											return false;
+										}
+										$.post("ajax/getPackUnitCalculation.php",{quantity: quantity, LABOURID: LABOURID, CHID: CHID, packingUnit: packingUnit }, function(j) {
+											//alert (j);
+											if(j.length>0) {
+												//var race = j.split("-"); 
+												//alert (posId[1]);
+												$("#Calculation_"+posId[1]).val(j);
+												//$("#EMPLOYEEID_"+posId[1]).html(j);
+											}
+											else {
+												$("#Calculation_"+posId[1]).html('');
+											}
+										})
+										
+																		
+								}
+								function getEggProd(batchPosition, BATCHNOEP){
+									var posId = batchPosition.split("_");
+									if(BATCHNOEP == '') {
+										//alert ('komol');
+											$("#MURGIQNTYEP_"+posId[1]).html('');
+											$("#MURGIQNTYEP_"+posId[1]).html(j);
+											return false;
+										}
+										$.post("ajax/getEggProduction.php",{BATCHNOEP: BATCHNOEP}, function(j) {
+											
+											if(j.length>0) {
+												//$("#MURGIQNTY").val('');
+												//alert (j);
+												//alert (posId[1]);
+												$("#MURGIQNTYEP_"+posId[1]).val(j);
+											}
+											else {
+												$("#MURGIQNTYEP_"+posId[1]).html('');
+											}
+										})
+									
+									
+								}
+								
+								function getUnitPrice(FOODID){
+									if(FOODID == '') {
+											$("#UNITPRICE").val('');
+											return false;
+										}
+										$.post("ajax/getFinishedGoodsUnitPrice.php",{FOODID: FOODID}, function(j) {
+											//alert (j);
+											if(j.length>0) {
+												$("#UNITPRICE").val('');
+												$("#UNITPRICE").val(j);
+											}
+											else {
+												$("#UNITPRICE").val('');
+											}
+										})
+									
+									
+								}
+								
+									function UnitPriceEgg(eggposition, EGGQNTYEP){
+										var posId 				= eggposition.split("_");
+										//var CHID	 			= $("#CHID_"+posId[1]).val();		
+										var MURGIQNTY		  	= $("#MURGIQNTYEP_"+posId[1]).val();
+										var EGGQNTY			  	= $("#EGGQNTYEP_"+posId[1]).val();
+										
+										MURGIQNTY			= parseFloat(MURGIQNTY);
+										EGGQNTY				= parseFloat(EGGQNTY);
+										var EggPercentage	= ((EGGQNTY / MURGIQNTY) * 100);
+										EggPercentage 			= EggPercentage.toFixed(4);
+										$("#EGGPERCENTAGEEP_"+posId[1]).val(EggPercentage);
+										
+									}
+									$(document).ready(function(){
+   																		
+									$("select#PARTYID").change(function(){
+										$.getJSON("ajax/getPartyInfo.php",{party_id: $(this).val()}, function(j) {
+											if(j.length>0) {
+												for (var i = 0; i < j.length; i++) {
+												$("#FATHERNAME").val(j[i]['FATHERNAME']);
+												$("#ADDRESS").val(j[i]['ADDRESS']);
+												$("#MOBILE").val(j[i]['MOBILE']);
+												
+												}
+											}
+											else {
+												$("#FATHERNAME").val('');
+												$("#ADDRESS").val('');
+												$("#MOBILE").val('');
+											}
+										})
+									})
+									
+									
+									
+									
+									var inputsep = 2;	
+									$('#btnAddMoreScripListEp').click(function() {		
+										
+										
+										$('.btnDelMoreScripListEp:disabled').removeAttr('disabled');
+										var c = $('.clonedInputForScripListEp:first').clone(true);
+										
+										
+										
+										c.find('select#BATCHNOEP_1').attr({
+																				'id':'BATCHNOEP_'+inputsep,
+																			});
+										c.find('input#MURGIQNTYEP_1').attr({
+																				'id':'MURGIQNTYEP_'+inputsep,
+																				'value':''
+																			});
+										c.find('input:hidden#EGGQNTYEP_1').attr({
+																				'id':'EGGQNTYEP_'+inputsep,
+																				'value':''
+																			});
+										c.find('input:hidden#EGGPERCENTAGEEP_1').attr({
+																				'id':'EGGPERCENTAGEEP_'+inputsep,
+																				'value':''
+																			});
+																			
+										c.find('input:hidden#closest_position_ep').attr({
+																			'id':'closest_position'+inputsep,
+																			'value':inputsep
+																		});																		
+																																
+																					
+										$('.clonedInputForScripListEp:last').after(c);
+										
+										
+										inputsep++;
+										$("#TOTAL_PRODUCT_LIST_EP").attr('value',inputsep);
+									});
+									
+									$('.btnDelMoreScripListEp').click(function() {
+										if (confirm('Continue Delete?')) {
+											var colsest_pos = $(this).closest('.clonedInputForScripListEp').find('.closest_position').val();
+											$(this).closest('.clonedInputForScripListEp').remove();
+											var counterep = 1;
+											for(var i=1;i<inputsep;i++) {
+												if(i == colsest_pos)
+												continue;
+												$("#trade_file_view_details_Ep").find('select#BATCHNOEP_'+i).attr({
+																											'id':'BATCHNOEP_'+counterep
+																										});
+												$("#trade_file_view_details_Ep").find('input#MURGIQNTYEP_'+i).attr({
+																											'id':'MURGIQNTYEP_'+counterep,
+																											'value':''
+																										});
+												$("#trade_file_view_details_Ep").find('input:hidden#EGGQNTYEP_'+i).attr({
+																											'id':'EGGQNTYEP_'+counterep,
+																											'value':''
+																										});
+												$("#trade_file_view_details_Ep").find('input:hidden#EGGPERCENTAGEEP_'+i).attr({
+																											'id':'EGGPERCENTAGEEP_'+counterep,
+																											'value':''
+																										});
+												$("#trade_file_view_details_Ep").find('input:text#closest_position'+i).attr({
+																							'value':counterep,
+																							'id':'closest_position'+counterep
+																						});
+												counterep++;
+											}
+											--inputsep;
+											$("#TOTAL_PRODUCT_LIST_EP").attr('value',inputsep);
+											$('.btnDelMoreScripListEp').attr('disabled',($('.clonedInputForScripListEp').length  < 2));
+											return false;
+										}
+										else{
+											return false;
+										}
+									});	
+									  
+  
+								});
+								
+                            </script>
+                            
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showEggProd')">Enter Egg Production</legend>
+                              <div id="showEggProd" style="display:none;">
+                  				<form name="labourForm" method="post" action="PaultryEntry.php" onsubmit="return confirmEggProdSubmit();">
+                                        <table width="98%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td colspan="7">
+                                                	<table width="100%">
+                                                       <tr>
+                                                    	<td align="center">
+                                                    	  Date :                                                    	  
+                                                   	      <input type="text" id="EPDATE" name="EPDATE" autocomplete="off" placeholder="Date" class="FormTextTypeInput" onclick="showCalender('EPDATE','EPDATE')" onchange="checkCalenderFD(this.value);" /></td>
+                                                      </tr>
+                                                       	
+                                                    </table>
+                                              </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="left" colspan="2">
+                                                		<div id="trade_file_view_details_Ep">
+                                                                <div style="margin-bottom:4px;width:100%; font-family:Tahoma, Geneva, sans-serif;" class="clonedInputForScripListEp">
+                                                                  <fieldset style='width:100%;border:0px;border-top:1px solid #2b2d93;font-family:Tahoma, Geneva, sans-serif;'>
+                                                                    <legend style="border:0px;" id="stock1">Add Product List <input type="text" name="closest_position_ep" id="closest_position_ep" class="closest_position" value="1" readonly="readonly" size="2" style="border:0px;font-weight:bold; width:40px;"/></legend>
+                                                                      <table width="100%" class="frmTbl" border="0" style="font-family:Tahoma, Geneva, sans-serif;font-size:100%;">
+                                                                         <tr valign="middle">
+                                                                              <td width="16%" align="center">Batch No</td>
+                                                                              <td width="27%" align="center">Murgi Qnty</td>
+                                                                              <td width="24%" align="center">Egg Qnty</td>
+                                                                              <td width="23%" align="center">Percentage</td>
+                                                                              <td width="10%" align="right">&nbsp;</td>
+                                                                                
+                                                                        </tr>
+                                                                          <tr valign="middle">
+                                                                              <td align="center"><select type="text" id="BATCHNOEP_1" name="BATCHNOEP[]" style="width:50px;" autocomplete="off" class="FormTextTypeInput" onchange="getEggProd(this.id, this.value)">
+                                                                                <option value="">Select</option>
+                                                                                <!--%[BATCH_NO]%-->
+                                                                            </select></td>
+                                                                              <td align="center"><input type="text" name="MURGIQNTYEP[]" id="MURGIQNTYEP_1" autocomplete="off" style="width:50px;" class="FormTextTypeInput" readonly="readonly" /></td>
+                                                                              <td align="center"><input type="text" name="EGGQNTYEP[]" id="EGGQNTYEP_1" autocomplete="off" style="width:50px;" class="FormTextTypeInput" onchange="UnitPriceEgg(this.id, this.value);"/></td>
+                                                                              <td align="center"><input  type="text" name="EGGPERCENTAGEEP[]" id="EGGPERCENTAGEEP_1" autocomplete="off" style="width:80px;" class="FormTextTypeInput" readonly="readonly" /></td>
+                                                                              <td align="right" valign="top"><input style="font-family:Tahoma, Geneva, sans-serif;font-size:80%;" class="btnDelMoreScripListEp"  disabled="disabled" type="image" src="../images/cancel.png">	
+                                                                             </td>
+                                                                          </tr>
+                                                                              
+                                                                      </table>
+                                                                    </fieldset>
+                                                                </div>
+                                                            </div>
+                                                </td>
+                                            </tr>
+                                                <tr valign="top">
+                                                    <td align="right" colspan="2">
+                                                        <input name="TOTAL_PRODUCT_LIST_EP" id="TOTAL_PRODUCT_LIST_EP" type="hidden" value="2" />
+                                                        <input style="font-family:Tahoma, Geneva, sans-serif;font-size:100%;" id="btnAddMoreScripListEp" value="Add More" type="button">
+                                                       
+                                                    </td>
+                                                </tr>
+                                            <tr valign="top">
+                                              <td width="33%" height="26" align="right">&nbsp;</td>
+                                              <td width="67%" height="26" align="left">
+                                              <input type="submit" name="InsertEggProdInfo" value="Insert" class="FormSubmitBtn" id="InsertEggProdInfo" />
+                                              <input type="reset"  name="Reset3" value="Reset" class="FormResetBtn" />
+                                              <input name="btnClose3" type="button" value="Close" onclick="return ShowHide('showEggProd')" /></td>
+                                            </tr>
+                                        </table>
+                                        
+                                </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Egg Production Entry Form  -->
+                    
+                    
+                    
+                </table>
+            </td>
+        </tr>
+    </table>

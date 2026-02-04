@@ -1,0 +1,140 @@
+    <table width="85%" border="0" cellspacing="1" cellpadding="10" style="margin:0px auto 0px auto;">
+        <tr>
+            <td colspan="2" align="center"><h4>File Management for FNA Setup</h4></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><!--%[MSG]%--></td>
+        </tr>
+        <tr valign="top">
+            <td width="50%" align="left">
+                <table width="100%"  border="0" cellspacing="0" cellpadding="0" align="center">                    
+                    
+                    <!--  Start Labour Contact Form -->
+                    <tr valign="top">
+                        <td align="left">
+                        <script type="text/javascript" language="JavaScript" src="../scripts/jquery-1.4.2.min.js"></script>
+							<script  type="text/javascript">
+								/*function confirmSessionSubmit() {
+									if($("#productid").val() == ''){
+											alert("Please enter Product Category Type name");
+											$("#productid").focus();
+											return false;
+									}
+									if($("#productname").val() == ''){
+											alert("Please enter Product name");
+											$("#productname").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								*/
+								
+								$('#masud1').click(function() {	
+										alert("sadfadsf");
+								});
+								
+								
+								
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showLabourContact')">Enter Session Information</legend>
+                                <div id="showLabourContact" style="display:none;">
+                                 <!-- <form name="PackingNameForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmSessionSubmit();">-->
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Labour Name :
+                                                </td>
+                                                <td height="26" align="left"><input type="button" name="masud" id="masud1" value="asfasdf"  />
+                                                    <select type="text" id="productid" name="productid" autocomplete="off" placeholder="productid" class="FormTextTypeInput" >
+                                                    <option value="">Select</option>
+                                                        <!--%[LABOUR_NAME]%-->
+                                                     </select>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Start Date :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" onchange="checkCalender(this.value);" onclick="showCalender('startDate','PackingNameForm')" readonly="readonly" class="FormDateTypeInput" id="startDate" size="18" name="startDate">
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   End Date :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" onchange="checkCalender(this.value);" onclick="showCalender('endDate','PackingNameForm')" readonly="readonly" class="FormDateTypeInput" id="endDate" size="18" name="endDate">
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Descripton :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <textarea id="productname" name="productname" autocomplete="off" placeholder="Productname" class="FormTextareaTypeInput" > </textarea>
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top">
+                                                <td colspan="2" align="left">
+                                                	<div id="trade_file_view_details">
+                                                        <div style="margin-bottom:4px;width:80%; font-family:Tahoma, Geneva, sans-serif;" class="clonedInputForScripList">
+                                                            <fieldset style='width:100%;border:0px;border-top:1px solid #2b2d93;font-family:Tahoma, Geneva, sans-serif;'>
+                                                                <legend style="border:0px;" id="stock1">Add Product List <input type="text" name="closest_position" id="closest_position1" class="closest_position" value="1" readonly="readonly" size="2" style="border:0px;font-weight:bold; width:40px;"/></legend>
+                                                                <table width="80%" class="frmTbl" border="0" style="font-family:Tahoma, Geneva, sans-serif;font-size:100%;">
+                                                                    <tr>
+                                                                        <td colspan="3" align="right" valign="top">
+                                                                            <input style="font-family:Tahoma, Geneva, sans-serif;font-size:100%;" class="btnDelMoreScripList"  disabled="disabled" type="image" src="../images/cancel.png">	
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr valign="middle">
+                                                                        <td align="right">Trading Code <sup style="color:red;">*</sup></td>
+                                                                        <td align="left">:</td>
+                                                                        <td align="left">
+                                                                            <select name="chFrom" id="chFrom">
+                                                                            	<option value="First">First</option>
+                                                                            </select>
+                                                                            
+                                                                        </td>
+                                                                    </tr>
+                                                                  
+                                                                </table>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td align="right" colspan="2">
+                                                    <input style="font-family:Tahoma, Geneva, sans-serif;font-size:100%;" id="btnAddMoreScripList" value="Add More" type="button">
+                                                </td>
+                                            </tr>                                       
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="button" name="InsertLabourContract" id="InsertLabourContract" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showSession')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                   <!-- </form>-->
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Labour Contact Entry Form  -->                 
+                    
+                </table>
+                
+            </td>
+            <td width="50%" align="right">
+                
+            </td>
+        </tr>
+    </table>

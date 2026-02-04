@@ -1,0 +1,99 @@
+    <table width="85%" border="0" cellspacing="1" cellpadding="10" style="margin:0px auto 0px auto;">
+        <tr>
+            <td colspan="2" align="center"><h4>Initialization Contract Concluding Stage </h4>
+            <div style="text-align:left;"><b>Package No:</b>  <!--%[PI_4]%--> <br/>
+             <b>Lot No:</b>  <!--%[PI_5]%--> <br/>
+            <b>Contract Name:</b> <!--%[PI_6]%--></div>
+            </td>
+            
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><!--%[MSG]%--></td>
+        </tr>
+        <tr valign="top">
+            <td width="50%" align="left">
+                <table width="100%"  border="0" cellspacing="0" cellpadding="0" align="center">
+                    
+            <!--  Start Contract Concluding Stage  ------------------------------------------------------------------------------------------------------------------    -->
+                  <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmInputTabFieldsSubmit() {
+									if($("#itfName").val() == ''){
+											alert("Please enter Input Tab Fields Name");
+											$("#itfName").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                           <script>
+                              $(document).ready(function() {
+                               $("#ccs_76, #ccs_77").datepicker({ dateFormat: "dd-mm-yy",
+                                beforeShow: function(input, inst) {
+                                 if ($("#dateplanedcheck").is(':checked')) {
+                                  $(".ui-datepicker-calendar").css("display", "none");
+                                }}
+                               });
+                              });
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" >Enter Contract Concluding Stage</legend>
+                                <div id="showInputTabFields">
+                                <center><b>Insert Data for " <!--%[CONTRACT_CONCLUDING_STAGE_PACKAGENAME]%--> " Package</b></center><hr/>
+                                  <form name="inputTabFieldsForm" method="post" action="contractConcludingStage.php" onsubmit="return confirmInputTabFieldsSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                        
+
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="3%" height="26" align="right">&nbsp;</td>
+                                                <td width="52%" height="26" align="right">
+                                                    Amounts Paid for Late Payment (Equiv. US$) :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input id="ccs_79" name="ccs_79" autocomplete="off" onblur="if(this.value=='') this.value='0.00'; numberFormat(this.id,this.value.toString(),'2',',','.');" onfocus="if(this.value=='0.00') this.value='';" size="15" class="FormNumericTypeInput" onkeyup="removeChar(this);"/>
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="3%" height="26" align="right">&nbsp;</td>
+                                                <td width="52%" height="26" align="right">
+                                                    LDs imposed on Supplier/ Contractor/ Consultant (Equiv. US$) :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input id="ccs_80" name="ccs_80" autocomplete="off" onblur="if(this.value=='') this.value='0.00'; numberFormat(this.id,this.value.toString(),'2',',','.');" onfocus="if(this.value=='0.00') this.value='';" size="15" class="FormNumericTypeInput" onkeyup="removeChar(this);"/>
+                                                </td>
+                                            </tr>
+                                             
+                                            
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td width="52%" height="26" align="right"> </td>
+                                                <td height="26" align="left">
+                                                     <input type="hidden" name="contractCSpackageId" value="<!--%[CONTRACT_CONCLUDING_STAGE_PACKAGEID]%-->" />
+                                                     <input type="hidden" name="contractCSpackageName" value="<!--%[CONTRACT_CONCLUDING_STAGE_PACKAGENAME]%-->" />
+                                                    <input type="submit" name="insertcontractConcludingStage" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input type="button" value="Back" onclick="window.close();" class="FormResetBtn">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+						
+            <!--  End Contract Concluding Stage  ------------------------------------------------------------------------------------------------------------------     -->
+                    
+                    
+                </table>
+                
+            </td>
+
+        </tr>
+    </table>

@@ -1,0 +1,474 @@
+    <table width="65%" border="0" cellspacing="1" cellpadding="10" style="margin:0px auto 0px auto;">
+        <tr>
+            <td colspan="2" align="center"><h1>Purchase Raw Materials Entry Form</h1></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><!--%[MSG]%--></td>
+        </tr>
+        <tr valign="top">
+            <td width="60%" align="center">
+                <table width="91%"  border="0" cellspacing="0" cellpadding="0" align="center">
+                   
+                    <!--  Start Load Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmPurRawMatSubmit() {
+									if($("#PROJECTID").val() == ''){
+											alert("Please Select Project name");
+											$("#PROJECTID").focus();
+											return false;
+									}
+									if($("#SUBPROJECTID").val() == ''){
+											alert("Please Select Sub Project name");
+											$("#SUBPROJECTID").focus();
+											return false;
+									}
+									if($("#PARTYID").val() == ''){
+											alert("Please Select Party name");
+											$("#PARTYID").focus();
+											return false;
+									}
+									if($("#PURCHASEDATE").val() == ''){
+											alert("Please Select Date");
+											$("#PURCHASEDATE").focus();
+											return false;
+									}
+									
+									var pList = $("#TOTAL_PRODUCT_LIST").val();
+									for(i=1; i < pList; i++){
+										if($("#PRODCATTYPEID_"+i).val() == ''){
+													alert("Please Select Product Category type");
+													$("#PRODCATTYPEID_"+i).focus();
+													return false;
+											}
+											if($("#PRODUCTID_"+i).val() == ''){
+													alert("Please Select Product Name");
+													$("#PRODUCTID_"+i).focus();
+													return false;
+											}
+											if($("#quantity_"+i).val() == ''){
+													alert("Please Insert Quantity");
+													$("#quantity_"+i).focus();
+													return false;
+											}
+											if($("#WTID_"+i).val() == ''){
+													alert("Please Select Chamber");
+													$("#WTID_"+i).focus();
+													return false;
+											}
+											if($("#AMOUNT_"+i).val() == ''){
+													alert("Please Select Pack Size");
+													$("#AMOUNT_"+i).focus();
+													return false;
+											}
+											
+										
+									}
+																		
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								
+								function getProjectNameLoad(pcId){					
+										var options = '';
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#SUBPROJECTID").html('');
+											$("select#SUBPROJECTID").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getProjectList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#SUBPROJECTID").html('');
+												$("select#SUBPROJECTID").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#SUBPROJECTID").html('');
+												$("select#SUBPROJECTID").html(options);
+											}
+										})
+									
+									
+								}
+								
+								function PartyName(pcId){					
+										var options = '';
+										var jj = '';
+										//alert (pcId);
+										options.length=0;
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#PARTYID").html('');
+											$("select#PARTYID").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getPartyName.php",{pcId: pcId}, function(jj) {
+											if(jj.length>0) {
+												//alert (pcId);
+												options = '';
+												options += '<option value="">Select</option>';
+												for (var ii = 0; ii < jj.length; ii++) {
+													options += '<option value="' + jj[ii].optionValue + '">' + jj[ii].optionDisplay + '</option>';
+												}
+												$("select#PARTYID").html('');
+												$("select#PARTYID").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#PARTYID").html('');
+												$("select#PARTYID").html(options);
+											}
+										});
+										var j = '';
+										$.getJSON("ajax/getProdCategoryList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options = '';
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#PRODCATTYPEID_1").html('');
+												$("select#PRODCATTYPEID_1").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#PRODCATTYPEID_1").html('');
+												$("select#PRODCATTYPEID_1").html(options);
+												
+											}
+										});
+									
+									
+								}
+								
+								function checkCalender(){
+									var PURCHASEDATE = String($("#PURCHASEDATE").val());
+									if(PURCHASEDATE != ''){
+										
+										var tempPURCHASEDATE = PURCHASEDATE.split('-'); 
+										
+										var a = tempPURCHASEDATE[1]+'/'+tempPURCHASEDATE[0]+'/'+tempPURCHASEDATE[2];
+									}
+								}
+								
+								function getProductNamebyCat(getCatIdName, pcId){
+																			
+										var splitCatId = getCatIdName.split("_");										
+										var options = '';
+										if(pcId == '' && getCatIdName == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#PRODUCTID_"+splitCatId[1]).html('');
+											$("select#PRODUCTID_"+splitCatId[1]).html(options);
+											return false;
+										}
+										$.getJSON("ajax/getProductList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#PRODUCTID_"+splitCatId[1]).html('');
+												$("select#PRODUCTID_"+splitCatId[1]).html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#PRODUCTID_"+splitCatId[1]).html('');
+												$("select#PRODUCTID_"+splitCatId[1]).html(options);
+											}
+										})
+									
+									
+								}
+								
+								
+								$(document).ready(function(){
+   																		
+									$("select#PARTYID").change(function(){
+										$.getJSON("ajax/getPartyInfo.php",{party_id: $(this).val()}, function(j) {
+											if(j.length>0) {
+												for (var i = 0; i < j.length; i++) {
+												$("#FATHERNAME").val(j[i]['FATHERNAME']);
+												$("#ADDRESS").val(j[i]['ADDRESS']);
+												$("#MOBILE").val(j[i]['MOBILE']);
+												
+												}
+											}
+											else {
+												$("#FATHERNAME").val('');
+												$("#ADDRESS").val('');
+												$("#MOBILE").val('');
+											}
+										})
+									})
+									
+									
+									
+									
+									var inputs = 2;	
+									$('#btnAddMoreScripList').click(function() {		
+										
+										
+										$('.btnDelMoreScripList:disabled').removeAttr('disabled');
+										var c = $('.clonedInputForScripList:first').clone(true);
+										
+										
+										
+										c.find('select#PRODCATTYPEID_1').attr({
+																				'id':'PRODCATTYPEID_'+inputs,
+																			});
+										c.find('select#PRODUCTID_1').attr({
+																				'id':'PRODUCTID_'+inputs
+																			});
+										c.find('input:hidden#quantity_1').attr({
+																				'id':'quantity_'+inputs,
+																				'value':''
+																			});
+																			
+										c.find('select#WTID_1').attr({
+																				'id':'WTID_'+inputs
+																			});
+																			
+										c.find('input:hidden#AMOUNT_1').attr({
+																				'id':'AMOUNT_'+inputs,
+																				'value':''
+																			});
+										
+										c.find('input:hidden#UNITPRICE_1').attr({
+																				'id':'UNITPRICE_'+inputs,
+																				'value':''
+																			});																																																																																															
+																			
+										
+										c.find('input:hidden#closest_position1').attr({
+																			'id':'closest_position'+inputs,
+																			'value':inputs
+																		});																		
+																																
+																					
+										$('.clonedInputForScripList:last').after(c);
+										
+										
+										inputs++;
+										$("#TOTAL_PRODUCT_LIST").attr('value',inputs);
+									});
+									
+									$('.btnDelMoreScripList').click(function() {
+										if (confirm('Continue Delete?')) {
+											var colsest_pos = $(this).closest('.clonedInputForScripList').find('.closest_position').val();
+											$(this).closest('.clonedInputForScripList').remove();
+											var counter = 1;
+											for(var i=1;i<inputs;i++) {
+												if(i == colsest_pos)
+												continue;
+												$("#trade_file_view_details").find('select#PRODCATTYPEID_'+i).attr({
+																											'id':'PRODCATTYPEID_'+counter
+																										});
+												$("#trade_file_view_details").find('select#PRODUCTID_'+i).attr({
+																											'id':'PRODUCTID_'+counter
+																										});
+												$("#trade_file_view_details").find('input:hidden#quantity_'+i).attr({
+																											'id':'quantity_'+counter,
+																											'value':''
+																										});
+												$("#trade_file_view_details").find('select#WTID_'+i).attr({
+																											'id':'WTID_'+counter
+																										});																									
+												$("#trade_file_view_details").find('input:hidden#AMOUNT_'+i).attr({
+																											'id':'AMOUNT_'+counter,
+																											'value':''
+																										});
+												
+												$("#trade_file_view_details").find('input:hidden#UNITPRICE_'+i).attr({
+																											'id':'UNITPRICE_'+counter,
+																											'value':''
+																										});
+																																																																																																																			
+												$("#trade_file_view_details").find('input:text#closest_position'+i).attr({
+																							'value':counter,
+																							'id':'closest_position'+counter
+																						});
+												counter++;
+											}
+											--inputs;
+											$("#TOTAL_PRODUCT_LIST").attr('value',inputs);
+											$('.btnDelMoreScripList').attr('disabled',($('.clonedInputForScripList').length  < 2));
+											return false;
+										}
+										else{
+											return false;
+										}
+									});	
+									  
+  
+								});
+								function LotNoCal(id){
+								var sp 			= id.split("_");
+								var qnty  		= $("#quantity_"+sp[1]).val();
+								var totamnt  	= $("#AMOUNT_"+sp[1]).val();
+								quantity		= parseFloat(qnty).toFixed(2);
+								TotalAmount		= parseFloat(totamnt).toFixed(2);
+								 //unitPrice	= TotalAmount/quantity ;
+								var unitPrice		= parseFloat(TotalAmount/quantity).toFixed(2) ;
+								
+								//
+								$("#UNITPRICE_"+sp[1]).val(unitPrice);
+								
+								}
+								
+								function getPackingUnitList(getCatIdName, chId){
+																		
+										var splitCatId = getCatIdName.split("_");
+											
+										var projectId = $("#PROJECTID").val();										
+										var subProjectId = $("#SUBPROJECTID").val();										
+										var labourId = $("#LABOURID").val();						
+										var options = '';
+										if(chId == '' && getCatIdName == '') {
+											options = '<option value="">No Packing Unit Found</option>';
+											$("select#packingUnit_"+splitCatId[1]).html('');
+											$("select#packingUnit_"+splitCatId[1]).html(options);
+											return false;
+										}
+										$.getJSON("ajax/getPackUnitList.php",{chId: chId, projectId: projectId, subProjectId: subProjectId, labourId: labourId}, function(j) {
+											if(j.length>0) {
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#packingUnit_"+splitCatId[1]).html('');
+												$("select#packingUnit_"+splitCatId[1]).html(options);
+											}
+											else {
+												options = '<option value="">No Packing Unit Found</option>';
+												$("select#packingUnit_"+splitCatId[1]).html('');
+												$("select#packingUnit_"+splitCatId[1]).html(options);
+											}
+										})
+									
+									
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showLoad')">Enter Purchase Raw Materials Entry Information</legend>
+                                <div id="showLoad" style="display:">
+                                  <form name="LoadForm" method="post" action="feedPurchaseRawMat.php" onsubmit="return confirmPurRawMatSubmit();">
+                                        <table width="90%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td colspan="7">
+                                                	<table width="814">
+                                                       <tr>
+                                                    	<td width="153" align="right">
+                                                               Project Name :
+                                                         </td>
+                                                            <td ><select type="text" id="PROJECTID" name="PROJECTID" style="width:180px;" autocomplete="off" placeholder="PackingName" onchange="getProjectNameLoad(this.value);" >
+                                                  <option value="">Select</option>
+                                                        <!--%[PROJECT_NAME]%-->
+                                                     </select>
+                                             				</td>
+                                                            <td width="191" align="right">
+                                                               Sub Project Name :
+                                                            </td>
+                                                            <td height="26" align="left"><select type="text" id="SUBPROJECTID" name="SUBPROJECTID" style="width:180px;" autocomplete="off" onchange="PartyName(this.value);"  /></td>
+                                                      </tr>
+                                                       <tr>
+                                                    	<td width="153" align="right">
+                                                               Party Name :
+                                                            </td>
+                                                            <td width="210" align="left">
+                                                                <select id="PARTYID" name="PARTYID" autocomplete="off" style="width:180px;" >
+                                                                
+                                                                 </select>
+                                                            </td>
+                                                            <td width="191" align="right">Date : </td>
+                                                            <td width="240" align="left"><input name="PURCHASEDATE" size="18" id="PURCHASEDATE" type="text" readonly="readonly" onclick="showCalender('PURCHASEDATE','PURCHASEDATE')" onchange="checkCalender(this.value);" style="width:100px;" /></td>
+                                                        </tr>
+                                                        <tr valign="top">
+                                                            <td align="right">&nbsp;</td>
+                                                            <td height="26" align="left">&nbsp;</td>
+                                                            <td height="26" align="right">Invoice No :</td>
+                                                            <td height="26" align="left"><input id="INVOICENO" name="INVOICENO" autocomplete="off" style="width:100px;" /></td>
+                                                         </tr>	
+                                                    </table>
+                                              </td>
+                                            </tr>
+                                            
+                                             <tr valign="top">
+                                                <td height="26" align="left" colspan="2">
+                                                		<div id="trade_file_view_details">
+                                                                <div style="margin-bottom:4px;width:100%; font-family:Tahoma, Geneva, sans-serif;" class="clonedInputForScripList">
+                                                                    <fieldset style='width:95%;border:0px;border-top:1px solid #2b2d93;font-family:Tahoma, Geneva, sans-serif;'>
+                                                                        <legend style="border:0px;" id="stock1">Add Product List <input type="text" name="closest_position" id="closest_position1" class="closest_position" value="1" readonly="readonly" size="2" style="border:0px;font-weight:bold; width:40px;"/></legend>
+                                                                        <table width="100%" class="frmTbl" border="0" style="font-family:Tahoma, Geneva, sans-serif;font-size:100%;">
+                                                                           <tr valign="middle">
+                                                                                <td width="13%" align="center">Product Cat. <sup style="color:red;">*</sup></td>
+                                                                                <td width="13%" align="center">Product name <sup style="color:red;">*</sup></td>
+                                                                                <td width="13%" align="center">Quantity <sup style="color:red;">*</sup></td>
+                                                                                <td width="13%" align="center">Unit(Kg)<sup style="color:red;">*</sup></td>
+                                                                                <td width="13%" align="center">Total Amount<sup style="color:red;">*</sup></td>
+                                                                                <td width="12%" align="center">Unit Price <sup style="color:red;">*</sup></td>
+                                                                                <td width="10%" align="right">&nbsp;</td>
+                                                                                
+                                                                            </tr>
+                                                                            <tr valign="middle">
+                                                                                <td align="center"><select id="PRODCATTYPEID_1" name="PRODCATTYPEID[]" style="width:90px;" onchange="getProductNamebyCat(this.id,this.value);">
+ 																				
+                                                                 				</select>                                                                               
+                                                                                </td>
+                                                                                <td align="center"><select id="PRODUCTID_1" name="PRODUCTID[]" style="width:100px;" >
+                                                                                <option value="">Select</option>
+                                                                    				<!--%[PRODUCT]-->
+                                                                 				</select>
+                                                                                </td>
+                                                                                <td align="center"><input id="quantity_1" name="quantity[]" style="width:100px;"/></td>
+                                                                                <td align="center"><select id="WTID_1" name="WTID[]" style="width:100px;" onchange="getPackingUnitList(this.id,this.value);">
+                                                                                  <option value="">Select</option>
+                                                                                  <!--%[WEIGHT]%-->
+                                                                                </select></td>
+                                                                                <td align="center"><input id="AMOUNT_1" name="AMOUNT[]" style="width:100px;"  onchange="LotNoCal(this.id);"/></td>
+                                                                                <td align="center"><input id="UNITPRICE_1" readonly="readonly" name="UNITPRICE[]" style="width:100px;"/></td>
+                                                                                <td align="right" valign="top"><input style="font-family:Tahoma, Geneva, sans-serif;font-size:100%;" class="btnDelMoreScripList"  disabled="disabled" type="image" src="../images/cancel.png">	
+                                                                               </td>
+                                                                            </tr>
+                                                                              
+                                                                        </table>
+                                                                    </fieldset>
+                                                                </div>
+                                                            </div>
+                                                </td>
+                                            </tr>
+                                                <tr valign="top">
+                                                    <td align="right" colspan="2">
+                                                        <input name="TOTAL_PRODUCT_LIST" id="TOTAL_PRODUCT_LIST" type="hidden" value="2" />
+                                                        <input style="font-family:Tahoma, Geneva, sans-serif;font-size:100%;" id="btnAddMoreScripList" value="Add More" type="button">
+                                                    </td>
+                                                </tr>                                       
+                                            <tr valign="top">
+                                                <td width="5%" height="26" align="right">&nbsp;</td>
+                                                <td width="95%" height="26" align="center">
+                                                    <input type="submit" name="InsertPurChaseRawMatInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showLoad')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Load Entry Form  --> 
+                    
+              </table>
+            </td>
+          </tr>
+    </table>

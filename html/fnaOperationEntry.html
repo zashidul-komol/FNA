@@ -1,0 +1,1071 @@
+    <table width="85%" border="0" cellspacing="1" cellpadding="10" style="margin:0px auto 0px auto;">
+        <tr>
+            <td colspan="2" align="center"><h4>File Management for FNA Setup</h4></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><!--%[MSG]%--></td>
+        </tr>
+        <tr valign="top">
+            <td width="50%" align="left">
+                <table width="100%"  border="0" cellspacing="0" cellpadding="0" align="center">
+                   
+                    <!--  Start Labour Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmLabourSubmit() {
+									if($("#name").val() == ''){
+											alert("Please enter name");
+											$("#name").focus();
+											return false;
+									}
+									if($("#fName").val() == ''){
+											alert("Please enter father name");
+											$("#fName").focus();
+											return false;
+									}
+									if($("#address").val() == ''){
+											alert("Please enter address");
+											$("#address").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showLabour')">Enter Labour Information</legend>
+                                <div id="showLabour" style="display:none;">
+                                  <form name="labourForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmLabourSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Name :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="name" name="name" autocomplete="off" placeholder="Name" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Father Name :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" name="fName" id="fName" autocomplete="off" placeholder="Father Name"  class="FormTextTypeInput"/>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Address :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <textarea name="address" id="address" autocomplete="off" class="FormTextAreaTypeInput"> </textarea>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Mobile :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="mobile" name="mobile" autocomplete="off" placeholder="Mobile Number" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertLabourInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showLabour')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Labour Entry Form  -->
+                    
+                    <!--  Start Party Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmPartySubmit() {
+									if($("#partyname").val() == ''){
+											alert("Please enter name");
+											$("#partyname").focus();
+											return false;
+									}
+									if($("#fatherName").val() == ''){
+											alert("Please enter father name");
+											$("#fatherName").focus();
+											return false;
+									}
+									if($("#address").val() == ''){
+											alert("Please enter address");
+											$("#address").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showParty')">Enter Party Information</legend>
+                                <div id="showParty" style="display:none;">
+                                  <form name="labourForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmPartySubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Name :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="partyname" name="partyname" autocomplete="off" placeholder="PartyName" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Father Name :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" name="fatherName" id="fatherName" autocomplete="off" placeholder="FatherName"  class="FormTextTypeInput"/>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Address :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <textarea name="address" id="address" autocomplete="off" class="FormTextAreaTypeInput"> </textarea>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Mobile :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="mobile" name="mobile" autocomplete="off" placeholder="Mobile Number" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertPartyInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showParty')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Party Entry Form  -->
+                    
+                     <!--  Start Packing Name Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmPackingNameSubmit() {
+									if($("#name").val() == ''){
+											alert("Please enter Packing name");
+											$("#name").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showPackingName')">Enter Packing Name Information</legend>
+                                <div id="showPackingName" style="display:none;">
+                                  <form name="PackingNameForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmPackingNameSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Name :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="name" name="name" autocomplete="off" placeholder="Name" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                                                       
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertPackingNameInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showPackingName')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Packing Name Entry Form  -->
+                    
+                     <!--  Start Quantity Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmQuantitySubmit() {
+									if($("#quantity").val() == ''){
+											alert("Please enter Quantity");
+											$("#quantity").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showQuantity')">Enter Quantity Information</legend>
+                                <div id="showQuantity" style="display:none;">
+                                  <form name="QuantityForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmQuantitySubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Quantity :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="quantity" name="quantity" autocomplete="off" placeholder="Quantity" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertQuantityInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showQuantity')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Quantity Entry Form  --> 
+                    
+                     <!--  Start Weight Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmWeightSubmit() {
+									if($("#weight").val() == ''){
+											alert("Please enter Quantity");
+											$("#weight").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showWeight')">Enter Weight Information</legend>
+                                <div id="showWeight" style="display:none;">
+                                  <form name="QuantityForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmWeightSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Weight Name :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="weight" name="weight" autocomplete="off" placeholder="Weight" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertWeightInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showWeight')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Weight Entry Form  --> 
+                    
+                    
+                    <!--  Start Chamber Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmChamberSubmit() {
+									if($("#chname").val() == ''){
+											alert("Please enter Chamber");
+											$("#chname").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showChamber')">Enter Chamber Information</legend>
+                                <div id="showChamber" style="display:none;">
+                                  <form name="QuantityForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmChamberSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Chamber Name :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="chname" name="chname" autocomplete="off" placeholder="Chname" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertChamberInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showChamber')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Chamber Entry Form  --> 
+                                  
+                    <!--  Start Packing Unit Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmPackingUnitSubmit() {
+									if($("#PackingName").val() == ''){
+											alert("Please enter Packing name");
+											$("#PackingName").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showPackingUnit')">Enter Packing Unit Information</legend>
+                                <div id="showPackingUnit" style="display:none;">
+                                  <form name="PackingNameForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmPackingUnitSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Packing  Name :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <select type="text" id="PackingName" name="PackingName" autocomplete="off" placeholder="PackingName" class="FormTextTypeInput" >
+                                                    <option value="">Select</option>
+                                                        <!--%[PACKING_NAME]%-->
+                                                     </select>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Quantity :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <select type="text" id="quantity" name="quantity" autocomplete="off" placeholder="Quantity" class="FormTextTypeInput" >
+                                                    <option value="">Select</option>
+                                                        <!--%[QUANTITY]%-->
+                                                     </select>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                    Weight Type :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <select type="text" id="weight" name="weight" autocomplete="off" placeholder="Weight" class="FormTextTypeInput" >
+                                                    <option value="">Select</option>
+                                                        <!--%[WEIGHTTYPE]%-->
+                                                     </select>
+                                                    
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertPackingUnitInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showPackingUnit')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Packing Unit Entry Form  -->
+                    
+                    <!--  Start Product Category Type Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmProdCatTypeSubmit() {
+									if($("#ProdCatTypeName").val() == ''){
+											alert("Please enter Product Category Type name");
+											$("#ProdCatTypeName").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showProdCatType')">Enter Product Category Type Information</legend>
+                                <div id="showProdCatType" style="display:none;">
+                                  <form name="PackingNameForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmProdCatTypeSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Packing  Name :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="ProdCatTypeName" name="ProdCatTypeName" autocomplete="off" placeholder="ProdCatTypeName" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                                                                      
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertProdCatTypeInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showProdCatType')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Product Category Type Entry Form  -->
+                    
+                    <!--  Start Product Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmProdSubmit() {
+									if($("#catType").val() == ''){
+											alert("Please enter Product Category Type name");
+											$("#catType").focus();
+											return false;
+									}
+									if($("#Prodname").val() == ''){
+											alert("Please enter Product name");
+											$("#Prodname").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showProd')">Enter Product Information</legend>
+                                <div id="showProd" style="display:none;">
+                                  <form name="PackingNameForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmProdSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Category Type:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <select type="text" id="catType" name="catType" autocomplete="off" placeholder="catType" class="FormTextTypeInput" >
+                                                    <option value="">Select</option>
+                                                        <!--%[PRODUCT_NAME]%-->
+                                                     </select>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Product Name :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="Prodname" name="Prodname" autocomplete="off" placeholder="Prodname" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                                                                      
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertProdInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showProd')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Product Entry Form  -->  
+                    
+                    <!--  Start Session Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmSessionSubmit() {
+									if($("#productid").val() == ''){
+											alert("Please enter Product Category Type name");
+											$("#productid").focus();
+											return false;
+									}
+									if($("#productname").val() == ''){
+											alert("Please enter Product name");
+											$("#productname").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showSession')">Enter Session Information</legend>
+                                <div id="showSession" style="display:none;">
+                                  <form name="PackingNameForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmSessionSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Product Category Type :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <select type="text" id="productid" name="productid" autocomplete="off" placeholder="productid" class="FormTextTypeInput" >
+                                                    <option value="">Select</option>
+                                                        <!--%[PRODUCT_NAME]%-->
+                                                     </select>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Product Name :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <select type="text" id="productname" name="productname" autocomplete="off" placeholder="Productname" class="FormTextTypeInput" >
+                                                    <option value="">Select</option>
+                                                        <!--%[PRODUCT]%-->
+                                                     </select>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Start Date :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="startdate" name="startdate" autocomplete="off" placeholder="Startdate" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   End Date :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="enddate" name="enddate" autocomplete="off" placeholder="Enddate" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                                                                      
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="submit" name="InsertSessionInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showSession')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Session Entry Form  -->   
+                    
+                    <!--  Start Labour Contact Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								/*function confirmSessionSubmit() {
+									if($("#productid").val() == ''){
+											alert("Please enter Product Category Type name");
+											$("#productid").focus();
+											return false;
+									}
+									if($("#productname").val() == ''){
+											alert("Please enter Product name");
+											$("#productname").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								*/
+								
+								$('#InsertLabourContract').click(function() {	
+										alert("sadfadsf");
+								});
+								var inputs = 2;	
+								$('#btnAddMoreScripList').click(function() {		
+									
+									alert("sdfdsaf");
+									$('.btnDelMoreScripList:disabled').removeAttr('disabled');
+									var c = $('.clonedInputForScripList:first').clone(true);
+									
+									
+									
+									c.find('input:hidden#instrumentID_1').attr({
+																			'id':'instrumentID_'+inputs
+																		});
+									c.find('input:text#instrumentName_1').attr({
+																			'value':'',
+																			'id':'instrumentName_'+inputs
+																		});
+									c.find('div:id#scripName_VoucherNoSuggestions_1').attr({
+																			'id':'scripName_VoucherNoSuggestions_'+inputs
+																		});
+									c.find('div:id#scripName_VoucherNoSuggestionsList_1').attr({
+																			'id':'scripName_VoucherNoSuggestionsList_'+inputs
+																		});												
+									c.find('input:text#IMMATURE_SHARE_QNTITY1').attr({
+																			'value':'',
+																			'id':'IMMATURE_SHARE_QNTITY'+inputs
+																		});
+									c.find('input:text#MATURE_DATE1').attr({
+																		'value':'',
+																		'class':'FormTextTypeInput',
+																		'id':"MATURE_DATE"+inputs
+																	});
+										
+																									
+									c.find('input:text#MATURE_SHARE_QNTITY1').attr({
+																		'value':'',				
+																		'id':"MATURE_SHARE_QNTITY"+inputs
+																	});
+									c.find('input:text#AVG_PRICE1').attr({
+																		'value':'',				
+																		'id':"AVG_PRICE"+inputs
+																	});
+									c.find('input:hidden#closest_position1').attr({
+																		'id':'closest_position'+inputs,
+																		'value':inputs
+																	});															
+																				
+									$('.clonedInputForScripList:last').after(c);
+									$("#TRADE_FILE"+inputs).attr('value','');
+									
+									
+									
+									
+									
+									inputs++;
+									$("#TOTAL_SCRIP_LIST").attr('value',inputs);
+								});
+								
+								$('.btnDelMoreScripList').click(function() {
+									if (confirm('Continue Delete?')) {
+										var colsest_pos = $(this).closest('.clonedInputForScripList').find('.closest_position').val();
+										$(this).closest('.clonedInputForScripList').remove();
+										var counter = 1;
+										for(var i=1;i<inputs;i++) {
+											if(i == colsest_pos)
+											continue;
+											$("#trade_file_view_details").find('input:hidden#instrumentID_'+i).attr({
+																										'id':'instrumentID_'+counter
+																									});
+											$("#trade_file_view_details").find('input:text#instrumentName_'+i).attr({
+																									'id':"instrumentName_"+counter
+																								});														
+											$("#trade_file_view_details").find('div:id#scripName_VoucherNoSuggestions_'+i).attr({
+																									'id':"scripName_VoucherNoSuggestions_"+counter
+																								});	
+											$("#trade_file_view_details").find('div:id#scripName_VoucherNoSuggestionsList_'+i).attr({
+																									'id':"scripName_VoucherNoSuggestionsList_"+counter
+																								});	
+											$("#trade_file_view_details").find('input:text#IMMATURE_SHARE_QNTITY'+i).attr({
+																									'id':"IMMATURE_SHARE_QNTITY"+counter
+																								});	
+											$("#trade_file_view_details").find('div:id#MATURE_DATE'+i).attr({
+																									'id':"MATURE_DATE"+counter
+																								});	
+											$("#trade_file_view_details").find('div:id#MATURE_SHARE_QNTITY'+i).attr({
+																									'id':"MATURE_SHARE_QNTITY"+counter
+																								});	
+											$("#trade_file_view_details").find('div:id#AVG_PRICE'+i).attr({
+																									'id':"AVG_PRICE"+counter
+																								});																																																																																																								
+											$("#trade_file_view_details").find('input:text#closest_position'+i).attr({
+																						'value':counter,
+																						'id':'closest_position'+counter
+																					});
+											counter++;
+										}
+										--inputs;
+										$("#TOTAL_SCRIP_LIST").attr('value',inputs);
+										$('.btnDelMoreScripList').attr('disabled',($('.clonedInputForScripList').length  < 2));
+										return false;
+									}
+									else{
+										return false;
+									}
+								});	
+								
+								
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showLabourContact')">Enter Session Information</legend>
+                                <div id="showLabourContact" style="display:none;">
+                                 <!-- <form name="PackingNameForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmSessionSubmit();">-->
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Labour Name :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <select type="text" id="productid" name="productid" autocomplete="off" placeholder="productid" class="FormTextTypeInput" >
+                                                    <option value="">Select</option>
+                                                        <!--%[LABOUR_NAME]%-->
+                                                     </select>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Start Date :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" onchange="checkCalender(this.value);" onclick="showCalender('startDate','PackingNameForm')" readonly="readonly" class="FormDateTypeInput" id="startDate" size="18" name="startDate">
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   End Date :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" onchange="checkCalender(this.value);" onclick="showCalender('endDate','PackingNameForm')" readonly="readonly" class="FormDateTypeInput" id="endDate" size="18" name="endDate">
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td height="26" align="right">
+                                                   Descripton :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <textarea id="productname" name="productname" autocomplete="off" placeholder="Productname" class="FormTextareaTypeInput" > </textarea>
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top">
+                                                <td colspan="2" align="left">
+                                                	<div id="trade_file_view_details">
+                                                        <div style="margin-bottom:4px;width:80%; font-family:Tahoma, Geneva, sans-serif;" class="clonedInputForScripList">
+                                                            <fieldset style='width:100%;border:0px;border-top:1px solid #2b2d93;font-family:Tahoma, Geneva, sans-serif;'>
+                                                                <legend style="border:0px;" id="stock1">Add Product List <input type="text" name="closest_position" id="closest_position1" class="closest_position" value="1" readonly="readonly" size="2" style="border:0px;font-weight:bold; width:40px;"/></legend>
+                                                                <table width="80%" class="frmTbl" border="0" style="font-family:Tahoma, Geneva, sans-serif;font-size:100%;">
+                                                                    <tr>
+                                                                        <td colspan="3" align="right" valign="top">
+                                                                            <input style="font-family:Tahoma, Geneva, sans-serif;font-size:100%;" class="btnDelMoreScripList"  disabled="disabled" type="image" src="../images/cancel.png">	
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr valign="middle">
+                                                                        <td align="right">Trading Code <sup style="color:red;">*</sup></td>
+                                                                        <td align="left">:</td>
+                                                                        <td align="left">
+                                                                            <select name="chFrom" id="chFrom">
+                                                                            	<option value="First">First</option>
+                                                                            </select>
+                                                                            
+                                                                        </td>
+                                                                    </tr>
+                                                                  
+                                                                </table>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td align="right" colspan="2">
+                                                    <input style="font-family:Tahoma, Geneva, sans-serif;font-size:100%;" id="btnAddMoreScripList" value="Add More" type="button">
+                                                </td>
+                                            </tr>                                       
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="left">
+                                                    <input type="button" name="InsertLabourContract" id="InsertLabourContract" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showSession')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                   <!-- </form>-->
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Labour Contact Entry Form  -->                 
+                    
+                </table>
+                
+            </td>
+            <td width="50%" align="right">
+                <table border="0" align="center" cellpadding="0" cellspacing="0" width="100%">
+                
+                    
+                    <!-- View Labour Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewProcurementType')">View Labour Information</legend>
+                                <div id="viewProcurementType" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:10%;">SL#</th>
+                                            <th style="width:40%;">Name</th>
+                                            <th style="width:40%;">Father Name</th>
+                                            <th style="width:40%;">Address</th>
+                                            <th style="width:40%;">Mobile</th>
+                                            <th style="width:10%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[LABOUR_VIEW]%-->
+                                    </tbody>
+                                </table>
+                                </div>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Labour End -->
+                    
+                    <!-- View Party Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewParty')">View Party Information</legend>
+                                <div id="viewParty" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:10%;">SL#</th>
+                                            <th style="width:40%;">Name</th>
+                                            <th style="width:40%;">Father Name</th>
+                                            <th style="width:40%;">Address</th>
+                                            <th style="width:40%;">Mobile</th>
+                                            <th style="width:10%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[PARTY_VIEW]%-->
+                                    </tbody>
+                                </table>
+                                </div>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Party End -->
+                    
+                    <!-- View Packing Name Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewPackingName')">View Packing Name Information</legend>
+                                <div id="viewPackingName" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:10%;">SL#</th>
+                                            <th style="width:40%;">Name</th>
+                                            <th style="width:10%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[PACKING_NAME_VIEW]%-->
+                                    </tbody>
+                                </table>
+                                </div>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Packing Name End -->
+                    
+                     <!-- View Quantity Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewQuantity')">View Quantity Information</legend>
+                                <div id="viewQuantity" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:10%;">SL#</th>
+                                            <th style="width:40%;">Quantity</th>
+                                            <th style="width:10%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[QUANTITY_VIEW]%-->
+                                    </tbody>
+                                </table>
+                                </div>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Quantity End -->
+                    
+                    <!-- View Weight Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewWeight')">View Weight Information</legend>
+                                <div id="viewWeight" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:10%;">SL#</th>
+                                            <th style="width:40%;">Weight Name</th>
+                                            <th style="width:10%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[WEIGHT_VIEW]%-->
+                                    </tbody>
+                                </table>
+                                </div>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Weight End -->
+                    
+                    <!-- View Chamber Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewChamber')">View Chamber Information</legend>
+                                <div id="viewChamber" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:10%;">SL#</th>
+                                            <th style="width:40%;">Chamber Name</th>
+                                            <th style="width:10%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[CHAMBER_VIEW]%-->
+                                    </tbody>
+                                </table>
+                                </div>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Chamber End -->
+                    
+                    <!-- View Weight Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewPackingUnit')">View Packing Unit Information</legend>
+                                <div id="viewPackingUnit" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:10%;">SL#</th>
+                                            <th style="width:40%;">Packing Unit </th>
+                                            <th style="width:10%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[WEIGHT_VIEW]%-->
+                                    </tbody>
+                                </table>
+                                </div>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Weight End -->
+                    
+                    <!-- View Product Cat Type Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewProdCatType')">View Product Cat Type Information</legend>
+                                <div id="viewProdCatType" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:10%;">SL#</th>
+                                            <th style="width:40%;">Product Cat Type Name </th>
+                                            <th style="width:10%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[PROD_CAT_TYPE_VIEW]%-->
+                                    </tbody>
+                                </table>
+                                </div>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Product Cat Type End -->
+                    
+                    <!-- View Product Start -->
+                    <tr valign="top">
+                        <td align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" onclick="return ShowHide('viewProd')">View Product Information</legend>
+                                <div id="viewProd" style="display:none;height:200px;overflow:auto;">
+                                <table class="tablesorter" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                                    <thead>
+                                        <tr valign="top" style="font-weight:bold; text-align:center; background:#E8E1E1;">
+                                            <th style="width:10%;">SL#</th>
+                                            <th style="width:40%;">Product Type Name </th>
+                                            <th style="width:40%;">Product Name </th>
+                                            <th style="width:10%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--%[PROD_VIEW]%-->
+                                    </tbody>
+                                </table>
+                                </div>
+                            </fieldset>
+                        </td>
+                    </tr>
+                    <!-- View Product End -->
+                </table>
+            </td>
+        </tr>
+    </table>

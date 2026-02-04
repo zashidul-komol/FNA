@@ -1,0 +1,236 @@
+    <table width="94%" border="0" cellspacing="1" style="margin:0px auto 0px auto;">
+        <tr>
+            <td colspan="2" align="center"><h4>Initialization Evaluation Report Approval Stage</h4>
+            <div style="text-align:left;"><b>Package No:</b>  <!--%[PI_4]%--> <br/>
+             <b>Lot No:</b>  <!--%[PI_5]%--> <br/>
+            <b>Contract Name:</b> <!--%[PI_6]%--></div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><!--%[MSG]%--></td>
+        </tr>
+        <tr valign="top">
+            <td width="50%" align="left">
+                <table width="100%"  border="0" cellspacing="0" cellpadding="0" align="center">
+                    
+            <!--  Start Evaluation Report Approval Stage ------------------------------------------------------------------------------------------------------------------    -->
+                   <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmInputTabFieldsSubmit() {
+									var checkDate   = $("#checkDate").val();
+									var checkNewDate = Date.parse(checkDate);
+									
+									var eras_60a      = $("#eras_60a").val();
+									var dSplit  	  = eras_60a.split("-");
+									var eras_60aNew   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var eras_60aNewDate = Date.parse(eras_60aNew);
+									if (eras_60aNewDate < checkNewDate) {
+										alert("Previous Date Not Allow!");
+										$("#eras_60a").focus();
+										return false;
+									}
+									
+									var eras_61      = $("#eras_61").val();
+									var dSplit  	 = eras_61.split("-");
+									var eras_61New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var eras_61NewDate = Date.parse(eras_61New);
+									if (eras_61NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#eras_61").focus();
+										return false;
+									}
+									
+									var eras_62      = $("#eras_62").val();
+									var dSplit  	= eras_62.split("-");
+									var eras_62New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var eras_62NewDate = Date.parse(eras_62New);
+									if (eras_62NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#eras_62").focus();
+										return false;
+									}
+									
+									var eras_62a      = $("#eras_62a").val();
+									var dSplit  	  = eras_62a.split("-");
+									var eras_62aNew   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var eras_62aNewDate = Date.parse(eras_62aNew);
+									if (eras_62aNewDate < checkNewDate) {
+										alert("Previous Date Not Allow!");
+										$("#eras_62a").focus();
+										return false;
+									}
+									var eras_62b      = $("#eras_62b").val();
+									var dSplit  	  = eras_62b.split("-");
+									var eras_62bNew   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var eras_62bNewDate = Date.parse(eras_62bNew);
+									if (eras_62bNewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#eras_62b").focus();
+										return false;
+									}
+									
+									var eras_63      = $("#eras_63").val();
+									var dSplit  	 = eras_63.split("-");
+									var eras_63New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var eras_63NewDate = Date.parse(eras_63New);
+									if (eras_63NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#eras_63").focus();
+										return false;
+									}
+
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <script>
+                              $(document).ready(function() {
+                               $("#eras_60a, #eras_61, #eras_62, #eras_62a, #eras_62b, #eras_63").datepicker({ dateFormat: "dd-mm-yy",
+                                beforeShow: function(input, inst) {
+                                 if ($("#dateplanedcheck").is(':checked')) {
+                                  $(".ui-datepicker-calendar").css("display", "none");
+                                }}
+                               });
+                              });
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" >Enter Evaluation Report Approval Stage</legend>
+                                <div id="showInputTabFields">
+                                <center><b>Insert Data for " <!--%[EVALUATION_RAS_PACKAGENAME]%--> " Package</b></center><hr/>
+                                  <form name="inputTabFieldsForm" method="post" action="evaluationReportApprovalStage.php" onsubmit="return confirmInputTabFieldsSubmit();">
+                                        <table width="100%" border="0" cellpadding="3" cellspacing="0">
+                                        
+                                             <tr valign="top" class="rowcolor" style="display:<!--%[ERAS_60A_61_62_VIEW]%-->;">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="59%" height="26" align="right">
+                                                    Planned Date of Sending Bid Evaluation Report (BER) to ADB:
+                                                </td>
+                                                <td width="40%" height="26" align="left">
+													 <input type="text" id="eras_60a" name="eras_60a"  class="FormDateTypeInput" value=""  autocomplete="off">
+                                                </td>
+                                            </tr>
+                                        
+                                            <tr valign="top" class="rowcolor" style="display:<!--%[ERAS_60A_61_62_VIEW]%-->;">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="59%" height="26" align="right">
+                                                    Date of Sending BER to ADB :
+                                              </td>
+                                                <td width="40%" height="26" align="left">
+													 <input type="text" id="eras_61" name="eras_61" class="FormDateTypeInput" value=""  autocomplete="off">
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="59%" height="26" align="right">
+                                                    Number of Revisions/ Clarifications of BER/ TBER/ FBER Sought by ADB:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="eras_96" name="eras_96" onkeyup='removeChar(this);' autocomplete="off" placeholder="Number of Revision of BER ..................." class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                            
+                                             <tr valign="top" class="rowcolor" style="display:<!--%[ERAS_60A_61_62_VIEW]%-->;">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="59%" height="26" align="right">
+                                                    Date of ADB's NOL on Contract Award / BER:
+                                                </td>
+                                                <td height="26" align="left">
+													 <input type="text" id="eras_62" name="eras_62"  class="FormDateTypeInput" value=""  autocomplete="off">
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="59%" height="26" align="right">
+                                                    Planned Date of EA's Approval on BER:
+                                                </td>
+                                                <td width="40%" height="26" align="left">
+													 <input type="text" id="eras_62a" name="eras_62a" class="FormDateTypeInput" value=""  autocomplete="off">
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="59%" height="26" align="right">
+                                                    Number of Revisions/ Clarifications of BER/ TBER/ FBER Sought by Approving Authority:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="eras_95" name="eras_95" autocomplete="off" onkeyup='removeChar(this);' placeholder="Number of Revisions .................." class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                           <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="59%" height="26" align="right">
+                                                    Date of EA's Approval on BER:
+                                                </td>
+                                                <td height="26" align="left">
+													 <input type="text" id="eras_63" name="eras_63" class="FormDateTypeInput" value=""  autocomplete="off">
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="59%" height="26" align="right">
+                                                    Planned Date of Issuance of NOA in Favor of Recommended Bidder:
+                                                </td>
+                                                <td width="40%" height="26" align="left">
+													 <input type="text" id="eras_62b" name="eras_62b"class="FormDateTypeInput"  autocomplete="off">
+                                                </td>
+                                            </tr>
+                                           
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="59%" height="26" align="right">
+                                                    Number of Complaints Received by EA :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="eras_101" name="eras_101" onkeyup='removeChar(this);' autocomplete="off" placeholder="Number of Complaints ..................." class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                           <tr valign="top" class="rowcolor">
+                                                <td width="3%" height="26" align="right">&nbsp;</td>
+                                                <td width="46%" height="26" align="right">
+                                                  Short Description of Complaints/ F&C Detected:
+                                                </td>
+                                                <td height="26" align="left">
+                                                  <textarea id="eras_104" name="eras_104" value="" autocomplete="off" class="FormTextAreaTypeInput"></textarea> 
+                                                </td>
+                                            </tr>
+                                            
+                                            
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td width="59%" height="26" align="right"> </td>
+                                                <td height="26" align="left">
+                                                    <input type="hidden" name="checkDate" id="checkDate" value="<!--%[CHECK_DATE]%-->" />
+                                                    <input type="hidden" name="evaluationRASpackageId" value="<!--%[EVALUATION_RAS_PACKAGEID]%-->" />
+                                                    <input type="hidden" name="evaluationRASpackageName" value="<!--%[EVALUATION_RAS_PACKAGENAME]%-->" />
+                                                    <input type="submit" name="insertEvaluationPAS" value="Submit" class="FormSubmitBtn" />
+                                                    <input type="reset" value="Reset" name="reset" class="FormResetBtn">
+                                                    <input type="button" value="Back" onclick="window.close();" class="FormResetBtn">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+						
+            <!--  End Evaluation Report Approval Stage ------------------------------------------------------------------------------------------------------------------     -->
+                    
+                    
+                </table>
+                
+            </td>
+
+        </tr>
+    </table>

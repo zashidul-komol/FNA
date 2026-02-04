@@ -1,0 +1,200 @@
+    <table width="85%" border="0" cellspacing="1" cellpadding="10" style="margin:0px auto 0px auto;">
+        <tr>
+            <td colspan="2" align="center"><h4>Initialization Package Information</h4></td>
+        </tr>
+        <tr>
+              
+<!--            <td colspan="2" align="center"><!--%[MSG]%</td> -->
+        </tr>
+        <tr valign="top">
+            <td width="50%" align="left">
+                <table width="100%"  border="0" cellspacing="0" cellpadding="0" align="center">
+                    
+            <!--  Start Pacakge Information ------------------------------------------------------------------------------------------------------------------    -->
+            
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmPacakgeInformationSubmit() {
+								
+								}
+								
+							
+                            </script>
+                            
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" >Enter Package Information</legend>
+                                <div id="showPacakgeInformation">
+                                  <form name="PacakgeInformationForm" method="post" action="packageInformation.php" onsubmit="return confirmPacakgeInformationSubmit();">
+   
+                                  
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                            
+                                            <tr valign="top">
+                                          		  <td width="3%" height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="right">
+                                                  ADB  Project Name :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <select name="psId" id="psId"  class="FormSelectTypeInput" autofocus="">
+                                                    <option value="">Select Project Name</option>
+                                                    <!--%[PROJECT_LIST]%-->
+                                                    </select>
+                           						 <sup style="color:red;">*</sup>
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="3%" height="26" align="right">&nbsp;</td>
+                                                <td width="46%" height="26" align="right">
+                                                    Package No :
+                                                </td>
+                                                <td width="51%" height="26" align="left">
+                                                    <input type="text" id="pi_4" name="pi_4" autocomplete="off" placeholder="Package No" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="3%" height="26" align="right">&nbsp;</td>
+                                                <td width="46%" height="26" align="right">
+                                                    Lot No.  :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="pi_5" name="pi_5" autocomplete="off" placeholder="Lot No" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="3%" height="26" align="right">&nbsp;</td>
+                                                <td width="46%" height="26" align="right">
+                                                    Contract Name :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="pi_6" name="pi_6" autocomplete="off" placeholder="Contract Name" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="3%" height="26" align="right">&nbsp;</td>
+                                                <td width="46%" height="26" align="right">
+                                                   Short Description of Contract  :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <!--<input type="text" id="pi_7" name="pi_7" autocomplete="off" placeholder="Short Description of Contract" class="FormTextTypeInput" />-->
+                                                    <textarea id="pi_7" name="pi_7" autocomplete="off" class="FormTextAreaTypeInput"> </textarea> 
+                                                </td>
+                                            </tr>
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="3%" height="26" align="right">&nbsp;</td>
+                                                <td width="46%" height="26" align="right">
+                                                    Unit :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="pi_7a" name="pi_7a" autocomplete="off" placeholder="Unit" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="3%" height="26" align="right">&nbsp;</td>
+                                                <td width="46%" height="26" align="right">
+                                                    Quantity :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="pi_7b" name="pi_7b" autocomplete="off" onkeyup="removeChar(this);" placeholder="Quantity" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top">
+                                                       <td width="2%" height="26" align="right">&nbsp;</td>
+                                                       <td height="26" align="right">
+                                                       Applicability of Guidelines :
+                                                       </td>
+                                                       <td height="26" align="left">
+                                                      <select name="pi_16" id="pi_16"  class="FormSelectTypeInput" autofocus="">
+                                                       <option value="">Select Applicability of Guidelines</option>
+                                                       <option value="ADB">ADB</option>
+                                                       <option value="GOB">GOB</option>
+                                                       </select>
+                                                       <sup style="color:red;">*</sup>
+                                                       </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="3%" height="26" align="right">&nbsp;</td>
+                                                <td width="46%" height="26" align="right">
+                                                    Cost Estimate (BDT) :
+                                                </td>
+                                                <td height="26" align="left">
+                                                	<input id="pi_7d" name="pi_7d" autocomplete="off" onblur="if(this.value=='') this.value='0.00'; numberFormat(this.id,this.value.toString(),'2',',','.');" onfocus="if(this.value=='0.00') this.value='';" size="15" class="FormNumericTypeInput" onkeyup="removeChar(this);"/> 
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="3%" height="26" align="right">&nbsp;</td>
+                                                <td width="46%" height="26" align="right">
+                                                   Cost Estimate (US$) :
+                                                </td>
+                                                <td height="26" align="left">
+  													 <input id="pi_8" name="pi_8" autocomplete="off" onblur="if(this.value=='') this.value='0.00'; numberFormat(this.id,this.value.toString(),'2',',','.');" onfocus="if(this.value=='0.00') this.value='';" size="15" class="FormNumericTypeInput" onkeyup="removeChar(this);"/> 
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="3%" height="26" align="right">&nbsp;</td>
+                                                <td width="46%" height="26" align="right">
+                                                    Source of Funds :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="pi_7c" name="pi_7c" autocomplete="off" placeholder="Source of Funds" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="3%" height="26" align="right">&nbsp;</td>
+                                                <td width="46%" height="26" align="right">
+                                                    Approving Authority :
+                                                </td>
+                                                 <td height="26" align="left">
+                                                      <select name="pi_17" id="pi_17"  class="FormSelectTypeInput" autofocus="">
+                                                       <option value="">Select Approving Authority</option>
+                                                       <option value="PD">PD</option>
+                                                       <option value="HOPE">HOPE</option>
+                                                       <option value="BOD">BOD</option>
+                                                       <option value="MI">MI</option>
+                                                       <option value="MINS">MINS</option>
+                                                       <option value="CCGP">CCGP</option>
+                                                       </select>
+                                                       <sup style="color:red;">*</sup>
+                                                 </td>
+                                            </tr>
+                                            
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td width="46%" height="26" align="right"> </td>
+                                                <td height="26" align="left">
+                                                	<input type="hidden" name="piProcurementType" value="<!--%[PROCUREMENTTYPE]%-->" />
+                                                    <input type="hidden" name="piProcurementMethod" value="<!--%[PROCUREMENTMETHOD]%-->" />
+                                                    <input type="hidden" name="piBiddingProcedure" value="<!--%[BIDDINGPROCUREDURE]%-->" />
+                                                    <input type="hidden" name="piPriorReview" value="<!--%[PRIOREVIEW]%-->" />
+                                                    <input type="hidden" name="piPrequalificationProcess" value="<!--%[PREWUALIFICATIONPROCESS]%-->" />
+                                                    <input type="submit" name="insertPacakgeInformation" value="Next" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+						
+            <!--  End Pacakge Information ------------------------------------------------------------------------------------------------------------------     -->
+                    
+                
+                </table>
+                
+                
+            </td>
+
+        </tr>
+    </table>

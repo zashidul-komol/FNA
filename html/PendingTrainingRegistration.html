@@ -1,0 +1,301 @@
+<script  type="text/javascript">
+	function getPaymentClear(registrationId) {
+		var contact = {};
+		contact = {
+			message: null,
+			init: function (registrationId) {
+				// load the contact form using ajax
+				$.post("ajax/getPaymentClear.php", {'registrationId': registrationId}, 
+				function(data) {
+					$(data).modal({
+						closeHTML: "<a href='#' title='Close' class='modal-close'>x</a>",
+						position: ["15%",],
+						overlayId: 'contact-overlay',
+						containerId: 'contact-container',
+						onOpen: contact.open,
+						onShow: contact.show,
+						onClose: contact.close
+					});
+				});
+				$('#contact-container .contact-title').html('');
+				//$('#contact-form input.contact, #contact-form a.contact').click(function (e) {});
+			},
+			open: function (dialog) {
+				// dynamically determine height
+				var h = 600;
+				if ($('#contact-subject').length) {
+					h += 26;
+				}
+				if ($('#contact-cc').length) {
+					h += 22;
+				}
+	
+				var title = $('#contact-container .contact-title').html();
+				$('#contact-container .contact-title').html('Loading...');
+				dialog.overlay.fadeIn(200, function () {
+					dialog.container.fadeIn(200, function () {
+						dialog.data.fadeIn(200, function () {
+							$('#contact-container .contact-content').animate({
+								height: h
+							}, function () {
+								$('#contact-container .contact-title').html(title);
+								$('#contact-container form').fadeIn(200, function () {
+									$('#contact-container #contact-name').focus();
+	
+									$('#contact-container .contact-cc').click(function () {
+										var cc = $('#contact-container #contact-cc');
+										cc.is(':checked') ? cc.attr('checked', '') : cc.attr('checked', 'checked');
+									});
+								});
+							});
+						});
+					});
+				});
+			},
+			
+			show: function (dialog) {
+				$('#InvestorPendingPaymentForm #payment_clear').click(function (e) {
+					e.preventDefault();
+					// validate form
+					if (contact.validate()) {
+						var msg = $('#InvestorPendingPaymentForm .contact-message');
+						msg.fadeOut(function () {
+							msg.removeClass('contact-error').empty();
+						});
+						$('#InvestorPendingPaymentForm .contact-title').html('Sending...');
+						$('#InvestorPendingPaymentForm table').fadeOut(200);
+						$('.contact-content').animate({
+							height: '80px'
+						}, function () {
+							$('#InvestorPendingPaymentForm .contact-loading').fadeIn(200, function () {
+								//alert($('#InvestorPendingPaymentForm').serialize() + '&payment_clear=OK');
+								$.ajax({
+									url: 'PendingSellPayment.php',
+									data: $('#InvestorPendingPaymentForm').serialize() + '&payment_clear=OK',
+									type: 'post',
+									cache: false,
+									dataType: 'html',
+									success: function (data) {
+										$('#InvestorPendingPaymentForm .contact-loading').fadeOut(200, function () {
+											$('#InvestorPendingPaymentForm .contact-title').html('Thank you!');
+											msg.html(data).fadeIn(200);
+										});
+										//window.location.reload();
+									},
+									error: contact.error
+								});
+							});
+						});
+					} else {
+						if ($('#InvestorPendingPaymentForm .contact-message:visible').length > 0) {
+							var msg = $('#InvestorPendingPaymentForm .contact-message div');
+							msg.fadeOut(200, function () {
+								msg.empty();
+								contact.showError();
+								msg.fadeIn(200);
+							});
+						} else {
+							$('#InvestorPendingPaymentForm .contact-message').animate({
+								height: '30px'
+							}, contact.showError);
+						}
+					}
+				});
+				$('#InvestorPendingPaymentForm #payment_disapprove').click(function (e) {
+					e.preventDefault();
+					if(!confirm('Are you sure, you want to proceed?')){
+						return false;
+					} else {
+						var msg = $('#InvestorPendingPaymentForm .contact-message');
+						msg.fadeOut(function () {
+							msg.removeClass('contact-error').empty();
+						});
+						$('#InvestorPendingPaymentForm .contact-title').html('Sending...');
+						$('#InvestorPendingPaymentForm table').fadeOut(200);
+						$('.contact-content').animate({
+							height: '80px'
+						}, function () {
+							$('#InvestorPendingPaymentForm .contact-loading').fadeIn(200, function () {
+								//alert($('#InvestorPendingPaymentForm').serialize() + '&payment_clear=OK');
+								$.ajax({
+									url: 'PendingSellPayment.php',
+									data: $('#InvestorPendingPaymentForm').serialize() + '&payment_disapprove=Disapprove',
+									type: 'post',
+									cache: false,
+									dataType: 'html',
+									success: function (data) {
+										$('#InvestorPendingPaymentForm .contact-loading').fadeOut(200, function () {
+											$('#InvestorPendingPaymentForm .contact-title').html('Thank you!');
+											msg.html(data).fadeIn(200);
+										});
+										setTimeout(function(){
+										   window.location.reload();
+										}, 10000);
+									},
+									error: contact.error
+								});
+							});
+						});	
+						return true;
+					}
+				});
+			},
+			close: function (dialog) {
+				$('#contact-container .contact-message').fadeOut();
+				$('#contact-container .contact-title').html('Closing...');
+				$('#contact-container form').fadeOut(200);
+				$('#contact-container .contact-content').animate({
+					height: 40
+				}, function () {
+					dialog.data.fadeOut(200, function () {
+						dialog.container.fadeOut(200, function () {
+							dialog.overlay.fadeOut(200, function () {
+								//window.location.reload();
+								$.modal.close();
+							});
+						});
+					});
+				});
+			},
+			error: function (xhr) {
+				alert(xhr.statusText);
+			},
+			validate: function () {
+				contact.message = '';
+				if($("#InvestorPendingPaymentForm #coa_head1").val() == ''){
+					contact.message = 'COA-Head is required. ';
+					$('#InvestorPendingPaymentForm #coa_head1').focus();
+					return false;	
+				}
+				if(typeof($('#InvestorPendingPaymentForm input[name=accountType1]:radio:checked').val()) == 'undefined') {
+					contact.message = 'DR/CR is required. ';
+					$('#InvestorPendingPaymentForm #accountTypeDebit1').focus();
+					return false;	
+				}
+				if(Number($("#InvestorPendingPaymentForm #amount1").val()) == 0){
+					contact.message = 'Amount is required. ';
+					$('#InvestorPendingPaymentForm #amount1').focus();
+					return false;	
+				}
+				
+				var numOfRows = $("#InvestorPendingPaymentForm #NumberOfRows").val();
+				for(var i = 1; i < numOfRows; i++ ) {
+					if($('#InvestorPendingPaymentForm #chequeNo').length > 0) {
+						if($("#InvestorPendingPaymentForm #chequeNo").val() == ''){
+							contact.message = 'Cheque No is required. ';
+							$('#InvestorPendingPaymentForm #chequeNo').focus();
+							return false;	
+						}
+					}
+					if($('#InvestorPendingPaymentForm #chq_date').length > 0) {
+						if($("#InvestorPendingPaymentForm #chq_date").val() == ''){
+							contact.message = 'Cheque Date is required. ';
+							$('#InvestorPendingPaymentForm #chq_date').focus();
+							return false;	
+						}
+					}
+				}
+				
+				for(var i = 2; i < numOfRows; i++ ) {
+					if($("#InvestorPendingPaymentForm #coa_head"+i).val() != ''){
+						if(typeof($('#InvestorPendingPaymentForm input[name=accountType'+i+']:radio:checked').val()) == 'undefined') {
+							contact.message = 'DR/CR is required. ';
+							$('#InvestorPendingPaymentForm #accountTypeDebit'+i).focus();
+							return false;	
+						}
+						if(Number($("#InvestorPendingPaymentForm #amount"+i).val()) == 0){
+							contact.message = 'Amount is required. ';
+							$('#InvestorPendingPaymentForm #amount'+i).focus();
+							return false;	
+						}
+					}
+				}
+				
+				var Totaldebit 	= 0;
+				var TotalCredit = 0;
+				Totaldebit 		= $('#totalDrAmount').val();
+				Totaldebit 		= Number(Totaldebit.replace(/\,/g,""));
+				
+				TotalCredit 	= $('#totalCrAmount').val();
+				TotalCredit 	= Number(TotalCredit.replace(/\,/g,""));
+							
+				if(Number(Totaldebit) != Number(TotalCredit)){
+					if(Totaldebit > TotalCredit) {
+						var diffAmount = Totaldebit - TotalCredit;	
+					} else {
+						var diffAmount = TotalCredit - Totaldebit;
+					}
+					contact.message = "Debit and Credit Amount mismatch! Difference : " + numberFormat('',diffAmount,2,',','.');
+					return false;
+				}
+				
+				if(!confirm('Are you sure, you want to proceed?')){
+					return false;
+				}
+				return true;
+			},
+			validateEmail: function (email) {
+				var at = email.lastIndexOf("@");
+	
+				// Make sure the at (@) sybmol exists and  
+				// it is not the first or last character
+				if (at < 1 || (at + 1) === email.length)
+					return false;
+	
+				// Make sure there aren't multiple periods together
+				if (/(\.{2,})/.test(email))
+					return false;
+	
+				// Break up the local and domain portions
+				var local = email.substring(0, at);
+				var domain = email.substring(at + 1);
+	
+				// Check lengths
+				if (local.length < 1 || local.length > 64 || domain.length < 4 || domain.length > 255)
+					return false;
+	
+				// Make sure local and domain don't start with or end with a period
+				if (/(^\.|\.$)/.test(local) || /(^\.|\.$)/.test(domain))
+					return false;
+	
+				// Check for quoted-string addresses
+				// Since almost anything is allowed in a quoted-string address,
+				// we're just going to let them go through
+				if (!/^"(.+)"$/.test(local)) {
+					// It's a dot-string address...check for valid characters
+					if (!/^[-a-zA-Z0-9!#$%*\/?|^{}`~&'+=_\.]*$/.test(local))
+						return false;
+				}
+	
+				// Make sure domain contains only valid characters and at least one period
+				if (!/^[-a-zA-Z0-9\.]*$/.test(domain) || domain.indexOf(".") === -1)
+					return false;	
+	
+				return true;
+			},
+			showError: function () {
+				$('#contact-container .contact-message')
+					.html($('<div class="contact-error"></div>').append(contact.message))
+					.fadeIn(600);
+			}
+		};
+		
+		contact.init(registrationId);
+	}
+</script>
+<table width="85%" border="0" cellspacing="1" cellpadding="10" style="margin:0px auto 0px auto;">
+    <tr>
+        <td align="center"><h4>Pending Training Registration List</h4></td>
+    </tr>
+    <tr>
+        <td align="center"><!--%[MSG]%--></td>
+    </tr>
+    <tr valign="top">
+        <td align="left" style="padding-right:30px;">
+            <fieldset style="width:1100px;">
+                <legend style="color:#2C89B5;">Pending Training Registration List</legend>
+                    <!--%[REGISTRATION_LIST]%-->
+            </fieldset>
+        </td>
+    </tr>
+</table>

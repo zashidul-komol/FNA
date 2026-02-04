@@ -1,0 +1,194 @@
+
+.px {
+	padding: 0px;
+	margin: 2px 0px 0px 0px;
+}
+.px5 {
+	padding: 0px;
+	margin: 5px 0px 0px 0px;
+}
+th {
+	color : #000000;
+	font-size : 11px;
+	font-family : Tahoma,Verdana,Arial;
+}
+input, select {
+	color : #000000;
+	font-size : 11px;
+	font-family : Tahoma,Verdana,Arial;
+	font-weight: bold;
+}
+.BDJTopMenuNormal{
+	font-family:verdana;
+	font-size:10px;
+	color:#627ff2;
+	font-weight:bold;
+	text-decoration:none;
+}
+.BDJTopMenuNormal:hover{
+	color:#ff0000;
+}
+
+.BDJTopMenuSelected{
+	font-family:verdana;
+	font-size:10px;
+	color:#fd7700;
+	font-weight:bold;
+	text-decoration:none;
+}
+.BDJtabNormal{
+	font-family:arial;
+	font-size:12px;
+	color:#5671bd;
+	font-weight:bold;
+	border-bottom:1px solid #8496d7;
+	background-color:#f2f2f5;
+}
+.BDJtabSelected{
+	font-family:arial;
+	font-size:12px;
+	color:#fd7700;
+	font-weight:bold;
+	border-left:1px solid #8496d7; 
+	border-right:1px solid #8496d7;
+	border-top:1px solid #8496d7;
+	background-color:#f6f9f5;
+
+}
+.title01, .BDJtabLinkNormal{
+	font-family:"Times New Roman", Times, serif;
+	font-size:25px;
+	color: #0033CC;	
+	font-weight: bold;
+}
+.BDJtabLinkSelected{
+	font-family:arial;
+	font-size:12px;
+	color:#fd7700;
+	font-weight:bold;
+	text-decoration:none;
+}
+.BDJtabDisabled{
+	font-family:arial;
+	font-size:12px;
+	color:#9ba2b7;
+	font-weight:bold;
+	border-bottom:1px solid #8496d7;
+	background-color:#f2f2f5;
+}
+.BDJGrayTxt{
+	font-family:arial;
+	font-size:12px;
+	color:#b7b7b7;
+	font-weight:bold;
+	border-bottom:1px solid #8496d7;
+	background-color:#f2f2f5;
+}
+.BDJFormTitle{
+	font-family:Verdana;
+	font-size:14px;
+	color:#268209;
+	font-weight:bold;
+}
+.BDJLebels{
+	font-family:verdana;
+	font-size:12px;
+	color:#2d428d;
+	padding-right:7px;
+	padding-left:7px;
+}
+.BDJLebel{
+	font-family:verdana;
+	font-size:9px;
+	color:#2d428d;
+	padding-right:7px;
+	padding-left:7px;
+}
+
+.BDJWelcomeTxt{
+	font-family:verdana;
+	font-size:11px;
+	color:#000000;
+	text-align:justify;
+}
+.BDJValign{
+	vertical-align:middle;
+}
+.BDJdropdownlist{
+	border:1px solid #cfcccc;
+	vertical-align:middle;
+	font-family:Arial;
+	font-size:12px;
+	width:250px;
+}
+.BDJdropdownlist2{
+	border:1px solid #cfcccc;
+	vertical-align:middle;
+	font-family:Arial;
+	font-size:12px;
+	width:350px;
+}
+.BDJListBox{
+	border:1px solid #cfcccc;
+	vertical-align:middle;
+	font-family:Arial;
+	font-size:11px;
+	width:200px;
+}
+
+.BDJPageBorder{
+	border-left:1px solid #c3c1c1;
+	border-right:1px solid #c3c1c1;
+	border-bottom:1px solid #c3c1c1;
+	background-color:#FFFFFF;
+}
+.BDJCopyright{
+ font-family:verdana;
+ font-size:11px;
+ color:#94a7d4;
+ padding-bottom:15px;
+
+}
+#BDJmenu td a {
+	COLOR: #fd7700;
+	background-image:url(../Images/btn_bg_n.gif);
+	background-repeat:repeat-y;
+	vertical-align:middle;
+	padding-left:7px;
+	text-decoration:none;
+	DISPLAY: block;
+	HEIGHT:28PX;
+	FONT-SIZE: 11px;
+	FONT-FAMILY: verdana; 
+}
+
+#BDJmenu td a:hover {
+	COLOR: #000000;
+	BACKGROUND:#CED2D3 no-repeat;
+	background-image:url(../Images/btn_bg_s.gif);
+	background-repeat:repeat-y;
+}
+#BDJmenu td a.selected {
+	FONT-WEIGHT: bold; 
+	background-image:url(../Images/btn_bg_s.gif);
+	background-repeat:repeat-y;
+}
+
+#BDJmenu td a:visited {
+	COLOR: #fd7700;
+	background-repeat:repeat-y;
+	vertical-align:middle;
+	padding-left:7px;
+	text-decoration:none;
+	DISPLAY: block;
+	HEIGHT:28PX;
+	FONT-SIZE: 11px;
+	FONT-FAMILY: verdana; 
+}
+
+.BDJtextBox .BDJtextarea .BDJtextarea2 .BDJButton .BDJButton2 .BDJButton3 .BDJButton4 .fjsel{
+	color : #000000;
+	font-size : 11px;
+	font-family : Tahoma,Verdana,Arial;
+	font-weight: bold;
+}

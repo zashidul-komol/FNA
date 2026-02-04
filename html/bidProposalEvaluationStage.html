@@ -1,0 +1,189 @@
+    <table width="85%" border="0" cellspacing="1" cellpadding="10" style="margin:0px auto 0px auto;">
+        <tr>
+            <td colspan="2" align="center"><h4></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><!--%[MSG]%--></td>
+        </tr>
+        <tr valign="top">
+            <td width="50%" align="left">
+                <table width="100%"  border="0" cellspacing="0" cellpadding="0" align="center">
+                    
+            <!--  Start Bid / Proposal Evaluation Stage ------------------------------------------------------------------------------------------------------------------    -->
+                 <!-- <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmInputTabFieldsSubmit() {
+									if($("#itfName").val() == ''){
+											alert("Please enter Input Tab Fields Name");
+											$("#itfName").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" >Enter Bid / Proposal Evaluation Stage</legend>
+                                <div id="showInputTabFields">
+                                  <center><b>Insert Data for " <!--%[BID_PES_PACKAGENAME]% </b></center><hr/>-->
+                                 <!-- <form name="inputTabFieldsForm" method="post" action="ProjectFileManagement.php" onsubmit="return confirmInputTabFieldsSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                        
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="4%" height="26" align="right">&nbsp;</td>
+                                                <td width="40%" height="26" align="right">
+                                                    Date of Bids Opening (T&F) :
+                                                </td>
+                                                <td width="56%" height="26" align="left">
+                                                    <input type="text" id="loanGrantNO" name="pi_1" autocomplete="off" placeholder="Date of Bids Opening (T&F)" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="4%" height="26" align="right">&nbsp;</td>
+                                                <td width="40%" height="26" align="right">
+                                                    Date of BER :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="loanGrantNO" name="pi_2" autocomplete="off" placeholder="Date of BER" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="4%" height="26" align="right">&nbsp;</td>
+                                                <td width="40%" height="26" align="right">
+                                                    Number of Bids Received :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="loanGrantNO" name="pi_3" autocomplete="off" placeholder="Number of Bids Received" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="4%" height="26" align="right">&nbsp;</td>
+                                                <td width="40%" height="26" align="right">
+                                                    Number of Responsive Bids :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="loanGrantNO" name="pi_4" autocomplete="off" placeholder="Number of Responsive Bids" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="4%" height="26" align="right">&nbsp;</td>
+                                                <td width="40%" height="26" align="right">
+                                                    BOS Sent to ADB (Yes/ No) :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="loanGrantNO" name="pi_5" autocomplete="off" placeholder="BOS Sent to ADB (Yes/ No)" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="4%" height="26" align="right">&nbsp;</td>
+                                                <td width="40%" height="26" align="right">
+                                                    Revised  Bid Validity Period (days) :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="loanGrantNO" name="pi_6" autocomplete="off" placeholder="Revised  Bid Validity Period ......." class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="4%" height="26" align="right">&nbsp;</td>
+                                                <td width="40%" height="26" align="right">
+                                                    Number of Extension of Bid Validity Period :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="loanGrantNO" name="pi_7" autocomplete="off" placeholder="Number of Extension of Bid ................" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                             
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="4%" height="26" align="right">&nbsp;</td>
+                                                <td width="40%" height="26" align="right">
+                                                    2nd Lowest Evaluated Responsive Bid Price (Equiv. US$) :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="loanGrantNO" name="pi_8" autocomplete="off" placeholder="2nd Lowest Evaluated ..................)" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="4%" height="26" align="right">&nbsp;</td>
+                                                <td width="40%" height="26" align="right">
+                                                    Confidentiality Provision Maintained in Bid Evaluation (Yes/ No) :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="loanGrantNO" name="pi_9" autocomplete="off" placeholder="Confidentiality Provision ......................." class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="4%" height="26" align="right">&nbsp;</td>
+                                                <td width="40%" height="26" align="right">
+                                                    Number of Complaints Received by EA :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="loanGrantNO" name="pi_10" autocomplete="off" placeholder="Number of Complaints ................" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="4%" height="26" align="right">&nbsp;</td>
+                                                <td width="40%" height="26" align="right">
+                                                    Fraud and Corruption Detected by EA (Yes/ No) :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="loanGrantNO" name="pi_11" autocomplete="off" placeholder="Fraud and Corruption ......................" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="4%" height="26" align="right">&nbsp;</td>
+                                                <td width="40%" height="26" align="right">
+                                                    Short Description of F&C Detected :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="loanGrantNO" name="pi_12" autocomplete="off" placeholder="Short Description of .................." class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="4%" height="26" align="right">&nbsp;</td>
+                                                <td width="40%" height="26" align="right">
+                                                    Recommendation for Rebidding (Yes/ No) :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="loanGrantNO" name="pi_13" autocomplete="off" placeholder="Recommendation for ..................)" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                                                                                                                 
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td width="40%" height="26" align="right"> </td>
+                                                <td height="26" align="left">
+                                                    <input type="hidden" name="packageId" value="<!--%[BID_PES_PACKAGEID]%-->
+                                                  <!--  <input type="hidden" name="packageName" value="<!--%[BID_PES_PACKAGENAME]%-->
+                                                  <!--  <input type="submit" name="insertBidProposalEvaluationStage" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+						
+            <!--  End Bid / Proposal Evaluation Stage ------------------------------------------------------------------------------------------------------------------     -->
+                    
+                    
+                </table>
+                
+            </td>
+
+        </tr>
+    </table>

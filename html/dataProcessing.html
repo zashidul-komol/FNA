@@ -1,0 +1,541 @@
+    <table align="center" width="69%" border="0" cellspacing="1" cellpadding="10" style="margin:0px auto 0px auto;">
+        <tr>
+            <td colspan="2" align="center"><h1>DATA PROCESSING</h1></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><!--%[MSG]%--></td>
+        </tr>
+        <tr valign="top">
+            <td width="60%" align="center">
+                <table width="79%"  border="0" cellspacing="0" cellpadding="0" align="center">
+                   
+                    <!--  Start Load Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmLoadSubmit() {
+									if($("#PROJECTID").val() == ''){
+											alert("Please Select Project name");
+											$("#PROJECTID").focus();
+											return false;
+									}
+									if($("#SUBPROJECTID").val() == ''){
+											alert("Please Select Sub Project name");
+											$("#SUBPROJECTID").focus();
+											return false;
+									}
+									if($("#PRODCATTYPEID").val() == ''){
+											alert("Please Select Product Category name");
+											$("#PRODCATTYPEID").focus();
+											return false;
+									}
+									if($("#SESSIONYEARID").val() == ''){
+											alert("Please Select Session Type");
+											$("#SESSIONYEARID").focus();
+											return false;
+									}
+									if($("#STARTDATE").val() == ''){
+											alert("Please Select Start Date");
+											$("#STARTDATE").focus();
+											return false;
+									}
+									if($("#ENDDATE").val() == ''){
+											alert("Please Select End Date");
+											$("#ENDDATE").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								
+								function getProjectNameLoad(pcId){					
+										var options = '';
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#SUBPROJECTID").html('');
+											$("select#SUBPROJECTID").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getProjectList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#SUBPROJECTID").html('');
+												$("select#SUBPROJECTID").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#SUBPROJECTID").html('');
+												$("select#SUBPROJECTID").html(options);
+											}
+										})
+									
+									
+								}
+								
+								
+								function PartyName(pcId){					
+										if(pcId == 1){
+											$("#showLotNo").show();
+										}else{
+											$("#showLotNo").hide();
+										}
+										
+										
+										var options = '';
+										var jj = '';
+										//alert (pcId);
+										options.length=0;
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#PARTYID").html('');
+											$("select#PARTYID").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getPartyName.php",{pcId: pcId}, function(jj) {
+											if(jj.length>0) {
+												//alert (pcId);
+												options = '';
+												options += '<option value="">Select</option>';
+												for (var ii = 0; ii < jj.length; ii++) {
+													options += '<option value="' + jj[ii].optionValue + '">' + jj[ii].optionDisplay + '</option>';
+												}
+												$("select#PARTYID").html('');
+												$("select#PARTYID").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#PARTYID").html('');
+												$("select#PARTYID").html(options);
+												$("#FATHERNAME").val('');
+												$("#ADDRESS").val('');
+												$("#MOBILE").val('');
+											}
+										});
+										var j = '';
+										$.getJSON("ajax/getLabourNameList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options = '';
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#LABOURID").html('');
+												$("select#LABOURID").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#LABOURID").html('');
+												$("select#LABOURID").html(options);
+												
+											}
+										});
+										
+										$.getJSON("ajax/getProdCategoryList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options = '';
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#PRODCATTYPEID").html('');
+												$("select#PRODCATTYPEID").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#PRODCATTYPEID").html('');
+												$("select#PRODCATTYPEID").html(options);
+												
+											}
+										});
+									
+									
+								}
+								
+								function checkCalender(){
+									var ENTRYDATE = String($("#ENTRYDATE").val());
+									if(ENTRYDATE != ''){
+										
+										var tempENTRYDATE = ENTRYDATE.split('-'); 
+										
+										var a = tempENTRYDATE[1]+'/'+tempENTRYDATE[0]+'/'+tempENTRYDATE[2];
+									}
+								}
+								
+								/*function getProductNamebyCat(getCatIdName, pcId){
+																			
+										//var splitCatId = getCatIdName.split("_");										
+										var options = '';
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("#STARTDATE").html('');
+											$("#STARTDATE").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getSessionYear.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("#STARTDATE").html('');
+												$("#STARTDATE").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("#STARTDATE").html('');
+												$("#STARTDATE").html(options);
+											}
+										})
+										$.getJSON("ajax/getSessionYear.php",{pcId: $(this).val()}, function(j) {
+											if(j.length>0) {
+												for (var i = 0; i < j.length; i++) {
+												$("#STARTDATE").val(j[i]['STARTDATE']);
+												$("#ADDRESS").val(j[i]['ADDRESS']);
+												$("#MOBILE").val(j[i]['MOBILE']);
+												
+												}
+											}
+											else {
+												$("#FATHERNAME").val('');
+												$("#ADDRESS").val('');
+												$("#MOBILE").val('');
+											}
+										})
+										
+									
+								}*/
+								
+								function getPackingUnitList(getCatIdName, chId){
+																		
+										var splitCatId = getCatIdName.split("_");
+											
+										var projectId = $("#PROJECTID").val();										
+										var subProjectId = $("#SUBPROJECTID").val();										
+										var labourId = $("#LABOURID").val();						
+										var options = '';
+										if(chId == '' && getCatIdName == '') {
+											options = '<option value="">No Packing Unit Found</option>';
+											$("select#packingUnit_"+splitCatId[1]).html('');
+											$("select#packingUnit_"+splitCatId[1]).html(options);
+											return false;
+										}
+										$.getJSON("ajax/getPackUnitList.php",{chId: chId, projectId: projectId, subProjectId: subProjectId, labourId: labourId}, function(j) {
+											//alert (j);
+											if(j.length>0) {
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#packingUnit_"+splitCatId[1]).html('');
+												$("select#packingUnit_"+splitCatId[1]).html(options);
+											}
+											else {
+												options = '<option value="">No Packing Unit Found</option>';
+												$("select#packingUnit_"+splitCatId[1]).html('');
+												$("select#packingUnit_"+splitCatId[1]).html(options);
+											}
+										})
+									
+									
+								}
+								
+								
+								function getSessionYear(SessionYear){
+									//alert ('komol');
+									//alert (SessionYear);
+									var PROJECTID 		= $("#PROJECTID").val();	
+									var SUBPROJECTID	= $("#SUBPROJECTID").val();	
+									var PRODCATTYPEID	= $("#PRODCATTYPEID").val();										
+									//alert (SessionYear);
+									if(SessionYear == '') {
+											$("#STARTDATE").html('');
+											$("#STARTDATE").html(j);
+											return false;
+										}
+										//alert (SessionYear);
+										$.post("ajax/getSessionYear.php",{SessionYear: SessionYear, PROJECTID: PROJECTID, SUBPROJECTID: SUBPROJECTID, PRODCATTYPEID: PRODCATTYPEID }, function(j) {
+										//alert ('komol');
+											//alert (j);
+											if(j.length>0) {
+												//alert (posId[1]);
+												$("#STARTDATE").val(j);
+												//$("#EMPLOYEEID_"+posId[1]).html(j);
+											}
+											else {
+												$("#STARTDATE").html('');
+											}
+										})
+										
+										$.post("ajax/getSessionYearEndDate.php",{SessionYear: SessionYear, PROJECTID: PROJECTID, SUBPROJECTID: SUBPROJECTID, PRODCATTYPEID: PRODCATTYPEID }, function(j) {
+										//alert ('komol');
+											//alert (j);
+											if(j.length>0) {
+												//alert (posId[1]);
+												$("#ENDDATE").val(j);
+												//$("#EMPLOYEEID_"+posId[1]).html(j);
+											}
+											else {
+												$("#ENDDATE").html('');
+											}
+										})
+										
+																		
+								}
+								
+								function getSelectYear(ProdCatId){	
+								
+										var PROJECTID 		= $("#PROJECTID").val();	
+										var SUBPROJECTID	= $("#SUBPROJECTID").val();	
+										var PRODCATTYPEID	= $("#PRODCATTYPEID").val();					
+										var options = '';
+										if(ProdCatId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#SESSIONYEARID").html('');
+											$("select#SESSIONYEARID").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getSelectSessionYear.php",{ProdCatId: ProdCatId, PROJECTID: PROJECTID, SUBPROJECTID: SUBPROJECTID}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#SESSIONYEARID").html('');
+												$("select#SESSIONYEARID").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#SESSIONYEARID").html('');
+												$("select#SESSIONYEARID").html(options);
+											}
+										})
+									
+									
+								}
+								
+															
+								$(document).ready(function(){
+   																		
+									$("select#PARTYID").change(function(){
+										$.getJSON("ajax/getPartyInfo.php",{party_id: $(this).val()}, function(j) {
+											if(j.length>0) {
+												for (var i = 0; i < j.length; i++) {
+												$("#FATHERNAME").val(j[i]['FATHERNAME']);
+												$("#ADDRESS").val(j[i]['ADDRESS']);
+												$("#MOBILE").val(j[i]['MOBILE']);
+												
+												}
+											}
+											else {
+												$("#FATHERNAME").val('');
+												$("#ADDRESS").val('');
+												$("#MOBILE").val('');
+											}
+										})
+									})
+									
+									
+									
+									
+									var inputs = 2;	
+									$('#btnAddMoreScripList').click(function() {		
+										
+										
+										$('.btnDelMoreScripList:disabled').removeAttr('disabled');
+										var c = $('.clonedInputForScripList:first').clone(true);
+										
+										
+										
+										c.find('select#PRODUCTID_1').attr({
+																				'id':'PRODUCTID_'+inputs
+																			});
+										c.find('input:hidden#CHALLANNO_1').attr({
+																				'id':'CHALLANNO_'+inputs,
+																				'value':''
+																			});
+										c.find('input:hidden#quantity_1').attr({
+																				'id':'quantity_'+inputs,
+																				'value':''
+																			});
+																			
+										c.find('input:hidden#wtquantity_1').attr({
+																				'id':'wtquantity_'+inputs,
+																				'value':''
+																			});
+										c.find('select#packingUnit_1').attr({
+																				'id':'packingUnit_'+inputs
+																			});
+										
+										c.find('select#CHID_1').attr({
+																				'id':'CHID_'+inputs
+																			});
+																			
+										c.find('input:hidden#EXTRALABBILL_1').attr({
+																				'id':'EXTRALABBILL_'+inputs,
+																				'value':''
+																			});																																																																																															
+																			
+										c.find('input:hidden#Calculation_1').attr({
+																				'id':'Calculation_'+inputs,
+																				'value':''
+																			});	
+																			
+										c.find('input:hidden#closest_position1').attr({
+																			'id':'closest_position'+inputs,
+																			'value':inputs
+																		});																		
+																																
+																					
+										$('.clonedInputForScripList:last').after(c);
+										
+										
+										inputs++;
+										$("#TOTAL_PRODUCT_LIST").attr('value',inputs);
+									});
+									
+									$('.btnDelMoreScripList').click(function() {
+										if (confirm('Continue Delete?')) {
+											var colsest_pos = $(this).closest('.clonedInputForScripList').find('.closest_position').val();
+											$(this).closest('.clonedInputForScripList').remove();
+											var counter = 1;
+											for(var i=1;i<inputs;i++) {
+												if(i == colsest_pos)
+												continue;
+												$("#trade_file_view_details").find('select#PRODUCTID_'+i).attr({
+																											'id':'PRODUCTID_'+counter
+																										});
+												$("#trade_file_view_details").find('input:hidden#CHALLANNO_'+i).attr({
+																											'id':'CHALLANNO_'+counter,
+																											'value':''
+																										});
+												$("#trade_file_view_details").find('input:hidden#quantity_'+i).attr({
+																											'id':'quantity_'+counter,
+																											'value':''
+																										});
+												$("#trade_file_view_details").find('input:hidden#wtquantity_'+i).attr({
+																											'id':'wtquantity_'+counter,
+																											'value':''
+																										});	
+												$("#trade_file_view_details").find('select#CHID_'+i).attr({
+																											'id':'CHID_'+counter
+																										});																									
+												$("#trade_file_view_details").find('select#packingUnit_'+i).attr({
+																											'id':'packingUnit_'+counter
+																										});
+												
+												$("#trade_file_view_details").find('input:hidden#EXTRALABBILL_'+i).attr({
+																											'id':'EXTRALABBILL_'+counter,
+																											'value':''
+																										});
+												$("#trade_file_view_details").find('input:hidden#Calculation_'+i).attr({
+																											'id':'Calculation_'+counter,
+																											'value':''
+																										});
+																																																																																																																			
+												$("#trade_file_view_details").find('input:text#closest_position'+i).attr({
+																							'value':counter,
+																							'id':'closest_position'+counter
+																						});
+												counter++;
+											}
+											--inputs;
+											$("#TOTAL_PRODUCT_LIST").attr('value',inputs);
+											$('.btnDelMoreScripList').attr('disabled',($('.clonedInputForScripList').length  < 2));
+											return false;
+										}
+										else{
+											return false;
+										}
+									});	
+									  
+  
+								});
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showLoad')">Data Processing Entry Information</legend>
+                                <div id="showLoad" style="display:">
+                                  <form name="LoadForm" method="post" action="dataProcessing.php" onsubmit="return confirmLoadSubmit();">
+                                        <table width="80%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td colspan="7">
+                                                	<table width="807">
+                                                       <tr>
+                                                    	<td width="132" align="right">
+                                                               Project Name :
+                                                         </td>
+                                                            <td ><select type="text" id="PROJECTID" name="PROJECTID" style="width:180px;" autocomplete="off" placeholder="PackingName" onchange="getProjectNameLoad(this.value);" >
+                                                  <option value="">Select</option>
+                                                        <!--%[PROJECT_NAME]%-->
+                                                     </select>
+                                             				</td>
+                                                            <td width="145" align="right">
+                                                               Sub Project Name :
+                                                            </td>
+                                                            <td height="26" align="left"><select type="text" id="SUBPROJECTID" name="SUBPROJECTID" style="width:180px;" autocomplete="off" onchange="PartyName(this.value);"  /></td>
+                                                      </tr>
+                                                       
+                                                        <tr valign="top">
+                                                            <td align="right">Product Catagory :</td>
+                                                            <td height="26" align="left"><select id="PRODCATTYPEID" name="PRODCATTYPEID" style="width:80px;" onchange="getSelectYear(this.value);">
+                                                            </select></td>
+                                                            <td width="145" height="26" align="right">
+                                                                Session Year:
+                                                            </td>
+                                                            <td width="306" height="26" align="left"><select type="text" id="SESSIONYEARID" name="SESSIONYEARID" style="width:150px;" autocomplete="off" placeholder="Session Year" onchange="getSessionYear(this.value);">
+                                                             </select>
+                                                          </td>
+                                                            <!--<td height="26" align="right">Load/ Unload : </td>
+                                                            <td height="26" align="left"><select type="text" id="WORKTYPE" name="WORKTYPE" style="width:150px;" autocomplete="off" placeholder="WORKTYPE" onchange="getSessionYear(this.value);">
+                                                                  <option value="">Select</option>
+                                                                  <option value="Load">Load</option>
+                                                                  <option value="Unload">Unload</option>
+                                                                  <option value="Aluload">Aluload</option>
+                                                                  <option value="AluUnload">AluUnload</option>
+                                                                     </select></td>-->
+                                                      </tr>
+                                                      <tr>
+                                                    	<td width="132" align="right">
+                                                               Start Date :
+                                                            </td>
+                                                            <td width="204" align="left"><input name="STARTDATE" size="18" id="STARTDATE" type="text" readonly="readonly" style="width:165px;" /></td>
+                                                            <td width="145" align="right">End Date : </td>
+                                                            <td width="306" align="left"><input name="ENDDATE" size="18" id="ENDDATE" type="text" readonly="readonly" style="width:165px;" /></td>
+                                                        </tr>
+                                                       	
+                                                    </table>
+                                              </td>
+                                            </tr>
+                                            
+                                             <tr valign="top">
+                                                <td height="26" align="left" colspan="2">&nbsp;</td>
+                                            </tr>
+                                                                                   
+                                            <tr valign="top">
+                                                <td width="5%" height="26" align="right">&nbsp;</td>
+                                                <td width="95%" height="26" align="center">
+                                                    <input type="submit" name="DataProcessing" value="Data Processing" class="FormSubmitBtn" />
+                                                    
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Load Entry Form  --> 
+                    
+              </table>
+            </td>
+          </tr>
+    </table>

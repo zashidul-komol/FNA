@@ -1,0 +1,158 @@
+    <table width="96%" border="0" cellspacing="1" style="margin:0px auto 0px auto;">
+        <tr>
+            <td colspan="2" align="center"><h4>Initialization Disbursements Stage</h4>
+            <div style="text-align:left;"><b>Package No:</b>  <!--%[PI_4]%--> <br/>
+             <b>Lot No:</b>  <!--%[PI_5]%--> <br/>
+            <b>Contract Name:</b> <!--%[PI_6]%--></div>
+            </td>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><!--%[MSG]%--></td>
+        </tr>
+        <td width="83%"><tr valign="top">
+            <td width="50%" align="left">
+                <table width="100%"  border="0" cellspacing="0" cellpadding="0" align="center">
+                    
+            <!--  Start Input Tab Fields ------------------------------------------------------------------------------------------------------------------    -->
+                   <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmInputTabFieldsSubmit() {
+									if($("#bdps_34").val() == ''){
+											alert("Please enter Date of BD Availability");
+											$("#bdps_34").focus();
+											return false;
+									}
+										if($("#bdps_41").val() == ''){
+											alert("Please enter Number of Revision Sought by ADB on DBD");
+											$("#bdps_41").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" >Enter Disbursements Stage</legend>
+                                <center><b>Insert Data for " <!--%[DISBURSMENT_STAGE_PACKAGENAME]%--> " Package</b></center><hr/>
+                                <div id="showInputTabFields">
+                                  <form name="inputTabFieldsForm" method="post" action="disbursements.php" onsubmit="return confirmInputTabFieldsSubmit();">
+                                  
+                                  <table>
+                                    <tr>
+                                      <td width="558">
+                                      
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                        
+                                            <tr valign="top">
+                                                       <td width="3%" height="26" align="right">&nbsp;</td>
+                                                       <td height="26" align="right">
+                                                      Quarter No :
+                                                       </td>
+                                                       <td height="26" align="left">
+                                                      <select name="bpc_79h" id="bpc_79h"  class="FormSelectTypeInput" autofocus="">
+                                                       <option value="">Select Quarter No</option>
+                                                       <option value="Q1">Q1</option>
+                                                       <option value="Q2">Q2</option>
+                                                       <option value="Q3">Q3</option>
+                                                       <option value="Q4">Q4</option>
+                                                       </select>
+                                                       <sup style="color:red;">*</sup>
+                                                       </td>
+                                            </tr>
+                                        
+                                        
+                                            <tr valign="top">
+                                                       <td width="3%" height="26" align="right">&nbsp;</td>
+                                                       <td height="26" align="right">
+                                                      Year :
+                                                       </td>
+                                                       <td height="26" align="left">
+                                                      <select name="bpc_79i" id="bpc_79i"  class="FormSelectTypeInput" autofocus="">
+                                                       <option value="">Select Year</option>
+                                                       <option value="2011">2011</option>
+                                                       <option value="2012">2012</option>
+                                                       <option value="2013">2013</option>
+                                                       <option value="2014">2014</option>
+                                                       <option value="2015">2015</option>
+                                                       <option value="2016">2016</option>
+                                                       <option value="2017">2017</option>
+                                                       <option value="2018">2018</option>
+                                                       <option value="2019">2019</option>
+                                                       <option value="2020">2020</option>
+                                                       <option value="2021">2021</option>
+                                                       <option value="2022">2022</option>
+                                                       <option value="2023">2023</option>
+                                                       <option value="2024">2024</option>
+                                                       <option value="2025">2025</option>
+                                                       
+                                                       </select>
+                                                       <sup style="color:red;">*</sup>
+                                                       </td>
+                                            </tr>
+                                              
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="3%" height="26" align="right">&nbsp;</td>
+                                                <td width="32%" height="26" align="right">
+                                                   Projection Amount :
+                                                </td>
+                                                <td width="65%" height="26" align="left">
+                                                	<input id="bpc_79j" name="bpc_79j" autocomplete="off" onblur="if(this.value=='') this.value='0.00'; numberFormat(this.id,this.value.toString(),'2',',','.');" onfocus="if(this.value=='0.00') this.value='';" size="15" class="FormNumericTypeInput" onkeyup="removeChar(this);"/> 
+                                               </td>
+                                            </tr>
+                              
+                                           <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td width="32%" height="26" align="right"> </td>
+                                                <td height="26" align="left">
+                                                	 <input type="hidden" name="pi_4" value="<!--%[PI_4]%-->" />
+                                               		 <input type="hidden" name="pi_6" value="<!--%[PI_6]%-->" />
+                                                     <input type="hidden" name="packageId" value="<!--%[DISBURSMENT_STAGE_PACKAGEID]%-->" />
+                                                     <input type="hidden" name="packageName" value="<!--%[DISBURSMENT_STAGE_PACKAGENAME]%-->" />
+                                                     <input type="submit" name="submitDisbursementsStage" value="Insert" class="FormSubmitBtn" />
+                                                     <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                     <input type="button" value="Back" onclick="window.close();" class="FormResetBtn">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        
+                                           
+                                    </td>
+                                     
+                                     <td width="514" valign="top" bordercolor="#000066">
+                       				<table style="width:100%; border-color:#093; font-size:12px;"> 
+                                          <tr>
+                                              <td style="background:#78a951; color:#FFF; padding:5px;">SL#</td>
+                                              <td style="background:#78a951; color:#FFF; padding:5px;">Quarter no#</td>
+                                              <td style="background:#78a951; color:#FFF; padding:5px;">Year</td>
+                                              <td style="background:#78a951; color:#FFF; padding:5px;">Actual disbursement amount</td>
+                                              <td style="background:#78a951; color:#FFF; padding:5px;">Remaining Contract Amount</td>
+                                          </tr>
+                                          <!--%[SHOW_DISBURSMENT_TABLE]%-->
+                                     </td>
+                                     
+                                    </tr>
+                                   </table>    
+                                        
+                                         
+                                        
+                                        
+                                        
+                                        
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+            <!--  End Project Form ------------------------------------------------------------------------------------------------------------------     -->
+                    
+                    
+                </table>
+                
+            </td>
+
+        </tr>
+    </table>

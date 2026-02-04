@@ -1,0 +1,182 @@
+    <table width="85%" border="0" cellspacing="1" style="margin:0px auto 0px auto;">
+        <tr>
+             <td colspan="2" align="center">
+            <div style="text-align:left;"><b>Package No:</b>  <!--%[PI_4]%--> <br/>
+            <b>Lot No:</b>  <!--%[PI_5]%--> <br/>
+            <b>Contract Name:</b> <!--%[PI_6]%--></div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><!--%[MSG]%--></td>
+        </tr>
+        <td width="83%"><tr valign="top">
+            <td width="50%" align="left">
+                <table width="100%"  border="0" cellspacing="0" cellpadding="0" align="center">
+                    
+            <!--  Start Input Tab Fields ------------------------------------------------------------------------------------------------------------------    -->
+                   <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmInputTabFieldsSubmit() {
+									var checkDate   = $("#checkDate").val();
+									var checkNewDate = Date.parse(checkDate);
+									
+									var bdps_29      = $("#bdps_29").val();
+									var dSplit  	= bdps_29.split("-");
+									var bdps_29New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var bdps_29NewDate = Date.parse(bdps_29New);
+									if (bdps_29NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#bdps_29").focus();
+										return false;
+									}
+									
+									var bdps_30      = $("#bdps_30").val();
+									var dSplit  	= bdps_30.split("-");
+									var bdps_30New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var bdps_30NewDate = Date.parse(bdps_30New);
+									if (bdps_30NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#bdps_30").focus();
+										return false;
+									}
+									
+									var bdps_31      = $("#bdps_31").val();
+									var dSplit  	= bdps_31.split("-");
+									var bdps_31New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var bdps_31NewDate = Date.parse(bdps_31New);
+									if (bdps_31NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#bdps_31").focus();
+										return false;
+									}
+									
+									var bdps_32      = $("#bdps_32").val();
+									var dSplit  	= bdps_32.split("-");
+									var bdps_32New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var bdps_32NewDate = Date.parse(bdps_32New);
+									if (bdps_32NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#bdps_32").focus();
+										return false;
+									}
+									
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            
+							<script>
+                              $(document).ready(function() {
+                               $("#bdps_29, #bdps_30, #bdps_31, #bdps_32").datepicker({ dateFormat: "dd-mm-yy",
+                                beforeShow: function(input, inst) {
+                                 if ($("#dateplanedcheck").is(':checked')) {
+                                  $(".ui-datepicker-calendar").css("display", "none");
+                                }}
+                               });
+                              });
+                            </script>
+
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" >Edit Bidding Document Preparation Stage</legend>
+                                <div id="showInputTabFields">
+                                  <form name="inputTabFieldsForm" method="post" action="biddingDPStageEdit.php" onsubmit="return confirmInputTabFieldsSubmit();">
+                                        <table width="96%" border="0" cellpadding="3" cellspacing="0">
+                                        
+                                        	<tr valign="top" class="rowcolor" style="display:<!--%[BDPS_29_30]%-->;">
+                                                <td width="4%" height="26" align="right">&nbsp;</td>
+                                                <td width="51%" height="26" align="right">
+                                                    Date of DBD sent to ADB:
+                                                </td>
+                                                <td width="45%" height="26" align="left">
+                                                    <input type="text" id="bdps_29" name="bdps_29" class="FormDateTypeInput" value="<!--%[BDPS_29]%-->" >
+                                              
+                                                </td>
+                                            </tr>
+                                            
+                                              <tr valign="top" class="rowcolor" style="display:<!--%[BDPS_29_30]%-->;">
+                                                <td width="4%" height="26" align="right">&nbsp;</td>
+                                                <td width="51%" height="26" align="right">
+                                                   Date of ADB"s NO on DBD:
+                                                </td>
+                                                <td width="45%" height="26" align="left">
+                                                
+                                                    <input type="text" id="bdps_30" name="bdps_30"  class="FormDateTypeInput" value="<!--%[BDPS_30]%-->"  autocomplete="off">
+                                              
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="4%" height="26" align="right">&nbsp;</td>
+                                                <td width="51%" height="26" align="right">
+                                                   Date of EA's Approval on BD:
+                                                </td>
+                                                <td width="45%" height="26" align="left">
+                                                
+                                                    <input type="text" id="bdps_31" name="bdps_31"  class="FormDateTypeInput" value="<!--%[BDPS_31]%-->"  autocomplete="off">
+                                              
+                                                </td>
+                                            </tr>
+                                            
+											<tr valign="top" class="rowcolor">
+                                                <td width="4%" height="26" align="right">&nbsp;</td>
+                                                <td width="51%" height="26" align="right">
+                                                   Date of BD/ 1st Stage BD Availability :
+                                                </td>
+                                                <td width="45%" height="26" align="left">
+                                                
+                                                    <input type="text" id="bdps_32" name="bdps_32"  class="FormDateTypeInput" value="<!--%[BDPS_32]%-->"  autocomplete="off">
+                                              
+                                                </td>
+                                            </tr>
+
+                                        <tr valign="top" class="rowcolor" style="display:<!--%[BDPS_89_90]%-->;">
+                                                <td width="3%" height="26" align="right">&nbsp;</td>
+                                                <td width="46%" height="26" align="right">
+                                                    Times of Clarification Sought by ADB on DPQD/DBD :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="bdps_89" name="bdps_89" autocomplete="off" value="<!--%[BDPS_89]%-->" placeholder="Times of Clarification.................." class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor" style="display:<!--%[BDPS_89_90]%-->;">
+                                                <td width="3%" height="26" align="right">&nbsp;</td>
+                                                <td width="46%" height="26" align="right">
+                                                    Number of Revision Sought by ADB on DPQD/DBD :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="bdps_90" name="bdps_90" onkeyup="removeChar(this);" autocomplete="off" value="<!--%[BDPS_90]%-->" placeholder="Number of Revision .................." class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                                                      
+                                            
+                                            
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td width="51%" height="26" align="right"> </td>
+                                                <td height="26" align="left">
+                                                     <input type="hidden" name="checkDate" id="checkDate" value="<!--%[CHECK_DATE]%-->" />
+                                                     <input type="hidden" name="packageId" value="<!--%[BIDDING_DP_STAGE_PACKAGEID]%-->" />
+                                                     <input type="hidden" name="packageName" value="<!--%[BIDDING_DP_STAGE_PACKAGENAME]%-->" />
+                                                     <input type="submit" name="editbiddingDPStage" value="Submit" class="FormSubmitBtn" />
+                                                     <input type="button" value="Back" onclick="window.close();" class="FormResetBtn">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+            <!--  End Project Form ------------------------------------------------------------------------------------------------------------------     -->
+                    
+                    
+                </table>
+                
+            </td>
+
+        </tr>
+    </table>

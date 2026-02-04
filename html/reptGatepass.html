@@ -1,0 +1,117 @@
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0px; padding:0px;">
+	<tr valign="top">
+		<td style="width:100%">
+			<div class="container">
+				<!--%[TABS]%-->
+			</div>
+		</td>
+	</tr>
+</table><br/>
+
+<table cellpadding="1" cellspacing="1" border="0" width="100%" style="margin:0px; padding:5px;">
+	<tr valign="top">
+        <td width="95%">
+        <div class="container">
+            <!--%[PRICEALERT]%-->          
+        <table width="100%">    
+             <!--  Start Project Form -->
+                    <tr valign="top">
+                        <td width="100%" align="left">
+							<script  type="text/javascript">
+								function confirmProjectSubmit() {
+									if($("#pName").val() == ''){
+											alert("Please enter Project Name");
+											$("#pName").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								
+								$(document).ready(function() {
+									$("#gatePassNumberReport").click(function(){
+										
+										var gatePassNumber = $("#gatePassNumber").val();
+										var userId = $("#userId").val();
+										if(gatePassNumber == ''){
+											alert("Please Select Gate Pass Number!");	
+											$("#gatePassNumber").focus();
+											return false;
+										}
+										$("#showAppSimple").html();
+										$.post("ajax/getGatePassNumberReport.php",{'gatePassNumber': gatePassNumber, 'userId': userId},
+										function(data)
+										{
+											$("#showAppSimple").html(data);
+										});
+									})
+								});
+								
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showProject')">Create Gate Pass Report</legend>
+                                <div id="showProject" style="">
+                                  <table width="100%" border="0" cellpadding="3" cellspacing="0" style="margin:0px auto 0px auto;font-size:85%;">
+                                    <tr>
+                                      <th width="45%" scope="col">&nbsp;</th>
+                                      <th width="51%" scope="col">&nbsp;</th>
+                                      <th width="4%" scope="col">&nbsp;</th>
+                                    </tr>
+                                    <tr>
+                                      <td align="right" valign="top">Gate Pass  Number : </td>
+                                      <td>
+                                        <select name="gatePassNumber" id="gatePassNumber"  class="FormSelectTypeInput" required="" autofocus="" style="width:200px;">
+                                                <option value="">Select Gate Pass Number</option>
+                                                <!--%[GATEPASS_NUMBER_LIST]%-->
+                                                </select>
+                                      </td>
+                                      <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                      <td height="31">&nbsp;</td>
+                                      <td>
+                                      <input type="hidden" name="userId" id="userId" value="<!--%[USER_ID]%-->" />
+                                   	   <input type="button" name="gatePassNumberReport" id="gatePassNumberReport" value="GO" class="FormSubmitBtn" />
+                                         <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                      </td>
+                                      <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                      <td>&nbsp;</td>
+                                      <td>&nbsp;</td>
+                                      <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                      <td>&nbsp;</td>
+                                      <td>&nbsp;</td>
+                                      <td>&nbsp;</td>
+                                    </tr>
+                                  </table>
+                               		   
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Project Form -->
+            </table>
+            
+            <table width="100%">    
+             <!--  Start Project Form -->
+                    <tr valign="top">
+                        <td width="100%" align="left">
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showProject')">View Gate Pass Report</legend>
+                                <div id="showAppSimple" style="">
+                               		   
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Project Form -->
+            </table>
+        </div>   
+		</td>
+	</tr>
+</table>

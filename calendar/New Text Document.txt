@@ -1,0 +1,4 @@
+<script type='text/javascript' src='calendar/utils/zapatec.js'></script>
+<script type="text/javascript" src="calendar/src/calendar.js"></script>
+<script type="text/javascript" src="calendar/lang/calendar-en.js"></script>
+<link href="calendar/themes/aqua.css" rel="stylesheet" type="text/css">

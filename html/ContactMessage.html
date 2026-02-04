@@ -1,0 +1,46 @@
+<div class="breadcrumb">
+	Home &raquo; Contact &raquo; <span id="dynBCItem">Contact Message</span>
+</div>
+<div class="container">
+    <ul class="tabs">
+        <li><a href="#ContactMessageList">Contact Message</a></li>
+    </ul>
+    <div class="tab_container" style="height:600px;">
+        <div class="tab_content" id="ContactMessageList" style="display: block;">
+			<div class="viewCls">
+                <table class="resultset" id="contactMessage" border="0" width="100%" align="left" cellspacing="1" cellpadding="3" style="font-size:75%;">
+                    <thead>
+                        <tr valign="top">
+                            <th style='width:7%'>SL No.</th>
+                            <th style='width:14%'>Posting Date</th>
+                            <th style='width:18%'>Name</th>
+                            <th style='width:15%'>Email</th>
+                            <th style='width:20%'>Subject</th>
+                            <th style='width:25%'>Message</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--%[CONTACT_MESSAGE_LIST]%-->
+                    </tbody>
+                </table>
+            </div>
+			<script type="text/javascript">					
+                $(document).ready(function() {
+                    $('#contactMessage').fixheadertable({ 
+                        caption : 'Contact Message View',
+                        colratio : [70, 140, 180, 150, 200, 240],
+                        height : 350, 
+                        width : 1000, 
+                        zebra : true, 
+                        sortable : true, 
+                        sortedColId : 0, 
+                        sortType : ['integer','string', 'string', 'string','string', 'string'],
+                        pager : true,
+                        rowsPerPage	 : 100,
+                        resizeCol : true
+                    });
+                });
+            </script>
+        </div>
+	</div>
+</div>

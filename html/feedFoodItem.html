@@ -1,0 +1,133 @@
+    <table align="center" width="50%" border="0" cellspacing="1" cellpadding="10" style="margin:0px auto 0px auto;">
+        <tr>
+            <td colspan="2" align="center"><h1>Food Item  Entry Form</h1></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><!--%[MSG]%--></td>
+        </tr>
+        <tr valign="top">
+            <td width="60%" align="center">
+                <table width="90%"  border="0" cellspacing="0" cellpadding="0" align="center">
+                   
+                    <!--  Start Load Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmFoodItemSubmit() {
+									
+									if($("#PROJECTID").val() == ''){
+											alert("Please Select Project Name....");
+											$("#PROJECTID").focus();
+											return false;
+									}
+									if($("#SUBPROJECTID").val() == ''){
+											alert("Please Select Sub Project Name....");
+											$("#SUBPROJECTID").focus();
+											return false;
+									}
+									if($("#FOODNAME").val() == ''){
+											alert("Please Insert Food Item name....");
+											$("#FOODNAME").focus();
+											return false;
+									}
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								function checkCalender(){
+									var ENTRYDATE = String($("#ENTRYDATE").val());
+									if(ENTRYDATE != ''){
+										
+										var tempENTRYDATE = ENTRYDATE.split('-'); 
+										
+										var a = tempENTRYDATE[1]+'/'+tempENTRYDATE[0]+'/'+tempENTRYDATE[2];
+									}
+								}
+								function getProjectNameFood(pcId){					
+										var options = '';
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#SUBPROJECTID").html('');
+											$("select#SUBPROJECTID").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getProjectList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#SUBPROJECTID").html('');
+												$("select#SUBPROJECTID").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#SUBPROJECTID").html('');
+												$("select#SUBPROJECTID").html(options);
+											}
+										})
+									
+									
+								}
+							
+							//Standarization End
+							</script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showLoad')">Enter Food Item Entry Information</legend>
+                                <div id="showLoad" style="display:">
+                                  <form name="LoadForm" method="post" action="feedFoodItem.php" onsubmit="return confirmFoodItemSubmit();">
+                                        <table width="100%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td colspan="7">
+                                                	<table align="center" width="644">
+                                                        <tr>
+                                                    	<td width="225" align="right">
+                                                               Project Name :
+                                                         </td>
+                                                            <td ><select type="text" id="PROJECTID" name="PROJECTID" style="width:180px;" autocomplete="off" placeholder="PackingName" onchange="getProjectNameFood(this.value);" >
+                                                  <option value="">Select</option>
+                                                        <!--%[PROJECT_NAME]%-->
+                                                     </select>
+                                             				</td>
+                                                            <td width="184" height="26" align="right">&nbsp;</td>
+                                                      </tr>
+                                                        <tr valign="top" >
+                                                          <td width="225" align="right">Sub Project Name : </td>
+                                                          <td width="219" height="26" align="left"><select type="text" id="SUBPROJECTID" name="SUBPROJECTID" style="width:180px;" autocomplete="off" />
+                                                          </select></td>
+                                                          <td height="26" align="right">&nbsp;</td>
+                                                        </tr>
+                                                        <tr valign="top">
+                                                          <td width="225" align="right">Food Name:</td>
+                                                          <td height="26" align="left"><input type="text" name="FOODNAME" id="FOODNAME" style="width:167px;" /></td>
+                                                          <td height="26" align="right">&nbsp;</td>
+                                                        </tr>
+                                                        <tr valign="top">
+                                                          <td align="right">Details:</td>
+                                                          <td height="26" align="left"><textarea name="DETAILS" id="DETAILS" cols="45" rows="5" style="width:200px; height:80px;"></textarea></td>
+                                                          <td height="26" align="right">&nbsp;</td>
+                                                        </tr>	
+                                                    </table>
+                                              </td>
+                                            </tr>                                       
+                                            <tr valign="top">
+                                                <td width="41%" height="26" align="right">&nbsp;</td>
+                                                <td width="59%" height="26" align="left">
+                                                    <input type="submit" name="InsertFoodItemInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showLoad')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Load Entry Form  --> 
+                    
+              </table>
+            </td>
+          </tr>
+    </table>

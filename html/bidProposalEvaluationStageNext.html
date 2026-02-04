@@ -1,0 +1,315 @@
+    <table width="100%" border="0" cellspacing="1" style="margin:0px auto 0px auto;">
+        <tr>
+            <td colspan="2" align="center"><h4>Initialization Bid / Proposal Evaluation Stage</h4>
+            <div style="text-align:left;"><b>Package No:</b>  <!--%[PI_4]%--> <br/>
+             <b>Lot No:</b>  <!--%[PI_5]%--> <br/>
+            <b>Contract Name:</b> <!--%[PI_6]%--></div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><!--%[MSG]%--></td>
+        </tr>
+        <tr valign="top">
+            <td width="50%" align="left">
+                <table width="100%"  border="0" cellspacing="0" cellpadding="0" align="center">
+                    
+            <!--  Start Bid / Proposal Evaluation Stage ------------------------------------------------------------------------------------------------------------------    -->
+                  <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmInputTabFieldsSubmit() {
+									var checkDate    = $("#checkDate").val();
+									var checkNewDate = Date.parse(checkDate);
+									
+									var bpes_50      = $("#bpes_50").val();
+									var dSplit  	 = bpes_50.split("-");
+									var bpes_50New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var bpes_50NewDate = Date.parse(bpes_50New);
+									if (bpes_50NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#bpes_50").focus();
+										return false;
+									}
+									
+									var bpes_50a      = $("#bpes_50a").val();
+									var dSplit  	  = bpes_50a.split("-");
+									var bpes_50aNew   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var bpes_50aNewDate = Date.parse(bpes_50aNew);
+									if (bpes_50aNewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#bpes_50a").focus();
+										return false;
+									}
+									
+									var bpes_51a      = $("#bpes_51a").val();
+									var dSplit  	  = bpes_51a.split("-");
+									var bpes_51aNew   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var bpes_51aNewDate = Date.parse(bpes_51aNew);
+									if (bpes_51aNewDate < checkNewDate) {
+										alert("Previous Date Not Allow!");
+										$("#bpes_51a").focus();
+										return false;
+									}
+									
+									
+									var bpes_54a      = $("#bpes_54a").val();
+									var dSplit  	  = bpes_54a.split("-");
+									var bpes_54aNew   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var bpes_54aNewDate = Date.parse(bpes_54aNew);
+									if (bpes_54aNewDate < checkNewDate) {
+										alert("Previous Date Not Allow!");
+										$("#bpes_54a").focus();
+										return false;
+									}
+									
+									var bpes_56      = $("#bpes_56").val();
+									var dSplit  	 = bpes_56.split("-");
+									var bpes_56New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var bpes_56NewDate = Date.parse(bpes_56New);
+									if (bpes_56NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#bpes_56").focus();
+										return false;
+									}
+									
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <script>
+                              $(document).ready(function() {
+                               $("#bpes_50, #bpes_50a, #bpes_51a, #bpes_54a, #bpes_56").datepicker({ dateFormat: "dd-mm-yy",
+                                beforeShow: function(input, inst) {
+                                 if ($("#dateplanedcheck").is(':checked')) {
+                                  $(".ui-datepicker-calendar").css("display", "none");
+                                }}
+                               });
+                              });
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" >Enter Bid / Proposal Evaluation Stage</legend>
+                                <div id="showInputTabFields">
+                                  <center><b>Insert Data for " <!--%[BID_PES_PACKAGENAME]%--> " Package</b></center><hr/>
+                                  <form name="inputTabFieldsForm" method="post" action="bidProposalEvaluationStage.php" onsubmit="return confirmInputTabFieldsSubmit();">
+                                        <table width="100%" border="0" cellpadding="3" cellspacing="0">
+                                        
+                                           <tr valign="top" class="rowcolor">
+                                                <td width="2%" height="26" align="right">&nbsp;</td>
+                                                <td width="53%" height="26" align="right">
+                                                    Planned Date of Bids Opening :
+                                                </td>
+                                                <td height="26" align="left">
+                                 				<input type="text" id="bpes_54a" name="bpes_54a"  class="FormDateTypeInput" value="" autocomplete="off">    
+                                                </td>
+                                            </tr>
+                                            
+                                          <tr valign="top" class="rowcolor">
+                                                <td width="2%" height="26" align="right">&nbsp;</td>
+                                                <td width="53%" height="26" align="right">
+                                                    Date of Bids Opening:
+                                                </td>
+                                                <td width="45%" height="26" align="left">
+                                                   <input type="text" id="bpes_50" name="bpes_50"  class="FormDateTypeInput" value="" autocomplete="off">
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="2%" height="26" align="right">&nbsp;</td>
+                                                <td width="53%" height="26" align="right">
+                                                    Original Bid Validity Period (days) :
+                                                </td>
+                                                <td height="26" align="left">
+                                                <input type="text" id="bpes_56a" onkeyup='removeChar(this);' name="bpes_56a" autocomplete="off" placeholder="Original Bid Validity........" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>   
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="2%" height="26" align="right">&nbsp;</td>
+                                                <td width="53%" height="26" align="right">
+                                                    Number of Extension of Bid Validity Period :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="bpes_94" onkeyup='removeChar(this);' name="bpes_94" autocomplete="off" placeholder="Number of Extension of Bid ................" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>         
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="2%" height="26" align="right">&nbsp;</td>
+                                                <td width="53%" height="26" align="right">
+                                                    Revised  Bid Validity Period (days) :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="bpes_93" name="bpes_93" onkeyup='removeChar(this);' autocomplete="off" placeholder="Revised  Bid Validity Period ......." class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>                       
+                                            
+                                            <tr valign="top" class="rowcolor" style="display:<!--%[BPES_50A]%-->;">
+                                                <td width="2%" height="26" align="right">&nbsp;</td>
+                                                <td width="53%" height="26" align="right">
+                                                   Date of Sending Bid Opening Records to ADB:
+                                                </td>
+                                                <td width="45%" height="26" align="left">
+                                                   <input type="text" id="bpes_50a" name="bpes_50a"  class="FormDateTypeInput" value="" autocomplete="off">
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="2%" height="26" align="right">&nbsp;</td>
+                                                <td width="53%" height="26" align="right">
+                                                    Number of Bids Received :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="bpes_85" onkeyup='removeChar(this);' name="bpes_85" autocomplete="off" placeholder="Number of Bids Received" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="2%" height="26" align="right">&nbsp;</td>
+                                                <td width="53%" height="26" align="right">
+                                                    Number of Responsive Bids :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="bpes_86" onkeyup='removeChar(this);' name="bpes_86" autocomplete="off" placeholder="Number of Responsive Bids" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="2%" height="26" align="right">&nbsp;</td>
+                                                <td width="53%" height="26" align="right">
+                                                    Planned Date of Bid Evaluation Report:
+                                                </td>
+                                                <td width="45%" height="26" align="left">
+                                                   <input type="text" id="bpes_51a" name="bpes_51a"  class="FormDateTypeInput" value="" autocomplete="off">
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="2%" height="26" align="right">&nbsp;</td>
+                                                <td width="53%" height="26" align="right">
+                                                    Date of Bid Evaluation Report :
+                                                </td>
+                                                <td height="26" align="left">
+                                 				<input type="text" id="bpes_56" name="bpes_56"  class="FormDateTypeInput" value="" autocomplete="off">    
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="2%" height="26" align="right">&nbsp;</td>
+                                                <td width="53%" height="26" align="right">
+                                                   Recommended for Awarding the 1st Lowest Evaluated Responsive Bidder?:
+                                                </td>
+                                                <td height="26" align="left">
+                                                <select name="bpes_87" id="bpes_87"  class="FormSelectTypeInput" autofocus="">
+                                                <option value="">Select Recommended for Awarding</option>
+                                                <option value="Yes">Yes</option>
+                                                <option value="No">No</option>
+												</select>
+                                                </td>
+                                            </tr>
+                                    
+                                      <tr valign="top" class="rowcolor">
+                                                <td width="2%" height="26" align="right">&nbsp;</td>
+                                                <td width="53%" height="26" align="right">Recommended Price of 1st Lowest Evaluated Responsive Bidder (in evaluation currency):</td>
+                                                <td height="26" align="left">
+                                                   <input id="bpes_95a" name="bpes_95a" autocomplete="off" onblur="if(this.value=='') this.value='0.00'; numberFormat(this.id,this.value.toString(),'2',',','.');" onfocus="if(this.value=='0.00') this.value='';" size="15" class="FormNumericTypeInput" onkeyup="removeChar(this);"/> 
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="2%" height="26" align="right">&nbsp;</td>
+                                                <td width="53%" height="26" align="right">
+                                                    Evaluated Bid Price of 1st Lowest Evaluated Responsive Bidder (Equiv. US$) :
+                                                </td>
+                                                <td height="26" align="left">
+                                                  <input id="bpes_97" name="bpes_97" autocomplete="off" onblur="if(this.value=='') this.value='0.00'; numberFormat(this.id,this.value.toString(),'2',',','.');" onfocus="if(this.value=='0.00') this.value='';" size="15" class="FormNumericTypeInput" onkeyup="removeChar(this);"/> 
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="2%" height="26" align="right">&nbsp;</td>
+                                                <td width="53%" height="26" align="right">
+                                                    Evaluated Bid Price of 2nd Lowest Evaluated Responsive Bidder (Equiv. US$):
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="bpes_98" name="bpes_98" autocomplete="off" onblur="if(this.value=='') this.value='0.00'; numberFormat(this.id,this.value.toString(),'2',',','.');" onfocus="if(this.value=='0.00') this.value='';" size="15" class="FormNumericTypeInput" onkeyup="removeChar(this);"/>
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top">
+                                            	 <td width="2%" height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="right">
+                                                    Recommendation for Re-invitation for Bids (Yes/ No) :
+                                                </td>
+                                                <td height="26" align="left">
+                                                <select name="bpes_113" id="bpes_113"  class="FormSelectTypeInput" autofocus="">
+                                                <option value="">Select Recommendation for Re-invitation</option>
+                                                <option value="Yes">Yes</option>
+                                                <option value="No">No</option>
+												</select>
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="2%" height="26" align="right">&nbsp;</td>
+                                                <td width="53%" height="26" align="right">
+                                                    Number of Complaints Received by EA  :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="bpes_102" onkeyup='removeChar(this);' name="bpes_102" autocomplete="off" placeholder=" Number of Complaints Received................" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr> 
+                                            
+                                            <tr valign="top">
+                                            	 <td width="2%" height="26" align="right">&nbsp;</td>
+                                                <td height="26" align="right">
+                                                    Fraud and Corruption Detected by EA (Yes/ No) :
+                                                </td>
+                                                <td height="26" align="left">
+                                                <select name="bpes_103" id="bpes_103"  class="FormSelectTypeInput" autofocus="">
+                                                <option value="">Select Fraud and Corruption Detected by EA</option>
+                                                <option value="Yes">Yes</option>
+                                                <option value="No">No</option>
+												</select>
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="2%" height="26" align="right">&nbsp;</td>
+                                                <td width="53%" height="26" align="right">
+                                                    Short Description of F&C Detected) :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <textarea id="bpes_104" name="bpes_104" autocomplete="off" class="FormTextAreaTypeInput"> </textarea> 
+                                                </td>
+                                            </tr>
+                                                                                     
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td width="53%" height="26" align="right"> </td>
+                                                <td height="26" align="left">
+                                                    <input type="hidden" name="checkDate" id="checkDate" value="<!--%[CHECK_DATE]%-->" />
+                                                    <input type="hidden" name="bPESpackageId" value="<!--%[BID_PES_PACKAGEID]%-->" />
+                                                    <input type="hidden" name="bPESpackageName" value="<!--%[BID_PES_PACKAGENAME]%-->" />
+                                                    <input type="submit" name="insertBidProposalEvaluationStage" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input type="button" value="Back" onclick="window.close();" class="FormResetBtn">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+						
+            <!--  End Bid / Proposal Evaluation Stage ------------------------------------------------------------------------------------------------------------------     -->
+                    
+                    
+                </table>
+                
+            </td>
+
+        </tr>
+    </table>

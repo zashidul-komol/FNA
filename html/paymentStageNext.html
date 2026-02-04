@@ -1,0 +1,202 @@
+    <table width="103%" border="0" cellspacing="1" style="margin:0px auto 0px auto;">
+        <tr>
+            <td colspan="2" align="center"><h4>Initialization Payment Stage</h4>
+            <h4>
+            <!--%[PSBKDN_ERROR]%-->
+            </h4>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><!--%[MSG]%--></td>
+        </tr>
+        <td width="83%"><tr valign="top">
+            <td width="50%" align="left">
+                <table width="100%"  border="0" cellspacing="0" cellpadding="0" align="center">
+                    
+            <!--  Start Input Tab Fields ------------------------------------------------------------------------------------------------------------------    -->
+                   <tr valign="top">
+                        <td align="left">
+                        
+							<!--%[PSBKDN_JAVASCRIPT]%-->
+                            
+                             <script>
+                              $(document).ready(function() {
+                               $("#psbkdn_1, #psbkdn_4, #psbkdn_5, #psbkdn_6").datepicker({ dateFormat: "dd-mm-yy",
+                                beforeShow: function(input, inst) {
+                                 if ($("#dateplanedcheck").is(':checked')) {
+                                  $(".ui-datepicker-calendar").css("display", "none");
+                                }}
+                               });
+                              });
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" >Enter Payment Stage</legend>
+                                <center><b>Insert Data for " <!--%[PAYMENT_PACKAGENAME]%--> " Package</b></center><hr/>
+                                <div id="showInputTabFields" style="display:<!--%[PSBKDN_ERROR_HIDDE]%-->;">
+                                  <form name="inputTabForm" method="post" action="paymentStage.php" onsubmit="return confirmInputTabFields();">
+                                        <table width="99%" border="0" cellpadding="3" cellspacing="0">
+                                        
+                                            <tr valign="top" class="rowcolor" style="display:<!--%[PSBKDN_1_2]%-->;">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="59%" height="26" align="right">
+                                                    Contractual Advance Payment Date (Cheque Date), if any:
+                                                </td>
+                                                <td width="40%" height="26" align="left">
+                                                
+                                                    <input type="text" id="psbkdn_1" name="psbkdn_1"  class="FormDateTypeInput" value=""  autocomplete="off">
+                                              
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor" style="display:<!--%[PSBKDN_1_2]%-->;">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="59%" height="26" align="right">
+                                                  Contractual Advance Payment Amount(Equiv. US$),if any:
+                                                </td>
+                                                <td width="40%" height="26" align="left">
+                                                    <input id="psbkdn_2" name="psbkdn_2" autocomplete="off"  onblur="if(this.value=='') this.value='0.00'; numberFormat(this.id,this.value.toString(),'2',',','.');" onfocus="if(this.value=='0.00') this.value='';" size="15" class="FormNumericTypeInput" onkeyup="removeChar(this);"/> 
+                                                </td>
+                                            </tr>
+                                            
+                                            
+                                            <tr valign="top" class="rowcolor" style="display:<!--%[PSBKDN_1_2]%-->;">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="59%" height="26" align="right">
+                                                  Advance Payment amount (in contract currency or currencies):
+                                                </td>
+                                                <td width="40%" height="26" align="left">
+                                                	<input id="psbkdn_2a" name="psbkdn_2a" autocomplete="off" onblur="if(this.value=='') this.value='0.00'; numberFormat(this.id,this.value.toString(),'2',',','.');" onfocus="if(this.value=='0.00') this.value='';" size="15" class="FormNumericTypeInput" onkeyup="removeChar(this);"/> 
+                                               </td>
+                                            </tr> 
+                                            
+                                             <tr valign="top" class="rowcolor" style="display:<!--%[PSBKDN_1_2]%-->;">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="59%" height="26" align="right">
+                                                 ADB Financing (percentage):
+                                                </td>
+                                                <td width="40%" height="26" align="left">
+                                                	<input id="psbkdn_78b" name="psbkdn_78b" autocomplete="off" onblur="if(this.value=='') this.value='0.00'; numberFormat(this.id,this.value.toString(),'2',',','.');" onfocus="if(this.value=='0.00') this.value='';" size="15" class="FormNumericTypeInput" onkeyup="removeChar(this);"/> 
+                                               </td>
+                                            </tr> 
+                                            
+                                             <tr valign="top" class="rowcolor" style="display:<!--%[PSBKDN_REGULER]%-->;">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="59%" height="26" align="right">
+                                                   Last Interim Payment Claim(IPC) No.:
+                                                </td>
+                                                <td width="40%" height="26" align="left">
+                                                   <input type="text" id="psbkdn_3" readonly="readonly" name="psbkdn_3" onkeyup='removeChar(this);' autocomplete="off" placeholder="1" class="FormTextTypeInput" />
+                                              </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor" style="display:<!--%[PSBKDN_REGULER]%-->;">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="59%" height="26" align="right">
+                                                   Last IPCSubmissionDate:
+                                                </td>
+                                                <td width="40%" height="26" align="left">
+                                                <input type="text" id="psbkdn_4" name="psbkdn_4"  class="FormDateTypeInput" value=""  autocomplete="off">
+                                             </td>
+                                            </tr>
+                                            
+                                           <tr valign="top" class="rowcolor" style="display:<!--%[PSBKDN_REGULER]%-->;">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="59%" height="26" align="right">
+                                                  Last IPC Certification / AcceptanceDate:
+                                                </td>
+                                                <td width="40%" height="26" align="left">
+                                                    <input type="text" id="psbkdn_5" name="psbkdn_5" class="FormDateTypeInput" value=""  autocomplete="off">                                              
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor" style="display:<!--%[PSBKDN_REGULER]%-->;">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="59%" height="26" align="right">
+                                                   Last Interim Payment Date (Cheque Date):
+                                                </td>
+                                                <td width="40%" height="26" align="left">
+                                                <input type="text" id="psbkdn_6" name="psbkdn_6" class="FormDateTypeInput" value=""  autocomplete="off">
+                                             </td>
+                                            </tr>
+                                            
+											<tr valign="top" class="rowcolor" style="display:<!--%[PSBKDN_REGULER]%-->;">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="59%" height="26" align="right">
+                                                   Cumulative Total Amount Certified & Paid up to Last IPC (In contract currency or currencies):
+                                                </td>
+                                                <td width="40%" height="26" align="left">
+                                                	<input id="psbkdn_7" name="psbkdn_7" autocomplete="off"   class="FormNumericTypeInput" /> 
+                                              </td>
+                                            </tr>
+                                          
+                                          	<tr valign="top" class="rowcolor" style="display:<!--%[PSBKDN_REGULER]%-->;">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="59%" height="26" align="right">
+                                                   Cumulative Total Amount Certified & Paid up to Last IPC (Equiv. US$):
+                                                </td>
+                                                <td width="40%" height="26" align="left">
+                                                	<input id="psbkdn_8" name="psbkdn_8" autocomplete="off"  onblur="if(this.value=='') this.value='0.00'; numberFormat(this.id,this.value.toString(),'2',',','.');" onfocus="if(this.value=='0.00') this.value='';" size="15" class="FormNumericTypeInput" onkeyup="removeChar(this);"/> 
+                                              </td>
+                                            </tr>
+                                          
+                                            <tr valign="top" class="rowcolor" style="display:<!--%[PSBKDN_REGULER]%-->;">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="59%" height="26" align="right">
+                                                  Cumulative Total Amount (up to Last IPC)Imposed on Employer for Late Payment (Equiv. US$) :
+                                                </td>
+                                                <td width="40%" height="26" align="left">
+                                                	<input id="psbkdn_9" name="psbkdn_9" autocomplete="off" onblur="if(this.value=='') this.value='0.00'; numberFormat(this.id,this.value.toString(),'2',',','.');" onfocus="if(this.value=='0.00') this.value='';" size="15" class="FormNumericTypeInput" onkeyup="removeChar(this);"/> 
+                                               </td>
+                                            </tr> 
+                                              
+                                           <tr valign="top" class="rowcolor" style="display:<!--%[PSBKDN_REGULER]%-->;">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="59%" height="26" align="right">
+                                                  Cumulative Total Liquidated Damage(up to Last IPC) imposed on Supplier/ Contractor (Equiv. US$):
+                                                </td>
+                                                <td width="40%" height="26" align="left">
+                                                	<input id="psbkdn_10" name="psbkdn_10" autocomplete="off" onblur="if(this.value=='') this.value='0.00'; numberFormat(this.id,this.value.toString(),'2',',','.');" onfocus="if(this.value=='0.00') this.value='';" size="15" class="FormNumericTypeInput" onkeyup="removeChar(this);"/> 
+                                               </td>
+                                            </tr>  
+                                             
+                                            
+                                            <tr valign="top" class="rowcolor" style="display:<!--%[PSBKDN_REGULER]%-->;">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="59%" height="26" align="right">
+                                                  Remaining Advance Amount after Adjustment in Last IPC payment(equiv. US$):
+                                                </td>
+                                                <td width="40%" height="26" align="left">
+                                                	<input id="psbkdn_12" name="psbkdn_12" autocomplete="off" onblur="if(this.value=='') this.value='0.00'; numberFormat(this.id,this.value.toString(),'2',',','.');" onfocus="if(this.value=='0.00') this.value='';" size="15" class="FormNumericTypeInput" onkeyup="removeChar(this);"/> 
+                                               </td>
+                                            </tr>  
+
+                                            
+                                           <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td width="59%" height="26" align="right"> </td>
+                                                <td height="26" align="left">
+                                                     <input type="hidden" name="contactPrize" id="contactPrize" value="<!--%[ORIGINAL_PRIZE_VIEW]%-->" />
+                                                     <input type="hidden" name="pi_4" value="<!--%[PI_4]%-->" />
+                                                     <input type="hidden" name="pi_6" value="<!--%[PI_6]%-->" />
+                                                     <input type="hidden" name="packageId" value="<!--%[PAYMENT_PACKAGEID]%-->" />
+                                                     <input type="hidden" name="packageName" value="<!--%[PAYMENT_PACKAGENAME]%-->" />
+                                                     <input type="submit" name="insertPaymentStage" value="Insert" class="FormSubmitBtn" />
+                                                     <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                     <input type="button" value="Back" onclick="window.close();" class="FormResetBtn">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+            <!--  End Project Form ------------------------------------------------------------------------------------------------------------------     -->
+                    
+                    
+                </table>
+                
+            </td>
+
+        </tr>
+    </table>

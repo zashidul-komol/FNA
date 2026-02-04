@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+   
+var inputs = 2;	
+$('#btnAddMoreScripList').click(function() {		
+	
+	
+	$('.btnDelMoreScripList:disabled').removeAttr('disabled');
+	var c = $('.clonedInputForScripList:first').clone(true);
+	
+	
+	
+	c.find('input:hidden#instrumentID_1').attr({
+											'id':'instrumentID_'+inputs
+										});
+	
+	c.find('input:hidden#closest_position1').attr({
+										'id':'closest_position'+inputs,
+										'value':inputs
+									});															
+												
+	$('.clonedInputForScripList:last').after(c);
+	
+	
+	
+	
+	
+	
+	inputs++;
+	$("#TOTAL_SCRIP_LIST").attr('value',inputs);
+});
+
+$('.btnDelMoreScripList').click(function() {
+	if (confirm('Continue Delete?')) {
+		var colsest_pos = $(this).closest('.clonedInputForScripList').find('.closest_position').val();
+		$(this).closest('.clonedInputForScripList').remove();
+		var counter = 1;
+		for(var i=1;i<inputs;i++) {
+			if(i == colsest_pos)
+			continue;
+			$("#trade_file_view_details").find('input:hidden#instrumentID_'+i).attr({
+																		'id':'instrumentID_'+counter
+																	});
+																																																																																																										
+			$("#trade_file_view_details").find('input:text#closest_position'+i).attr({
+														'value':counter,
+														'id':'closest_position'+counter
+													});
+			counter++;
+		}
+		--inputs;
+		$("#TOTAL_SCRIP_LIST").attr('value',inputs);
+		$('.btnDelMoreScripList').attr('disabled',($('.clonedInputForScripList').length  < 2));
+		return false;
+	}
+	else{
+		return false;
+	}
+});	
+  
+  
+});
+
+		
+
+
+	
+
+
+$("#submitbutton").click(function() {
+	
+	if($("#PORTFOLIO_CODE").val() == ''){
+		alert('Please insert portfolio code!');
+		$("#PORTFOLIO_CODE").focus();
+		return false;
+	}
+	
+	if($("#MARKET_DETAILS_ID").val() == ''){
+		alert('Please select Market!');
+		$("#MARKET_DETAILS_ID").focus();
+		return false;
+	}
+	
+	if($("#BROKER_DETAILS_ID").val() == ''){
+		alert('Please select broker name!');
+		$("#BROKER_DETAILS_ID").focus();
+		return false;
+	}
+	
+	var TOTAL_SCRIP_LIST =  $("#TOTAL_SCRIP_LIST").val();
+	for(var i=1;i<TOTAL_SCRIP_LIST;i++) {
+		if($("#instrumentID_"+i).val() == ''){
+			alert('Please Insert Instrument!');
+			$("#instrumentID_"+i).focus();
+			return false;
+		}
+		if(($("#IMMATURE_SHARE_QNTITY"+i).val() == '') && ($("#MATURE_SHARE_QNTITY"+i).val() == '')){
+			alert('Please Insert Share Quantity!');
+			$("#IMMATURE_SHARE_QNTITY"+i).focus();
+			return false;
+		}
+		if($("#AVG_PRICE"+i).val() == ''){
+			alert('Please Insert Avg. Rate!');
+			$("#AVG_PRICE"+i).focus();
+			return false;
+		}
+	}
+	
+	if(!confirm('Are you sure, you want to proceed?')) {
+		return false;
+	}
+	
+});
+	
+$(document).ready(function() {
+	$('#MATURE_DATE1').datepicker({
+		dateFormat : 'dd-mm-yy'
+	});	
+});	
+		
+
+</script>
+</head>
+<body>
+
+<table width="100%">
+ <tr valign="middle">
+            <td colspan="4" align="center">
+            	<div id="trade_file_view_details">
+                    <div style="margin-bottom:4px;width:80%; font-family:Tahoma, Geneva, sans-serif;" class="clonedInputForScripList">
+                        <fieldset style='width:100%;border:0px;border-top:1px solid #2b2d93;font-family:Tahoma, Geneva, sans-serif;'>
+                            <legend style="border:0px;" id="stock1">Add Scrip List <input type="text" name="closest_position" id="closest_position1" class="closest_position" value="1" readonly="readonly" size="2" style="border:0px;font-weight:bold; width:40px;"/></legend>
+                            <table width="80%" class="frmTbl" border="0" style="font-family:Tahoma, Geneva, sans-serif;font-size:100%;">
+                                <tr>
+                                    <td colspan="3" align="right" valign="top">
+                                        <input style="font-family:Tahoma, Geneva, sans-serif;font-size:100%;" class="btnDelMoreScripList"  disabled="disabled" type="image" src="../img/cancel.png">	
+                                    </td>
+                                </tr>
+                                <tr valign="middle">
+                                    <td align="right">Trading Code <sup style="color:red;">*</sup></td>
+                                    <td align="left">:</td>
+                                    <td align="left">
+                                            <input name="instrumentID[]" id="instrumentID_1" type="text" value="" />
+                                           
+                                        
+                                    </td>
+                                </tr>
+                               
+                            </table>
+                        </fieldset>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td align="right" colspan="4">
+        		<input name="TOTAL_SCRIP_LIST" id="TOTAL_SCRIP_LIST" type="hidden" value="2" />
+				<input style="font-family:Tahoma, Geneva, sans-serif;font-size:100%;" id="btnAddMoreScripList" value="Add More" type="button">
+            </td>
+        </tr>
+</table>
+</body>
+</html>

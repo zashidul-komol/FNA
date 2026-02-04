@@ -1,0 +1,98 @@
+    <table align="center" width="50%" border="0" cellspacing="1" cellpadding="10" style="margin:0px auto 0px auto;">
+        <tr>
+            <td colspan="2" align="center"><h1>Profit Amount Entry Form</h1></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><!--%[MSG]%--></td>
+        </tr>
+        <tr valign="top">
+            <td width="60%" align="center">
+                <table width="80%"  border="0" cellspacing="0" cellpadding="0" align="center">
+                   
+                    <!--  Start Load Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmProfitSubmit() {
+									if($("#RATE").val() == ''){
+											alert("Please Select Profit Rate");
+											$("#RATE").focus();
+											return false;
+									}
+									if($("#PADATE").val() == ''){
+											alert("Please Select Date");
+											$("#PADATE").focus();
+											return false;
+									}
+									
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								
+								function checkCalender(){
+									var PADATE = String($("#PADATE").val());
+									if(PADATE != ''){
+										
+										var tempPADATE = PADATE.split('-'); 
+										
+										var a = tempPADATE[1]+'/'+tempPADATE[0]+'/'+tempPADATE[2];
+									}
+								}
+								
+								
+                            </script>
+                            
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showLoad')">Enter Profit Amount Entry Information</legend>
+                                <div id="showLoad" style="display:">
+                                  <form name="LoadForm" method="post" action="feedProfitAmount.php" onsubmit="return confirmProfitSubmit();">
+                                        <table width="100%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td colspan="7">
+                                                	<table width="618">
+                                                       <tr>
+                                                         <td width="162" align="right"> Expected Profit Amount: </td>
+                                                    	<td ><input id="RATE" name="RATE" style="width:100px;"/></td>
+                                                            <td width="74" align="right">Date : </td>
+                                                            <td height="26" align="left"><input name="PADATE" size="18" id="PADATE" type="text" readonly="readonly" onclick="showCalender('PADATE','PADATE')" onchange="checkCalender(this.value);" style="width:100px;" /></td>
+                                                      </tr>
+                                                       <tr>
+                                                    	<td width="162" align="right">&nbsp;</td>
+                                                            <td width="118" align="left">&nbsp;</td>
+                                                            <td width="74" align="right">&nbsp;</td>
+                                                            <td width="226" align="left">&nbsp;</td>
+                                                        </tr>	
+                                                    </table>
+                                              </td>
+                                            </tr>
+                                            
+                                             <tr valign="top">
+                                                <td height="26" align="left" colspan="2">&nbsp;</td>
+                                            </tr>
+                                               <!-- <tr valign="top">
+                                                    <td align="right" colspan="2">
+                                                        <input name="TOTAL_PRODUCT_LIST" id="TOTAL_PRODUCT_LIST" type="hidden" value="2" />
+                                                        <input style="font-family:Tahoma, Geneva, sans-serif;font-size:100%;" id="btnAddMoreScripList" value="Add More" type="button">
+                                                    </td>
+                                                </tr>  -->                                     
+                                            <tr valign="top">
+                                                <td width="5%" height="26" align="right">&nbsp;</td>
+                                                <td width="95%" height="26" align="center">
+                                                    <input type="submit" name="InsertProfitInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showLoad')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Load Entry Form  --> 
+                    
+              </table>
+            </td>
+          </tr>
+    </table>

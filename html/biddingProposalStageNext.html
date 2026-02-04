@@ -1,0 +1,335 @@
+    <table width="100%" border="0" cellspacing="1" style="margin:0px auto 0px auto;">
+        <tr>
+            <td colspan="2" align="center"><h4>Initialization Bidding / Proposal Stage</h4>
+            <div style="text-align:left;"><b>Package No:</b>  <!--%[PI_4]%--> <br/>
+             <b>Lot No:</b>  <!--%[PI_5]%--> <br/>
+            <b>Contract Name:</b> <!--%[PI_6]%--></div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><!--%[MSG]%--></td>
+        </tr>
+        <tr valign="top">
+            <td width="50%" align="left">
+                <table width="100%"  border="0" cellspacing="0" cellpadding="0" align="center">
+                    
+            <!--  Start Input Tab Fields ------------------------------------------------------------------------------------------------------------------    -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmInputTabFieldsSubmit() {
+									var checkDate   = $("#checkDate").val();
+									var checkNewDate = Date.parse(checkDate);
+									
+									var bps_38      = $("#bps_38").val();
+									var dSplit  	= bps_38.split("-");
+									var bps_38New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var bps_38NewDate = Date.parse(bps_38New);
+									if (bps_38NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#bps_38").focus();
+										return false;
+									}
+									var bps_38a      = $("#bps_38a").val();
+									var dSplit  	 = bps_38a.split("-");
+									var bps_38aNew   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var bps_38aNewDate = Date.parse(bps_38aNew);
+									if (bps_38aNewDate < checkNewDate) {
+										alert("Previous Date Not Allow!");
+										$("#bps_38a").focus();
+										return false;
+									}
+									var bps_39      = $("#bps_39").val();
+									var dSplit  	= bps_39.split("-");
+									var bps_39New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var bps_39NewDate = Date.parse(bps_39New);
+									if (bps_39NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#bps_39").focus();
+										return false;
+									}
+									var bps_40      = $("#bps_40").val();
+									var dSplit  	= bps_40.split("-");
+									var bps_40New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var bps_40NewDate = Date.parse(bps_40New);
+									if (bps_40NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#bps_40").focus();
+										return false;
+									}
+									var bps_41      = $("#bps_41").val();
+									var dSplit  	= bps_41.split("-");
+									var bps_41New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var bps_41NewDate = Date.parse(bps_41New);
+									if (bps_41NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#bps_41").focus();
+										return false;
+									}
+									var bps_42      = $("#bps_42").val();
+									var dSplit  	= bps_42.split("-");
+									var bps_42New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var bps_42NewDate = Date.parse(bps_42New);
+									if (bps_42NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#bps_42").focus();
+										return false;
+									}
+									var bps_43      = $("#bps_43").val();
+									var dSplit  	= bps_43.split("-");
+									var bps_43New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var bps_43NewDate = Date.parse(bps_43New);
+									if (bps_43NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#bps_43").focus();
+										return false;
+									}
+									var bps_44      = $("#bps_44").val();
+									var dSplit  	= bps_44.split("-");
+									var bps_44New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var bps_44NewDate = Date.parse(bps_44New);
+									if (bps_44NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#bps_44").focus();
+										return false;
+									}
+									var bps_45      = $("#bps_45").val();
+									var dSplit  	= bps_45.split("-");
+									var bps_45New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var bps_45NewDate = Date.parse(bps_45New);
+									if (bps_45NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#bps_45").focus();
+										return false;
+									}
+									var bps_46      = $("#bps_46").val();
+									var dSplit  	= bps_46.split("-");
+									var bps_46New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var bps_46NewDate = Date.parse(bps_46New);
+									if (bps_46NewDate > checkNewDate) {
+										alert("Future Date Not Allow!");
+										$("#bps_46").focus();
+										return false;
+									}
+									
+									var bps_48      = $("#bps_48").val();
+									var dSplit  	= bps_48.split("-");
+									var bps_48New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var bps_48NewDate = Date.parse(bps_48New);
+									if (bps_48NewDate < checkNewDate) {
+										alert("Previous Date Not Allow!");
+										$("#bps_48").focus();
+										return false;
+									}
+
+									var bps_49      = $("#bps_49").val();
+									var dSplit  	= bps_49.split("-");
+									var bps_49New   = dSplit[2] + "-" + dSplit[1] + "-" + dSplit[0];
+									var bps_49NewDate = Date.parse(bps_49New);
+									if (bps_49NewDate < checkNewDate) {
+										alert("Previous Date Not Allow!");
+										$("#bps_49").focus();
+										return false;
+									}
+									
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+                            </script>
+                            <script>
+                              $(document).ready(function() {
+                               $("#bps_38, #bps_38a, #bps_39, #bps_40, #bps_41, #bps_42, #bps_43, #bps_44, #bps_45, #bps_46, #bps_48, #bps_49").datepicker({ dateFormat: "dd-mm-yy",
+                                beforeShow: function(input, inst) {
+                                 if ($("#dateplanedcheck").is(':checked')) {
+                                  $(".ui-datepicker-calendar").css("display", "none");
+                                }}
+                               });
+                              });
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;" >Enter Bidding / Proposal Stage</legend>
+                                <div id="showInputTabFields">
+                                <center><b>Insert Data for " <!--%[BIDDING_PS_PACKAGENAME]%--> " Package</b></center><hr/>
+                                  <form name="inputTabFieldsForm" method="post" action="biddingProposalStage.php" onsubmit="return confirmInputTabFieldsSubmit();">
+                              <table width="100%" border="0" cellpadding="3" cellspacing="0">
+                                        
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="60%" height="26" align="right">
+                                                    Planned Date of Procurement Notice :
+                                                </td>
+                                                <td width="39%" height="26" align="left">
+                                              	 	<input type="text" id="bps_38a" name="bps_38a" class="FormDateTypeInput" value=""  autocomplete="off">
+
+                                                </td>
+                                            </tr>
+                                        
+                                            <tr valign="top" class="rowcolor" style="display:<!--%[SHOW_HIDE]%-->;">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="60%" height="26" align="right">
+                                                    Date of Issuance of Invitation for Bids (IFB) :
+                                                </td>
+                                                <td width="39%" height="26" align="left">
+                                              	 	<input type="text" id="bps_38" name="bps_38"  class="FormDateTypeInput" value="" autocomplete="off">
+
+                                                </td>
+                                            </tr>
+
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="60%" height="26" align="right">
+                                                    Date of Publication of Procurement Notice (IFPQ/ IFB) in National Newspaper in Bangla:
+                                                </td>
+                                                <td height="26" align="left">
+													<input type="text" id="bps_39" name="bps_39"  class="FormDateTypeInput" value=""  autocomplete="off">
+
+                                                </td>
+                                            </tr>
+
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="60%" height="26" align="right">
+                                                    Date of Publication of Procurement Notice (IFPQ/ IFB) in National Newspaper in English:
+                                                </td>
+                                                <td height="26" align="left">
+                                              		<input type="text" id="bps_40" name="bps_40"  class="FormDateTypeInput" value="" autocomplete="off">
+
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="60%" height="26" align="right">
+                                                    Date of Publication of Procurement Notice (IFPQ/IFB) in CPTU Website:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    
+                                                	<input type="text" id="bps_41" name="bps_41"  class="FormDateTypeInput" value="" autocomplete="off">
+
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor" style="display:<!--%[BPS_43_43_44VIEW]%-->;">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="60%" height="26" align="right">
+                                                   Date of Publication of Procurement Notice (IFPQ/IFB) in ADB Website :
+                                                </td>
+                                                <td height="26" align="left">                                                   
+                                               		 <input type="text" id="bps_42" name="bps_42"  class="FormDateTypeInput" value="" autocomplete="off">
+                                                </td>
+                                            </tr>
+                                            
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="60%" height="26" align="right">
+                                                    Date of Pre-bid Conference :
+                                                </td>
+                                                <td height="26" align="left">
+                                                 
+                                                	<input type="text" id="bps_43" name="bps_43"  class="FormDateTypeInput" value="" autocomplete="off">
+
+                                                </td>
+                                            </tr>      
+                                            
+                                             <tr valign="top" class="rowcolor" style="display:<!--%[BPS_43_43_44VIEW]%-->;">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="60%" height="26" align="right">
+                                                    Date of Sending Pre-bid Meeting Minutes, Clarifications &Proposed Amendments (if any) to ADB:
+                                                </td>
+                                                <td height="26" align="left">                                                 
+                                               	    <input type="text" id="bps_44" name="bps_44"  class="FormDateTypeInput" value="" autocomplete="off">
+                                                </td>
+                                            </tr>
+                                             
+                                            <tr valign="top" class="rowcolor" style="display:<!--%[BPS_43_43_44VIEW]%-->;">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="60%" height="26" align="right">
+                                                    Date of ADB"s NOL on Clarifications &Proposed Amendments (if any) Pre-bid Meeting Minutes:
+                                                </td>
+                                                <td height="26" align="left">
+                                                	<input type="text" id="bps_45" name="bps_45"  class="FormDateTypeInput" value="" autocomplete="off">
+                                                </td>
+                                            </tr>	
+                                                                                 
+                                             <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="60%" height="26" align="right">
+                                                    Date of Sending Pre-bid Meeting Minutes, Clarifications & Amendments (if any) to Bidders:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="bps_46" name="bps_46"  class="FormDateTypeInput" value=""  autocomplete="off">
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="60%" height="26" align="right">
+                                                    Original Date of Bid Submission Deadline:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="bps_48" name="bps_48" class="FormDateTypeInput" value="" autocomplete="off">
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="60%" height="26" align="right">
+                                                   Revised Date of Bid Submission Deadline:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="bps_49" name="bps_49"  class="FormDateTypeInput" value="" autocomplete="off">
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="60%" height="26" align="right">
+                                                    Number of Bid Documents Sold/ Issued:
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="bps_84" name="bps_84" onkeyup='removeChar(this);' autocomplete="off" placeholder="Number of BD Sold/ Issued " class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr valign="top" class="rowcolor">
+                                                <td width="1%" height="26" align="right">&nbsp;</td>
+                                                <td width="60%" height="26" align="right">
+                                                   Number of Amendments to BD :
+                                                </td>
+                                                <td height="26" align="left">
+                                                    <input type="text" id="bps_90" name="bps_90" onkeyup='removeChar(this);' autocomplete="off" placeholder="Number of Amendments for BD" class="FormTextTypeInput" />
+                                                </td>
+                                            </tr>
+                                            
+                                            
+                                            <tr valign="top">
+                                                <td height="26" align="right">&nbsp;</td>
+                                                <td width="60%" height="26" align="right"> </td>
+                                                <td height="26" align="left">
+                                                     <input type="hidden" name="checkDate" id="checkDate" value="<!--%[CHECK_DATE]%-->" />
+                                                    <input type="hidden" name="packageId" value="<!--%[BIDDING_PS_PACKAGEID]%-->" />
+                                                    <input type="hidden" name="packageName" value="<!--%[BIDDING_PS_PACKAGENAME]%-->" />
+                                                    <input type="submit" name="insertbiddingProposalStage" value="Insert" class="FormSubmitBtn" />
+                                                    <input type="reset"  name="Reset" value="Reset" class="FormResetBtn">
+                                                    <input type="button" value="Back" onclick="window.close();" class="FormResetBtn">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+						
+            <!--  End Project Form ------------------------------------------------------------------------------------------------------------------     -->
+                    
+                    
+                </table>
+                
+            </td>
+
+        </tr>
+    </table>

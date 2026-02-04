@@ -1,0 +1,429 @@
+    <table align="center" width="50%" border="0" cellspacing="1" cellpadding="10" style="margin:0px auto 0px auto;">
+        <tr>
+            <td colspan="2" align="center"><h1>Murgi/Morog  Sell  Entry Form</h1></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><!--%[MSG]%--></td>
+        </tr>
+        <tr valign="top">
+            <td width="60%" align="center">
+                <table width="75%"  border="0" cellspacing="0" cellpadding="0" align="center">
+                   
+                    <!--  Start Load Entry Form -->
+                    <tr valign="top">
+                        <td align="left">
+							<script  type="text/javascript">
+								function confirmLoadSubmit() {
+									if($("#PROJECTID").val() == ''){
+											alert("Please Select Project Name");
+											$("#PROJECTID").focus();
+											return false;
+									}
+									if($("#SUBPROJECTID").val() == ''){
+											alert("Please Select Sub Project Name");
+											$("#SUBPROJECTID").focus();
+											return false;
+									}
+									if($("#BATCHNO_MMS").val() == ''){
+											alert("Please Select Batch No....");
+											$("#BATCHNO_MMS").focus();
+											return false;
+									}
+									if($("#STOCKINHAND_MOR").val() == ''){
+											alert("This Batch Stock Quantity is not Sufficient....Please select another Batch...");
+											$("#STOCKINHAND_MOR").focus();
+											return false;
+									}
+									if($("#STOCKINHAND_MUR").val() == ''){
+											alert("This Batch Stock Quantity is not Sufficient....Please select another Batch...");
+											$("#STOCKINHAND_MUR").focus();
+											return false;
+									}
+									if($("#MMSELLDATE").val() == ''){
+											alert("Please Select Date....");
+											$("#MMSELLDATE").focus();
+											return false;
+									}
+									var pList = $("#TOTAL_PRODUCT_LIST").val();
+									for(i=1; i < pList; i++){
+										if($("#SCID_"+i).val() == ''){
+													alert("Please Select Sell Category type");
+													$("#SCID_"+i).focus();
+													return false;
+											}
+											if($("#PARTYID_"+i).val() == ''){
+													alert("Please Select Party Name");
+													$("#PARTYID_"+i).focus();
+													return false;
+											}
+											if($("#QUANTITY_"+i).val() == ''){
+													alert("Please Insert Egg Quantity..");
+													$("#QUANTITY_"+i).focus();
+													return false;
+											}
+											if($("#RATE_"+i).val() == ''){
+													alert("Please Insert Egg Rate..");
+													$("#RATE_"+i).focus();
+													return false;
+											}
+											if($("#TOTALPRICE_"+i).val() == ''){
+													alert("Please Insert Total Price..");
+													$("#TOTALPRICE_"+i).focus();
+													return false;
+											}
+																						
+										
+									}
+																		
+									if(!confirm('Are you sure, you want to proceed?')){
+										return false;
+									}
+									return true;
+								}
+								
+								function checkCalender(){
+									var MMSELLDATE = String($("#MMSELLDATE").val());
+									if(MMSELLDATE != ''){
+										
+										var tempMMSELLDATE = MMSELLDATE.split('-'); 
+										
+										var a = tempMMSELLDATE[1]+'/'+tempMMSELLDATE[0]+'/'+tempMMSELLDATE[2];
+									}
+								}
+								
+								$(document).ready(function(){
+   																		
+									$("select#PARTYID").change(function(){
+										$.getJSON("ajax/getPartyInfo.php",{party_id: $(this).val()}, function(j) {
+											if(j.length>0) {
+												for (var i = 0; i < j.length; i++) {
+												$("#FATHERNAME").val(j[i]['FATHERNAME']);
+												$("#ADDRESS").val(j[i]['ADDRESS']);
+												$("#MOBILE").val(j[i]['MOBILE']);
+												
+												}
+											}
+											else {
+												$("#FATHERNAME").val('');
+												$("#ADDRESS").val('');
+												$("#MOBILE").val('');
+											}
+										})
+									})
+									
+									
+									
+									
+									var inputs = 2;	
+									$('#btnAddMoreScripList').click(function() {		
+										
+										
+										$('.btnDelMoreScripList:disabled').removeAttr('disabled');
+										var c = $('.clonedInputForScripList:first').clone(true);
+										
+										
+										
+										c.find('select#SCID_1').attr({
+																				'id':'SCID_'+inputs,
+																			});
+										c.find('select#PARTYID_1').attr({
+																				'id':'PARTYID_'+inputs,
+																			});
+										c.find('input:hidden#QUANTITY_1').attr({
+																				'id':'QUANTITY_'+inputs,
+																				'value':''
+																			});
+										c.find('input:hidden#RATE_1').attr({
+																				'id':'RATE_'+inputs,
+																				'value':''
+																			});
+										c.find('input:hidden#TOTALPRICE_1').attr({
+																				'id':'TOTALPRICE_'+inputs,
+																				'value':''
+																			});
+										
+										c.find('input:hidden#closest_position1').attr({
+																			'id':'closest_position'+inputs,
+																			'value':inputs
+																		});																		
+																																
+																					
+										$('.clonedInputForScripList:last').after(c);
+										
+										
+										inputs++;
+										$("#TOTAL_PRODUCT_LIST").attr('value',inputs);
+									});
+									
+									$('.btnDelMoreScripList').click(function() {
+										if (confirm('Continue Delete?')) {
+											var colsest_pos = $(this).closest('.clonedInputForScripList').find('.closest_position').val();
+											$(this).closest('.clonedInputForScripList').remove();
+											var counter = 1;
+											for(var i=1;i<inputs;i++) {
+												if(i == colsest_pos)
+												continue;
+												$("#trade_file_view_details").find('select#SCID_'+i).attr({
+																											'id':'SCID_'+counter
+																										});
+												$("#trade_file_view_details").find('select#PARTYID_'+i).attr({
+																											'id':'PARTYID_'+counter
+																										});
+												$("#trade_file_view_details").find('input:hidden#QUANTITY_'+i).attr({
+																											'id':'QUANTITY_'+counter,
+																											'value':''
+																										});
+												$("#trade_file_view_details").find('input:hidden#RATE_'+i).attr({
+																											'id':'RATE_'+counter,
+																											'value':''
+																										});
+												$("#trade_file_view_details").find('input:hidden#TOTALPRICE_'+i).attr({
+																											'id':'TOTALPRICE_'+counter,
+																											'value':''
+																										});																									
+												$("#trade_file_view_details").find('input:text#closest_position'+i).attr({
+																							'value':counter,
+																							'id':'closest_position'+counter
+																						});
+												counter++;
+											}
+											--inputs;
+											$("#TOTAL_PRODUCT_LIST").attr('value',inputs);
+											$('.btnDelMoreScripList').attr('disabled',($('.clonedInputForScripList').length  < 2));
+											return false;
+										}
+										else{
+											return false;
+										}
+									});	
+									  
+  
+								});
+								
+								function getEggSell(BATCHNO_MMS){
+									if(BATCHNO_MMS == '') {
+											$("#STOCKINHAND_MOR").val('');
+											$("#STOCKINHAND_MUR").val('');
+											return false;
+										}
+										$.post("ajax/getPalMorogSell.php",{BATCHNO_MMS: BATCHNO_MMS}, function(j) {
+											//alert (j);
+											if(j.length>0) {
+												$("#STOCKINHAND_MOR").val('');
+												$("#STOCKINHAND_MOR").val(j);
+											}
+											else {
+												$("#STOCKINHAND_MOR").val('');
+											}
+										})
+										
+										$.post("ajax/getPalMurgiSell.php",{BATCHNO_MMS: BATCHNO_MMS}, function(j) {
+											//alert (j);
+											if(j.length>0) {
+												$("#STOCKINHAND_MUR").val('');
+												$("#STOCKINHAND_MUR").val(j);
+											}
+											else {
+												$("#STOCKINHAND_MUR").val('');
+											}
+										})
+									
+									
+								}
+								
+								function calTotPrice(id){
+									var sp = id.split("_");
+									var quantity = $("#QUANTITY_"+sp[1]).val();
+									var rate = $("#RATE_"+sp[1]).val();
+									quantity = parseFloat(quantity);
+									rate 	 = parseFloat(rate);
+									var totPrice = quantity * rate;
+									$("#TOTALPRICE_"+sp[1]).val(totPrice);
+								}
+								
+								function getProjectNameLoad(pcId){					
+										var options = '';
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#SUBPROJECTID").html('');
+											$("select#SUBPROJECTID").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getProjectList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												//alert (pcId);
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#SUBPROJECTID").html('');
+												$("select#SUBPROJECTID").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#SUBPROJECTID").html('');
+												$("select#SUBPROJECTID").html(options);
+											}
+										})
+										
+										
+									
+									
+								}
+								
+								function PartyName(pcId){					
+										var options = '';
+										var jj = '';
+										//alert (pcId);
+										options.length=0;
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#PARTYID").html('');
+											$("select#PARTYID").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getPartyName.php",{pcId: pcId}, function(jj) {
+											if(jj.length>0) {
+												//alert (pcId);
+												options = '';
+												options += '<option value="">Select</option>';
+												for (var ii = 0; ii < jj.length; ii++) {
+													options += '<option value="' + jj[ii].optionValue + '">' + jj[ii].optionDisplay + '</option>';
+												}
+												$("select#PARTYID_1").html('');
+												$("select#PARTYID_1").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#PARTYID_1").html('');
+												$("select#PARTYID_1").html(options);
+											}
+										});
+										
+										
+									
+									
+								}
+                            </script>
+                            <fieldset>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showLoad')">Enter Murgi/Morog Sell Entry Information</legend>
+                                <div id="showLoad" style="display:">
+                                  <form name="LoadForm" method="post" action="PalMorogMurgiSell.php" onsubmit="return confirmLoadSubmit();">
+                                        <table width="50%" border="0" cellpadding="3" cellspacing="0">
+                                            <tr valign="top">
+                                                <td colspan="7">
+                                                	<table width="631">
+                                                        <tr valign="top">
+                                                            <td width="54" align="right">&nbsp;</td>
+                                                            <td width="192" height="26" align="right">Project Name:</td>
+                                                            <td height="31" align="left"><select type="text" id="PROJECTID" name="PROJECTID" style="width:150px;" autocomplete="off" placeholder="PackingName" onchange="getProjectNameLoad(this.value);" >
+                                                              <option value="">Select</option>
+                                                              <!--%[PROJECT_NAME]%-->
+                                                            </select></td>
+                                                             <td width="183" height="26" align="left">&nbsp;</td>
+                                                          </tr>   
+                                                      <tr valign="top">
+                                                            <td width="54" align="right">&nbsp;</td>
+                                                            <td width="192" height="26" align="right">Sub Project Name:</td>
+                                                            <td height="31" align="left"><select type="text" id="SUBPROJECTID" name="SUBPROJECTID" style="width:150px;" autocomplete="off" onchange="PartyName(this.value);"  />
+                                                            </select></td>
+                                                             <td width="183" height="26" align="left">&nbsp;</td>
+                                                       </tr>
+                                                        
+                                                        <tr valign="top">
+                                                            <td width="87" align="right">&nbsp;</td>
+                                                            <td width="166" height="26" align="right">Batch No:</td>
+                                                            <td height="31" align="left"><select type="text" id="BATCHNO_MMS" name="BATCHNO_MMS" style="width:150px;" autocomplete="off" class="FormTextTypeInput" onchange="getEggSell(this.value)">
+                                                  				<option value="">Select</option>
+                                                  				<!--%[BATCH_NO]%-->
+                                          						</select> 
+                                                            </td>
+                                                            <td width="183" height="26" align="left"></select></td>
+                                                         </tr>
+                                                        <tr valign="top">
+                                                            <td width="87" align="right">&nbsp;</td>
+                                                            <td width="166" height="26" align="right">Morog Stock in Hand:</td>
+                                                            <td width="175" height="26" align="left"><input name="STOCKINHAND_MOR" size="18" id="STOCKINHAND_MOR" type="text" readonly="readonly" style="width:135px;" /></td>
+                                                            <td width="183" height="26" align="left">&nbsp;</td>
+                                                         </tr>
+                                                         <tr valign="top">
+                                                            <td width="87" align="right">&nbsp;</td>
+                                                            <td width="166" height="26" align="right">Murgi Stock in Hand:</td>
+                                                            <td width="175" height="26" align="left"><input name="STOCKINHAND_MUR" size="18" id="STOCKINHAND_MUR" type="text" readonly="readonly" style="width:135px;" /></td>
+                                                            <td width="183" height="26" align="left">&nbsp;</td>
+                                                         </tr>
+                                                        <tr valign="top">
+                                                          <td align="right">&nbsp;</td>
+                                                          <td height="26" align="right">Date:</td>
+                                                          <td height="26" align="left"><input name="MMSELLDATE" size="18" id="MMSELLDATE" type="text" readonly="readonly" onclick="showCalender('MMSELLDATE','MMSELLDATE')" style="width:135px;" /></td>
+                                                          <td height="26" align="left">&nbsp;</td>
+                                                        </tr>	
+                                                    </table>
+                                              </td>
+                                            </tr>
+                                            
+                                             <tr valign="top">
+                                                <td height="26" align="left" colspan="2">
+                                                		<div id="trade_file_view_details">
+                                                                <div style="margin-bottom:4px;width:100%; font-family:Tahoma, Geneva, sans-serif;" class="clonedInputForScripList">
+                                                                    <fieldset style='width:95%;border:0px;border-top:1px solid #2b2d93;font-family:Tahoma, Geneva, sans-serif;'>
+                                                                        <legend style="border:0px;" id="stock1">Add Product List <input type="text" name="closest_position" id="closest_position1" class="closest_position" value="1" readonly="readonly" size="2" style="border:0px;font-weight:bold; width:40px;"/></legend>
+                                                                        <table align="center" width="100%" class="frmTbl" border="0" style="font-family:Tahoma, Geneva, sans-serif;font-size:100%;">
+                                                                           <tr valign="middle">
+                                                                                <td width="25%" align="center">Murgi/Morog<sup style="color:red;">*</sup></td>
+                                                                                <td width="22%" align="center">Party name<sup style="color:red;">*</sup></td>
+                                                                                <td width="22%" align="center">Quantity <sup style="color:red;">*</sup></td>
+                                                                                <td width="22%" align="center">Rate<sup style="color:red;">*</sup></td>
+                                                                                <td width="22%" align="right">Total price <sup style="color:red;">*</sup></td>
+                                                                                <td width="9%" align="right">&nbsp;</td>
+                                                                                
+                                                                            </tr>
+                                                                            <tr valign="middle">
+                                                                                <td align="center"><select id="SCID_1" name="SCID[]" style="width:100px;">
+ 																					<option value="">Select</option>
+                                                                                    <option value="Morog">Morog</option>
+                                                                                    <option value="Murgi">Murgi</option>
+                                                  									</select>                                                                               
+                                                                                </td>
+                                                                                <td align="center"><select id="PARTYID_1" name="PARTYID[]" style="width:100px;">
+ 																					<option value="">Select</option>
+                                                  									</select>                                                                               
+                                                                                </td>
+                                                                                <td align="center"><input id="QUANTITY_1" name="QUANTITY[]" style="width:100px;"/></td>
+                                                                                <td align="center"><input id="RATE_1" name="RATE[]" style="width:100px;" onchange="calTotPrice(this.id)"/></td>
+                                                                                <td align="center" valign="top"><input readonly="readonly" id="TOTALPRICE_1" name="TOTALPRICE[]" style="width:100px;"/></td>
+                                                                                <td align="right" valign="top">
+                                                                                    <input style="font-family:Tahoma, Geneva, sans-serif;font-size:100%;" class="btnDelMoreScripList"  disabled="disabled" type="image" src="../images/cancel.png"></td>
+                                                                            </tr>
+                                                                              
+                                                                        </table>
+                                                                    </fieldset>
+                                                                </div>
+                                                            </div>
+                                                </td>
+                                            </tr>
+                                                <tr valign="top">
+                                                    <td align="right" colspan="2">
+                                                        <input name="TOTAL_PRODUCT_LIST" id="TOTAL_PRODUCT_LIST" type="hidden" value="2" />
+                                                        <input style="font-family:Tahoma, Geneva, sans-serif;font-size:100%;" id="btnAddMoreScripList" value="Add More" type="button">
+                                                    </td>
+                                                </tr>                                       
+                                            <tr valign="top">
+                                                <td width="38%" height="26" align="right">&nbsp;</td>
+                                                <td width="62%" height="26" align="left">
+                                                    <input type="submit" name="InsertMurMorSellInfo" value="Insert" class="FormSubmitBtn" />
+                                                    <input name="btnClose" type="button" value="Close" onClick="return ShowHide('showLoad')">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                              </div>
+                          </fieldset>
+                        </td>
+                    </tr>
+                    <!--  End Load Entry Form  --> 
+                    
+              </table>
+            </td>
+          </tr>
+    </table>
