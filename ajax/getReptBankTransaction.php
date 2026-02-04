@@ -279,7 +279,7 @@ function insertDateMySQlFormat($date){
 							
 							<td align='right' valign='top' style='border: 1px dotted #000'>&nbsp;</td>
 							
-							<td align='right' valign='top' style='border: 1px dotted #000'>".number_format($ACCBALANCE,2)."</td>
+							<td align='right' valign='top' style='border: 1px dotted #000'>&nbsp;</td>
 							
 						</tr>
 						<tr>
