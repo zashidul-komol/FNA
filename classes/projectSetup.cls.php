@@ -9247,6 +9247,19 @@
 				$prodCatTypeVal					.= "<option value='".$PRODCATTYPEID."'>".$PRODUCTNAME."</option>";
 			}
 			$systemParametersBody = str_replace('<!--%[PRODUCT]%-->',$prodCatTypeVal,$systemParametersBody);
+
+			// Expanse Head View  Start
+			
+			$ExpHeadNameVal 					= '';
+			$ExpHeadQuery 						= "SELECT EXPHID, EXPHEADNAME FROM fna_expense_head ORDER BY EXPHEADNAME ASC";
+			$ExpHeadQueryStatement				= mysql_query($ExpHeadQuery);
+			while($ExpHeadQueryStatementData	= mysql_fetch_array($ExpHeadQueryStatement)) {
+				$EXPHID							= $ExpHeadQueryStatementData["EXPHID"];
+				$EXPHEADNAME					= $ExpHeadQueryStatementData["EXPHEADNAME"];
+				$ExpHeadNameVal 					.= "<option value='".$EXPHID."'>".$EXPHEADNAME."</option>";
+			}
+			$systemParametersBody = str_replace('<!--%[EXPANSE_HEAD_NAME]%-->',$ExpHeadNameVal,$systemParametersBody);
+			// Expanse Head View  End
 			
 			$QuantityVal 						= '';
 			$quantityQuery 						= "SELECT QID,QVALUE FROM fna_quantity ORDER BY QVALUE ASC";
