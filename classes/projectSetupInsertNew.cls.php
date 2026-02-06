@@ -11099,7 +11099,9 @@
 
 			$TOTAL_PRODUCT_LIST	= $_REQUEST["TOTAL_PRODUCT_LIST"];
 
+			echo 'Komol'; die();
 			$TotalExpense_Amount = 0;
+			$i = 0;
 			for($i = 0; $i < $TOTAL_PRODUCT_LIST; $i++ ){
 				$TotalExpense_Amount += (float)$AMOUNT[$i];
 			}
