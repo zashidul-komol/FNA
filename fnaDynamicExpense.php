@@ -18,8 +18,8 @@
 		
 		// Insert UnLoad Information Start
 		if(isset($_POST['insertDynamicExpenseInfo'])) {
-			$unloadInsert 	= new projectSetupInsertNew();
-			$msg 			= $dynamucExpenseInsert->insertDynamicExpenseInfo($userId);
+			$dynamicExpenseInsert 	= new projectSetupInsertNew();
+			$msg 					= $dynamicExpenseInsert->insertDynamicExpenseInfo($userId);
 		}
 		// Insert UnLoad Information End
 		
