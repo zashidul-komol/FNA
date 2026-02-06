@@ -9114,6 +9114,493 @@
 			return $systemParametersBody;
 		}
 		//System Pocket UnLoad Entry  End
+
+		//Dynamic Expense Entry Start
+		function getDynamicExpenseEntry($empId) {
+			$systemParametersBody = $this->getTemplateContent('fnaDynamicExpense');
+			
+		// Project View  Start
+			
+			$projNameVal 				= '';
+			$projQuery 				= "SELECT PROJECTID, PROJECTNAME FROM fna_project ORDER BY PROJECTNAME ASC";
+			$projQueryStatement				= mysql_query($projQuery);
+			while($projQueryStatementData	= mysql_fetch_array($projQueryStatement)) {
+				$PROJECTID					= $projQueryStatementData["PROJECTID"];
+				$PROJECTNAME				= $projQueryStatementData["PROJECTNAME"];
+				$projNameVal 				.= "<option value='".$PROJECTID."'>".$PROJECTNAME."</option>";
+			}
+			$systemParametersBody = str_replace('<!--%[PROJECT_NAME]%-->',$projNameVal,$systemParametersBody);
+			// Project View  End
+			
+			
+			// Product Load Unload No  Start
+			
+			$maxLoadNo		= mysql_fetch_array(mysql_query("SELECT MAX(PRODUCTLOADUNLOADID) FROM fna_productloadunload"));
+			$NowmaxLoadNo	= $maxLoadNo['MAX(PRODUCTLOADUNLOADID)'] + 1;
+			$systemParametersBody = str_replace('<!--%[LOADUNLOAD_VIEW]%-->',$NowmaxLoadNo,$systemParametersBody);
+			// Product Load Unload No  End
+			
+			//Chamber From Start
+			$chamberFromVal							= '';
+			$chamberFromQuery 						= "SELECT CHID, CHNAME FROM fna_chamber ORDER BY CHNAME ASC";
+			$chamberFromQueryStatement				= mysql_query($chamberFromQuery);
+			while($chamberFromQueryStatementData	= mysql_fetch_array($chamberFromQueryStatement)) {
+				$chamberId							= $chamberFromQueryStatementData["CHID"];
+				$chamberName						= $chamberFromQueryStatementData["CHNAME"];
+				$chamberFromVal 					.= "<option value='".$chamberId."'>".$chamberName."</option>";
+			}
+			$systemParametersBody = str_replace('<!--%[CHAMBER_FROM]%-->',$chamberFromVal,$systemParametersBody);
+			//Chamber From End
+			
+			// Labour View Start
+			$ptView 		= '';
+			$ptViewQuery 	= "
+									SELECT
+											LABOURNAME,
+											FATHERNAME,
+											ADDRESS,
+											MOBILE
+									FROM
+											fna_labour 
+									ORDER BY
+											LABOURNAME
+									ASC
+								";
+			$sv								= 1;
+			$ptViewStatement			= mysql_query($ptViewQuery);
+			while($ptViewStatementData	= mysql_fetch_array($ptViewStatement)) {
+				if($sv%2==0) {
+					$class	= "evenRow";
+				} else {
+					$class	= "oddRow";
+				}
+				
+				$LABOURNAME   = $ptViewStatementData["LABOURNAME"];
+				$FATHERNAME   = $ptViewStatementData["FATHERNAME"];
+				$ADDRESS      = $ptViewStatementData["ADDRESS"];
+				$MOBILE       = $ptViewStatementData["MOBILE"];
+				
+				$ptView .= "<tr valign='top' class='$class'>
+									<td >{$sv}</td>
+									<td >{$LABOURNAME}</td>
+									<td >{$FATHERNAME}</td>
+									<td >{$ADDRESS}</td>
+									<td >{$MOBILE}</td>
+									<td align='center'>
+									<img src='images/icon_edit.gif' alt='Edit' border='0' title='Edit' />
+									</td>
+								</tr>";
+				
+				$sv++;
+			}
+			$systemParametersBody = str_replace('<!--%[LABOUR_VIEW]%-->',$ptView,$systemParametersBody);
+			
+			//Labour View End
+			
+			// Product View  Start
+			
+			$prodNameVal 				= '';
+			$prodQuery 				= "SELECT PRODCATTYPEID, CATEGORYTYPENAME FROM fna_productcattype ORDER BY CATEGORYTYPENAME ASC";
+			$prodQueryStatement				= mysql_query($prodQuery);
+			while($prodQueryStatementData	= mysql_fetch_array($prodQueryStatement)) {
+				$productCatTypeId				= $prodQueryStatementData["PRODCATTYPEID"];
+				$catName						= $prodQueryStatementData["CATEGORYTYPENAME"];
+				$prodNameVal 					.= "<option value='".$productCatTypeId."'>".$catName."</option>";
+			}
+			$systemParametersBody = str_replace('<!--%[PRODUCT_NAME]%-->',$prodNameVal,$systemParametersBody);
+			
+			
+			//Labour Name View
+			$labourNameVal 				= '';
+			$labourQuery 				= "SELECT LABOURID, LABOURNAME FROM fna_labour ORDER BY LABOURNAME ASC";
+			$labourQueryStatement				= mysql_query($labourQuery);
+			while($labourQueryStatementData	= mysql_fetch_array($labourQueryStatement)) {
+				$labourId						= $labourQueryStatementData["LABOURID"];
+				$labourName						= $labourQueryStatementData["LABOURNAME"];
+				$labourNameVal 					.= "<option value='".$labourId."'>".$labourName."</option>";
+			}
+			$systemParametersBody = str_replace('<!--%[LABOUR_NAME]%-->',$labourNameVal,$systemParametersBody);
+			
+			$PartyNameVal 				= '';
+			$PartyQuery 				= "SELECT PARTYID, PARTYNAME FROM fna_party ORDER BY PARTYNAME ASC";
+			$PartyQueryStatement				= mysql_query($PartyQuery);
+			while($PartyQueryStatementData	= mysql_fetch_array($PartyQueryStatement)) {
+				$PartyId						= $PartyQueryStatementData["PARTYID"];
+				$PartyName						= $PartyQueryStatementData["PARTYNAME"];
+				$PartyNameVal 					.= "<option value='".$PartyId."'>".$PartyName."</option>";
+			}
+			$systemParametersBody = str_replace('<!--%[PARTY_NAME]%-->',$PartyNameVal,$systemParametersBody);
+			
+			$prodCatTypeVal						= '';
+			$prodCatQuery 						= "SELECT PRODCATTYPEID,PRODUCTNAME FROM fna_product ORDER BY PRODUCTNAME ASC";
+			$prodCatQueryStatement				= mysql_query($prodCatQuery);
+			while($prodCatQueryStatementData	= mysql_fetch_array($prodCatQueryStatement)) {
+				$PRODCATTYPEID					= $prodCatQueryStatementData["PRODCATTYPEID"];
+				$PRODUCTNAME					= $prodCatQueryStatementData["PRODUCTNAME"];
+				$prodCatTypeVal					.= "<option value='".$PRODCATTYPEID."'>".$PRODUCTNAME."</option>";
+			}
+			$systemParametersBody = str_replace('<!--%[PRODUCT]%-->',$prodCatTypeVal,$systemParametersBody);
+			
+			$QuantityVal 						= '';
+			$quantityQuery 						= "SELECT QID,QVALUE FROM fna_quantity ORDER BY QVALUE ASC";
+			$quantityQueryStatement				= mysql_query($quantityQuery);
+			while($quantityQueryStatementData	= mysql_fetch_array($quantityQueryStatement)) {
+				$qId							= $quantityQueryStatementData["QID"];
+				$qValue							= $quantityQueryStatementData["QVALUE"];
+				$QuantityVal 					.= "<option value='".$qId."'>".$qValue."</option>";
+			}
+			$systemParametersBody = str_replace('<!--%[QUANTITY]%-->',$QuantityVal,$systemParametersBody);
+			
+			$weightTypeVal 							= '';
+			$weightTypeQuery 						= "SELECT WTID,WNAME FROM fna_weight ORDER BY WNAME ASC";
+			$weightTypeQueryStatement				= mysql_query($weightTypeQuery);
+			while($weightTypeQueryStatementData		= mysql_fetch_array($weightTypeQueryStatement)) {
+				$wtId								= $weightTypeQueryStatementData["WTID"];
+				$wtName								= $weightTypeQueryStatementData["WNAME"];
+				$weightTypeVal 						.= "<option value='".$wtId."'>".$wtName."</option>";
+			}
+			$systemParametersBody = str_replace('<!--%[WEIGHTTYPE]%-->',$weightTypeVal,$systemParametersBody);
+			
+			// Packing Unit Start
+			$packingNameVal 					= '';
+			$PackingQuery 						= "SELECT PACKINGNAMEID,PACKINGNAME FROM fna_packingname ORDER BY PACKINGNAME ASC";
+			$PackingQueryStatement				= mysql_query($PackingQuery);
+			while($PackingQueryStatementData	= mysql_fetch_array($PackingQueryStatement)) {
+				$packingId						= $PackingQueryStatementData["PACKINGNAMEID"];
+				$packingName					= $PackingQueryStatementData["PACKINGNAME"];
+				$packingNameVal 					.= "<option value='".$packingId."'>".$packingName."</option>";
+			}
+			
+			$systemParametersBody = str_replace('<!--%[PACKING_NAME_NEW]%-->',$packingNameVal,$systemParametersBody);
+			$packingNameVal 	= '';
+			$packingViewQuery 	= "
+									SELECT
+											PACKINGUNITID,
+											PACKINGNAMEID,
+											QID,
+											WTID
+									FROM
+											fna_packingunit 
+									ORDER BY
+											PACKINGUNITID
+									ASC
+								";
+			$sv								= 1;
+			$packingViewQueryStatement				= mysql_query($packingViewQuery);
+			while($packingViewQueryStatementData	= mysql_fetch_array($packingViewQueryStatement)) {
+				if($sv%2==0) {
+					$class	= "evenRow";
+				} else {
+					$class	= "oddRow";
+				}
+				
+				$PACKINGUNITID   		= $packingViewQueryStatementData["PACKINGUNITID"];
+				$PACKINGNAMEID   		= $packingViewQueryStatementData["PACKINGNAMEID"];
+				$QID			   		= $packingViewQueryStatementData["QID"];
+				$WTID			   		= $packingViewQueryStatementData["WTID"];
+				
+				$packingNameQuery = "
+									SELECT
+											PACKINGNAMEID,
+											PACKINGNAME
+									FROM
+											fna_packingname 
+											WHERE PACKINGNAMEID = {$PACKINGNAMEID}
+									";
+				$packingNameQueryStatement				= mysql_query($packingNameQuery);
+				while($packingNameQueryStatementData	= mysql_fetch_array($packingNameQueryStatement)) {
+					$PACKINGNAMEID_NEW   		= $packingNameQueryStatementData["PACKINGNAMEID"];
+					$PACKINGNAME_NEW   			= $packingNameQueryStatementData["PACKINGNAME"];
+					
+				}
+				
+				$QidQuery = "
+									SELECT
+											QVALUE
+									FROM
+											fna_quantity 
+											WHERE QID = {$QID}
+									";
+				$QidQueryStatement				= mysql_query($QidQuery);
+				while($QidQueryStatementData	= mysql_fetch_array($QidQueryStatement)) {
+					$QVALUE   		= $QidQueryStatementData["QVALUE"];
+					
+				}
+				
+				$wtidQuery = "
+									SELECT
+											WNAME
+									FROM
+											fna_weight 
+											WHERE WTID = {$WTID}
+									";
+				$wtidQueryStatement				= mysql_query($wtidQuery);
+				while($wtidQueryStatementData	= mysql_fetch_array($wtidQueryStatement)) {
+					$WNAME   		= $wtidQueryStatementData["WNAME"];
+					
+				}
+			
+			
+			$packingNameVal 					.= "<option value='".$PACKINGUNITID."'>".$PACKINGNAME_NEW.", ".$QVALUE.",".$WNAME."</option>";
+			}
+			
+			$systemParametersBody = str_replace('<!--%[PACKING_NAME]%-->',$packingNameVal,$systemParametersBody);
+			
+			//Product View End
+			
+			//Chamber From Start
+			$chamberFromVal							= '';
+			$chamberFromQuery 						= "SELECT CHID, CHNAME FROM fna_chamber ORDER BY CHNAME ASC";
+			$chamberFromQueryStatement				= mysql_query($chamberFromQuery);
+			while($chamberFromQueryStatementData	= mysql_fetch_array($chamberFromQueryStatement)) {
+				$chamberId							= $chamberFromQueryStatementData["CHID"];
+				$chamberName						= $chamberFromQueryStatementData["CHNAME"];
+				$chamberFromVal 					.= "<option value='".$chamberId."'>".$chamberName."</option>";
+			}
+			$systemParametersBody = str_replace('<!--%[CHAMBER_FROM]%-->',$chamberFromVal,$systemParametersBody);
+			//Chamber From End
+					
+			//Service for Module Form Start
+			$moduleService 						= '';
+			$moduleServiceQuery 				= "SELECT DISTINCT SERVICE_ID,SERVICE_NAME FROM s_service_main ORDER BY SERVICE_NAME ASC";
+			$moduleServiceStatement				= mysql_query($moduleServiceQuery);
+			while($moduleServiceStatementData	= mysql_fetch_array($moduleServiceStatement)) {
+				$serviceId						= $moduleServiceStatementData["SERVICE_ID"];
+				$serviceName					= $moduleServiceStatementData["SERVICE_NAME"];
+				$moduleService 					.= "<option value='".$serviceId."'>".$serviceName."</option>";
+			}
+			$systemParametersBody = str_replace('<!--%[MODULE_SERVICE]%-->',$moduleService,$systemParametersBody);
+			//Service for Module Form End
+			
+			//Module View Start
+			$moduleView = "<table border='0' width='100%' align='left' cellspacing='0' cellpadding='3' style='font-size:75%;'>";
+			$moduleServQuery = "
+									SELECT
+											SERVICE_ID,
+											SERVICE_NAME
+									FROM
+											s_service_main 
+									ORDER BY
+											ORDER_NO
+									ASC
+								";
+			$msv							= 1;
+			$moduleServStatement			= mysql_query($moduleServQuery);
+			while($moduleServStatementData	= mysql_fetch_array($moduleServStatement)) {
+				if($msv%2==0) {
+					$class	= "evenRow";
+				} else {
+					$class	= "oddRow";
+				}
+				
+				$moduleServiceID        = $moduleServStatementData["SERVICE_ID"];
+				$moduleServiceName      = $moduleServStatementData["SERVICE_NAME"];
+				
+				$moduleView .= "<tr class='$class'><td style='font-weight:bold;'><span onclick=\"return ShowHide('viewModule{$moduleServiceID}')\" style='display:block;'>{$moduleServiceName}</span></td></tr>";
+				
+				$moduleQuery = "
+								SELECT
+										s_module_main.MODULE_ID,
+										s_module_main.MODULE_NAME,
+										s_module_main.DESCRIPTION,
+										s_module_main.ORDER_NO
+								FROM
+										s_module_main
+								WHERE
+										s_module_main.SERVICE_ID='$moduleServiceID'
+								ORDER BY
+										s_module_main.ORDER_NO
+							  ";
+				$moduleView .= "<tr valign='top'>
+									<td>
+									<div id='viewModule{$moduleServiceID}' style='display:none;'>
+									<table border='0' width='99%' align='left' cellspacing='1' cellpadding='2' style='font-size:90%;'>
+									<tr style='background:#E8E1E1;text-align:center; font-weight:bold;'>
+									<td>Module</td>
+									<td>Description</td>
+									<td>Order</td>
+									<td>Action</td>
+								</tr>";
+				$moduleStatement	= mysql_query($moduleQuery);
+				$moduleCount 		= mysql_num_rows($moduleStatement);
+				if($moduleCount>0) {
+					$mv 						= 1;
+					$moduleStatement			= mysql_query($moduleQuery);
+					while($moduleStatementData	= mysql_fetch_array($moduleStatement)) {
+						if($mv%2==0) {
+							$moduleClass="evenRow";
+						} else {
+							$moduleClass="oddRow";
+						}
+						$moduleId          = $moduleStatementData["MODULE_ID"];
+						$moduleName        = $moduleStatementData["MODULE_NAME"];
+						$moduleDescription = $moduleStatementData["DESCRIPTION"];
+						$moduleOrder       = $moduleStatementData["ORDER_NO"];
+						
+						$moduleView .= "<tr class='$moduleClass'>
+											<td>&nbsp;$moduleName</td>
+											<td>&nbsp;$moduleDescription</td>
+											<td style='text-align:center'>$moduleOrder</td>
+											<td style='text-align:center;'><a href='ModuleEdit.php?keepThis=true&TB_iframe=true&height=600&width=1200&moduleID={$moduleId}' class='thickbox'>
+											<img src='images/icon_edit.gif' alt='Edit' border='0' title='Edit' /></td>
+										</tr>";
+						$mv++;
+					}
+				} else {
+					$moduleView .= "<tr style='background:#F7F4F4'>
+										<td colspan='3' style='text-align:center; color:red;'>No Module Found</td>
+									</tr>";
+				}
+				$moduleView .= "</table></div></td></tr>";
+				$msv++;
+			}
+			$moduleView .= "</table>";
+			$systemParametersBody = str_replace('<!--%[MODULE_VIEW]%-->',$moduleView,$systemParametersBody);
+			//Module View End
+			
+			//Sub Module View Start
+			$submoduleView = "<table border='0' width='100%' align='left' cellspacing='0' cellpadding='2' style='font-size:75%;'>";
+			$submoduleServiceQuery = "
+										SELECT
+												SERVICE_ID,
+												SERVICE_NAME
+										FROM
+												s_service_main 
+										ORDER BY
+												ORDER_NO
+										ASC
+								    ";
+			$smsv									= 1;
+			$submoduleServiceStatement				= mysql_query($submoduleServiceQuery);
+			while($submoduleServiceStatementData	= mysql_fetch_array($submoduleServiceStatement)) {
+				if($smsv%2==0) {
+					$class	= "evenRow";
+				} else {
+					$class	= "oddRow";
+				}
+				
+				$submoduleServiceID		= $submoduleServiceStatementData["SERVICE_ID"];
+				$submoduleServiceName	= $submoduleServiceStatementData["SERVICE_NAME"];
+				
+				$submoduleView .= "<tr class='$class'><td style='font-weight:bold;'><span onclick=\"return ShowHide('viewsubModuleModule{$submoduleServiceID}')\" style='display:block;'>{$submoduleServiceName}</span></td></tr>";
+				$submoduleModuleQuery = "
+											SELECT
+													s_module_main.MODULE_ID,
+													s_module_main.MODULE_NAME,
+													s_module_main.DESCRIPTION
+											FROM
+													s_module_main
+											WHERE
+													s_module_main.SERVICE_ID='$submoduleServiceID'
+											ORDER BY
+													s_module_main.ORDER_NO
+										";
+				$submoduleView .= "<tr valign='top'>
+									<td>
+										<div id='viewsubModuleModule{$submoduleServiceID}' style='display:none;'>
+											<table border='0' width='100%' align='left' cellspacing='0' cellpadding='2' style='font-size:95%;'>";
+				$submoduleModuleStatement	= mysql_query($submoduleModuleQuery);
+				$submoduleModuleCount 		= mysql_num_rows($submoduleModuleStatement);
+				if($submoduleModuleCount>0) {
+					$smv 								= 1;
+					$submoduleModuleStatement			= mysql_query($submoduleModuleQuery);
+					while($submoduleModuleStatementData	= mysql_fetch_array($submoduleModuleStatement)) {
+						if($smv%2==0) {
+							$moduleClass	= "evenRow";
+						} else {
+							$moduleClass	= "oddRow";
+						}
+						$submoduleModuleId           = $submoduleModuleStatementData["MODULE_ID"];
+						$submoduleModuleName         = $submoduleModuleStatementData["MODULE_NAME"];
+						$submoduleModuleDescription  = $submoduleModuleStatementData["DESCRIPTION"];
+						
+						$submoduleView .= "<tr class='$moduleClass'>
+											<td  style='font-weight:bold; text-align:center;'><span onclick=\"return ShowHide('viewSubModule{$submoduleModuleId}')\" style='display:block;'>{$submoduleModuleName}</span></td>
+										   </tr>";
+						
+						$subModuleQuery = "
+											SELECT
+													s_sub_module_main.SUB_MODULE_ID,
+													s_sub_module_main.SUB_MODULE_NAME,
+													s_sub_module_main.DEFAULT_FILE,
+													s_sub_module_main.DESCRIPTION,
+													s_sub_module_main.ORDER_NO
+											FROM
+													s_sub_module_main
+											WHERE
+													s_sub_module_main.MODULE_ID='$submoduleModuleId'
+											ORDER BY
+													s_sub_module_main.ORDER_NO
+										  ";
+						$submoduleView .= "<tr valign='top'>
+												<td>
+												<div id='viewSubModule{$submoduleModuleId}' style='display:none;'>
+												<table border='0' width='100%' align='lect' cellspacing='1' cellpadding='2' style='font-size:100%;'>
+												<tr style='background:#E8E1E1;text-align:center; font-weight:bold;'>
+												<td>Submodule</td>
+												<td>Defaultfile</td>
+												<td>Description</td>
+												<td>Order</td>
+												<td>Action</td>
+											</tr>";
+						$subModuleStatement	= mysql_query($subModuleQuery);
+						$submoduleCount 	= mysql_num_rows($subModuleStatement);
+						if($submoduleCount>0) {
+							$sm 							= 1;
+							$subModuleStatement				= mysql_query($subModuleQuery);
+							while($subModuleStatementData	= mysql_fetch_array($subModuleStatement)) {
+								if($sm%2==0) {
+									$submoduleClass	= "evenRow";
+								} else {
+									$submoduleClass	= "oddRow";
+								}
+								
+								$submoduleId           = $subModuleStatementData["SUB_MODULE_ID"];
+								$submoduleName         = $subModuleStatementData["SUB_MODULE_NAME"];
+								$submoduleFile         = $subModuleStatementData["DEFAULT_FILE"];
+								$submoduleDescription  = $subModuleStatementData["DESCRIPTION"];
+								$submoduleOrder        = $subModuleStatementData["ORDER_NO"];
+								
+								$submoduleView .= "<tr class='$submoduleClass'>
+														<td>&nbsp;$submoduleName</td>
+														<td>&nbsp;$submoduleFile</td>
+														<td>&nbsp;$submoduleDescription</td>
+														<td style='text-align:center;'>$submoduleOrder</td>
+														<td style='text-align:center;'><a href='SubModuleEdit.php?keepThis=true&TB_iframe=true&height=600&width=1200&submoduleID={$submoduleId}' class='thickbox'>
+														<img src='images/icon_edit.gif' alt='Edit' border='0' title='Edit' /></td>
+													</tr>";
+								$sm++;
+							}
+						} else {
+							$submoduleView .= "<tr style='background:#F7F4F4'>
+													<td colspan='4' style='text-align:center; color:red;'>No Sub Module Found</td>
+											   </tr>";
+						}
+						$submoduleView .= "</table></div></td></tr>";		
+						$smv++;
+					}
+				} else {
+					$submoduleView .= "<tr style='background:#F7F4F4'>
+											<td colspan='3' style='text-align:center; color:red;'>No Module Found</td>
+									   </tr>";
+				}
+				$submoduleView .= "</table></div></td></tr>";
+				
+				$smsv++;
+			}
+			$submoduleView .= "</table>";
+			$systemParametersBody = str_replace('<!--%[SUB_MODULE_VIEW]%-->',$submoduleView,$systemParametersBody);
+	
+			//Sub Module View End
+	
+			
+			//Service for Sub Module Start
+			$systemParametersBody = str_replace('<!--%[SUBMODULE_SERVICE]%-->',$moduleService,$systemParametersBody);
+			//Service for Sub Module End
+			
+			return $systemParametersBody;
+		}
+		//Dynamic Expense Entry  End
 		
 		//System Pocket UnLoad Entry Jaber Start
 		function getPocketUnLoadEntryJaber($empId) {
