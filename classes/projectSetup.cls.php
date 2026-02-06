@@ -9139,6 +9139,13 @@
 			$NowmaxLoadNo	= $maxLoadNo['MAX(PRODUCTLOADUNLOADID)'] + 1;
 			$systemParametersBody = str_replace('<!--%[LOADUNLOAD_VIEW]%-->',$NowmaxLoadNo,$systemParametersBody);
 			// Product Load Unload No  End
+
+			// Max Entry Serial No  Start
+			
+			$maxEntrySLNo		= mysql_fetch_array(mysql_query("SELECT MAX(ENTRYSERIALNO) FROM fna_entryserialno"));
+			$NowmaxEntrySLNo	= $maxEntrySLNo['MAX(ENTRYSERIALNO)'] + 1;
+			$systemParametersBody = str_replace('<!--%[MAXENTRY_SLNO_VIEW]%-->',$NowmaxEntrySLNo,$systemParametersBody);
+			// Max Entry Serial No  End
 			
 			//Chamber From Start
 			$chamberFromVal							= '';

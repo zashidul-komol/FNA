@@ -1,6 +1,6 @@
     <table width="70%" border="0" cellspacing="1" cellpadding="1" style="margin:0px auto 0px auto;">
         <tr>
-            <td colspan="2" align="center"><h1>Unload Entry Form</h1></td>
+            <td colspan="2" align="center"><h1>Dynamic Expense Entry Form</h1></td>
         </tr>
         <tr>
             <td colspan="2" align="center"><!--%[MSG]%--></td>
@@ -13,7 +13,7 @@
                     <tr valign="top">
                         <td align="left">
 							<script  type="text/javascript">
-								function confirmLoadSubmit() {
+								function confirmDynamicExpSubmit() {
 									if($("#PROJECTID").val() == ''){
 											alert("Please Select Project name");
 											$("#PROJECTID").focus();
@@ -546,19 +546,43 @@
 										
 																		
 								}
+								function checkVoucher(vno){
+								    var vno = $("#VOUCHERNO").val();
+
+								    if(vno == ''){
+								        $("#voucherIcon").html('');
+								        $("#voucherMsg").html('');
+								        return;
+								    }
+
+								    $("#voucherIcon").html('⏳');
+
+								    $.get("ajax/checkVoucher.php",{voucher:vno},function(data){
+								    	//alert (data);
+								        if($.trim(data) == 'exists'){
+								            $("#voucherIcon").html('❌');
+								            $("#voucherMsg").html('<span style="color:red">Already exists</span>');
+								            $("#VOUCHERNO").focus();
+								        }else{
+								            $("#voucherIcon").html('✅');
+								            $("#voucherMsg").html('<span style="color:green">Available</span>');
+								        }
+
+								    });
+								}
 								
                             </script>
                             <fieldset>
-                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showLoad')">Enter Unload Entry Information</legend>
+                                <legend style="color:#2C89B5; cursor:pointer;"  onClick="return ShowHide('showLoad')">Enter Dynamic Expense Entry Information</legend>
                                 <div id="showLoad" style="display:">
-                                  <form name="LoadForm" method="post" action="fnaDynamicExpense.php" onsubmit="return confirmLoadSubmit();">
+                                  <form name="LoadForm" method="post" action="fnaDynamicExpense.php" onsubmit="return confirmDynamicExpSubmit();">
                                         <table width="100%" border="0" cellpadding="3" cellspacing="0">
                                             <tr valign="top">
                                                 <td colspan="7">
                                                 	<table width="100%" border="1">
                                                       <tr>
-                                                    	<td height="26" colspan="3" align="right" valign="top" bgcolor="#999999"><strong>Load Unload No :</strong></td>
-                                                    	<td height="26" align="left" valign="top" bgcolor="#999999"><input name="LOADUNLOADNO" type="text" class="FormTextTypeInput" id="LOADUNLOADNO" value="<!--%[LOADUNLOAD_VIEW]%-->" readonly="readonly" autocomplete="off" placeholder="LOADUNLOADNO" /></td>
+                                                    	<td height="26" colspan="3" align="right" valign="top" bgcolor="#999999"><strong>Entry Serial No :</strong></td>
+                                                    	<td height="26" align="left" valign="top" bgcolor="#999999"><input name="LOADUNLOADNO" type="text" class="FormTextTypeInput" id="LOADUNLOADNO" value="<!--%[MAXENTRY_SLNO_VIEW]%-->" readonly="readonly" autocomplete="off" placeholder="LOADUNLOADNO" /></td>
                                                       </tr>
                                                       <tr>
                                                     	<td width="165" align="right">
@@ -588,17 +612,15 @@
                                                             <td width="225" align="left"><input name="ENTRYDATE" size="18" id="ENTRYDATE" type="text" readonly="readonly" onclick="showCalender('ENTRYDATE','ENTRYDATE')" onchange="checkCalender(this.value);" style="width:170px;" /></td>
                                                         </tr>
                                                         <tr valign="top">
-                                                            <td align="right">
-                                                               Labour Name :
-                                                            </td>
-                                                            <td height="26" align="left">
-                                                                <select id="LABOURID" name="LABOURID" autocomplete="off" style="width:180px;">
-                                                                <option value="">Select</option>
-                                                                    <!--%[LABOUR_NAME]%-->
-                                                                 </select>
-                                                            </td>
-                                                            <td height="26" align="right">&nbsp;</td>
+                                                            <td align="right">&nbsp;</td>
                                                             <td height="26" align="left">&nbsp;</td>
+                                                            <td height="26" align="right">Voucher Number:</td>
+															<td height="26" align="left">
+																<input type="text" name="VOUCHERNO" id="VOUCHERNO" style="width:167px;" onblur="checkVoucher();" />
+
+																<span id="voucherIcon" style="margin-left:5px;"></span>
+																<span id="voucherMsg" style="margin-left:5px;font-size:12px;"></span>
+															</td>
                                                          </tr>	
                                                          
                                                     </table>
@@ -611,24 +633,21 @@
                                                                 <div style="margin-bottom:4px;width:100%; font-family:Tahoma, Geneva, sans-serif;" class="clonedInputForScripList">
                                                                     <table width="100%" class="frmTbl" border="0" style="font-family:Tahoma, Geneva, sans-serif;font-size:100%;">
                                                                            <tr valign="middle" bgcolor="#0000CC" style="color:white">
-                                                                                <td width="20%" align="center">Count No <sup style="color:red;">*</sup></td>
-                                                                                <td width="30%" align="center">Product name <sup style="color:red;">*</sup></td>
-                                                                                <td width="20%" align="center">Existing Quantity <sup style="color:red;">*</sup></td>
-                                                                                <td width="20%" align="center">Unload Quantity <sup style="color:red;">*</sup></td>
+                                                                                <td width="20%" align="center">Expense Head <sup style="color:red;">*</sup></td>
+                                                                                <td width="30%" align="center">Amount <sup style="color:red;">*</sup></td>
+                                                                                <td width="20%" align="center">Description <sup style="color:red;">*</sup></td>
                                                                                 <td width="10%" align="right">&nbsp;</td>
                                                                                 
                                                                             </tr>
                                                                             <tr valign="middle">
-                                                                            	<td align="center"><input id="PRODUCTLOADUNLOADBKDNID_1" name="PRODUCTLOADUNLOADBKDNID[]" style="width:180px;" onchange="getProduct(this.id,this.value);">
-                                                                                
-                                                                              <td align="center"><select id="PRODUCTID_1" name="PRODUCTID[]" style="width:280px;" onchange="getPocketBalance(this.id,this.value);">
+                                                                              <td align="center"><select id="EXPHID_1" name="EXPHID[]" style="width:280px;">
                                                                                 <option value="">Select</option>
-                                                                    				<!--%[PRODUCT]-->
+                                                                    				<!--%[EXPANSE_HEAD_NAME]-->
                                                                  				</select>
                                                                                 </td>
-                                                                                <td align="center"><input id="existingquantity_1" name="existingquantity[]" style="width:180px;" readonly="true"/></td>
+                                                                                <td align="center"><input id="amount_1" name="amount[]" style="width:180px;"/></td>
                                                                                 
-                                                                            	<td align="center"><input id="quantity_1" name="quantity[]" style="width:180px;" /></td>
+                                                                            	<td align="center"><input id="description_1" name="description[]" style="width:180px;" /></td>
                                                                                 <td align="right" valign="top"><input style="font-family:Tahoma, Geneva, sans-serif;font-size:100%;" class="btnDelMoreScripList"  disabled="disabled" type="image" src="../images/cancel.png"></td>
                                                                             </tr>
                                                                               
