@@ -11093,19 +11093,18 @@
 			$EXPDATE 			= insertDateMySQlFormat($_REQUEST["EXPDATE"]);
 			$VOUCHERNO			= addslashes($_REQUEST["VOUCHERNO"]);
 
-			$AMOUNT 			= addslashes($_REQUEST["AMOUNT"]);
-			$EXPHID 			= addslashes($_REQUEST["EXPHID"]);
-			$DESCRIPTION 		= addslashes($_REQUEST["DESCRIPTION"]);
+			$AMOUNT = $_REQUEST["AMOUNT"];
+			$EXPHID = $_REQUEST["EXPHID"];
+			$DESCRIPTION = $_REQUEST["DESCRIPTION"];
 
 			$TOTAL_PRODUCT_LIST	= $_REQUEST["TOTAL_PRODUCT_LIST"];
 
-			$TotalExpense_Amount = 0;   // initialize before loop
-			$k = 0;
-			for($i = 1; $i < $TOTAL_PRODUCT_LIST; $i++ ){
-
-				$TotalExpense_Amount += $AMOUNT[$i];  
+			$TotalExpense_Amount = 0;
+			for($i = 0; $i < $TOTAL_PRODUCT_LIST; $i++ ){
+				$TotalExpense_Amount += (float)$AMOUNT[$i];
 			}
-			echo $TotalExpense_Amount;
+
+			//echo $TotalExpense_Amount;
 
 			$entDate 			= date('Y-m-d');
 			$entTime 			= date('H:i:s A');
@@ -11130,7 +11129,7 @@
 				$FNA_Balance_Query  	= mysql_fetch_array(mysql_query("SELECT CASHINHAND FROM fna_cashinhand WHERE FLAG = '".$MaxFlag."'"));
 				$CASHINHAND				= $FNA_Balance_Query['CASHINHAND'];
 				
-				echo $CASHINHAND;
+				//echo $CASHINHAND;
 				
 				if($CASHINHAND >= $TotalExpense_Amount){
 					
@@ -11175,13 +11174,10 @@
 													ENTRYSERIALNOID,
 													PROJECTID,
 													SUBPROJECTID,
-													EXPHID,
 													EXPSUBHID,
 													PARTYID,
-													AMOUNT,
 													EXPDATE,
 													VOUCHERNO,
-													DESCRIPTION,
 													STATUS,
 													ENTDATE,
 													ENTTIME,
@@ -11192,13 +11188,10 @@
 													'".$MaxEntrySlNo."',
 													'".$PROJECTID."',
 													'".$SUBPROJECTID."',
-													'".$EXPHID."',
 													'0',
 													'".$PARTYID."',
-													'".$AMOUNT."',
 													'".$EXPDATE."',
 													'".$VOUCHERNO."',
-													'".$DESCRIPTION."',
 													'Active',
 													'".$entDate."',
 													'".$entTime."',
@@ -11208,29 +11201,30 @@
 						$insertQueryExpStatement = mysql_query($insertQueryExp);
 						$ExpenseCtId = mysql_insert_id();
 						if($insertQueryExpStatement){
-							for($i = 1; $i < $TOTAL_PRODUCT_LIST; $i++ ){
+							for($i = 0; $i < $TOTAL_PRODUCT_LIST; $i++ ){
 
 								$insertQueryExpDet = "
-										INSERT INTO fna_expanse_details
-														(
-															EXPID,
-															ENTRYSERIALNOID,
-															EXPHID,
-															AMOUNT,
-															DESCRIPTION
-														) 
-												VALUES
-														(
-															'".$ExpenseCtId."',
-															'".$MaxEntrySlNo."',
-															'".$EXPHID[$k]."',
-															'".$AMOUNT[$k]."',
-															'".$DESCRIPTION[$k]."'
-														)
-													";
-								$insertQueryExpDetStatement = mysql_query($insertQueryExpDet);
+									INSERT INTO fna_expanse_details
+									(
+										EXPID,
+										ENTRYSERIALNOID,
+										EXPHID,
+										AMOUNT,
+										DESCRIPTION
+									) 
+									VALUES
+									(
+										'".$ExpenseCtId."',
+										'".$MaxEntrySlNo."',
+										'".$EXPHID[$i]."',
+										'".$AMOUNT[$i]."',
+										'".$DESCRIPTION[$i]."'
+									)
+								";
 
+								mysql_query($insertQueryExpDet);
 							}
+
 						}
 							
 						//Update FNA Balance Table Start
@@ -11265,7 +11259,7 @@
 													'".$MaxEntrySlNo."',
 													'".$PROJECTID."',
 													'".$SUBPROJECTID."',
-													'".$AMOUNT."',
+													'".$TotalExpense_Amount."',
 													'".$NOW_BALANCE_AMOUNT."',
 													'".$NOW_MAXBALANCE_FLAG."',
 													'".$EXPDATE."',
@@ -11301,8 +11295,8 @@
 									$CASHINHAND	        			= $CashIHQueryStatementData["CASHINHAND"];
 								}
 								
-								$Now_ExpanseAmount					= $EXPANSE + $TotalExpense_Amount ;
-								$Now_CashInHand						= $CASHINHAND - $TotalExpense_Amount ; 
+								$Now_ExpanseAmount					= $EXPANSE + $TotalExpense_Amount;
+								$Now_CashInHand						= $CASHINHAND - $TotalExpense_Amount; 
 								
 								$UPDATE_Queary				= "UPDATE fna_cashinhand Set
 																EXPANSE = '".$Now_ExpanseAmount."',
@@ -11363,7 +11357,7 @@
 										$Present_CashInHand		= $CashIH_Query['CASHINHAND'];
 										
 										
-										$NowCashInHand			= $Present_CashInHand - $TotalExpense_Amount ; 
+										$NowCashInHand			= $Present_CashInHand - $TotalExpense_Amount; 
 							
 										$insertCIHQuery = "
 												INSERT INTO fna_cashinhand
@@ -11382,7 +11376,7 @@
 														(
 															'".$EXPDATE."',
 															'0',
-															'".$AMOUNT."',
+															'".$TotalExpense_Amount."',
 															'".$NowCashInHand."',
 															'".$NowMaxCashFlag."',
 															'Expanse',
@@ -11402,11 +11396,12 @@
 							$MAXINEX_FLAG	 		= $INEX_FLAG['MAX(FLAG)'];
 							$NOW_MAXINEX_FLAG	 	= $MAXINEX_FLAG + 1;
 							
-							$EXPHEADNAME_QRY 		= mysql_fetch_array(mysql_query("SELECT EXPHEADNAME FROM fna_expense_head WHERE EXPHID = '".$EXPHID."'"));
+							$EXPHEADNAME_QRY 		= mysql_fetch_array(mysql_query("SELECT EXPHEADNAME FROM fna_expense_head WHERE EXPHID = '".$EXPHID[$i]."'"));
 							$ESPHEAD_NAME			= $EXPHEADNAME_QRY['EXPHEADNAME'];
 							$PARTYNAME_QRY 			= mysql_fetch_array(mysql_query("SELECT PARTYNAME FROM fna_party WHERE PARTYID = '".$PARTYID."'"));
 							$PARTYNAME				= $PARTYNAME_QRY['PARTYNAME'];
-							$NOW_DESCRIPTION		= 'Expanse for ' .$PARTYNAME . '   (' .$DESCRIPTION. ')' ;
+							$NOW_DESCRIPTION 		= 'Expanse for '.$PARTYNAME.' ('.implode(', ', $DESCRIPTION).')';
+
 							
 							
 							$insertDailyInExQuery = "
@@ -11416,9 +11411,7 @@
 																PROJECTID,
 																SUBPROJECTID,
 																DATE,
-																EXPHID,
 																EXPANSE,
-																DESCRIPTION,
 																FLAG,
 																STATUS,
 																ENTDATE,
@@ -11431,9 +11424,7 @@
 																'".$PROJECTID."',
 																'".$SUBPROJECTID."',
 																'".$EXPDATE."',
-																'".$EXPHID."',
 																'".$TotalExpense_Amount."',
-																'".$NOW_DESCRIPTION."',
 																'".$NOW_MAXINEX_FLAG."',
 																'Active',
 																'".$entDate."',
