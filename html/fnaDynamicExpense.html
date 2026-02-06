@@ -580,8 +580,9 @@
 											return false;
 										}
 										$.getJSON("ajax/getExpanseHeadList.php",{pcId: pcId}, function(j) {
+											alert ('komol');
 											if(j.length>0) {
-												
+												alert (j);
 												options += '<option value="">Select</option>';
 												for (var i = 0; i < j.length; i++) {
 													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
@@ -668,14 +669,14 @@
                                                                                 
                                                                             </tr>
                                                                             <tr valign="middle">
-                                                                              <td align="center"><select id="EXPHID_1" name="EXPHID[]" autocomplete="off" style="width:530px;" onchange="getExpanseHead(this.value);" >
+                                                                              <td align="center"><select id="EXPHID_1" name="EXPHID[]" autocomplete="off" style="width:330px;" onchange="getExpanseHead(this.value);" >
                                                                                 <option value="">Select</option>
                                                                     				<!--%[EXPANSE_HEAD_NAME]-->
                                                                  				</select>
                                                                                 </td>
                                                                                 <td align="center"><input id="amount_1" name="amount[]" style="width:180px;"/></td>
                                                                                 
-                                                                            	<td align="center"><input id="description_1" name="description[]" style="width:180px;" /></td>
+                                                                            	<td align="center"><input id="description_1" name="description[]" style="width:280px;" /></td>
                                                                                 <td align="right" valign="top"><input style="font-family:Tahoma, Geneva, sans-serif;font-size:100%;" class="btnDelMoreScripList"  disabled="disabled" type="image" src="../images/cancel.png"></td>
                                                                             </tr>
                                                                               
