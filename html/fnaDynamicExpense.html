@@ -140,19 +140,16 @@
 										$('.btnDelMoreScripList:disabled').removeAttr('disabled');
 										var c = $('.clonedInputForScripList:first').clone(true);
 										
-										c.find('input:hidden#PRODUCTLOADUNLOADBKDNID_1').attr({
-																				'id':'PRODUCTLOADUNLOADBKDNID_'+inputs,
+										c.find('input:hidden#EXPHID_1').attr({
+																				'id':'EXPHID_'+inputs,
 																				'value':''
 																			});										
-										c.find('select#PRODUCTID_1').attr({
-																				'id':'PRODUCTID_'+inputs
-																			});
-										c.find('input:hidden#existingquantity_1').attr({
-																				'id':'existingquantity_'+inputs,
+										c.find('select#AMOUNT_1').attr({
+																				'id':'AMOUNT_'+inputs,
 																				'value':''
 																			});
-										c.find('input:hidden#quantity_1').attr({
-																				'id':'quantity_'+inputs,
+										c.find('input:hidden#DESCRIPTION_1').attr({
+																				'id':'DESCRIPTION_'+inputs,
 																				'value':''
 																			});
 										c.find('input:hidden#closest_position1').attr({
@@ -176,19 +173,16 @@
 											for(var i=1;i<inputs;i++) {
 												if(i == colsest_pos)
 												continue;
-												$("#trade_file_view_details").find('input:hidden#PRODUCTLOADUNLOADBKDNID_'+i).attr({
-																											'id':'PRODUCTLOADUNLOADBKDNID_'+counter,
+												$("#trade_file_view_details").find('input:hidden#EXPHID_'+i).attr({
+																											'id':'EXPHID_'+counter,
 																											'value':''
 																										});
-												$("#trade_file_view_details").find('select#PRODUCTID_'+i).attr({
-																											'id':'PRODUCTID_'+counter
-																										});
-												$("#trade_file_view_details").find('input:hidden#existingquantity_'+i).attr({
-																											'id':'existingquantity_'+counter,
+												$("#trade_file_view_details").find('select#AMOUNT_'+i).attr({
+																											'id':'AMOUNT_'+counter,
 																											'value':''
 																										});
-												$("#trade_file_view_details").find('input:hidden#quantity_'+i).attr({
-																											'id':'quantity_'+counter,
+												$("#trade_file_view_details").find('input:hidden#DESCRIPTION_'+i).attr({
+																											'id':'DESCRIPTION_'+counter,
 																											'value':''
 																										});
 												$("#trade_file_view_details").find('input:text#closest_position'+i).attr({
@@ -259,129 +253,6 @@
 									
 								}
 								
-								function getPackingUnitList(getCatIdName, chId){
-																		
-										var splitCatId = getCatIdName.split("_");
-											
-										var projectId = $("#PROJECTID").val();										
-										var subProjectId = $("#SUBPROJECTID").val();										
-										var labourId = $("#LABOURID").val();
-										var ENTRYDATE = $("#ENTRYDATE").val();						
-										var options = '';
-										if(chId == '' && getCatIdName == '') {
-											options = '<option value="">No Packing Unit Found</option>';
-											$("select#packingUnit_"+splitCatId[1]).html('');
-											$("select#packingUnit_"+splitCatId[1]).html(options);
-											return false;
-										}
-										$.getJSON("ajax/getPackUnitList.php",{chId: chId, projectId: projectId, subProjectId: subProjectId, labourId: labourId, ENTRYDATE: ENTRYDATE}, function(j) {
-											if(j.length>0) {
-												options += '<option value="">Select</option>';
-												for (var i = 0; i < j.length; i++) {
-													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
-												}
-												$("select#packingUnit_"+splitCatId[1]).html('');
-												$("select#packingUnit_"+splitCatId[1]).html(options);
-											}
-											else {
-												options = '<option value="">No Packing Unit Found</option>';
-												$("select#packingUnit_"+splitCatId[1]).html('');
-												$("select#packingUnit_"+splitCatId[1]).html(options);
-											}
-										})
-									
-									
-								}
-								
-								function getPackingUnit(getCatIdName, pcId){
-										//alert (getCatIdName);									
-										//var splitCatId = getCatIdName.split("_");	
-										var projectId = $("#PROJECTID").val();										
-										var subProjectId = $("#SUBPROJECTID").val();										
-										var labourId = $("#LABOURID").val();		
-										var ENTRYDATE = $("#ENTRYDATE").val();										
-										var options = '';
-										
-										if(pcId == '' && getCatIdName == '') {
-											options = '<option value="">No Product Found</option>';
-											$("select#packingUnit_1").html('');
-											$("select#packingUnit_1").html(options);
-											return false;
-										}
-										$.getJSON("ajax/getPackUnitList.php",{pcId: pcId, projectId: projectId, subProjectId: subProjectId, labourId: labourId, ENTRYDATE: ENTRYDATE}, function(j) {
-											if(j.length>0) {
-												//alert (j);
-												options += '<option value="">Select</option>';
-												for (var i = 0; i < j.length; i++) {
-													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
-												}
-												$("select#packingUnit_1").html('');
-												$("select#packingUnit_1").html(options);
-											}
-											else {
-												options = '<option value="">No Product Found</option>';
-												$("select#packingUnit_1").html('');
-												$("select#packingUnit_1").html(options);
-											}
-										});
-										
-										var jj = '';
-										//alert ('komol');
-										$.getJSON("ajax/getFloorList.php",{pcId: pcId}, function(jj) {
-											//alert ('komol');
-											if(jj.length>0) {
-												//alert (jj);
-												options = '';
-												options += '<option value="">Select</option>';
-												for (var i = 0; i < jj.length; i++) {
-													options += '<option value="' + jj[i].optionValue + '">' + jj[i].optionDisplay + '</option>';
-												}
-												$("select#FLOORID").html('');
-												$("select#FLOORID").html(options);
-											}
-											else {
-												options = '<option value="">No Labour Found</option>';
-												$("select#FLOORID").html('');
-												$("select#FLOORID").html(options);
-												
-											}
-										});
-										
-									
-								}
-								
-								function getPocket(getCatIdName, FloorId){
-										//alert (getCatIdName);									
-										//var splitCatId = getCatIdName.split("_");	
-										var CHID = $("#CHID").val();										
-										var options = '';
-										
-										if(FloorId == '' && getCatIdName == '') {
-											options = '<option value="">No Product Found</option>';
-											$("select#POCKETID_1").html('');
-											$("select#POCKETID_1").html(options);
-											return false;
-										}
-										$.getJSON("ajax/getPocketList.php",{FloorId: FloorId, CHID: CHID}, function(j) {
-											if(j.length>0) {
-												//alert (j);
-												options += '<option value="">Select</option>';
-												for (var i = 0; i < j.length; i++) {
-													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
-												}
-												$("select#POCKETID_1").html('');
-												$("select#POCKETID_1").html(options);
-											}
-											else {
-												options = '<option value="">No Product Found</option>';
-												$("select#POCKETID_1").html('');
-												$("select#POCKETID_1").html(options);
-											}
-										});
-										
-																		
-									
-								}
 								
 								function PartyName(pcId){					
 										var options = '';
@@ -434,118 +305,7 @@
 											
 								}
 								
-								function getProduct(getCatIdName, pid){
-										//alert (getCatIdName);								
-										var splitCatId = getCatIdName.split("_");
-										var PROJECTID 		= $("#PROJECTID").val();
-										var SUBPROJECTID 	= $("#SUBPROJECTID").val();
-										var PARTYID 		= $("#PARTYID").val();
-										//var PRODUCTLOADUNLOADBKDNID = $("#PRODUCTLOADUNLOADBKDNID").val();	
-										var options = '';
-										if(pid == '') {
-											options = '<option value="">No Product Found</option>';
-											$("select#packingUnit_"+splitCatId[1]).html('');
-											$("select#packingUnit_"+splitCatId[1]).html(options);
-											return false;
-										}
-										//alert (pid);
-										$.getJSON("ajax/getProductListEntrySl.php",{'pid': pid, 'PARTYID': PARTYID, 'PROJECTID': PROJECTID, 'SUBPROJECTID': SUBPROJECTID}, function(j) {
-											//$.post("ajax/getProductListEntrySl.php",{'pid': pid, 'PARTYID': PARTYID, 'PROJECTID': PROJECTID, 'SUBPROJECTID': SUBPROJECTID}, function(j) {
-											//alert (j);
-											//alert ('komol');
-											
-											if(j.length>0) {
-												options += '<option value="">Select</option>';
-												for (var i = 0; i < j.length; i++) {
-													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
-												}
-												$("select#PRODUCTID_"+splitCatId[1]).html('');
-												$("select#PRODUCTID_"+splitCatId[1]).html(options);
-											}
-											else {
-												options = '<option value="">No Product Found</option>';
-												$("select#PRODUCTID_"+splitCatId[1]).html('');
-												$("select#PRODUCTID_"+splitCatId[1]).html(options);
-											}
-											
-										});
-									
-									
-								}
 								
-								function PackCalculation(quantityPosition, quantity){
-									
-									var posId = quantityPosition.split("_");
-									//alert (j);
-									var LABOURID 		= $("#LABOURID").val();	
-									var PARTYID 		= $("#PARTYID").val();	
-									var PRODCATTYPEID 	= $("#PRODCATTYPEID").val();										
-									var CHID	 		= $("#CHID").val();										
-									var packingUnit 	= $("#packingUnit_"+posId[1]).val();	
-									var PRODUCTID	 	= $("#PRODUCTID_"+posId[1]).val();
-									
-									if(quantity == '') {
-											$("#Calculation_"+posId[1]).html('');
-											$("#Calculation_"+posId[1]).html(j);
-											return false;
-										}
-										$.post("ajax/getPackUnitCalculationUnload.php",{quantity: quantity, LABOURID: LABOURID, CHID: CHID, packingUnit: packingUnit }, function(j) {
-											//alert (j);
-											if(j.length>0) {
-												//var race = j.split("-"); 
-												//alert (posId[1]);
-												$("#Calculation_"+posId[1]).val(j);
-												//$("#EMPLOYEEID_"+posId[1]).html(j);
-											}
-											else {
-												$("#Calculation_"+posId[1]).html('');
-											}
-										})
-										$.post("ajax/getPackUnitCalculationUnloadKG.php",{quantity: quantity, PRODUCTID: PRODUCTID, PARTYID: PARTYID, packingUnit: packingUnit , PRODCATTYPEID: PRODCATTYPEID}, function(j) {
-											//alert (j);
-											if(j.length>0) {
-												//var race = j.split("-"); 
-												//alert (posId[1]);
-												$("#quantityKG_"+posId[1]).val(j);
-												//$("#EMPLOYEEID_"+posId[1]).html(j);
-											}
-											else {
-												$("#quantityKG_"+posId[1]).html('');
-											}
-										})
-										
-																		
-								}
-								
-								function getPocketBalance(quantityPosition, quantity){
-									
-									var posId = quantityPosition.split("_");
-									//alert (quantity);
-									var PROJECTID 		= $("#PROJECTID").val();	
-									var SUBPROJECTID 	= $("#SUBPROJECTID").val();
-									var PARTYID		 	= $("#PARTYID").val();											
-									var PRODUCTLOADUNLOADBKDNID	= $("#PRODUCTLOADUNLOADBKDNID_"+posId[1]).val();
-									
-									if(quantity == '') {
-											$("#existingquantity_"+posId[1]).html('');
-											$("#existingquantity_"+posId[1]).html(j);
-											return false;
-										}
-										$.post("ajax/getPocketBalanceUnload.php",{quantity: quantity, PROJECTID: PROJECTID, SUBPROJECTID: SUBPROJECTID, PARTYID: PARTYID, PRODUCTLOADUNLOADBKDNID: PRODUCTLOADUNLOADBKDNID }, function(j) {
-											//alert (j);
-											if(j.length>0) {
-												//var race = j.split("-"); 
-												//alert (posId[1]);
-												$("#existingquantity_"+posId[1]).val(j);
-												//$("#EMPLOYEEID_"+posId[1]).html(j);
-											}
-											else {
-												$("#existingquantity_"+posId[1]).html('');
-											}
-										})
-										
-																		
-								}
 								function checkVoucher(vno){
 								    var vno = $("#VOUCHERNO").val();
 
@@ -580,9 +340,9 @@
 											return false;
 										}
 										$.getJSON("ajax/getExpanseHeadList.php",{pcId: pcId}, function(j) {
-											alert ('komol');
+											//alert ('komol');
 											if(j.length>0) {
-												alert (j);
+												//alert (j);
 												options += '<option value="">Select</option>';
 												for (var i = 0; i < j.length; i++) {
 													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
@@ -674,9 +434,9 @@
                                                                     				<!--%[EXPANSE_HEAD_NAME]%-->
                                                                  				</select>
                                                                                 </td>
-                                                                                <td align="center"><input id="amount_1" name="amount[]" autocomplete="off" style="width:180px;"/></td>
+                                                                                <td align="center"><input id="AMOUNT_1" name="AMOUNT[]" autocomplete="off" style="width:180px;"/></td>
                                                                                 
-                                                                            	<td align="center"><input id="description_1" name="description[]" autocomplete="off" style="width:280px;" /></td>
+                                                                            	<td align="center"><input id="DESCRIPTION_1" name="DESCRIPTION[]" autocomplete="off" style="width:280px;" /></td>
                                                                                 <td align="right" valign="top"><input style="font-family:Tahoma, Geneva, sans-serif;font-size:100%;" class="btnDelMoreScripList"  disabled="disabled" type="image" src="../images/cancel.png"></td>
                                                                             </tr>
                                                                               
