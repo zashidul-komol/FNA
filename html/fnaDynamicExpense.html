@@ -34,27 +34,22 @@
 											$("#ENTRYDATE").focus();
 											return false;
 									}
-									if($("#LABOURID").val() == ''){
+									if($("#VOUCHERNO").val() == ''){
 											alert("Please Select Labour name");
-											$("#LABOURID").focus();
+											$("#VOUCHERNO").focus();
 											return false;
 									}
 									
 									var pList = $("#TOTAL_PRODUCT_LIST").val();
 									for(i=1; i < pList; i++){
-										if($("#entryserialno_"+i).val() == ''){
-													alert("Please Insert Entry Serial No Please.......");
-													$("#entryserialno_"+i).focus();
+											if($("#AMOUNT_"+i).val() == ''){
+													alert("Please Insert Amount");
+													$("#AMOUNT_"+i).focus();
 													return false;
 											}
-											if($("#PRODUCTID_"+i).val() == ''){
-													alert("Please Select Product Name");
-													$("#PRODUCTID_"+i).focus();
-													return false;
-											}
-											if($("#quantity_"+i).val() == ''){
-													alert("Please Insert Quantity");
-													$("#quantity_"+i).focus();
+											if($("#EXPHID_"+i).val() == ''){
+													alert("Please Select Expense Head Name");
+													$("#EXPHID_"+i).focus();
 													return false;
 											}
 											
@@ -371,7 +366,7 @@
                                                 	<table width="100%" border="1">
                                                       <tr>
                                                     	<td height="26" colspan="3" align="right" valign="top" bgcolor="#999999"><strong>Entry Serial No :</strong></td>
-                                                    	<td height="26" align="left" valign="top" bgcolor="#999999"><input name="LOADUNLOADNO" type="text" class="FormTextTypeInput" id="LOADUNLOADNO" value='<!--%[MAXENTRY_SLNO_VIEW]%-->' readonly="readonly" autocomplete="off" placeholder="LOADUNLOADNO" /></td>
+                                                    	<td height="26" align="left" valign="top" bgcolor="#999999"><input name="ENTRYSERIALNO" type="text" class="FormTextTypeInput" id="ENTRYSERIALNO" value='<!--%[MAXENTRY_SLNO_VIEW]%-->' readonly="readonly" autocomplete="off" placeholder="ENTRYSERIALNO" /></td>
                                                       </tr>
                                                       <tr>
                                                     	<td width="165" align="right">

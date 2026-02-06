@@ -9940,17 +9940,6 @@
 			
 			$WorkType			= 'Load';
 			
-			/*$k = 0;
-			 					echo 	"SELECT 
-												*
-										FROM 
-												fna_pocketstock
-										WHERE POCKETBALANCE >= '".$UnloadBasta[$k]."'
-											AND PROJECTID = '".$PROJECTID."'
-											AND SUBPROJECTID = '".$SUBPROJECTID."'
-											AND PRODUCTID = '".$PRODUCTID[$k]."'
-											AND ENTRYSERIALNOID = '".$ENTRYSERIALNO[$k]."'";
-											die();*/
 			$k = 0;
 			$PocketQueryCheck		= "
 										SELECT 
@@ -11098,1184 +11087,377 @@
 
 		// Insert Dynamic Expense Entry Information Start
 		function insertDynamicExpenseInfo($userId){
-			
 			$PROJECTID 			= $_REQUEST["PROJECTID"];
 			$SUBPROJECTID		= $_REQUEST["SUBPROJECTID"];
-			
-			$LABOURID 			= $_REQUEST["LABOURID"];
-			$PARTYID 			= $_REQUEST["PARTYID"];
-			$ENTRYDATE	 		= insertDateMySQlFormat($_REQUEST["ENTRYDATE"]);
-			
-			
-			//$PRODCATTYPEID		= $_REQUEST["PRODCATTYPEID"];
-			$PRODUCTLOADUNLOADBKDNID		= $_REQUEST["PRODUCTLOADUNLOADBKDNID"];
-			$PRODUCTID 			= $_REQUEST["PRODUCTID"];
-			$quantity	 		= $_REQUEST["quantity"];
-			$UnloadBasta 		= $_REQUEST["quantity"];
-			//$packingUnit		= $_REQUEST["packingUnit"];
-			//$CHID		 		= $_REQUEST["CHID"];
-			//$POCKETID	 		= $_REQUEST["POCKETID"];
-			//$FLOORID	 		= $_REQUEST["FLOORID"];
+			$PARTYID 			= addslashes($_REQUEST["PARTYID"]);
+			$EXPDATE 			= insertDateMySQlFormat($_REQUEST["EXPDATE"]);
+			$VOUCHERNO			= addslashes($_REQUEST["VOUCHERNO"]);
+
+			$AMOUNT 			= addslashes($_REQUEST["AMOUNT"]);
+			$EXPHID 			= addslashes($_REQUEST["EXPHID"]);
+			$DESCRIPTION 		= addslashes($_REQUEST["DESCRIPTION"]);
+
 			$TOTAL_PRODUCT_LIST	= $_REQUEST["TOTAL_PRODUCT_LIST"];
-			
+
+			$TotalExpense_Amount = 0;   // initialize before loop
+			$k = 0;
+			for($i = 1; $i < $TOTAL_PRODUCT_LIST; $i++ ){
+
+				$TotalExpense_Amount += $AMOUNT[$i];  
+			}
+			echo $TotalExpense_Amount;
+
 			$entDate 			= date('Y-m-d');
 			$entTime 			= date('H:i:s A');
 			
-			$WorkType			= 'Load';
-			
-			/*$k = 0;
-			 					echo 	"SELECT 
-												*
-										FROM 
-												fna_pocketstock
-										WHERE POCKETBALANCE >= '".$UnloadBasta[$k]."'
-											AND PROJECTID = '".$PROJECTID."'
-											AND SUBPROJECTID = '".$SUBPROJECTID."'
-											AND PRODUCTID = '".$PRODUCTID[$k]."'
-											AND ENTRYSERIALNOID = '".$ENTRYSERIALNO[$k]."'";
-											die();*/
-			$k = 0;
-			$PocketQueryCheck		= "
-										SELECT 
-												*
-										FROM 
-												fna_pocketstock
-										WHERE POCKETBALANCE >= '".$UnloadBasta[$k]."'
-											AND PROJECTID = '".$PROJECTID."'
-											AND SUBPROJECTID = '".$SUBPROJECTID."'
-											AND PRODUCTID = '".$PRODUCTID[$k]."'
-											AND PRODUCTLOADUNLOADBKDNID = '".$PRODUCTLOADUNLOADBKDNID[$k]."'
-									";
-			$PocketQueryCheckStatement	= mysql_query($PocketQueryCheck);
-			if(mysql_num_rows($PocketQueryCheckStatement)>0) {
+			$ExpQuery		= "
+									SELECT 
+											VOUCHERNO
+									FROM 
+											fna_expanse
+									WHERE VOUCHERNO = '".$VOUCHERNO."'
+								  ";
+								 
+			$ExpQueryStatement	= mysql_query($ExpQuery);
+			if(mysql_num_rows($ExpQueryStatement)>0) {
+				$msg = "<span class='errorMsg'>Sorry, This Voucher Number [ $VOUCHERNO ] already exist!</span>";
+			} else {
 				
-				 	$pocketCheckQuery	= "SELECT 	
-														*
-												FROM 	
-														fna_pocketstock 
-												WHERE	PRODUCTLOADUNLOADBKDNID = '".$PRODUCTLOADUNLOADBKDNID[$k]."'
-													AND PRODUCTID 		= '".$PRODUCTID[$k]."'
-													AND PROJECTID		= '".$PROJECTID."'
-													AND SUBPROJECTID	= '".$SUBPROJECTID."'
-													AND PARTYID			= '".$PARTYID."'
-												
-											 ";
-						$pocketCheckQueryStatement				= mysql_query($pocketCheckQuery);
-						$PRODCATTYPEID 	= '';
-						$PACKINGUNITID	= '';
-						$POCKETBALANCE	= '';
-						while($pocketCheckQueryStatementData	= mysql_fetch_array($pocketCheckQueryStatement)) {
-							$ENTRYHISTRY_NEW 					= $pocketCheckQueryStatementData["ENTRYHISTRY"];
-							$POCKETSTOCKID	 					= $pocketCheckQueryStatementData["POCKETSTOCKID"];
-							$CHALLANNO		 					= $pocketCheckQueryStatementData["CHALLANNO"];
-							$PRODCATTYPEID 						= $pocketCheckQueryStatementData["PRODCATTYPEID"];
-							$PACKINGUNITID 						= $pocketCheckQueryStatementData["PACKINGUNITID"];
-							$LOADQUANTITY	 					= $pocketCheckQueryStatementData["LOADQUANTITY"];
-							$UNLOADQUANTITY						= $pocketCheckQueryStatementData["UNLOADQUANTITY"];
-							$POCKETBALANCE	 					= $pocketCheckQueryStatementData["POCKETBALANCE"];
-							$CHIDFROM		 					= $pocketCheckQueryStatementData["CHID"];
-							$FLOORIDFROM 						= $pocketCheckQueryStatementData["FLOORID"];
-							$POCKETIDFROM	 					= $pocketCheckQueryStatementData["POCKETID"];
-							$MANUFACTUREDATE					= $pocketCheckQueryStatementData["MANUFACTUREDATE"];
-							$EXPIREDATE		 					= $pocketCheckQueryStatementData["EXPIREDATE"];
-							
-						}
-			
-			$MaxTypeFlag_Query	= mysql_fetch_array(mysql_query("Select MAX(PRODCATTYPEFLAG) from fna_session WHERE PROJECTID = '".$PROJECTID."' AND SUBPROJECTID = '".$SUBPROJECTID."' AND PRODCATTYPEID = '".$PRODCATTYPEID."' "));
-			$MaxProdCatTypeFlag	= $MaxTypeFlag_Query['MAX(PRODCATTYPEFLAG)'];
-			
 				
-				$Query		= "
-										SELECT 
-												*
-										FROM 
-												fna_session
-										WHERE '".$ENTRYDATE."' 	BETWEEN STARTDATE AND ENDDATE
-											AND SUBPROJECTID = '".$SUBPROJECTID."'
-											AND PRODCATTYPEID = '".$PRODCATTYPEID."'
-											AND PRODCATTYPEFLAG = '".$MaxProdCatTypeFlag."'
-									";
-				$QueryStatement	= mysql_query($Query);
-				if(mysql_num_rows($QueryStatement)>0) {
-					
-					$EntrySerial_Query_Flag = mysql_fetch_array(mysql_query("SELECT MAX(FLAG) FROM fna_entryserialno"));
-					$MaxFlagEntrySl			= $EntrySerial_Query_Flag['MAX(FLAG)'];
-					
-					$EntrySerial_Query_No	= mysql_fetch_array(mysql_query("SELECT MAX(ENTRYSERIALNOID) FROM fna_entryserialno"));
-					$MaxEntrySlNo			= $EntrySerial_Query_No['MAX(ENTRYSERIALNOID)'] + 1;
-			
-			
-					$insertQueryEntrySl = "
-											INSERT INTO 
-														fna_entryserialno
-																		(
-																			ENTRYSERIALNO,
-																			PROJECTID,
-																			SUBPROJECTID,
-																			ENTRYDATE,
-																			FLAG,
-																			STATUS,
-																			ENTDATE,
-																			ENTTIME,
-																			USERID
-																		) 
-																VALUES
-																		(
-																			'".$MaxEntrySlNo."',
-																			'".$PROJECTID."',
-																			'".$SUBPROJECTID."',
-																			'".$ENTRYDATE."',
-																			'".$MaxFlagEntrySl."',
-																			'Active',
-																			'".$entDate."',
-																			'".$entTime."',
-																			'".$userId."'
-																		)
-										";
-					$insertQueryEntrySlStatement = mysql_query($insertQueryEntrySl);
-					
-					
-				for($p = 0; $p < $TOTAL_PRODUCT_LIST; $p++ ){
-					
-					
+				$FNA_Balance_Query_Flag = mysql_fetch_array(mysql_query("SELECT MAX(FLAG) FROM fna_cashinhand"));
+				$MaxFlag				= $FNA_Balance_Query_Flag['MAX(FLAG)'];
 				
-					$PARTY_FLAG_QUERY 	= mysql_fetch_array(mysql_query("SELECT MAX(PARTYFLAG) FROM fna_productstock WHERE PARTYID = '".$PARTYID."' AND PRODUCTID = '".$PRODUCTID[$k]."' "));
-					$MaxPartyFlag 		= $PARTY_FLAG_QUERY['MAX(PARTYFLAG)'];
-					
-					
-					$PRODUCT_FLAG_QUERY = mysql_fetch_array(mysql_query("SELECT MAX(PRODTYPEFLAG) FROM fna_productstock WHERE PARTYID = '".$PARTYID."' AND PRODUCTID = '".$PRODUCTID[$k]."'"));
-					$MaxProductFlag 	= $PRODUCT_FLAG_QUERY['MAX(PRODTYPEFLAG)'];
-					
-					$queryCheck = mysql_fetch_array(mysql_query("SELECT	TOTQUANTITY, BALBASTA FROM fna_productstock WHERE PARTYID = '".$PARTYID."' AND PRODUCTID = '".$PRODUCTID[$k]."'  AND PARTYFLAG = '".$MaxPartyFlag."' AND PRODTYPEFLAG = '".$MaxProductFlag."'"));
-					
-					$TotalQnty = $queryCheck['TOTQUANTITY'];
-					$BalBasta  = $queryCheck['BALBASTA'];
-					
-					$queryCheckProdName = mysql_fetch_array(mysql_query("SELECT	* FROM fna_product WHERE PRODUCTID = '".$PRODUCTID[$k]."'"));
-					$ProdName = $queryCheckProdName['PRODUCTNAME'];
-						
-					
-						if($TotalQnty >= $quantity[$k] or $BalBasta >= $UnloadBasta[$k]){
-							$check = true;
-						}else
-						{
-							$check =false;
-							break;
-							$msg = "<span class='errorMsg'>Sorry! Product Quantity [$quantity[$k], $ProdName ] is not Sufficient!</span>";
-						}
-										
-				}//for($p = 1; $p < $TOTAL_PRODUCT_LIST; $p++ )
-				if($check){
-					
+				$FNA_Balance_Query  	= mysql_fetch_array(mysql_query("SELECT CASHINHAND FROM fna_cashinhand WHERE FLAG = '".$MaxFlag."'"));
+				$CASHINHAND				= $FNA_Balance_Query['CASHINHAND'];
 				
+				echo $CASHINHAND;
+				
+				if($CASHINHAND >= $TotalExpense_Amount){
 					
-					//This section work for multiple entry within 5 mints start.
-					$getEntTimeResult = mysql_fetch_array(mysql_query("SELECT MAX(ENTTIME) FROM fna_productloadunload where PARTYID='".$PARTYID."' AND ENTDATE='".$entDate."'"));
-					$getEntTime = $getEntTimeResult['MAX(ENTTIME)'];
-					if(empty($getEntTime)){
-						$duration = 100;
-					}else{
-						$exp = explode(" ",$getEntTime);
-						$assigned_time = $exp[0];
-						$completed_time = date('H:i:s');   
-					
-						$d1 = new DateTime($assigned_time);
-						$d2 = new DateTime($completed_time);
-						$interval = $d2->diff($d1);
+						$EntrySerial_Query_Flag = mysql_fetch_array(mysql_query("SELECT MAX(FLAG) FROM fna_entryserialno"));
+						$MaxFlagEntrySl			= $EntrySerial_Query_Flag['MAX(FLAG)'];
 						
-						$duration =  $interval->format('%I');
-					}
-					//This section work for multiple entry within 5 mints End.
-					if($duration > 5){
-						// Insert Here
-					}else{
-						// Error Message generate here.
-					}
-					
-					$MAXDELCHALLNO = mysql_fetch_array(mysql_query("SELECT MAX(IFNULL(DELIVERYCHALLANNUMBER,0)) FROM fna_productloadunload "));
-					$maxNo = $MAXDELCHALLNO['MAX(IFNULL(DELIVERYCHALLANNUMBER,0))'];
-					if($maxNo == 0 or $maxNo =''){
-							$nowMAXDELCHALLNO = $maxNo + 1;
-						}else{
-							$nowMAXDELCHALLNO = $maxNo + 1;	
-						}
-						
-						$maxFlagQry			= mysql_fetch_array(mysql_query("SELECT MAX(FLAG) FROM fna_productloadunload"));
-						$maxFlag			= $maxFlagQry['MAX(FLAG)'];
-						$Now_maxFlag		= $maxFlag + 1;
-						$insertQuery = "
-										INSERT INTO 
-													fna_productloadunload
-																		(
-																			ENTRYSERIALNOID,
-																			PROJECTID,
-																			SUBPROJECTID,
-																			PARTYID,
-																			LABOURID,
-																			ENTRYDATE,
-																			DELIVERYCHALLANNUMBER,
-																			FLAG,
-																			STATUS,
-																			ENTDATE,
-																			ENTTIME,
-																			USERID
-																		) 
-																VALUES
-																		(
-																			'".$MaxEntrySlNo."',
-																			'".$PROJECTID."',
-																			'".$SUBPROJECTID."',
-																			'".$PARTYID."',
-																			'".$LABOURID."',
-																			'".$ENTRYDATE."',
-																			'".$nowMAXDELCHALLNO."',
-																			'".$Now_maxFlag."',
-																			'Unload',
-																			'".$entDate."',
-																			'".$entTime."',
-																			'".$userId."'
-																		)
-										"; 
-					if(mysql_query($insertQuery)){
-						
-						$loadCtId = mysql_insert_id();
-						
-						
-						$k = 0;
-						$globalLabourTotalBillAmount = 0;
-						$globalPartyTotalBillAmount = 0;
-						
-						for($i = 1; $i < $TOTAL_PRODUCT_LIST; $i++ ){
-							
-							//------------------------- Pocket Stock Search Start-----------------------
-							
-							$pocketCheckQuery	= "SELECT 	
-														*
-												FROM 	
-														fna_pocketstock 
-												WHERE	PRODUCTLOADUNLOADBKDNID = '".$PRODUCTLOADUNLOADBKDNID[$k]."'
-													AND PRODUCTID 		= '".$PRODUCTID[$k]."'
-													AND PROJECTID		= '".$PROJECTID."'
-													AND SUBPROJECTID	= '".$SUBPROJECTID."'
-													AND PARTYID			= '".$PARTYID."'
-												
-											 ";
-						$pocketCheckQueryStatement				= mysql_query($pocketCheckQuery);
-						$PRODCATTYPEID_POCK 	= '';
-						$PACKINGUNITID_POCK		= '';
-						$POCKETBALANCE_POCK		= '';
-						$CHIDFROM_POCK 			= '';
-						$FLOORIDFROM_POCK		= '';
-						$POCKETIDFROM_POCK		= '';
-						
-						while($pocketCheckQueryStatementData	= mysql_fetch_array($pocketCheckQueryStatement)) {
-							$ENTRYHISTRY_NEW_POCK				= $pocketCheckQueryStatementData["ENTRYHISTRY"];
-							$POCKETSTOCKID_POCK					= $pocketCheckQueryStatementData["POCKETSTOCKID"];
-							$CHALLANNO_POCK	 					= $pocketCheckQueryStatementData["CHALLANNO"];
-							$PRODCATTYPEID_POCK					= $pocketCheckQueryStatementData["PRODCATTYPEID"];
-							$PACKINGUNITID_POCK					= $pocketCheckQueryStatementData["PACKINGUNITID"];
-							$LOADQUANTITY_POCK 					= $pocketCheckQueryStatementData["LOADQUANTITY"];
-							$UNLOADQUANTITY_POCK				= $pocketCheckQueryStatementData["UNLOADQUANTITY"];
-							$POCKETBALANCE_POCK					= $pocketCheckQueryStatementData["POCKETBALANCE"];
-							$CHIDFROM_POCK	 					= $pocketCheckQueryStatementData["CHID"];
-							$FLOORIDFROM_POCK					= $pocketCheckQueryStatementData["FLOORID"];
-							$POCKETIDFROM_POCK					= $pocketCheckQueryStatementData["POCKETID"];
-							$MANUFACTUREDATE_POCK				= $pocketCheckQueryStatementData["MANUFACTUREDATE"];
-							$EXPIREDATE_POCK 					= $pocketCheckQueryStatementData["EXPIREDATE"];
-							
-						}
-							
-							//-------------------------Pocket Stock Search Query End------- -----------
-							
-							
-								$insertbkdnQuery = "
-											INSERT INTO 
-														fna_productloadunloadbkdn
-																		(
-																			ENTRYSERIALNOID,
-																			PRODUCTLOADUNLOADID,
-																			PRODCATTYPEID,
-																			PRODUCTID,
-																			PACKINGUNITID,
-																			QUANTITY,
-																			CHID,
-																			FLOORID,
-																			POCKETID,
-																			STATUS,
-																			ENTDATE,
-																			ENTTIME,
-																			USERID
-																		) 
-																VALUES
-																		(
-																			'".$MaxEntrySlNo."',
-																			'".$loadCtId."',
-																			'".$PRODCATTYPEID_POCK."',
-																			'".$PRODUCTID[$k]."',
-																			'".$PACKINGUNITID_POCK."',
-																			'".$quantity[$k]."',
-																			'".$CHIDFROM_POCK."',
-																			'".$FLOORIDFROM_POCK."',
-																			'".$POCKETIDFROM_POCK."',
-																			'Unload',
-																			'".$entDate."',
-																			'".$entTime."',
-																			'".$userId."'
-																		)
-										"; 
-										
-										
-										$insertbkdnQueryStatement = mysql_query($insertbkdnQuery);
-										if($insertbkdnQueryStatement){
-											$msg = "<span class='validMsg'>Labour Information [$loadCtId] added sucessfully</span>";
-										}else{
-											$msg = "<span class='errorMsg'>Sorry! System Error!</span>";
-											break;
-											$msg = "<span class='errorMsg'>Sorry! Product Quantity [$quantity[$k], $PRODUCTID[$k] ] is not Sufficient!</span>";
-											}
-											
-											//Update Product Stock table Start
-											
-											$loadUnloadBkdnIdCtId = mysql_insert_id();
-											
-											$partyFlag = mysql_fetch_array(mysql_query("SELECT MAX(IFNULL(PARTYFLAG,0)) FROM fna_productstock WHERE PARTYID = '".$PARTYID."'"));
-											$MAXpartyFlag = $partyFlag['MAX(IFNULL(PARTYFLAG,0))'];
-											$NowMAXpartyFlag = $MAXpartyFlag + 1;
-											
-											$prodCatTypeFlag = mysql_fetch_array(mysql_query("SELECT MAX(IFNULL(PRODCATTYPEFLAG,0)) FROM fna_productstock WHERE PARTYID = '".$PARTYID."' AND PRODCATTYPEID = '".$PRODCATTYPEID_POCK."'"));
-											$MAXprodCatTypeFlag = $prodCatTypeFlag['MAX(IFNULL(PRODCATTYPEFLAG,0))'];
-											$NowMaxprodCatTypeFlag = $MAXprodCatTypeFlag + 1;
-											
-											$prodTypeFlag = mysql_fetch_array(mysql_query("SELECT MAX(PRODTYPEFLAG) FROM fna_productstock WHERE PARTYID = '".$PARTYID."' AND PRODUCTID = '".$PRODUCTID[$k]."'"));
-											
-											$MAXprodTypeFlag = $prodTypeFlag['MAX(PRODTYPEFLAG)'];
-											if ($MAXprodTypeFlag == ''){
-													//$MAXprodTypeFlag = 0;
-													$NowTotQnty 	= $quantity[$k];
-													$NowTotBalBasta = $UnloadBasta[$k];
-												}else
-												{
-													$prodQnty = mysql_fetch_array(mysql_query("SELECT TOTQUANTITY, BALBASTA, AVGUNIT, BALKG FROM fna_productstock WHERE PARTYID = '".$PARTYID."' AND PRODUCTID = '".$PRODUCTID[$k]."' AND PRODTYPEFLAG = '".$MAXprodTypeFlag."'"));
-													$TotQnty 		= $prodQnty['TOTQUANTITY'];
-													$TotBalBasta 	= $prodQnty['BALBASTA'] ;
-													$AVGUNIT	 	= $prodQnty['AVGUNIT'] ;
-													$BALKG		 	= $prodQnty['BALKG'] ;
-													if ($TotQnty >= $quantity[$k]){
-															$NowTotQnty = $prodQnty['TOTQUANTITY'] - $quantity[$k];
-															$NowTotBalBasta = $prodQnty['BALBASTA'] - $UnloadBasta[$k];
-														}else
-														{
-															$msg = "<span class='errorMsg'>Sorry! Product Quantity is not Sufficient!</span>";
-															
-														}
-													//$NowTotQnty = $prodQnty['TOTQUANTITY'] + $quantity[$k];
-												}
-													$NowMaxprodTypeFlag = $MAXprodTypeFlag + 1;
-													
-													$NowUnloadKG		= $UnloadBasta[$k] * $AVGUNIT ;
-													$NowTotBalKG		= $BALKG - $NowUnloadKG ;
-													$UNLOADUNIT			= $AVGUNIT ;
-													$insertStockQuery = "
-																		INSERT INTO 		
-																					fna_productstock
-																								(
-																									ENTRYSERIALNOID,
-																									PROJECTID,
-																									SUBPROJECTID,
-																									PRODUCTLOADUNLOADBKDNID,
-																									PARTYID,
-																									PRODCATTYPEID,
-																									PRODUCTID,
-																									QUANTITY,
-																									TOTQUANTITY,
-																									UNLOADBASTA,
-																									BALBASTA,
-																									UNLOADKG,
-																									BALKG,
-																									CHID,
-																									FLOORID,
-																									POCKETID,
-																									UNLOADUNIT,
-																									AVGUNIT,
-																									PARTYFLAG,
-																									PRODCATTYPEFLAG,
-																									PRODTYPEFLAG,
-																									WORKTYPEFLAG,
-																									STATUS,
-																									ENTDATE,
-																									ENTTIME,
-																									USERID
-																								) 
-																						VALUES
-																								(
-																									'".$MaxEntrySlNo."',
-																									'".$PROJECTID."',
-																									'".$SUBPROJECTID."',
-																									'".$loadUnloadBkdnIdCtId."',
-																									'".$PARTYID."',
-																									'".$PRODCATTYPEID_POCK."',
-																									'".$PRODUCTID[$k]."',
-																									'".$quantity[$k]."',
-																									'".$NowTotQnty."',
-																									'".$UnloadBasta[$k]."',
-																									'".$NowTotBalBasta."',
-																									'".$NowUnloadKG."',
-																									'".$NowTotBalKG."',
-																									'".$CHIDFROM_POCK."',
-																									'".$FLOORIDFROM_POCK."',
-																									'".$POCKETIDFROM_POCK."',
-																									'".$UNLOADUNIT."',
-																									'".$AVGUNIT."',
-																									'".$NowMAXpartyFlag."',
-																									'".$NowMaxprodCatTypeFlag."',
-																									'".$NowMaxprodTypeFlag."',
-																									'Unload',
-																									'Active',
-																									'".$ENTRYDATE."',
-																									'".$entTime."',
-																									'".$userId."'
-																								)
-												"; 
-												
-												
-												$insertStockQueryStatement = mysql_query($insertStockQuery);
-										
-										
-											//Update Product Stock table End
-											
-											//Update Pocket Stock table Start
-											if($insertStockQueryStatement){
-												
-												/* echo "SELECT
-																						ENTRYHISTRY,
-																						POCKETSTOCKID,
-																						LOADQUANTITY, 
-																						UNLOADQUANTITY
-																				FROM
-																						fna_pocketstock 
-																						WHERE PROJECTID = '".$PROJECTID."'
-																						AND SUBPROJECTID = '".$SUBPROJECTID."'
-																						AND PRODUCTID = '".$PRODUCTID[$k]."'
-																						AND PRODUCTLOADUNLOADBKDNID = '".$PRODUCTLOADUNLOADBKDNID[$k]."'
-																				"; echo '</br>';*/
-												
-												$PocketQuery = "
-																				SELECT
-																						ENTRYHISTRY,
-																						POCKETSTOCKID,
-																						LOADQUANTITY, 
-																						UNLOADQUANTITY
-																				FROM
-																						fna_pocketstock 
-																						WHERE PROJECTID = '".$PROJECTID."'
-																						AND SUBPROJECTID = '".$SUBPROJECTID."'
-																						AND PRODUCTID = '".$PRODUCTID[$k]."'
-																						AND PRODUCTLOADUNLOADBKDNID = '".$PRODUCTLOADUNLOADBKDNID[$k]."'
-																				";
-															$PocketQueryStatement			= mysql_query($PocketQuery);
-															$LOADQUANTITY_NEW 	= 0;
-															$UNLOADQUANTITY_NEW	= 0;
-															$POCKETSTOCKID_NEW	= 0;
-															$ENTRYHISTRY_NEW 	= 0;
-															while($PocketQueryStatementData	= mysql_fetch_array($PocketQueryStatement)) {
-																$ENTRYHISTRY_NEW   			= $PocketQueryStatementData['ENTRYHISTRY'];
-																$POCKETSTOCKID_NEW   		= $PocketQueryStatementData['POCKETSTOCKID'];
-																$LOADQUANTITY_NEW   		= $PocketQueryStatementData['LOADQUANTITY'];
-																$UNLOADQUANTITY_NEW   		= $PocketQueryStatementData['UNLOADQUANTITY'];
-																
-															}
-											
-												
-												$TotalUnloadQuantity		= $UNLOADQUANTITY_NEW + $UnloadBasta[$k]; 
-												$NowPocketBalance			= $LOADQUANTITY_NEW - $TotalUnloadQuantity ;
-												
-												$UPDATE_Query				= "UPDATE fna_pocketstock Set
-																				UNLOADQUANTITY = '".$TotalUnloadQuantity."',
-																				POCKETBALANCE = '".$NowPocketBalance."'
-																				WHERE PRODUCTID = '".$PRODUCTID[$k]."'
-																				AND PRODUCTLOADUNLOADBKDNID = '".$PRODUCTLOADUNLOADBKDNID[$k]."'
-																			";
-												$UPDATE_QueryStatement		= mysql_query($UPDATE_Query);	
-												
-												//$pocketStockID = mysql_insert_id();
-												/*
-												$insertPocketStockDetailQuery = "
-																				INSERT INTO 
-																							fna_pocketstockdetails
-																										(
-																											ENTRYSERIALNOID,
-																											ENTRYHISTRY,
-																											POCKETSTOCKID,
-																											ENTYRYDATE,
-																											PRODCATTYPEID,
-																											PRODUCTID,
-																											PACKINGUNITID,
-																											CHID,
-																											FLOORID,
-																											POCKETID,
-																											LOADQUANTITY,
-																											UNLOADQUANTITY,
-																											STATUS
-																										) 
-																								VALUES
-																										(
-																											'".$MaxEntrySlNo."',
-																											'".$ENTRYHISTRY_NEW."',
-																											'".$POCKETSTOCKID_NEW."',
-																											'".$ENTRYDATE."',
-																											'".$PRODCATTYPEID_POCK."',
-																											'".$PRODUCTID[$k]."',
-																											'".$PACKINGUNITID_POCK."',
-																											'".$CHIDFROM_POCK."',
-																											'".$FLOORIDFROM_POCK."',
-																											'".$POCKETIDFROM_POCK."',
-																											'0',
-																											'".$quantity[$k]."',
-																											'unload'
-																											
-																										)
-																								"; 
-												$insertPocketStockDetailQueryStatement = mysql_query($insertPocketStockDetailQuery);*/
-												
-												}
-											//Update Pocket Stock table End
-											
-											//Update Labour Work History Table Start
-											
-											$LABOURIDQUERY  =mysql_fetch_array(mysql_query("SELECT LABCONTACTID FROM fna_labourcontact WHERE LABOURID = '".$LABOURID."'"));
-											$LABCONTACTID = $LABOURIDQUERY['LABCONTACTID'];
-											
-											$QUERYUNLOADPRICE = "
-																				SELECT 	
-																						 DISTINCT lc_bkdn.UNLOADPRICE
-																				FROM 	
-																						fna_labourcontact lc, fna_labourcontact_bkdn lc_bkdn
-																				WHERE	lc.LABCONTACTID = lc_bkdn.LABCONTACTID
-																				AND 	lc.LABOURID =".$LABOURID." 
-																				AND 	lc_bkdn.PACKINGUNITID =".$PACKINGUNITID_POCK."
-																				ORDER BY 
-																						lc_bkdn.PACKINGUNITID ASC
-																				
-																				";
-															$QUERYUNLOADPRICEStatement					= mysql_query($QUERYUNLOADPRICE);
-															while($QUERYUNLOADPRICEStatementData		= mysql_fetch_array($QUERYUNLOADPRICEStatement)) {
-																$UNLOADPRICE	   						= $QUERYUNLOADPRICEStatementData['UNLOADPRICE'];
-																
-															}
-															
-											
-											$TOTBILLAMOUNT = $quantity[$k] * $UNLOADPRICE ;
-											$globalLabourTotalBillAmount = $globalLabourTotalBillAmount + $TOTBILLAMOUNT ;
-											
-											
-											$insertLabWorkHistQuery = "
-																INSERT INTO 
-																			fna_labourworkhistory
-																						(
-																							ENTRYSERIALNOID,
-																							PROJECTID,
-																							SUBPROJECTID,
-																							LABOURID,
-																							PARTYID,
-																							PRODUCTLOADUNLOADBKDNID,
-																							PRODCATTYPEID,
-																							PRODUCTID,
-																							PACKINGUNITID,
-																							QUANTITY,
-																							CHID,
-																							FLOORID,
-																							POCKETID,
-																							BILLAMOUNT,
-																							TOTBILLAMOUNT,
-																							DELIVERYCHALLANNUMBER,
-																							WORKTYPEFLAG,
-																							STATUS,
-																							ENTDATE,
-																							ENTTIME,
-																							USERID
-																						) 
-																				VALUES
-																						(
-																							'".$MaxEntrySlNo."',
-																							'".$PROJECTID."',
-																							'".$SUBPROJECTID."',
-																							'".$LABOURID."',
-																							'".$PARTYID."',
-																							'".$loadUnloadBkdnIdCtId."',
-																							'".$PRODCATTYPEID_POCK."',
-																							'".$PRODUCTID[$k]."',
-																							'".$PACKINGUNITID_POCK."',
-																							'".$quantity[$k]."',
-																							'".$CHIDFROM_POCK."',
-																							'".$FLOORIDFROM_POCK."',
-																							'".$POCKETIDFROM_POCK."',
-																							'".$UNLOADPRICE."',
-																							'".$TOTBILLAMOUNT."',
-																							'".$nowMAXDELCHALLNO."',
-																							'Unload',
-																							'Active',
-																							'".$ENTRYDATE."',
-																							'".$entTime."',
-																							'".$userId."'
-																						)
-										";
-										
-										
-										$insertLabWorkHistQueryStatement = mysql_query($insertLabWorkHistQuery);
-										
-										//Update Labour Work History Table End
-										
-										
-											//--------------------------Packing Unit Name Start----------------------------
-											/*
-											$ProCatNameQuery		= mysql_fetch_array(mysql_query("SELECT CATEGORYTYPENAME FROM fna_productcattype WHERE PROJECTID = '".$PROJECTID."' and SUBPROJECTID = '".$SUBPROJECTID."' and PRODCATTYPEID = '".$PRODCATTYPEID_POCK."'"));
-											
-											$CATEGORYTYPENAME_NEW	= $ProCatNameQuery['CATEGORYTYPENAME'];
-											
-											$ProdNameQuery = "
-																				SELECT
-																						PRODUCTNAME
-																				FROM
-																						fna_product 
-																						WHERE PROJECTID = '".$PROJECTID."'
-																						AND SUBPROJECTID = '".$SUBPROJECTID."'
-																						AND PRODCATTYPEID = '".$PRODCATTYPEID_POCK."'
-																						AND PRODUCTID = '".$PRODUCTID[$k]."'
-																				";
-															$ProdNameQueryStatement				= mysql_query($ProdNameQuery);
-															while($ProdNameQueryStatementData	= mysql_fetch_array($ProdNameQueryStatement)) {
-																$PRODUCTNAME_NEW   				= $ProdNameQueryStatementData['PRODUCTNAME'];
-																
-															}
-											
-											
-													$getModuleQuery	= "
-																						SELECT 	
-																									pu.PACKINGNAMEID,
-																									pu.QID,
-																									pu.WTID
-																						FROM 	
-																								fna_packingunit pu
-																						WHERE	PACKINGUNITID ='".$PACKINGUNITID_POCK."' 
-																						
-																					 "; 
-														$getModuleStatement				= mysql_query($getModuleQuery);
-														while($getModuleStatementData	= mysql_fetch_array($getModuleStatement)) {
-															$PACKINGNAMEID 				= $getModuleStatementData['PACKINGNAMEID'];
-															$QID 						= $getModuleStatementData['QID'];
-															$WTID 						= $getModuleStatementData['WTID'];
-															
-													$packingNameQuery = "
-																				SELECT
-																						PACKINGNAMEID,
-																						PACKINGNAME
-																				FROM
-																						fna_packingname 
-																						WHERE PACKINGNAMEID = '".$PACKINGNAMEID."'
-																				";
-															$packingNameQueryStatement				= mysql_query($packingNameQuery);
-															$PACKINGNAMEID_NEW	=	'';
-															$PACKINGNAME_NEW	=	'';
-															while($packingNameQueryStatementData	= mysql_fetch_array($packingNameQueryStatement)) {
-																$PACKINGNAMEID_NEW   		= $packingNameQueryStatementData['PACKINGNAMEID'];
-																$PACKINGNAME_NEW   			= $packingNameQueryStatementData['PACKINGNAME'];
-																
-															}
-															
-															$QidQuery = "
-																				SELECT
-																						QVALUE
-																				FROM
-																						fna_quantity 
-																						WHERE QID = '".$QID."'
-																				";
-															$QidQueryStatement				= mysql_query($QidQuery);
-															$QVALUE	=	'';
-															while($QidQueryStatementData	= mysql_fetch_array($QidQueryStatement)) {
-																$QVALUE   		= $QidQueryStatementData['QVALUE'];
-																
-															}
-															
-															$wtidQuery = "
-																				SELECT
-																						WNAME
-																				FROM
-																						fna_weight 
-																						WHERE WTID = '".$WTID."'
-																				";
-															$wtidQueryStatement				= mysql_query($wtidQuery);
-															$WNAME	=	'';
-															while($wtidQueryStatementData	= mysql_fetch_array($wtidQueryStatement)) {
-																$WNAME   		= $wtidQueryStatementData['WNAME'];
-																
-															}
-													
-													
-															$packingUnitList  = $PACKINGNAME_NEW.", ".$QVALUE.",".$WNAME;
-												}
-											//------------------------Packing Unit Name End --------------------
-											
-											//----------------------------Chamber Floor Pocket Name Start ---------------------
-														$ChamNameQuery = "
-																			SELECT
-																					CHNAME
-																			FROM
-																					fna_chamber 
-																					WHERE CHID = '".$CHIDFROM_POCK."'
-																			"; 
-														$ChamNameQueryStatement				= mysql_query($ChamNameQuery);
-														while($ChamNameQueryStatementData	= mysql_fetch_array($ChamNameQueryStatement)) {
-															$CHNAME_NEW   					= $ChamNameQueryStatementData['CHNAME'];
-															
-														}
-														
-														$FloorNameQuery = "
-																			SELECT
-																					FLOORNAME
-																			FROM
-																					fna_floor 
-																					WHERE FLOORID = '".$FLOORIDFROM_POCK."'
-																			"; 
-														$FloorNameQueryStatement				= mysql_query($FloorNameQuery);
-														while($FloorNameQueryStatementData		= mysql_fetch_array($FloorNameQueryStatement)) {
-															$FLOORNAME_NEW   					= $FloorNameQueryStatementData['FLOORNAME'];
-															
-														}
-														$PocketNameQuery = "
-																			SELECT
-																					POCKETNAME
-																			FROM
-																					fna_pocket 
-																					WHERE POCKETID = '".$POCKETIDFROM_POCK."'
-																			"; 
-														$PocketNameQueryStatement				= mysql_query($PocketNameQuery);
-														while($PocketNameQueryStatementData		= mysql_fetch_array($PocketNameQueryStatement)) {
-															$POCKETNAME_NEW   					= $PocketNameQueryStatementData['POCKETNAME'];
-															
-														}
-										
-										//----------------------------Chamber Floor Pocket Name End ---------------------
-											
-											//---------------------------Update Daily Income Expanse Table Start-------------
-											
-											
-											$INEX_FLAG	 			= mysql_fetch_array(mysql_query("SELECT MAX(FLAG) FROM fna_daily_income_expanse"));
-											$MAXINEX_FLAG	 		= $INEX_FLAG['MAX(FLAG)'];
-											$NOW_MAXINEX_FLAG	 	= $MAXINEX_FLAG + 1;
-											
-											$LABNAME_QRY 			= mysql_fetch_array(mysql_query("SELECT LABOURNAME FROM fna_labour WHERE LABOURID = '".$LABOURID."'"));
-											$LABOURNAME				= $LABNAME_QRY['LABOURNAME'];
-											$EX_Quantity			= $globalLabourTotalBillAmount / $UNLOADPRICE ;
-											$NOW_DESCRIPTION		= 'UNLOAD : Labour Bill Payment to  '.$LABOURNAME . ' , '. $CATEGORYTYPENAME_NEW . ' , '.$PRODUCTNAME_NEW.' , ' .$packingUnitList.' , '.$quantity[$k].' * '.$UNLOADPRICE.' = '.$TOTBILLAMOUNT.' From  Chamber: '.$CHNAME_NEW.' , Floor:  '.$FLOORNAME_NEW.', Pocket:  '.$POCKETNAME_NEW.' ';
-											
-			
-											$insertDailyInExQuery = "
-																	INSERT INTO 
-																					fna_daily_income_expanse
-																												(
-																													ENTRYSERIALNOID,
-																													PROJECTID,
-																													SUBPROJECTID,
-																													DATE,
-																													EXPHID,
-																													EXPANSE,
-																													DESCRIPTION,
-																													FLAG,
-																													STATUS,
-																													ENTDATE,
-																													ENTTIME,
-																													USERID
-																												) 
-																										VALUES
-																												(
-																													'".$MaxEntrySlNo."',
-																													'".$PROJECTID."',
-																													'".$SUBPROJECTID."',
-																													'".$ENTRYDATE."',
-																													'185',
-																													'".$TOTBILLAMOUNT."',
-																													'".$NOW_DESCRIPTION."',
-																													'".$NOW_MAXINEX_FLAG."',
-																													'Payment',
-																													'".$entDate."',
-																													'".$entTime."',
-																													'".$userId."'
-																												)
-																		";
-													
-													
-													$insertDailyInExQueryStatement = mysql_query($insertDailyInExQuery);
-								
-								//--------------------------Update Daily Income Expanse Table End --------------------------
-										
-								*/				
-											
-							$k++;
-						}
-					// Upadate FNA Labour Bill Table Start
-					$MAXLABFLAG = mysql_fetch_array(mysql_query("SELECT MAX(LABOURFLAG) FROM fna_labourbill WHERE LABOURID = '".$LABOURID."'"));
-					$MAXLABOUR_FLAG = $MAXLABFLAG['MAX(LABOURFLAG)'];
-					$NOW_MAXLAB_FLAG = $MAXLABOUR_FLAG + 1;
-					$BAL_AMOUNT = mysql_fetch_array(mysql_query("SELECT BALANCEAMOUNT FROM fna_labourbill WHERE LABOURID = '".$LABOURID."' AND LABOURFLAG = '".$MAXLABOUR_FLAG."'"));
-					$LAB_BAL_AMOUNT = $BAL_AMOUNT['BALANCEAMOUNT'];
-					if(($MAXLABOUR_FLAG == 0) or ($MAXLABOUR_FLAG ='')){
-						$NOW_LAB_BALAMOUNT = $globalLabourTotalBillAmount ;
-					}else{
-						$NOW_LAB_BALAMOUNT = $LAB_BAL_AMOUNT + $globalLabourTotalBillAmount ;
-					}
-					$insertLabourBillQuery = "
-											INSERT INTO 
-														fna_labourbill
-																(
-																	ENTRYSERIALNOID,
-																	PROJECTID,
-																	SUBPROJECTID,
-																	LABOURID,
-																	PARTYID,
-																	PRODUCTLOADUNLOADID,
-																	PRODCATTYPEID,
-																	BILLAMOUNT,
-																	PAYMENTAMOUNT,
-																	BALANCEAMOUNT,
-																	WORKTYPEFLAG,
-																	LABOURFLAG,
-																	ENTRYDATE,
-																	STATUS,
-																	ENTDATE,
-																	ENTTIME,
-																	USERID
-																) 
-														VALUES
-																(
-																	'".$MaxEntrySlNo."',
-																	'".$PROJECTID."',
-																	'".$SUBPROJECTID."',
-																	'".$LABOURID."',
-																	'".$PARTYID."',
-																	'".$loadCtId."',
-																	'".$PRODCATTYPEID."',
-																	'".$globalLabourTotalBillAmount."',
-																	'0',
-																	'".$NOW_LAB_BALAMOUNT."',
-																	'Unload',
-																	'".$NOW_MAXLAB_FLAG."',
-																	'".$ENTRYDATE."',
-																	'Unload',
-																	'".$entDate."',
-																	'".$entTime."',
-																	'".$userId."'
-																)
-						"; 
-						
-						
-						$insertLabourBillQueryStatement = mysql_query($insertLabourBillQuery);
-						
-					// Upadate FNA Labour Bill Table End
-					
-					
-							//------------------------------Labour Bill Direct Entry Start------------------------------------
-						
-						/*
-						// Upadate FNA Labour Bill Table Start
-							$MAXLABFLAG = mysql_fetch_array(mysql_query("SELECT MAX(LABOURFLAG) FROM fna_labourbill WHERE LABOURID = '".$LABOURID."'"));
-							$MAXLABOUR_FLAG = $MAXLABFLAG['MAX(LABOURFLAG)'];
-							$NOW_MAXLAB_FLAG = $MAXLABOUR_FLAG + 1;
-							$BAL_AMOUNT = mysql_fetch_array(mysql_query("SELECT BALANCEAMOUNT FROM fna_labourbill WHERE LABOURID = '".$LABOURID."' AND LABOURFLAG = '".$MAXLABOUR_FLAG."'"));
-							$LAB_BAL_AMOUNT = $BAL_AMOUNT['BALANCEAMOUNT'];
-							
-							if(($MAXLABOUR_FLAG == 0) or ($MAXLABOUR_FLAG ='')){
-								$NOW_LAB_BALAMOUNT = $globalLabourTotalBillAmount ;
-							}else{
-								$NOW_LAB_BALAMOUNT = $LAB_BAL_AMOUNT - $globalLabourTotalBillAmount ;
-							}
-								
-													
-								$insertLabourBillQueryPayment = "
-																	INSERT INTO 
-																				fna_labourbill
-																						(
-																							ENTRYSERIALNOID,
-																							PROJECTID,
-																							SUBPROJECTID,
-																							LABOURID,
-																							EXPHID,
-																							PARTYID,
-																							PRODUCTLOADUNLOADID,
-																							PRODCATTYPEID,
-																							BILLAMOUNT,
-																							PAYMENTAMOUNT,
-																							BALANCEAMOUNT,
-																							WORKTYPEFLAG,
-																							LABOURFLAG,
-																							ENTRYDATE,
-																							STATUS,
-																							ENTDATE,
-																							ENTTIME,
-																							USERID
-																						) 
-																				VALUES
-																						(
-																							'".$MaxEntrySlNo."',
-																							'".$PROJECTID."',
-																							'".$SUBPROJECTID."',
-																							'".$LABOURID."',
-																							'185',
-																							'".$PARTYID."',
-																							'".$loadCtId."',
-																							'".$PRODCATTYPEID."',
-																							'0',
-																							'".$globalLabourTotalBillAmount."',
-																							'".$NOW_LAB_BALAMOUNT."',
-																							'Unload',
-																							'".$NOW_MAXLAB_FLAG."',
-																							'".$ENTRYDATE."',
-																							'Unload',
-																							'".$entDate."',
-																							'".$entTime."',
-																							'".$userId."'
-							
-																						)
-																					"; 
-									
-									
-									$insertLabourBillQueryStatementPayment = mysql_query($insertLabourBillQueryPayment);
-								
-								if($insertLabourBillQueryStatementPayment){
-									
-										$insertQueryExpLabBill = "
-															INSERT INTO 
-																		fna_expanse
-																						(
-																							ENTRYSERIALNOID,
-																							PROJECTID,
-																							SUBPROJECTID,
-																							PARTYID,
-																							EXPHID,
-																							EXPSUBHID,
-																							AMOUNT,
-																							EXPDATE,
-																							DESCRIPTION,
-																							STATUS,
-																							ENTDATE,
-																							ENTTIME,
-																							USERID
-																						) 
-																				VALUES
-																						(
-																							'".$MaxEntrySlNo."',
-																							'".$PROJECTID."',
-																							'".$SUBPROJECTID."',
-																							'".$PARTYID."',
-																							'185',
-																							'0',
-																							'".$globalLabourTotalBillAmount."',
-																							'".$ENTRYDATE."',
-																							'Unload Labour Bill Payment....',
-																							'Payment',
-																							'".$entDate."',
-																							'".$entTime."',
-																							'".$userId."'
-																						)
-														";
-										$insertQueryExpStatementLabBill = mysql_query($insertQueryExpLabBill);
-										
-										//Update FNA Balance Table Start
-										$BALANCE_FLAG 			= mysql_fetch_array(mysql_query("SELECT MAX(FLAG) FROM fna_balance"));
-										$MAXBALANCE_FLAG 		= $BALANCE_FLAG['MAX(FLAG)'];
-										$NOW_MAXBALANCE_FLAG 	= $MAXBALANCE_FLAG + 1;
-										
-										$BALANCE_QUERY		 	= mysql_fetch_array(mysql_query("SELECT * FROM fna_balance WHERE FLAG = '".$MAXBALANCE_FLAG."'"));
-										$INCOME_AMOUNT 			= $BALANCE_QUERY['INCOME'];
-										$EXPANSE_AMOUNT			= $BALANCE_QUERY['EXPANSE'];
-										$BALANCE_AMOUNT 		= $BALANCE_QUERY['BALANCE'];
-										
-										$NOW_BALANCE_AMOUNT		= $BALANCE_AMOUNT - $globalLabourTotalBillAmount ;
-										
-										$insertBalanceQuery = "
-																INSERT INTO 
-																			fna_balance
-																					(
-																						ENTRYSERIALNOID,
-																						PROJECTID,
-																						SUBPROJECTID,
-																						EXPANSE,
-																						BALANCE,
-																						FLAG,
-																						BALDATE,
-																						STATUS,
-																						ENTDATE,
-																						ENTTIME,
-																						USERID
-																					) 
-																			VALUES
-																					(
-																						'".$MaxEntrySlNo."',
-																						'".$PROJECTID."',
-																						'".$SUBPROJECTID."',
-																						'".$globalLabourTotalBillAmount."',
-																						'".$NOW_BALANCE_AMOUNT."',
-																						'".$NOW_MAXBALANCE_FLAG."',
-																						'".$ENTRYDATE."',
-																						'Payment',
-																						'".$entDate."',
-																						'".$entTime."',
-																						'".$userId."'
-																					)
+						$EntrySerial_Query_No	= mysql_fetch_array(mysql_query("SELECT MAX(ENTRYSERIALNOID) FROM fna_entryserialno"));
+						$MaxEntrySlNo			= $EntrySerial_Query_No['MAX(ENTRYSERIALNOID)'] + 1;
+				
+				
+						$insertQueryEntrySl = "
+								INSERT INTO fna_entryserialno
+												(
+													ENTRYSERIALNO,
+													PROJECTID,
+													SUBPROJECTID,
+													ENTRYDATE,
+													FLAG,
+													STATUS,
+													ENTDATE,
+													ENTTIME,
+													USERID
+												) 
+										VALUES
+												(
+													'".$MaxEntrySlNo."',
+													'".$PROJECTID."',
+													'".$SUBPROJECTID."',
+													'".$EXPDATE."',
+													'".$MaxFlagEntrySl."',
+													'Active',
+													'".$entDate."',
+													'".$entTime."',
+													'".$userId."'
+												)
 											";
-											
-											
-											$insertBalanceQueryStatement = mysql_query($insertBalanceQuery);
-											
-										//-------------------------------Update Cash In Hand Table Start---------------------------//
-										$CashinHandQuery			= "
-																		SELECT 
-																				ENTRYDATE
-																		FROM 
-																				fna_cashinhand
-																		WHERE ENTRYDATE = '".$ENTRYDATE."'
-																	  ";
-															 
-										$CashinHandQueryStatement	= mysql_query($CashinHandQuery);
-										if(mysql_num_rows($CashinHandQueryStatement)>0) {
-											
-											 $CashIHQuery 	= "SELECT *
-																			FROM fna_cashinhand
-																			WHERE ENTRYDATE = '".$ENTRYDATE."'
-																		";
-												$CashIHQueryStatement				= mysql_query($CashIHQuery);
-												while($CashIHQueryStatementData		= mysql_fetch_array($CashIHQueryStatement)){ 
-													$CASHINHANDID        			= $CashIHQueryStatementData["CASHINHANDID"];
-													$EXPANSE	        			= $CashIHQueryStatementData["EXPANSE"];
-													$CASHINHAND	        			= $CashIHQueryStatementData["CASHINHAND"];
-												}
-												
-												$Now_ExpanseAmount					= $EXPANSE + $globalLabourTotalBillAmount ;
-												$Now_CashInHand						= $CASHINHAND - $globalLabourTotalBillAmount ; 
-												
-												$UPDATE_Queary				= "UPDATE fna_cashinhand Set
-																				EXPANSE = '".$Now_ExpanseAmount."',
-																				CASHINHAND = '".$Now_CashInHand."'
-																				WHERE ENTRYDATE = '".$ENTRYDATE."'
-																			";
-												$UPDATE_QuearyStatement		= mysql_query($UPDATE_Queary);	
-												
-																	
-																			
-												$CASH_ENTRYDATE_ARRAY  		= array();
-												$CIHIDQuery 				= "SELECT 	DISTINCT ENTRYDATE
-																						FROM fna_cashinhand 
-																						WHERE ENTRYDATE > '".$ENTRYDATE."'
-																						ORDER BY ENTRYDATE ASC
-																					"; 
-												$CIHIDQueryStatement				= mysql_query($CIHIDQuery);
-												$i = 0;
-												while($CIHIDQueryStatementData		= mysql_fetch_array($CIHIDQueryStatement)){	
-													$CASH_ENTRYDATE_ARRAY[]			= $CIHIDQueryStatementData['ENTRYDATE'];
-													$i++;
-												}
-												
-												$CASH_ENTRYDATE_ARRAY_UNIQUE 		= array_unique($CASH_ENTRYDATE_ARRAY) ;
-												foreach($CASH_ENTRYDATE_ARRAY_UNIQUE as $individualCashEntryDate){
-												
-													   $CashIHQuery 	= "SELECT *
-																					FROM fna_cashinhand
-																					WHERE ENTRYDATE = '".$individualCashEntryDate."'
-																				";
-														$CashIHQueryStatement				= mysql_query($CashIHQuery);
-														while($CashIHQueryStatementData		= mysql_fetch_array($CashIHQueryStatement)){ 
-															$EXPANSE_NEXT        			= $CashIHQueryStatementData["EXPANSE"];
-															$CASHINHAND_NEXT       			= $CashIHQueryStatementData["CASHINHAND"];
-														}
-														
-														$Now_ExpanseAmount_Nxt				= $EXPANSE_NEXT + $globalLabourTotalBillAmount ;
-														$Now_CashInHand_Next				= $CASHINHAND_NEXT - $globalLabourTotalBillAmount ; 
-														
-														$UPDATE_Queary_Next					= "UPDATE fna_cashinhand Set
-																									CASHINHAND = '".$Now_CashInHand_Next."'
-																									WHERE ENTRYDATE = '".$individualCashEntryDate."'
-																								";
-														$UPDATE_Queary_NextStatement		= mysql_query($UPDATE_Queary_Next);		
-														
-												}
+						$insertQueryEntrySlStatement = mysql_query($insertQueryEntrySl);
+				
+						$insertQueryExp = "
+								INSERT INTO fna_expanse
+												(
+													ENTRYSERIALNOID,
+													PROJECTID,
+													SUBPROJECTID,
+													EXPHID,
+													EXPSUBHID,
+													PARTYID,
+													AMOUNT,
+													EXPDATE,
+													VOUCHERNO,
+													DESCRIPTION,
+													STATUS,
+													ENTDATE,
+													ENTTIME,
+													USERID
+												) 
+										VALUES
+												(
+													'".$MaxEntrySlNo."',
+													'".$PROJECTID."',
+													'".$SUBPROJECTID."',
+													'".$EXPHID."',
+													'0',
+													'".$PARTYID."',
+													'".$AMOUNT."',
+													'".$EXPDATE."',
+													'".$VOUCHERNO."',
+													'".$DESCRIPTION."',
+													'Active',
+													'".$entDate."',
+													'".$entTime."',
+													'".$userId."'
+												)
+											";
+						$insertQueryExpStatement = mysql_query($insertQueryExp);
+						$ExpenseCtId = mysql_insert_id();
+						if($insertQueryExpStatement){
+							for($i = 1; $i < $TOTAL_PRODUCT_LIST; $i++ ){
+
+								$insertQueryExpDet = "
+										INSERT INTO fna_expanse_details
+														(
+															EXPID,
+															ENTRYSERIALNOID,
+															EXPHID,
+															AMOUNT,
+															DESCRIPTION
+														) 
+												VALUES
+														(
+															'".$ExpenseCtId."',
+															'".$MaxEntrySlNo."',
+															'".$EXPHID[$k]."',
+															'".$AMOUNT[$k]."',
+															'".$DESCRIPTION[$k]."'
+														)
+													";
+								$insertQueryExpDetStatement = mysql_query($insertQueryExpDet);
+
+							}
+						}
+							
+						//Update FNA Balance Table Start
+						$BALANCE_FLAG 			= mysql_fetch_array(mysql_query("SELECT MAX(FLAG) FROM fna_balance"));
+						$MAXBALANCE_FLAG 		= $BALANCE_FLAG['MAX(FLAG)'];
+						$NOW_MAXBALANCE_FLAG 	= $MAXBALANCE_FLAG + 1;
+						
+						$BALANCE_QUERY		 	= mysql_fetch_array(mysql_query("SELECT * FROM fna_balance WHERE FLAG = '".$MAXBALANCE_FLAG."'"));
+						$INCOME_AMOUNT 			= $BALANCE_QUERY['INCOME'];
+						$EXPANSE_AMOUNT			= $BALANCE_QUERY['EXPANSE'];
+						$BALANCE_AMOUNT 		= $BALANCE_QUERY['BALANCE'];
+						
+						$NOW_BALANCE_AMOUNT		= $BALANCE_AMOUNT - $TotalExpense_Amount ;
+						
+						$insertBalanceQuery = "
+								INSERT INTO fna_balance
+												(
+													ENTRYSERIALNOID,
+													PROJECTID,
+													SUBPROJECTID,
+													EXPANSE,
+													BALANCE,
+													FLAG,
+													BALDATE,
+													STATUS,
+													ENTDATE,
+													ENTTIME,
+													USERID
+												) 
+										VALUES
+												(
+													'".$MaxEntrySlNo."',
+													'".$PROJECTID."',
+													'".$SUBPROJECTID."',
+													'".$AMOUNT."',
+													'".$NOW_BALANCE_AMOUNT."',
+													'".$NOW_MAXBALANCE_FLAG."',
+													'".$EXPDATE."',
+													'Payment',
+													'".$entDate."',
+													'".$entTime."',
+													'".$userId."'
+												)
+											";
+							$insertBalanceQueryStatement = mysql_query($insertBalanceQuery);
+							//Update FNA Balance Table End
+									
+							//------------------------------Update Cash In Hand Table Start-----------------------------//
+							$CashinHandQuery = "
+											SELECT 
+													ENTRYDATE
+											FROM 
+													fna_cashinhand
+											WHERE ENTRYDATE = '".$EXPDATE."'
+											";
 													
-																				
-											
-										} else {
-														
-														 
-														$CashIH_Query_Flag 		= mysql_fetch_array(mysql_query("SELECT MAX(FLAG) FROM fna_cashinhand"));
-														$MaxCashFlag			= $CashIH_Query_Flag['MAX(FLAG)'];
-														$NowMaxCashFlag			= $MaxCashFlag + 1;
-														
-														$CashIH_Query_ID 		= mysql_fetch_array(mysql_query("SELECT MAX(CASHINHANDID) FROM fna_cashinhand"));
-														$MaxCashID				= $CashIH_Query_ID['MAX(CASHINHANDID)'];
-														
-														$CashIH_Query	 		= mysql_fetch_array(mysql_query("SELECT CASHINHAND FROM fna_cashinhand WHERE CASHINHANDID = '".$MaxCashID."'"));
-														$Present_CashInHand		= $CashIH_Query['CASHINHAND'];
-														
-														
-														$NowCashInHand			= $Present_CashInHand - $globalLabourTotalBillAmount ; 
-											
-														$insertCIHQuery = "
-																			INSERT INTO 
-																						fna_cashinhand
-																								(
-																									ENTRYDATE,
-																									INCOME,
-																									EXPANSE,
-																									CASHINHAND,
-																									FLAG,
-																									STATUS,
-																									ENTDATE,
-																									ENTTIME,
-																									USERID
-																								) 
-																						VALUES
-																								(
-																									'".$ENTRYDATE."',
-																									'0',
-																									'".$globalLabourTotalBillAmount."',
-																									'".$NowCashInHand."',
-																									'".$NowMaxCashFlag."',
-																									'Expanse',
-																									'".$entDate."',
-																									'".$entTime."',
-																									'".$userId."'
-																								)
-																							";
-														$insertCIHQueryStatement = mysql_query($insertCIHQuery);		
+							$CashinHandQueryStatement	= mysql_query($CashinHandQuery);
+							if(mysql_num_rows($CashinHandQueryStatement)>0) {
+								
+								$CashIHQuery 	= "SELECT *
+															FROM fna_cashinhand
+															WHERE ENTRYDATE = '".$EXPDATE."'
+														";
+								$CashIHQueryStatement				= mysql_query($CashIHQuery);
+								while($CashIHQueryStatementData		= mysql_fetch_array($CashIHQueryStatement)){ 
+									$CASHINHANDID        			= $CashIHQueryStatementData["CASHINHANDID"];
+									$EXPANSE	        			= $CashIHQueryStatementData["EXPANSE"];
+									$CASHINHAND	        			= $CashIHQueryStatementData["CASHINHAND"];
+								}
+								
+								$Now_ExpanseAmount					= $EXPANSE + $TotalExpense_Amount ;
+								$Now_CashInHand						= $CASHINHAND - $TotalExpense_Amount ; 
+								
+								$UPDATE_Queary				= "UPDATE fna_cashinhand Set
+																EXPANSE = '".$Now_ExpanseAmount."',
+																CASHINHAND = '".$Now_CashInHand."'
+																WHERE ENTRYDATE = '".$EXPDATE."'
+															";
+								$UPDATE_QuearyStatement		= mysql_query($UPDATE_Queary);	
+								
 													
+															
+								$CASH_ENTRYDATE_ARRAY  		= array();
+								$CIHIDQuery 				= "SELECT 	DISTINCT ENTRYDATE
+																		FROM fna_cashinhand 
+																		WHERE ENTRYDATE > '".$EXPDATE."'
+																		ORDER BY ENTRYDATE ASC
+																	"; 
+								$CIHIDQueryStatement				= mysql_query($CIHIDQuery);
+								$i = 0;
+								while($CIHIDQueryStatementData		= mysql_fetch_array($CIHIDQueryStatement)){	
+									$CASH_ENTRYDATE_ARRAY[]			= $CIHIDQueryStatementData['ENTRYDATE'];
+									$i++;
+								}
+								
+								$CASH_ENTRYDATE_ARRAY_UNIQUE 		= array_unique($CASH_ENTRYDATE_ARRAY) ;
+								foreach($CASH_ENTRYDATE_ARRAY_UNIQUE as $individualCashEntryDate){
+								
+										$CashIHQuery 	= "SELECT *
+																	FROM fna_cashinhand
+																	WHERE ENTRYDATE = '".$individualCashEntryDate."'
+																";
+										$CashIHQueryStatement				= mysql_query($CashIHQuery);
+										while($CashIHQueryStatementData		= mysql_fetch_array($CashIHQueryStatement)){ 
+											$EXPANSE_NEXT        			= $CashIHQueryStatementData["EXPANSE"];
+											$CASHINHAND_NEXT       			= $CashIHQueryStatementData["CASHINHAND"];
 										}
 										
-									//--------------------------------Update Cash In Hand Table End------------------------//
-								}
-										//Update FNA Balance Table End
+										$Now_ExpanseAmount_Nxt				= $EXPANSE_NEXT + $TotalExpense_Amount ;
+										$Now_CashInHand_Next				= $CASHINHAND_NEXT - $TotalExpense_Amount ; 
 										
-								//---------------------------Labour Bill Direct Entry End  ------------------------------
-					
-							*/
-						
-					} else {
-						$msg = "<span class='errorMsg'>Sorry! System Error!</span>";
-					}
-				
-					}else
-					{
-						$msg = "<span class='errorMsg'>Sorry! Product Quantity [$quantity[$p], $ProdName ] is not Sufficient!</span>";
-						}
-						
+										$UPDATE_Queary_Next					= "UPDATE fna_cashinhand Set
+																					CASHINHAND = '".$Now_CashInHand_Next."'
+																					WHERE ENTRYDATE = '".$individualCashEntryDate."'
+																				";
+										$UPDATE_Queary_NextStatement		= mysql_query($UPDATE_Queary_Next);		
+										
+								}			
+							} else {//if(mysql_num_rows($CashinHandQueryStatement)>0)
+													
+													 
+										$CashIH_Query_Flag 		= mysql_fetch_array(mysql_query("SELECT MAX(FLAG) FROM fna_cashinhand"));
+										$MaxCashFlag			= $CashIH_Query_Flag['MAX(FLAG)'];
+										$NowMaxCashFlag			= $MaxCashFlag + 1;
+										
+										$CashIH_Query_ID 		= mysql_fetch_array(mysql_query("SELECT MAX(CASHINHANDID) FROM fna_cashinhand"));
+										$MaxCashID				= $CashIH_Query_ID['MAX(CASHINHANDID)'];
+										
+										$CashIH_Query	 		= mysql_fetch_array(mysql_query("SELECT CASHINHAND FROM fna_cashinhand WHERE CASHINHANDID = '".$MaxCashID."'"));
+										$Present_CashInHand		= $CashIH_Query['CASHINHAND'];
+										
+										
+										$NowCashInHand			= $Present_CashInHand - $TotalExpense_Amount ; 
+							
+										$insertCIHQuery = "
+												INSERT INTO fna_cashinhand
+														(
+															ENTRYDATE,
+															INCOME,
+															EXPANSE,
+															CASHINHAND,
+															FLAG,
+															STATUS,
+															ENTDATE,
+															ENTTIME,
+															USERID
+														) 
+												VALUES
+														(
+															'".$EXPDATE."',
+															'0',
+															'".$AMOUNT."',
+															'".$NowCashInHand."',
+															'".$NowMaxCashFlag."',
+															'Expanse',
+															'".$entDate."',
+															'".$entTime."',
+															'".$userId."'
+														)
+													";
+										$insertCIHQueryStatement = mysql_query($insertCIHQuery);		
+												
+							}//if(mysql_num_rows($CashinHandQueryStatement)>0)
+									
+							//-------------------------Update Cash In Hand Table End---------------------------------//
+															
+							//----------------------------Update Daily Income Expanse Table Start-------------------------------//
+							$INEX_FLAG	 			= mysql_fetch_array(mysql_query("SELECT MAX(FLAG) FROM fna_daily_income_expanse"));
+							$MAXINEX_FLAG	 		= $INEX_FLAG['MAX(FLAG)'];
+							$NOW_MAXINEX_FLAG	 	= $MAXINEX_FLAG + 1;
+							
+							$EXPHEADNAME_QRY 		= mysql_fetch_array(mysql_query("SELECT EXPHEADNAME FROM fna_expense_head WHERE EXPHID = '".$EXPHID."'"));
+							$ESPHEAD_NAME			= $EXPHEADNAME_QRY['EXPHEADNAME'];
+							$PARTYNAME_QRY 			= mysql_fetch_array(mysql_query("SELECT PARTYNAME FROM fna_party WHERE PARTYID = '".$PARTYID."'"));
+							$PARTYNAME				= $PARTYNAME_QRY['PARTYNAME'];
+							$NOW_DESCRIPTION		= 'Expanse for ' .$PARTYNAME . '   (' .$DESCRIPTION. ')' ;
+							
+							
+							$insertDailyInExQuery = "
+									INSERT INTO fna_daily_income_expanse
+															(
+																ENTRYSERIALNOID,
+																PROJECTID,
+																SUBPROJECTID,
+																DATE,
+																EXPHID,
+																EXPANSE,
+																DESCRIPTION,
+																FLAG,
+																STATUS,
+																ENTDATE,
+																ENTTIME,
+																USERID
+															) 
+													VALUES
+															(
+																'".$MaxEntrySlNo."',
+																'".$PROJECTID."',
+																'".$SUBPROJECTID."',
+																'".$EXPDATE."',
+																'".$EXPHID."',
+																'".$TotalExpense_Amount."',
+																'".$NOW_DESCRIPTION."',
+																'".$NOW_MAXINEX_FLAG."',
+																'Active',
+																'".$entDate."',
+																'".$entTime."',
+																'".$userId."'
+															)
+														";
+									
+									
+									$insertDailyInExQueryStatement = mysql_query($insertDailyInExQuery);
+									
+								//------------------------Update Daily Income Expanse Table End ----------------------------//
+									
+								if($insertQueryExpStatement){
+									$msg = "<span class='validMsg'>This Voucher Number [ $VOUCHERNO ] added sucessfully</span>";
+								} else {
+									$msg = "<span class='errorMsg'>Sorry! System Error!</span>";
+								}											
+		
 				}else{
-					$msg = "<span class='errorMsg'>Sorry, Please Enter  Session Entry First....!</span>";
+					$msg = "<span class='errorMsg'>Sorry! Insufficient Balance.......!</span>";
 				}
-			}else{
-					$msg = "<span class='errorMsg'>Sorry, Please Check the Entry Again...You put wrong entry....!</span>";
-				}
-			
+			}
 			return $msg;
-			
-			
-			
-			
 		}
 		// Insert Dynamic Expense Entry Information  End
 		
