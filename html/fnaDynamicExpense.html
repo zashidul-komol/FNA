@@ -570,6 +570,34 @@
 
 								    });
 								}
+								function getExpanseHead(pcId){					
+																			
+										var options = '';
+										if(pcId == '') {
+											options = '<option value="">No Product Found</option>';
+											$("select#EXPSUBHID").html('');
+											$("select#EXPSUBHID").html(options);
+											return false;
+										}
+										$.getJSON("ajax/getExpanseHeadList.php",{pcId: pcId}, function(j) {
+											if(j.length>0) {
+												
+												options += '<option value="">Select</option>';
+												for (var i = 0; i < j.length; i++) {
+													options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+												}
+												$("select#EXPSUBHID").html('');
+												$("select#EXPSUBHID").html(options);
+											}
+											else {
+												options = '<option value="">No Product Found</option>';
+												$("select#EXPSUBHID").html('');
+												$("select#EXPSUBHID").html(options);
+											}
+										})
+									
+									
+								}
 								
                             </script>
                             <fieldset>
@@ -640,7 +668,7 @@
                                                                                 
                                                                             </tr>
                                                                             <tr valign="middle">
-                                                                              <td align="center"><select id="EXPHID_1" name="EXPHID[]" style="width:280px;">
+                                                                              <td align="center"><select id="EXPHID_1" name="EXPHID[]" autocomplete="off" style="width:530px;" onchange="getExpanseHead(this.value);" >
                                                                                 <option value="">Select</option>
                                                                     				<!--%[EXPANSE_HEAD_NAME]-->
                                                                  				</select>
