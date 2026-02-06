@@ -11099,7 +11099,7 @@
 
 			$TOTAL_PRODUCT_LIST	= $_REQUEST["TOTAL_PRODUCT_LIST"];
 
-			echo $VOUCHERNO; die();
+			//echo $VOUCHERNO; die();
 			$TotalExpense_Amount = 0;
 			$i = 0;
 			for($i = 0; $i < $TOTAL_PRODUCT_LIST; $i++ ){
